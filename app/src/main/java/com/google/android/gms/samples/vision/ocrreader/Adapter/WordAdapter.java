@@ -2,16 +2,21 @@ package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.samples.vision.ocrreader.FetchMealDetails;
 import com.google.android.gms.samples.vision.ocrreader.R;
 
 import java.util.ArrayList;
@@ -25,7 +30,9 @@ public class WordAdapter extends ArrayAdapter {
     private LayoutInflater inflater;
     private Context context;
     private TextToSpeech myTTs;
-    private ArrayList<String> mData = new ArrayList<String>();
+    private ArrayList<String[]> mData = new ArrayList<String[]>();
+
+    private final String LOG_TAG = WordAdapter.class.getSimpleName();
 
     public WordAdapter(Context context, int resource, TextToSpeech myTTS){
         super(context,resource);
@@ -34,7 +41,7 @@ public class WordAdapter extends ArrayAdapter {
         this.inflater = LayoutInflater.from(context);
     }
 
-    public void addItem(String wordInMeal){
+    public void addItem(String[] wordInMeal){
         mData.add(wordInMeal);
     }
 
@@ -44,8 +51,8 @@ public class WordAdapter extends ArrayAdapter {
     }
 
     @Override
-    public String getItem(int position){
-        return (String) mData.get(position);
+    public String[] getItem(int position){
+        return (String []) mData.get(position);
     }
 
     @Override
@@ -61,8 +68,15 @@ public class WordAdapter extends ArrayAdapter {
         }
 
         final TextView textView = (TextView) convertView.findViewById(R.id.word_in_text);
-        textView.setText(mData.get(position));
+        textView.setText(mData.get(position)[1]);
 
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.recipe_image);
+
+        Uri uri = Uri.parse(mData.get(position)[0]);
+
+        Log.d(LOG_TAG, mData.get(position)[0]);
+
+        Glide.with(context).load(uri).into(imageView);
 
         myTTs.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
@@ -86,9 +100,9 @@ public class WordAdapter extends ArrayAdapter {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String wholeString = mData.get(0);
+                String wholeString = mData.get(0)[1];
                 for (int i = 1; i < mData.size(); i++){
-                    wholeString += " " + mData.get(i);
+                    wholeString += " " + mData.get(i)[1];
                 }
                 myTTs.speak(wholeString, TextToSpeech.QUEUE_FLUSH, null);
             }

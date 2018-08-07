@@ -1,8 +1,16 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
+import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.GridView;
+
+import com.google.android.gms.samples.vision.ocrreader.Adapter.WordAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +18,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by mgo983 on 8/6/18.
@@ -24,6 +33,14 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
     public final static String NUM_FROM = "0";
 
     private final String LOG_TAG = FetchMealDetails.class.getSimpleName();
+
+    private WordAdapter adapter;
+    private Context context;
+
+    public FetchMealDetails(WordAdapter wordAdapter, Context context){
+        adapter = wordAdapter;
+        this.context = context;
+    }
 
 
 
@@ -63,7 +80,7 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
                 return null;
             }
 
-            Log.d(LOG_TAG, buffer.toString());
+            //Log.d(LOG_TAG, buffer.toString());
 
 
             String  testString = buffer.toString();
@@ -106,6 +123,25 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
 
                 .build();
         return buildUri;
+    }
+
+
+    @Override
+    protected void onPostExecute(String Result){
+        //JSONObject newJSONObject = new JSONObject(Result);
+
+        EdmanJasonReader edmanJasonReader = new EdmanJasonReader(Result);
+        ArrayList<String[]> edmanInfo = edmanJasonReader.getRecipe();
+
+        for (String[] recipeInformation : edmanInfo){
+            recipeInformation[1] = "val";
+            adapter.addItem(recipeInformation);
+        }
+
+        GridView wholeWordGridView = (GridView) ((Activity) context).findViewById(R.id.gridview_edit_meal);
+        wholeWordGridView.setAdapter(adapter);
+
+
     }
 
 

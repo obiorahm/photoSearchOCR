@@ -34,7 +34,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/gridview_edit_meal"
         android:layout_below="@id/meal_text"
-        >
+        android:columnWidth="150dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center">
 
     </GridView>
     <ListView

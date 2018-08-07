@@ -52,18 +52,19 @@ public class MealMenuActivity extends AppCompatActivity implements TextToSpeech.
 
         //place each word in a single text view
         String [] wordInMealText = mealText.split(" ");
-        for(int i = 0; i < wordInMealText.length; i++){
+        /*for(int i = 0; i < wordInMealText.length; i++){
             adapter.addItem(wordInMealText[i]);
-        }
+        }*/
 
         //Async task expects a string array, so we make one of length one
+        // adapter is set in the fetchMeal AsyncTask
         String[] mealSearchString = new String[1];
         mealSearchString[0] = mealText;
-        FetchMealDetails fetchMealDetails = new FetchMealDetails();
+        FetchMealDetails fetchMealDetails = new FetchMealDetails(adapter, this);
         fetchMealDetails.execute(mealSearchString);
 
-        GridView wholeWordGridView = (GridView) findViewById(R.id.gridview_edit_meal);
-        wholeWordGridView.setAdapter(adapter);
+        //GridView wholeWordGridView = (GridView) findViewById(R.id.gridview_edit_meal);
+        //wholeWordGridView.setAdapter(adapter);
 
     }
 

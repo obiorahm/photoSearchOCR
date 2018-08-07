@@ -334,21 +334,6 @@
             ]
         },
         {
-            "outputFile": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/values-xlarge-v4_values-xlarge-v4.arsc.flat",
-            "map": [
-                {
-                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/values-xlarge-v4/values-xlarge-v4.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,126,197,267,337,405",
-                        "endColumns": "70,70,69,69,67,67",
-                        "endOffsets": "121,192,262,332,400,468"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/values-uz-rUZ_values-uz-rUZ.arsc.flat",
             "map": [
                 {
@@ -359,6 +344,21 @@
                         "startOffsets": "55,160,268,391,495,609,695,806,922,1002,1081,1165,1274,1381,1482,1590,1695,1802,1926,2025,2109",
                         "endColumns": "104,107,122,103,113,85,110,115,79,78,83,108,106,100,107,104,106,123,98,83,100",
                         "endOffsets": "155,263,386,490,604,690,801,917,997,1076,1160,1269,1376,1477,1585,1690,1797,1921,2020,2104,2205"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/values-xlarge-v4_values-xlarge-v4.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/values-xlarge-v4/values-xlarge-v4.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,126,197,267,337,405",
+                        "endColumns": "70,70,69,69,67,67",
+                        "endOffsets": "121,192,262,332,400,468"
                     }
                 }
             ]
@@ -474,6 +474,21 @@
             ]
         },
         {
+            "outputFile": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/values-v13_values-v13.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/values-v13/values-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "58",
+                        "endOffsets": "109"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/values-mr_values-mr.arsc.flat",
             "map": [
                 {
@@ -508,21 +523,6 @@
                         "startOffsets": "105,215,411,537,661,866,1075,1198,1564,1812,1932,2045,2230,2359,2560,2696,2882,2972,3068",
                         "endColumns": "109,195,125,123,204,208,122,128,247,119,112,184,128,200,135,185,89,95,109",
                         "endOffsets": "210,406,532,656,861,1070,1193,1322,1807,1927,2040,2225,2354,2555,2691,2877,2967,3063,3173"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/values-v13_values-v13.arsc.flat",
-            "map": [
-                {
-                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/values-v13/values-v13.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "58",
-                        "endOffsets": "109"
                     }
                 }
             ]

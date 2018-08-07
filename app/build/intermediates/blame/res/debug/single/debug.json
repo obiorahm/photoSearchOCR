@@ -16,12 +16,12 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/72a2735e153e4817538f36c4f5efa3ee/res/drawable/common_google_signin_btn_text_dark_normal.xml"
     },
     {
-        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_text_dark_normal.9.png.flat",
-        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/res/drawable-xxhdpi-v4/common_google_signin_btn_text_dark_normal.9.png"
-    },
-    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_common_google_signin_btn_text_dark_normal.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/res/drawable-mdpi-v4/common_google_signin_btn_text_dark_normal.9.png"
+    },
+    {
+        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_text_dark_normal.9.png.flat",
+        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/res/drawable-xxhdpi-v4/common_google_signin_btn_text_dark_normal.9.png"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/color_abc_hint_foreground_material_dark.xml.flat",
@@ -40,24 +40,24 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/72a2735e153e4817538f36c4f5efa3ee/res/drawable/common_google_signin_btn_text_dark_focused.xml"
     },
     {
-        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/anim_abc_fade_out.xml.flat",
-        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/anim/abc_fade_out.xml"
-    },
-    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_notification_bg_normal.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/8547dfaa0500a0902114c65a8d02eb56/res/drawable-hdpi-v4/notification_bg_normal.9.png"
+    },
+    {
+        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/anim_abc_fade_out.xml.flat",
+        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/anim/abc_fade_out.xml"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_text_select_handle_right_mtrl_light.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/2299c6c6943913da27c44a6bcb042f0a/res/drawable-hdpi-v4/abc_text_select_handle_right_mtrl_light.png"
     },
     {
-        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_textfield_search_default_mtrl_alpha.9.png.flat",
-        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/drawable-xhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/drawable-xxhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_textfield_search_default_mtrl_alpha.9.png.flat",
+        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/drawable-xhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/color-v23_abc_tint_switch_thumb.xml.flat",
@@ -80,12 +80,12 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/126f96d1ed3f3eaea2ffcd950e257ea9/res/drawable-anydpi-v21/design_ic_visibility_off.xml"
     },
     {
-        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
-        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/drawable-xxxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_common_plus_signin_btn_icon_dark_focused.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/res/drawable-hdpi-v4/common_plus_signin_btn_icon_dark_focused.9.png"
+    },
+    {
+        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
+        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/drawable-xxxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_common_google_signin_btn_text_dark_pressed.9.png.flat",
@@ -136,12 +136,12 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/design-24.2.0.aar/2b2926cdb40ff47c575bb35e5cf69ccc/res/layout/design_layout_tab_icon.xml"
     },
     {
-        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/layout_notification_media_cancel_action.xml.flat",
-        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/layout/notification_media_cancel_action.xml"
-    },
-    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_text_select_handle_left_mtrl_alpha.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/drawable-xhdpi-v4/abc_text_select_handle_left_mtrl_alpha.png"
+    },
+    {
+        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/layout_notification_media_cancel_action.xml.flat",
+        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/layout/notification_media_cancel_action.xml"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_common_full_open_on_phone.png.flat",
@@ -152,12 +152,12 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_normal.9.png"
     },
     {
-        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/color-v23_abc_tint_default.xml.flat",
-        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/color-v23/abc_tint_default.xml"
-    },
-    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/color_abc_secondary_text_material_dark.xml.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/color/abc_secondary_text_material_dark.xml"
+    },
+    {
+        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/color-v23_abc_tint_default.xml.flat",
+        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/color-v23/abc_tint_default.xml"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_abc_btn_borderless_material.xml.flat",
@@ -172,12 +172,12 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/res/drawable-tvdpi-v4/common_plus_signin_btn_icon_dark_disabled.9.png"
     },
     {
-        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_dark_normal.xml.flat",
-        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/72a2735e153e4817538f36c4f5efa3ee/res/drawable/common_google_signin_btn_icon_dark_normal.xml"
-    },
-    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-v21_avd_hide_password.xml.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/126f96d1ed3f3eaea2ffcd950e257ea9/res/drawable-v21/avd_hide_password.xml"
+    },
+    {
+        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_dark_normal.xml.flat",
+        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/72a2735e153e4817538f36c4f5efa3ee/res/drawable/common_google_signin_btn_icon_dark_normal.xml"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-tvdpi-v4_common_google_signin_btn_icon_light_pressed.9.png.flat",
