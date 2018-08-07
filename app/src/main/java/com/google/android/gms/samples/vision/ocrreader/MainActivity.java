@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -37,26 +38,39 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private CompoundButton useFlash;
     private TextView statusMessage;
     private TextView textValue;
+    private ImageButton imageButton;
 
     private static final int RC_OCR_CAPTURE = 9003;
     private static final String TAG = "MainActivity";
+    public static final String MEAL = "com.google.android.gms.samples.vision.ocrreader.MEAL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         statusMessage = (TextView)findViewById(R.id.status_message);
         textValue = (TextView)findViewById(R.id.text_value);
+        imageButton = (ImageButton) findViewById(R.id.edit_text);
 
         autoFocus = (CompoundButton) findViewById(R.id.auto_focus);
         useFlash = (CompoundButton) findViewById(R.id.use_flash);
 
         findViewById(R.id.read_text).setOnClickListener(this);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mealMenuActivityIntent = new Intent(getApplicationContext(), MealMenuActivity.class);
+                mealMenuActivityIntent.putExtra(MEAL, textValue.getText().toString());
+                startActivity(mealMenuActivityIntent);
+            }
+        });
     }
 
     /**
-     * Called when a view has been clicked.
+     * Called when a view has been clicked.fv          vvv
      *
      * @param v The view that was clicked.
      */
@@ -102,6 +116,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     String text = data.getStringExtra(OcrCaptureActivity.TextBlockObject);
                     statusMessage.setText(R.string.ocr_success);
                     textValue.setText(text);
+                    // now make edit button visible
+                    imageButton.setVisibility(View.VISIBLE);
                     Log.d(TAG, "Text read: " + text);
                 } else {
                     statusMessage.setText(R.string.ocr_failure);
