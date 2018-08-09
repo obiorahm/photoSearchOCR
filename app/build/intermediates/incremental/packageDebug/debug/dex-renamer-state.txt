@@ -1,4 +1,7 @@
-#Tue Aug 07 11:12:04 CDT 2018
-base.0=/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/18
+#Thu Aug 09 16:31:23 CDT 2018
+base.0=/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/1
+path.1=classes.dex
+renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
+base.1=/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/2

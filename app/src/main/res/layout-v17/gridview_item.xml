@@ -11,6 +11,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:id="@+id/recipe_image"
+        android:background="@drawable/image_border"
         android:src="@drawable/outline_edit_white_18dp"/>
 
 </LinearLayout>

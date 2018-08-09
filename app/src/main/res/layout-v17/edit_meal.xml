@@ -10,14 +10,19 @@
         android:id="@+id/meal_edit"
         android:layout_alignParentTop="true"
         android:visibility="invisible"
-            />
+        android:paddingStart="10sp"
+        android:paddingEnd="10sp" />
     <TextView
         android:paddingTop="20sp"
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/meal_text"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"
+        android:paddingStart="10sp"
+        android:paddingEnd="10sp"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/ic_volume_up_white_18dp"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,13 +44,17 @@
         android:verticalSpacing="10dp"
         android:horizontalSpacing="10dp"
         android:stretchMode="columnWidth"
-        android:gravity="center">
+        android:gravity="center"
+        android:paddingEnd="10sp"
+        android:paddingStart="10sp"
+        android:paddingTop="10sp"
+        android:paddingBottom="10sp"
+        android:listSelector="@color/colorPrimaryDark" >
 
     </GridView>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
     </ListView>
 
 </RelativeLayout>

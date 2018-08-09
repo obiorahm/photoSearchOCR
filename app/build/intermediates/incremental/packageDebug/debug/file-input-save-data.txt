@@ -1,7 +1,11 @@
 #Internal package file, do not edit.
-#Mon Aug 06 21:02:47 CDT 2018
+#Thu Aug 09 16:31:24 CDT 2018
+1.base=/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/1
 0.baseType=DIRECTORY
-0.base=/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/18
+1.baseType=DIRECTORY
+count=2
+1.set=DEX
 0.path=classes.dex
 0.set=DEX
-count=1
+0.base=/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/2
+1.path=classes.dex

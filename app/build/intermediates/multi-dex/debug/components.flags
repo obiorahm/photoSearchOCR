@@ -1,0 +1,68 @@
+-injars /Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/libs/opennlp-tools-1.6.0.jar(**.class)
+-injars /Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/libs/opennlp-uima-1.6.0.jar(**.class)
+-injars /Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/libs/edu.mit.jwi_2.4.0.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/design-24.2.0.aar/2b2926cdb40ff47c575bb35e5cf69ccc/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-vision-9.4.0.aar/dbbfa19e6337c85e89dae66bba93d9b6/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-tasks-9.4.0.aar/fb02b5181af73396d346938b419dd2b3/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-basement-9.4.0.aar/ac7a4c615b77ed18c2339113192f405b/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-v4-24.2.0.aar/1c1d123a43777e97ad4a4097c08ac223/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/7730c99b3bf88f6930279277edbe5cf7/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.5.2/ecf534dba3a8446ce84cbb797d314763be212a68/glide-3.5.2.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-24.2.0.aar/4f5db25d43889b8c04ea2c4181937668/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-fragment-24.2.0.aar/ac0dbc706686e018f8f7e9a3b1cd6f92/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-fragment-24.2.0.aar/ac0dbc706686e018f8f7e9a3b1cd6f92/jars/libs/internal_impl-24.2.0.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-core-ui-24.2.0.aar/88ae772368262c1906a1dc42e30ddf04/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-core-ui-24.2.0.aar/88ae772368262c1906a1dc42e30ddf04/jars/libs/internal_impl-24.2.0.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-24.2.0.aar/bf8538aa6cccc61dba9f51209d20ac62/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-24.2.0.aar/919c99f45c5c620fbd327d9937d347d2/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-core-utils-24.2.0.aar/3d524ca06ede84fbb44b753825949493/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-core-utils-24.2.0.aar/3d524ca06ede84fbb44b753825949493/jars/libs/internal_impl-24.2.0.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-media-compat-24.2.0.aar/f871feb41827e5c138aecc086fae6894/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-media-compat-24.2.0.aar/f871feb41827e5c138aecc086fae6894/jars/libs/internal_impl-24.2.0.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-compat-24.2.0.aar/4a09fa3ed9e298e9d2fb7891e2cc675a/jars/classes.jar(**.class)
+-injars /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-compat-24.2.0.aar/4a09fa3ed9e298e9d2fb7891e2cc675a/jars/libs/internal_impl-24.2.0.jar(**.class)
+-injars /Users/mgo983/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.0/support-annotations-24.2.0.jar(**.class)
+-injars /Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/classes/debug(**.class)
+-outjars /Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/multi-dex/debug/componentClasses.jar
+
+-libraryjars /Users/mgo983/Library/Android/sdk/build-tools/26.0.2/lib/shrinkedAndroid.jar
+
+-forceprocessing
+-dontoptimize
+-dontobfuscate
+-dontusemixedcaseclassnames
+-dontpreverify
+-dontnote **
+-dontwarn **
+-printconfiguration /Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/multi-dex/debug/components.flags
+
+
+# Referenced at /Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/manifests/full/debug/AndroidManifest.xml:19
+-keep class android.support.multidex.MultiDexApplication {
+    <init>(...);
+}
+
+-keep public class * extends android.app.Instrumentation {
+    <init>();
+}
+
+-keep public class * extends android.app.Application {
+    <init>();
+    void attachBaseContext(android.content.Context);
+}
+
+-keep public class * extends android.app.backup.BackupAgent {
+    <init>();
+}
+
+-keep public class * extends java.lang.annotation.Annotation {
+    <fields>;
+    <methods>;
+}
+
+-keep class com.android.tools.ir.** {
+    <fields>;
+    <methods>;
+}

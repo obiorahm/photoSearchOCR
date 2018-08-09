@@ -35,7 +35,10 @@ public class EdmanJasonReader {
             for (int i = 0; i < hits.length(); i++){
                 String[] recipeInfo = new String[2];
                 JSONObject recipe = hits.getJSONObject(i);
+                // get url
                 recipeInfo[0] = recipe.getJSONObject("recipe").getString("image");
+                //get ingredients
+                recipeInfo[1] = recipe.getJSONObject("recipe").getJSONArray("ingredientLines").toString();
                 Log.d(LOG_TAG, recipeInfo[0]);
                 tenRecipes.add(recipeInfo);
 

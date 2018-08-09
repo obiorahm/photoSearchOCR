@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
 
     <application
         android:allowBackup="true"
@@ -14,7 +16,8 @@
         android:icon="@drawable/icon"
         android:label="MultiTrackerApp"
         android:supportsRtl = "true"
-        android:theme="@style/Theme.AppCompat" >
+        android:theme="@style/Theme.AppCompat"
+        android:name="android.support.multidex.MultiDexApplication">
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="ocr" />
@@ -41,6 +44,15 @@
 
         <activity android:name="com.google.android.gms.samples.vision.ocrreader.OcrCaptureActivity"
             android:label="Read Text" />
+        <provider
+            android:name="com.google.android.gms.samples.vision.ocrreader.GenericFileProvider"
+            android:authorities="${applicationId}.org.tensorflow.demo.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>

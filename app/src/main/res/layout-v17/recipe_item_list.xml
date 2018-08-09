@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10sp"
+    android:paddingBottom="10sp"
+    android:paddingLeft="10sp"
+    android:paddingEnd="10sp">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/outline_edit_white_18dp"
+        android:id="@+id/ingredient_image"
+        android:background="@drawable/image_border"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:layout_alignParentTop="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ingredient_name"
+        android:textColor="@color/white"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textSize="20sp"
+        android:drawableStart="@drawable/ic_volume_up_white_18dp"
+        android:drawablePadding="10sp"
+        android:layout_toRightOf="@id/ingredient_image"/>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/select_ingredient"
+        android:layout_alignParentRight="true"
+        android:buttonTint="@color/colorPrimaryDark" />
+
+</RelativeLayout>

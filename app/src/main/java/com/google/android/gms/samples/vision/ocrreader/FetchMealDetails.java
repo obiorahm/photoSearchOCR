@@ -134,7 +134,7 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
         ArrayList<String[]> edmanInfo = edmanJasonReader.getRecipe();
 
         for (String[] recipeInformation : edmanInfo){
-            recipeInformation[1] = "val";
+            //recipeInformation[1] = "val";
             adapter.addItem(recipeInformation);
         }
 

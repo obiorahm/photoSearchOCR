@@ -1,12 +1,15 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.FetchMealDetails;
 import com.google.android.gms.samples.vision.ocrreader.R;
+import com.google.android.gms.samples.vision.ocrreader.RecipeDialog;
 
 import java.util.ArrayList;
 
@@ -33,6 +37,8 @@ public class WordAdapter extends ArrayAdapter {
     private ArrayList<String[]> mData = new ArrayList<String[]>();
 
     private final String LOG_TAG = WordAdapter.class.getSimpleName();
+
+    public static String RECIPE_INGREDIENTS = "com.google.android.gms.samples.vision.ocrreader.Adapter.RECIPE_INGREDIENTS";
 
     public WordAdapter(Context context, int resource, TextToSpeech myTTS){
         super(context,resource);
@@ -62,13 +68,13 @@ public class WordAdapter extends ArrayAdapter {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null){
             convertView = inflater.inflate(R.layout.gridview_item, null);
         }
 
         final TextView textView = (TextView) convertView.findViewById(R.id.word_in_text);
-        textView.setText(mData.get(position)[1]);
+        //textView.setText(mData.get(position)[1]);
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.recipe_image);
 
@@ -106,6 +112,19 @@ public class WordAdapter extends ArrayAdapter {
                 }
                 myTTs.speak(wholeString, TextToSpeech.QUEUE_FLUSH, null);
             }
+        });
+
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment newFragment = new RecipeDialog();
+                Bundle bundle = new Bundle();
+                bundle.putString(RECIPE_INGREDIENTS, mData.get(position)[1]);
+                //bundle.putString(EXTRA_DIALOG_IMAGE, imgFile.toString());
+
+                newFragment.setArguments(bundle);
+                newFragment.show(((Activity) context).getFragmentManager(),"what?"); }
         });
 
 
