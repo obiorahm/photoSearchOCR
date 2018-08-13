@@ -21,7 +21,7 @@ import java.util.Locale;
 public class MealMenuActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     private int MY_DATA_CHECK_CODE = 0;
-    private TextToSpeech myTTS;
+    public TextToSpeech myTTS;
     private WordAdapter adapter;
 
     protected void onCreate(Bundle savedInstanceState) {

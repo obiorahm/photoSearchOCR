@@ -14,6 +14,8 @@ import com.google.android.gms.samples.vision.ocrreader.Adapter.WordAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.TreeSet;
+
 /**
  * Created by mgo983 on 8/7/18.
  */
