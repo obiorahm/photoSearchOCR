@@ -298,8 +298,6 @@ public class RecipeDialog extends DialogFragment {
 
         Log.d(LOG_TAG + " nlp", processedIngredient);
 
-        String food = "";
-
         String path = DocumentDir.getAbsolutePath();
 
         URL url = new URL("file", null, path);

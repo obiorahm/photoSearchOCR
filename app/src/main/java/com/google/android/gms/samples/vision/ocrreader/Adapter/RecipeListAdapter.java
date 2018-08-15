@@ -7,6 +7,8 @@ import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -206,6 +208,9 @@ public class RecipeListAdapter extends ArrayAdapter {
 
                 viewHolderTypeImage.mListView = convertView.findViewById(R.id.ingredient_image_list_view);
 
+                LinearLayoutManager layoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
+                viewHolderTypeImage.mListView.setLayoutManager(layoutManager);
+
                 viewHolderTypeImage.mListView.setAdapter(imageAdapter);
                 convertView.setVisibility(View.GONE);
 
@@ -225,8 +230,7 @@ public class RecipeListAdapter extends ArrayAdapter {
     }
 
     public static class ViewHolderTypeImage{
-        ListView mListView;
-        ImageView mImageView;
+        RecyclerView mListView;
     }
 
 

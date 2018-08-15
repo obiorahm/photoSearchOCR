@@ -5,11 +5,6 @@
     android:paddingTop="10sp"
     android:paddingBottom="10sp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="GOOD"/>
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
