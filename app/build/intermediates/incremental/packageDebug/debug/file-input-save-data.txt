@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Aug 09 16:31:24 CDT 2018
+#Tue Aug 14 20:04:31 CDT 2018
 1.base=/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/1
 0.baseType=DIRECTORY
 1.baseType=DIRECTORY

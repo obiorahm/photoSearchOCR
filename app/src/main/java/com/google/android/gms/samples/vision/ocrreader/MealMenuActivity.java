@@ -8,9 +8,12 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.google.android.gms.samples.vision.ocrreader.Adapter.ImageAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.WordAdapter;
 import com.google.android.gms.samples.vision.ocrreader.FetchMealDetails;
 import com.google.android.gms.samples.vision.ocrreader.R;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Locale;
 
@@ -24,9 +27,13 @@ public class MealMenuActivity extends AppCompatActivity implements TextToSpeech.
     public TextToSpeech myTTS;
     private WordAdapter adapter;
 
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_meal);
+
+
 
         //start text to speech
         Intent checkTTSIntent = new Intent();
@@ -84,6 +91,8 @@ public class MealMenuActivity extends AppCompatActivity implements TextToSpeech.
 
     @Override
     public void onInit(int initStatus){
+        //initialize firebase
+        FirebaseApp.initializeApp(this);
         if (initStatus == TextToSpeech.SUCCESS) {
             myTTS.setLanguage(Locale.US);
             myTTS.setSpeechRate(0.6f);

@@ -4,7 +4,7 @@
             "outputFile": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-land/values-land.xml",
             "map": [
                 {
-                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/design-24.2.0.aar/2b2926cdb40ff47c575bb35e5cf69ccc/res/values-land/values-land.xml",
+                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/design-24.2.0.aar/6867bc155a216d14ddb2e31494ceb056/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/da95d1d486f54ced962c4da6f93686b3/res/values-land/values-land.xml",
+                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

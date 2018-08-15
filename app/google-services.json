@@ -1,0 +1,130 @@
+{
+  "project_info": {
+    "project_number": "932679649774",
+    "firebase_url": "https://aphasiadatabase.firebaseio.com",
+    "project_id": "aphasiadatabase",
+    "storage_bucket": "aphasiadatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932679649774:android:83b792e26f07bf18",
+        "android_client_info": {
+          "package_name": "com.example.android.sunshine.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932679649774-dkvisv7ahd8brju0a7l5iq3i5il8tq9s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWUqWDktUFXubP_oqQo8nAsW97ALNe_M4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932679649774:android:074610b6fa86b978",
+        "android_client_info": {
+          "package_name": "com.google.android.gms.samples.vision.ocrreader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932679649774-b7uh74m6i0kg3pcvupvgpmddadts87vv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.google.android.gms.samples.vision.ocrreader",
+            "certificate_hash": "f9c518ef108b1295698efd80892110dd0c5b480d"
+          }
+        },
+        {
+          "client_id": "932679649774-dkvisv7ahd8brju0a7l5iq3i5il8tq9s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWUqWDktUFXubP_oqQo8nAsW97ALNe_M4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "932679649774-dkvisv7ahd8brju0a7l5iq3i5il8tq9s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932679649774:android:b01db18433589acd",
+        "android_client_info": {
+          "package_name": "org.tensorflow.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932679649774-foe54n4eg8d8dlkg8u0ql47eejr6909j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.tensorflow.demo",
+            "certificate_hash": "f9c518ef108b1295698efd80892110dd0c5b480d"
+          }
+        },
+        {
+          "client_id": "932679649774-dkvisv7ahd8brju0a7l5iq3i5il8tq9s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWUqWDktUFXubP_oqQo8nAsW97ALNe_M4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "932679649774-dkvisv7ahd8brju0a7l5iq3i5il8tq9s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

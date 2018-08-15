@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
@@ -27,10 +28,15 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 	compile 'com.android.support:support-v4:24.2.0'
-    compile 'com.google.android.gms:play-services-vision:9.4.0+'
+    compile 'com.google.android.gms:play-services-vision:10.2.1'
     compile 'com.android.support:design:24.2.0'
     implementation'com.github.bumptech.glide:glide:3.5.2'
     compile 'com.android.support:multidex:1.0.1'
+
+    implementation 'com.google.firebase:firebase-core:10.2.1'
+    implementation 'com.google.firebase:firebase-database:10.2.1'
+    implementation 'com.google.firebase:firebase-auth:10.2.1'
+    implementation 'com.google.firebase:firebase-storage:10.2.1'
 
     implementation files('libs/opennlp-tools-1.6.0.jar')
     implementation files('libs/opennlp-uima-1.6.0.jar')
@@ -39,3 +45,5 @@ dependencies {
 
 
 }
+
+apply plugin: 'com.google.gms.google-services'

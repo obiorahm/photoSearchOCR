@@ -2,6 +2,7 @@ package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
@@ -11,34 +12,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.MealMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 
 
 
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.TreeSet;
 
-import edu.mit.jwi.Dictionary;
-import edu.mit.jwi.IDictionary;
-import edu.mit.jwi.data.IHasLifecycle;
-import edu.mit.jwi.item.IIndexWord;
-import edu.mit.jwi.item.ISynset;
-import edu.mit.jwi.item.ISynsetID;
-import edu.mit.jwi.item.IWord;
-import edu.mit.jwi.item.IWordID;
-import edu.mit.jwi.item.POS;
-import edu.mit.jwi.item.Pointer;
-import opennlp.tools.tokenize.SimpleTokenizer;
+
+import java.util.TreeSet;
 
 
 /**
@@ -47,40 +34,57 @@ import opennlp.tools.tokenize.SimpleTokenizer;
 
 public class RecipeListAdapter extends ArrayAdapter {
 
-    ArrayList<String[]> ingredients = new ArrayList<>();
+    private ArrayList<ArrayList<String>> ingredients = new ArrayList<ArrayList<String>>();
 
-    LayoutInflater inflater;
-    Context context;
-    String LOG_TAG = RecipeListAdapter.class.getSimpleName();
-    TextToSpeech myTTS;
+    private LayoutInflater inflater;
+    private Context context;
+    private String LOG_TAG = RecipeListAdapter.class.getSimpleName();
+    private TextToSpeech myTTS;
 
-    //set up wordnet constants
-    static final String WNDICT = "dict";
-    static final String DOCUMENT = "document";
-    static final File DocumentDir = new File(Environment.getExternalStoragePublicDirectory(DOCUMENT), WNDICT);
+    //ImageAdapter adapter;
 
-    HashSet<String> measurementHypernyms = new HashSet<>();
+
 
     private static final int TYPE_IMAGE = 0;
     private static final int TYPE_FULL_CONTENT = 1;
+    private static final int TYPE_MAX_COUNT = TYPE_FULL_CONTENT + 1;
 
     private TreeSet imageSet = new TreeSet();
     private TreeSet fullContentSet = new TreeSet();
+
 
 
     public RecipeListAdapter(Context context, int resource){
         super(context, resource);
         this.context = context;
         inflater = LayoutInflater.from(context);
+        //ImageAdapter for list in this list adapter
+        //this.adapter = adapter;
     }
 
-    public void addItem(String[] an_ingredient){
+    public void addItem(ArrayList an_ingredient){
         ingredients.add(an_ingredient);
-
+        notifyDataSetChanged();
     }
 
-    public void addImage(String imageUrl){
+    public void addImage(ArrayList imageUrl){
+        ingredients.add(imageUrl);
+        imageSet.add(ingredients.size() - 1);
+        notifyDataSetChanged();
+    }
 
+    @Override
+    public int getItemViewType (int position){
+        if(imageSet.contains(position)){
+            return TYPE_IMAGE;
+        }else{
+            return TYPE_FULL_CONTENT;
+        }
+    }
+
+    @Override
+    public int getViewTypeCount(){
+        return TYPE_MAX_COUNT;
     }
 
 
@@ -90,8 +94,8 @@ public class RecipeListAdapter extends ArrayAdapter {
     }
 
     @Override
-    public String[] getItem(int position){
-        return (String []) ingredients.get(position);
+    public ArrayList getItem(int position){
+        return (ArrayList) ingredients.get(position);
     }
 
     @Override
@@ -100,128 +104,130 @@ public class RecipeListAdapter extends ArrayAdapter {
     }
 
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public boolean hasStableIds(){
+        return true;
+    }
+
+    @Override
+    public View getView(final int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
+
+        final int type = getItemViewType(position);
 
         if (convertView == null){
-            convertView = inflater.inflate(R.layout.recipe_item_list, null);
-        }
-        TextView textView = (TextView) convertView.findViewById(R.id.ingredient_name);
+            switch (type){
+                case TYPE_FULL_CONTENT:
+                    convertView = inflater.inflate(R.layout.recipe_item_list, null);
+                    break;
+                case TYPE_IMAGE:
+                    convertView = inflater.inflate(R.layout.ingredient_image, null);
 
-        Log.d(LOG_TAG, "the ingredients" + ingredients.get(position)[0]);
 
-        //position 0 contains the recipe itself
-        String anIngridient = ingredients.get(position)[0];
-
-        String food = "";
-
-        try{
-            food = findFoodInIngredient(anIngridient);
-
-        }catch (IOException e){
-            Log.e(LOG_TAG, e + "");
-        }catch (IllegalArgumentException e){
-            Log.e(LOG_TAG, e + "");
-        }
-
-        //textView.setText(anIngridient);
-        textView.setText(food);
-
-        final String spoken_food = food;
-
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myTTS = ((MealMenuActivity) context).myTTS;
-
-                myTTS.speak(spoken_food, TextToSpeech.QUEUE_FLUSH, null);
             }
-        });
+        }
+
+
+        switch (type){
+            case TYPE_FULL_CONTENT:
+
+                ViewHolderTypeFullContent viewHolder = new ViewHolderTypeFullContent();
+                viewHolder.mTextView = (TextView) convertView.findViewById(R.id.ingredient_name);
+
+                Log.d(LOG_TAG, "the ingredients" + ingredients.get(position).get(0));
+
+                //position 0 contains the recipe itself
+                String anIngridient = ingredients.get(position).get(0);
+
+                String ingredientImageUri = ingredients.get(position).get(1);
+
+
+
+                viewHolder.mTextView.setText(anIngridient);
+
+                final String spoken_food = anIngridient;
+
+                viewHolder.mTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        myTTS = ((MealMenuActivity) context).myTTS;
+
+                        myTTS.speak(spoken_food, TextToSpeech.QUEUE_FLUSH, null);
+                    }
+                });
+
+                viewHolder.mImageView = convertView.findViewById(R.id.ingredient_image);
+                Glide.with(context).load(ingredientImageUri).into(viewHolder.mImageView);
+
+                //getImageUrls(ingredients.get(position).get(0),position ,viewHolder.mImageView);
+                viewHolder.mImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final View corresponding_view = parent.getChildAt(position + 1);
+                        ViewHolderTypeImage viewHolderTypeImage = new ViewHolderTypeImage();
+                        if (corresponding_view != null){
+                            int visibility = corresponding_view.getVisibility();
+                            if (visibility == View.GONE){
+                                corresponding_view.setVisibility(View.VISIBLE);
+                                viewHolderTypeImage.mListView = corresponding_view.findViewById(R.id.ingredient_image_list_view);
+                                viewHolderTypeImage.mListView.setVisibility(View.VISIBLE);
+
+
+                            }else{
+                                corresponding_view.setVisibility(View.GONE);
+                                viewHolderTypeImage.mListView = corresponding_view.findViewById(R.id.ingredient_image_list_view);
+                                viewHolderTypeImage.mListView.setVisibility(View.GONE);
+
+
+                            }
+
+                        }
+
+                    }
+                });
+
+                break;
+            case TYPE_IMAGE:
+                //adapter.addItem(ingredients.get(position));
+
+
+                //add item to adapter here
+                //getImageUrls(ingredients.get(position).get(0), imageAdapter);
+
+                ImageAdapter imageAdapter = new ImageAdapter(context, R.layout.ingredient_image_item);
+
+                ViewHolderTypeImage viewHolderTypeImage = new ViewHolderTypeImage();
+
+                String uriToString = "";
+                ArrayList<String> stringUri = ingredients.get(position);
+                for (String child: stringUri){
+                    Log.d(LOG_TAG + " uri content ", child);
+                    imageAdapter.addItem(child);
+
+                }
+
+                viewHolderTypeImage.mListView = convertView.findViewById(R.id.ingredient_image_list_view);
+
+                viewHolderTypeImage.mListView.setAdapter(imageAdapter);
+                convertView.setVisibility(View.GONE);
+
+
+
+        }
+
 
         return convertView;
     }
 
-    private String findFoodInIngredient(String anIngredient) throws IOException{
-        //add measurement hypernyms
-        measurementHypernyms.add("dishware");
-        measurementHypernyms.add("container");
-        measurementHypernyms.add("avoirdupois_unit");
-        measurementHypernyms.add("containerful");
 
-        //first do some natural language processing
-        // remove all special characters and numbers
-        String processedIngredient = anIngredient.replaceAll("[0-9/]", "");
-
-
-        //break the recipe step into words to find ingredients
-        String [] tokenizedIngredient = anIngredient.split(" ");
-        //tokenizedIngredient[0] = processedIngredient;
-
-        SimpleTokenizer tokenizer = SimpleTokenizer.INSTANCE;
-        String [] tokens = tokenizer.tokenize(processedIngredient);
-
-
-        Log.d(LOG_TAG + " nlp", processedIngredient);
-
-        String food = "";
-
-        String path = DocumentDir.getAbsolutePath();
-
-        URL url = new URL("file", null, path);
-
-        /*net.sf.extjwnl.dictionary.Dictionary  dictionary = net.sf.extjwnl.dictionary.Dictionary.getDefaultResourceInstance();
-        IndexWord ACCOMPLISH = dictionary.getIndexWord(net.sf.extjwnl.data.POS.NOUN, "dog");
-        Log.d(LOG_TAG + "dog" , ACCOMPLISH.getLemma());*/
-
-        // construct the dictionary object and open it
-        IDictionary dict = new Dictionary( url);
-
-
-        boolean dictIsOpen = dict.open();
-        Log.d(LOG_TAG, " " + dictIsOpen);
-
-        String finalWords  = "";
-        for (String item : tokens){
-            //remove numbers
-            if (!(item == null)){
-                // look up first sense of the word item
-                IIndexWord idxWord = dict . getIndexWord (item, POS.NOUN );
-                if (idxWord != null){
-                    IWordID wordID = idxWord . getWordIDs ().get (0) ;
-                    IWord word = dict . getWord ( wordID );
-
-                    ISynset synset = word.getSynset ();
-
-                    // get the hypernyms
-                    List< ISynsetID > hypernyms = synset.getRelatedSynsets (Pointer.HYPERNYM);
-
-                    boolean removeMeasurements = false;
-                    List<IWord > words ;
-                    for( ISynsetID sid : hypernyms ){
-                        words = dict.getSynset(sid).getWords ();
-//            Log.d("",sid + " {");
-                        for(Iterator<IWord > i = words.iterator(); i.hasNext () ;){
-                            String aHypernym = i.next().getLemma();
-                            if (measurementHypernyms.contains(aHypernym))
-                                removeMeasurements = true;
-
-                            Log.d("JWI " + item , aHypernym);
-                        }
-                        //Log.d ("","}");
-                    }
-                    if (!removeMeasurements && !(hypernyms == null)){
-                        finalWords += item + " ";
-                    }
-
-            }
-
-
-            }
-
-
-
-        }
-
-        return finalWords;
+    public static class ViewHolderTypeFullContent{
+        TextView mTextView;
+        ImageView mImageView;
 
     }
+
+    public static class ViewHolderTypeImage{
+        ListView mListView;
+        ImageView mImageView;
+    }
+
+
 }
