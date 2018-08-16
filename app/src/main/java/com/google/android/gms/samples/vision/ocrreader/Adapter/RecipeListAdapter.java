@@ -36,7 +36,7 @@ import java.util.TreeSet;
 
 public class RecipeListAdapter extends ArrayAdapter {
 
-    private ArrayList<ArrayList<String>> ingredients = new ArrayList<ArrayList<String>>();
+    private ArrayList<ArrayList<String[]>> ingredients = new ArrayList<ArrayList<String[]>>();
 
     private LayoutInflater inflater;
     private Context context;
@@ -134,12 +134,12 @@ public class RecipeListAdapter extends ArrayAdapter {
                 ViewHolderTypeFullContent viewHolder = new ViewHolderTypeFullContent();
                 viewHolder.mTextView = (TextView) convertView.findViewById(R.id.ingredient_name);
 
-                Log.d(LOG_TAG, "the ingredients" + ingredients.get(position).get(0));
+                //Log.d(LOG_TAG, "the ingredients" + ingredients.get(position).get(0)[0]);
 
                 //position 0 contains the recipe itself
-                String anIngridient = ingredients.get(position).get(0);
+                String anIngridient = ingredients.get(position).get(0)[0];
 
-                String ingredientImageUri = ingredients.get(position).get(1);
+                String ingredientImageUri = ingredients.get(position).get(1)[0];
 
 
 
@@ -160,12 +160,30 @@ public class RecipeListAdapter extends ArrayAdapter {
                 Glide.with(context).load(ingredientImageUri).into(viewHolder.mImageView);
 
                 //getImageUrls(ingredients.get(position).get(0),position ,viewHolder.mImageView);
+
+
                 viewHolder.mImageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        final View corresponding_view = parent.getChildAt(position + 1);
+                        Log.d(LOG_TAG + " position ", position + "");
+
+                        // handle getting position when user scrolls view off screen
+                        ListView newParent = (ListView) parent;
+                        int wantedPosition = position + 1; // Whatever position you're looking for
+                        int firstPosition = newParent.getFirstVisiblePosition() - newParent.getHeaderViewsCount(); // This is the same as child #0
+                        int wantedChild = wantedPosition - firstPosition;
+
+                        // Say, first visible position is 8, you want position 10, wantedChild will now be 2
+                        // So that means your view is child #2 in the ViewGroup:
+
+                        if (wantedChild < 0 || wantedChild >= newParent.getChildCount()) {
+                            Log.w(LOG_TAG, "Unable to get view for desired position, because it's not being displayed on screen.");
+                            return;
+                        }
+                        final View corresponding_view = parent.getChildAt(wantedChild);
                         ViewHolderTypeImage viewHolderTypeImage = new ViewHolderTypeImage();
                         if (corresponding_view != null){
+
                             int visibility = corresponding_view.getVisibility();
                             if (visibility == View.GONE){
                                 corresponding_view.setVisibility(View.VISIBLE);
@@ -188,31 +206,38 @@ public class RecipeListAdapter extends ArrayAdapter {
 
                 break;
             case TYPE_IMAGE:
-                //adapter.addItem(ingredients.get(position));
-
-
-                //add item to adapter here
-                //getImageUrls(ingredients.get(position).get(0), imageAdapter);
 
                 ImageAdapter imageAdapter = new ImageAdapter(context, R.layout.ingredient_image_item);
 
                 ViewHolderTypeImage viewHolderTypeImage = new ViewHolderTypeImage();
 
                 String uriToString = "";
-                ArrayList<String> stringUri = ingredients.get(position);
-                for (String child: stringUri){
-                    Log.d(LOG_TAG + " uri content ", child);
+                ArrayList<String[]> stringUri = ingredients.get(position);
+                for (String[] child: stringUri){
+                    Log.d(LOG_TAG + " uri content ", child[1]);
                     imageAdapter.addItem(child);
 
                 }
 
                 viewHolderTypeImage.mListView = convertView.findViewById(R.id.ingredient_image_list_view);
+                //viewHolderTypeImage.mImageView = convertView.findViewById(R.id.test_image);
 
                 LinearLayoutManager layoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
                 viewHolderTypeImage.mListView.setLayoutManager(layoutManager);
 
                 viewHolderTypeImage.mListView.setAdapter(imageAdapter);
-                convertView.setVisibility(View.GONE);
+
+                // when the visibility is set to true don't default to gone
+                if (convertView.getVisibility() == View.GONE)
+                    convertView.setVisibility(View.GONE);
+
+                /*viewHolderTypeImage.mImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(LOG_TAG + " position ", position + "");
+
+                    }
+                });*/
 
 
 
@@ -231,6 +256,7 @@ public class RecipeListAdapter extends ArrayAdapter {
 
     public static class ViewHolderTypeImage{
         RecyclerView mListView;
+        //ImageView mImageView;
     }
 
 

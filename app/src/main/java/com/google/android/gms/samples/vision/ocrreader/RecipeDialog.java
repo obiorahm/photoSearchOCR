@@ -113,10 +113,12 @@ public class RecipeDialog extends DialogFragment {
         if (n < ingredientArray.length())
         {
             final int count = n + 1;
-            final ArrayList<String> ingredient = new ArrayList<>();
+            final ArrayList<String[]> ingredient = new ArrayList<>();
             try{
                 String food = findFoodInIngredient(ingredientArray.getString(n));
-                ingredient.add(food);
+                //create array to accommodate TYPE_IMAGE content
+                String[]  foodAndSpace = {food, ""};
+                ingredient.add(foodAndSpace);
 
             }catch (IOException e){
                 Log.e(LOG_TAG, e + "");
@@ -127,19 +129,22 @@ public class RecipeDialog extends DialogFragment {
             }
 
 
-            final ArrayList<String> imageUrlsArray = new ArrayList<String>();
+            final ArrayList<String[]> imageUrlsArray = new ArrayList<String[]>();
 
 
             //tokenize ingredient
             SimpleTokenizer simpleTokenizer = SimpleTokenizer.INSTANCE;
-            final String tokenizedIngredient [] = simpleTokenizer.tokenize(ingredient.get(0));
+            final int FIRST_RECIPE_ITEM = 0;
+            final int ITEM = 0;
+
+            final String tokenizedIngredient [] = simpleTokenizer.tokenize(ingredient.get(FIRST_RECIPE_ITEM)[ITEM]);
 
             //sign in anonymously to Firebase
             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
             if (firebaseUser == null){
                 signInAnonymously();
             }
-            Query databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD).child(tokenizedIngredient[0]).limitToFirst(1);
+            Query databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD).child(tokenizedIngredient[0].toLowerCase()).limitToFirst(1);
 
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -208,31 +213,37 @@ public class RecipeDialog extends DialogFragment {
 
     }
 
-    private void addItemToAdapters(String newItem, ArrayList<String> ingredient, ArrayList<String> imageUrlsArray, String [] tokenizedIngredient, JSONArray ingredientArray, int count ){
-        ingredient.add(newItem);
+    private void addItemToAdapters(String newItem, ArrayList<String[]> ingredient, ArrayList<String[]> imageUrlsArray, String [] tokenizedIngredient, JSONArray ingredientArray, int count ){
+        // url and word in a string array
+        String urlAndWord[] = {newItem, tokenizedIngredient[0]};
+        ingredient.add(urlAndWord);
+        imageUrlsArray.add(urlAndWord);
         recipeListAdapter.addItem(ingredient);
         recipeListAdapter.addImage(imageUrlsArray);
-        imageUrlsArray.add(newItem);
         getImageUrlsForOtherTokens(tokenizedIngredient, 1, imageUrlsArray);
         search(ingredientArray, count);
 
     }
 
-    private void getImageUrlsForOtherTokens(final String [] tokenizedIngredient, final int i, final ArrayList<String> imageUrlsArray){
-        Log.d(LOG_TAG + "other tokens", imageUrlsArray.get(0));
+    private void getImageUrlsForOtherTokens(final String [] tokenizedIngredient, final int i, final ArrayList<String[]> imageUrlsArray){
+        Log.d(LOG_TAG + "other tokens", imageUrlsArray.get(0)[0]);
         if (i < tokenizedIngredient.length){
-            Query databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD).child(tokenizedIngredient[i]).limitToFirst(1);
+            Query databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD).child(tokenizedIngredient[i].toLowerCase()).limitToFirst(1);
 
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     //takes care of images that do not exist
                     if (!dataSnapshot.exists()){
-                        imageUrlsArray.add("");
+                        //add searched word and Url
+                        String[] urlAndWord = {"", tokenizedIngredient[i]};
+                        imageUrlsArray.add(urlAndWord);
                         getImageUrlsForOtherTokens(tokenizedIngredient, i + 1, imageUrlsArray);
 
                     }
 
+                    /* 0 is the category, 1 is the firebase generated id on push, 2 is the word itself
+                    * */
                     for (DataSnapshot child: dataSnapshot.getChildren()){
                         String childValue [] = child.getValue().toString().split("/");
                         Log.d(LOG_TAG + " child ", WORD_IMAGE_REFERENCE + "/" + childValue[0] +"/" + childValue[1]);
@@ -246,7 +257,9 @@ public class RecipeDialog extends DialogFragment {
                                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        imageUrlsArray.add(uri.toString());
+                                        // add searched word and Url
+                                        String [] urlAndWord = {uri.toString(), tokenizedIngredient[i]};
+                                        imageUrlsArray.add(urlAndWord);
                                         Log.d(LOG_TAG + "other tokens", imageUrlsArray.size()+ "");
 
                                         getImageUrlsForOtherTokens(tokenizedIngredient, i + 1, imageUrlsArray);
@@ -254,7 +267,9 @@ public class RecipeDialog extends DialogFragment {
                                 }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                imageUrlsArray.add("");
+                                //add searched word and Url
+                                String[] urlAndWord = {"", tokenizedIngredient[i]};
+                                imageUrlsArray.add(urlAndWord);
                                 getImageUrlsForOtherTokens(tokenizedIngredient, i + 1, imageUrlsArray);
                             }
                         });
