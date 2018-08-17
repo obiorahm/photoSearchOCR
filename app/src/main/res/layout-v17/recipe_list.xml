@@ -3,7 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="10sp"
-    android:paddingBottom="10sp">
+    android:paddingBottom="10sp"
+    style="@style/Theme_Dialog">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,14 +1,17 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -61,6 +64,7 @@ import opennlp.tools.util.eval.Mean;
 
 public class RecipeDialog extends DialogFragment {
 
+
     RecipeListAdapter recipeListAdapter;
 
     //ImageAdapter imageAdapter;
@@ -71,9 +75,6 @@ public class RecipeDialog extends DialogFragment {
 
 
     public static FirebaseAuth firebaseAuth;
-
-
-
 
     //set up wordnet constants
     static final String WNDICT = "dict";
@@ -89,6 +90,7 @@ public class RecipeDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recipe_list, container, false);
+
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -393,6 +395,33 @@ public class RecipeDialog extends DialogFragment {
 
         return finalWords;
 
+    }
+
+    @Override
+    public void onResume() {
+
+        // Get screen width and height in pixels
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        // The absolute width of the available display size in pixels.
+        int displayWidth = displayMetrics.widthPixels;
+
+        // Set alert dialog width equal to screen width 90%
+        int dialogWindowWidth = (int) (displayWidth * 0.9f);
+
+        // Assign wrap content of dialog
+        int dialogWindowHeight = WindowManager.LayoutParams.WRAP_CONTENT;
+
+        // Get existing layout params for the window
+        ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
+
+        params.width = dialogWindowWidth;
+        params.height = dialogWindowHeight;
+
+
+        getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+        // Call super onResume after sizing
+        super.onResume();
     }
 
     public void signInAnonymously() {

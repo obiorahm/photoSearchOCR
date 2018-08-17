@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
@@ -23,14 +27,29 @@ import java.io.InputStream;
 
 public class DetectImageActivity extends Activity {
 
-String LOG_TAG = DetectImageActivity.class.getSimpleName();
+    String LOG_TAG = DetectImageActivity.class.getSimpleName();
+
+    private GraphicOverlay<OcrGraphic> mGraphicOverlay;
+
+
 @Override
     public void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
 
+    setContentView(R.layout.activity_image_detection);
+
+    mGraphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.second_graphic_overlay);
+
+
     Context context = getApplicationContext();
 
     Frame outputFrame = null;
+
+    ImageView imageView = findViewById(R.id.image_to_detect);
+
+
+
+
 
     //get image and convert to frame
     try{
@@ -39,6 +58,8 @@ String LOG_TAG = DetectImageActivity.class.getSimpleName();
         BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 
         Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream);
+
+        Glide.with(this).load(Uri.parse("file:///android_asset/farmhouse.png")).into(imageView);
 
         //bitmap to frame
         outputFrame = new Frame.Builder().setBitmap(bmp).build();
@@ -51,9 +72,12 @@ String LOG_TAG = DetectImageActivity.class.getSimpleName();
     //detect image
     TextRecognizer textRecognizer = new TextRecognizer.Builder(context).build();
     SparseArray<TextBlock> result = textRecognizer.detect(outputFrame);
+    //textRecognizer.setProcessor(new OcrDetectorProcessor(mGraphicOverlay));
 
     for (int i = 0; i < result.size(); i++){
         if (result.get(i) != null){
+            OcrGraphic graphic = new OcrGraphic(mGraphicOverlay, result.get(i));
+            mGraphicOverlay.add(graphic);
             Log.d(LOG_TAG + " size : ", result.get(i).getValue() + "");
         }
     }

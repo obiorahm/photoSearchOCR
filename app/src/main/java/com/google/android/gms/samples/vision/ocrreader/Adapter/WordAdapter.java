@@ -10,16 +10,19 @@ import android.speech.tts.UtteranceProgressListener;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.FetchMealDetails;
+import com.google.android.gms.samples.vision.ocrreader.MealMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.RecipeDialog;
 
@@ -124,8 +127,16 @@ public class WordAdapter extends ArrayAdapter {
                 //bundle.putString(EXTRA_DIALOG_IMAGE, imgFile.toString());
 
                 newFragment.setArguments(bundle);
-                newFragment.show(((Activity) context).getFragmentManager(),"what?"); }
-        });
+                newFragment.show(((Activity) context).getFragmentManager(),"what?");
+
+            }
+
+
+            });
+
+
+
+
 
 
         return convertView;
