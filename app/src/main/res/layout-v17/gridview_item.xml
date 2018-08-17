@@ -14,4 +14,14 @@
         android:background="@drawable/image_border"
         android:src="@drawable/outline_edit_white_18dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/include_item"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/remove_item"/>
+
 </LinearLayout>

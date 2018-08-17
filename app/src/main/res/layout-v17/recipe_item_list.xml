@@ -31,8 +31,22 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/get_extra"
+        android:buttonTint="@color/colorPrimaryDark"
+        android:layout_alignParentRight="true"
+        android:padding="15sp"/>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/get_none"
+        android:buttonTint="@color/gray"
+        android:layout_toLeftOf="@id/get_extra"
+        android:padding="15sp"/>
+    <!--CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/select_ingredient"
         android:layout_alignParentRight="true"
-        android:buttonTint="@color/colorPrimaryDark" />
+        android:buttonTint="@color/colorPrimaryDark" /-->
 
 </RelativeLayout>

@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.google.android.gms.samples.vision.ocrreader.Adapter.ImageAdapter;
@@ -101,9 +103,19 @@ public class RecipeDialog extends DialogFragment {
             ListView listView = (ListView) rootView.findViewById(R.id.recipe_list_view);
             listView.setAdapter(recipeListAdapter);
 
+
         }catch (JSONException e){
             Log.e(LOG_TAG, e + "");
         }
+
+        ImageButton imageButton = rootView.findViewById(R.id.next_item);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //recipeListAdapter.
+            }
+        });
 
         return rootView;
     }
@@ -297,6 +309,15 @@ public class RecipeDialog extends DialogFragment {
         measurementHypernyms.add("container");
         measurementHypernyms.add("avoirdupois_unit");
         measurementHypernyms.add("containerful");
+        measurementHypernyms.add("crockery");
+        measurementHypernyms.add("cooking_utensil");
+        measurementHypernyms.add("cookware");
+
+        //other hypernyms
+        measurementHypernyms.add("outlet");
+        measurementHypernyms.add("sales_outlet");
+        measurementHypernyms.add("retail_store");
+        measurementHypernyms.add("mercantile_establishment");
 
         //first do some natural language processing
         // remove all special characters and numbers

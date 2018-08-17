@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="10sp"
     android:paddingBottom="10sp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NO"
+        android:layout_alignParentRight="true"
+        android:id="@+id/no_item"
+        android:drawableLeft="@drawable/baseline_not_interested_white_18dp"
+        android:drawablePadding="10sp"
+        android:padding="10sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EXTRA"
+        android:id="@+id/more_item"
+        android:layout_toLeftOf="@id/no_item"
+        android:drawableLeft="@drawable/baseline_add_circle_outline_white_18dp"
+        android:drawablePadding="10sp"
+        android:padding="10sp"/>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recipe_list_view" />
+        android:id="@+id/recipe_list_view"
+        android:layout_below="@+id/more_item"/>
 
-</LinearLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/next_item"
+        android:src="@drawable/baseline_navigate_next_white_48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/circular_button"
+        android:layout_margin="10sp"/>
+
+</RelativeLayout>

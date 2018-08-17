@@ -21,7 +21,15 @@
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="ocr" />
+        <activity
+            android:name="com.google.android.gms.samples.vision.ocrreader.DetectImageActivity"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name="com.google.android.gms.samples.vision.ocrreader.MealMenuActivity"

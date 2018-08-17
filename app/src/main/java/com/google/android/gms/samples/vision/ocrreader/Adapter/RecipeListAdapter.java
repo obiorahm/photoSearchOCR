@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -132,6 +133,7 @@ public class RecipeListAdapter extends ArrayAdapter {
             case TYPE_FULL_CONTENT:
 
                 ViewHolderTypeFullContent viewHolder = new ViewHolderTypeFullContent();
+
                 viewHolder.mTextView = (TextView) convertView.findViewById(R.id.ingredient_name);
 
                 //Log.d(LOG_TAG, "the ingredients" + ingredients.get(position).get(0)[0]);
@@ -160,6 +162,7 @@ public class RecipeListAdapter extends ArrayAdapter {
                 Glide.with(context).load(ingredientImageUri).into(viewHolder.mImageView);
 
                 //getImageUrls(ingredients.get(position).get(0),position ,viewHolder.mImageView);
+                final View newConvertView = null;
 
 
                 viewHolder.mImageView.setOnClickListener(new View.OnClickListener() {
@@ -175,8 +178,13 @@ public class RecipeListAdapter extends ArrayAdapter {
 
                         // Say, first visible position is 8, you want position 10, wantedChild will now be 2
                         // So that means your view is child #2 in the ViewGroup:
-
                         if (wantedChild < 0 || wantedChild >= newParent.getChildCount()) {
+                            int i = ((ListView) parent).getFirstVisiblePosition();
+                            View firstItemView = parent.getChildAt(i);
+                            //deal with scrolling
+                            makeFirstItemInvisible(firstItemView, i);
+                            getViewByPosition(wantedChild, newConvertView, parent );
+
                             Log.w(LOG_TAG, "Unable to get view for desired position, because it's not being displayed on screen.");
                             return;
                         }
@@ -203,6 +211,7 @@ public class RecipeListAdapter extends ArrayAdapter {
 
                     }
                 });
+                makeItemsVisible(convertView, position);
 
                 break;
             case TYPE_IMAGE:
@@ -247,16 +256,87 @@ public class RecipeListAdapter extends ArrayAdapter {
         return convertView;
     }
 
+    private void makeFirstItemInvisible(View firstItem, int position){
+
+        final int type = getItemViewType(position);
+        switch (type){
+            case TYPE_FULL_CONTENT:
+
+                // make all containing elements invisible
+                ViewHolderTypeFullContent viewHolderTypeFullContent = new ViewHolderTypeFullContent();
+                viewHolderTypeFullContent.mImageView = firstItem.findViewById(R.id.ingredient_image);
+                viewHolderTypeFullContent.mImageView.setVisibility(View.GONE);
+
+                viewHolderTypeFullContent.mTextView = firstItem.findViewById(R.id.ingredient_name);
+                viewHolderTypeFullContent.mTextView.setVisibility(View.GONE);
+
+                viewHolderTypeFullContent.mCheckExclude = firstItem.findViewById(R.id.get_none);
+                viewHolderTypeFullContent.mCheckExclude.setVisibility(View.GONE);
+
+                viewHolderTypeFullContent.mCheckExtra = firstItem.findViewById(R.id.get_extra);
+                viewHolderTypeFullContent.mCheckExtra.setVisibility(View.GONE);
+
+                firstItem.setVisibility(View.GONE);
+                break;
+            case TYPE_IMAGE:
+                break;
+
+
+
+        }
+
+    }
+
+
+    private void makeItemsVisible(View anyItem, int position){
+
+        final int type = getItemViewType(position);
+        switch (type){
+            case TYPE_FULL_CONTENT:
+
+                // make all containing elements invisible
+                ViewHolderTypeFullContent viewHolderTypeFullContent = new ViewHolderTypeFullContent();
+                viewHolderTypeFullContent.mImageView = anyItem.findViewById(R.id.ingredient_image);
+                viewHolderTypeFullContent.mImageView.setVisibility(View.VISIBLE);
+
+                viewHolderTypeFullContent.mTextView = anyItem.findViewById(R.id.ingredient_name);
+                viewHolderTypeFullContent.mTextView.setVisibility(View.VISIBLE);
+
+                viewHolderTypeFullContent.mCheckExclude = anyItem.findViewById(R.id.get_none);
+                viewHolderTypeFullContent.mCheckExclude.setVisibility(View.VISIBLE);
+
+                viewHolderTypeFullContent.mCheckExtra = anyItem.findViewById(R.id.get_extra);
+                viewHolderTypeFullContent.mCheckExtra.setVisibility(View.VISIBLE);
+
+                anyItem.setVisibility(View.VISIBLE);
+                break;
+            case TYPE_IMAGE:
+                break;
+
+
+
+        }
+
+    }
+
 
     public static class ViewHolderTypeFullContent{
         TextView mTextView;
         ImageView mImageView;
+        CheckBox mCheckExtra;
+        CheckBox mCheckExclude;
 
     }
 
     public static class ViewHolderTypeImage{
         RecyclerView mListView;
         //ImageView mImageView;
+    }
+
+    public void getViewByPosition(int position, View convertView, ViewGroup parent){
+        convertView = inflater.inflate(R.layout.ingredient_image, null);
+        makeItemsVisible(convertView, position);
+        this.getView(position, convertView, parent);
     }
 
 
