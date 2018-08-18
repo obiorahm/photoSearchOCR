@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_to_detect"/>
     <com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay
         android:id="@+id/second_graphic_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/image_to_detect"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circular_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/baseline_navigate_before_white_48dp"
+        android:layout_margin="20sp"/>
 
 
 
-</LinearLayout>
+
+</RelativeLayout>

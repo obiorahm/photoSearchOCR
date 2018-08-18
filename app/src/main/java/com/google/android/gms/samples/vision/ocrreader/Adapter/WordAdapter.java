@@ -128,9 +128,7 @@ public class WordAdapter extends ArrayAdapter {
 
                 newFragment.setArguments(bundle);
                 newFragment.show(((Activity) context).getFragmentManager(),"what?");
-
             }
-
 
             });
 

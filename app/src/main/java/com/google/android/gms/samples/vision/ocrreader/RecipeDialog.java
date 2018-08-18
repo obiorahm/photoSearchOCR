@@ -407,16 +407,16 @@ public class RecipeDialog extends DialogFragment {
         int displayWidth = displayMetrics.widthPixels;
 
         // Set alert dialog width equal to screen width 90%
-        int dialogWindowWidth = (int) (displayWidth * 0.9f);
+        int dialogWindowWidth = (int) (displayWidth * 0.85f);
 
         // Assign wrap content of dialog
-        int dialogWindowHeight = WindowManager.LayoutParams.WRAP_CONTENT;
+        //int dialogWindowHeight = WindowManager.LayoutParams.WRAP_CONTENT;
 
         // Get existing layout params for the window
         ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
 
         params.width = dialogWindowWidth;
-        params.height = dialogWindowHeight;
+        //params.height = dialogWindowHeight;
 
 
         getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);

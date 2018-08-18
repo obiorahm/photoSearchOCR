@@ -27,7 +27,8 @@
         android:textSize="20sp"
         android:drawableStart="@drawable/ic_volume_up_white_18dp"
         android:drawablePadding="10sp"
-        android:layout_toRightOf="@id/ingredient_image"/>
+        android:layout_toRightOf="@id/ingredient_image"
+        android:layout_toLeftOf="@id/get_none"/>
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
