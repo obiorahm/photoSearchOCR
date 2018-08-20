@@ -11,15 +11,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.textservice.SentenceSuggestionsInfo;
+import android.view.textservice.SpellCheckerSession;
+import android.view.textservice.SuggestionsInfo;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.samples.vision.ocrreader.Adapter.RecognizedTextAdapter;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSource;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.Detector;
@@ -42,7 +50,7 @@ import java.util.Locale;
  * Created by mgo983 on 8/17/18.
  */
 
-public class DetectImageActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+public class DetectImageActivity extends AppCompatActivity implements TextToSpeech.OnInitListener, SpellCheckerSession.SpellCheckerSessionListener {
 
     String LOG_TAG = DetectImageActivity.class.getSimpleName();
 
@@ -58,6 +66,8 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
 
     private TextBlock selectedTextBlock = null;
 
+    private RecognizedTextAdapter recognizedTextAdapter = null;
+
 
 @Override
     public void onCreate(Bundle savedInstanceState){
@@ -68,8 +78,6 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
     mGraphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.second_graphic_overlay);
 
     gestureDetector = new GestureDetector(this, new DetectImageActivity.CaptureGestureListener());
-
-
 
     //start text to speech
     Intent checkTTSIntent = new Intent();
@@ -97,10 +105,6 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
 
 
 
-
-
-
-
     //get image and convert to frame
     try{
         //InputStream inputStream = getAssets().open("farmhouse.png");
@@ -114,7 +118,7 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
         Glide.with(this).load(file).into(imageView);
 
         //bitmap to frame
-        outputFrame = new Frame.Builder().setBitmap(bmp).build();
+        //outputFrame = new Frame.Builder().setBitmap(bmp).build();
 
     }catch (IOException e){
 
@@ -127,6 +131,10 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
     //textRecognizer.setProcessor(new OcrDetectorProcessor(mGraphicOverlay));
     final SparseArray<TextBlock> result = OcrCaptureActivity.items;
 
+    myTTS = new TextToSpeech(this, this);
+
+    //initialize adapter
+    recognizedTextAdapter = new RecognizedTextAdapter(this, R.layout.horizontal_text);
 
     for (int i = 0; i < result.size(); i++){
         if (result.get(i) != null){
@@ -135,9 +143,17 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
             String textStr[] = result.get(i).getValue().split("\\r\\n|\\n|\\r");
 
             for(int j = 0; j < textStr.length; j++){
-                Log.d(LOG_TAG + "text lines: ",  textStr[j] + "");
+
+                String line_detected = textStr[j];
+                //test for null string or empty string
+                if (line_detected != null && line_detected != "" ){
+                    recognizedTextAdapter.addItem(line_detected);
+                    Log.d(LOG_TAG + "text lines: ",  " added item ");
+
+                }
+                Log.d(LOG_TAG + "text lines: ",  line_detected );
             }
-            Log.d(LOG_TAG + " size : ", result.get(i).getValue() + "");
+            Log.d(LOG_TAG + " size : ", result.get(i).getValue() );
         }
     }
 
@@ -164,6 +180,17 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
             startActivity(mealMenuActivity);
         }
     });
+
+    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.detected_text_list_view);
+
+
+// apparently the recycler view does not work without setting up a layout manager
+    LinearLayoutManager layoutManager= new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false);
+    recyclerView.setLayoutManager(layoutManager);
+
+
+
+    recyclerView.setAdapter(recognizedTextAdapter);
 
     }
 
@@ -252,5 +279,13 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
             Log.d(LOG_TAG,"no text detected");
         }
         return text != null;
+    }
+
+    @Override
+    public void onGetSuggestions(SuggestionsInfo[] results) {
+    }
+
+    @Override
+    public void onGetSentenceSuggestions(SentenceSuggestionsInfo[] results) {
     }
 }

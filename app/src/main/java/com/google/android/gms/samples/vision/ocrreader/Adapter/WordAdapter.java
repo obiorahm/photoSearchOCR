@@ -41,7 +41,7 @@ public class WordAdapter extends ArrayAdapter {
 
     private final String LOG_TAG = WordAdapter.class.getSimpleName();
 
-    public static String RECIPE_INGREDIENTS = "com.google.android.gms.samples.vision.ocrreader.Adapter.RECIPE_INGREDIENTS";
+    public static String RECIPE_INGREDIENTS = "com.google.android.gms.samples.vision.ocrreader.RecognizedTextAdapter.RECIPE_INGREDIENTS";
 
     public WordAdapter(Context context, int resource, TextToSpeech myTTS){
         super(context,resource);
@@ -87,23 +87,6 @@ public class WordAdapter extends ArrayAdapter {
 
         Glide.with(context).load(uri).into(imageView);
 
-        myTTs.setOnUtteranceProgressListener(new UtteranceProgressListener() {
-            @Override
-            public void onStart(String s) {
-                textView.setHighlightColor(((Activity) context).getResources().getColor(R.color.common_google_signin_btn_text_dark_focused));
-            }
-
-            @Override
-            public void onDone(String s) {
-                textView.setHighlightColor(((Activity) context).getResources().getColor(R.color.common_google_signin_btn_text_light_disabled));
-
-            }
-
-            @Override
-            public void onError(String s) {
-
-            }
-        });
 
         //say all the words
         textView.setOnClickListener(new View.OnClickListener() {
