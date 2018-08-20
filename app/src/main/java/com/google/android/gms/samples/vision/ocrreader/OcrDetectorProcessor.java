@@ -15,6 +15,7 @@
  */
 package com.google.android.gms.samples.vision.ocrreader;
 
+import android.os.Parcelable;
 import android.util.SparseArray;
 
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay;
@@ -28,6 +29,9 @@ import com.google.android.gms.vision.text.TextBlock;
 public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
 
     private GraphicOverlay<OcrGraphic> mGraphicOverlay;
+
+    //created by Mmachi;
+    SparseArray<TextBlock> items = null;
 
     OcrDetectorProcessor(GraphicOverlay<OcrGraphic> ocrGraphicOverlay) {
         mGraphicOverlay = ocrGraphicOverlay;
@@ -43,12 +47,18 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
     @Override
     public void receiveDetections(Detector.Detections<TextBlock> detections) {
         mGraphicOverlay.clear();
-        SparseArray<TextBlock> items = detections.getDetectedItems();
+        //SparseArray<TextBlock> items = detections.getDetectedItems();
+        items = detections.getDetectedItems();
         for (int i = 0; i < items.size(); ++i) {
             TextBlock item = items.valueAt(i);
             OcrGraphic graphic = new OcrGraphic(mGraphicOverlay, item);
             mGraphicOverlay.add(graphic);
         }
+    }
+
+
+    public SparseArray<TextBlock> getTextBlocks(){
+        return items;
     }
 
     /**

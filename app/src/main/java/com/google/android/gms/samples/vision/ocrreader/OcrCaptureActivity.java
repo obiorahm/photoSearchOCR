@@ -25,18 +25,26 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -48,7 +56,14 @@ import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+
 
 /**
  * Activity for the multi-tracker app.  This app detects text and displays the value with the
@@ -77,6 +92,31 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     private ScaleGestureDetector scaleGestureDetector;
     private GestureDetector gestureDetector;
 
+
+    //Image file variables
+    private String currentDateTimeString = "";
+    private String imageFileName="";
+    File imageFile = null;
+
+    static final String applicationDirectory = "Detector";
+    static final File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), applicationDirectory);
+    File file = null;
+
+
+
+    public static String IMAGE_FILE_NAME = "com.google.android.gms.samples.vision.ocrreader.IMAGE_FILE_NAME";
+    public static String TEXT_BLOCKS = "com.google.android.gms.samples.vision.ocrreader.TEXT_BLOCK";
+    private String LOG_TAG = OcrCaptureActivity.class.getSimpleName();
+
+
+    /**
+     * Struggled with passing items through intent and resorted to making it a public and static object
+     * */
+    public static SparseArray<TextBlock> items = new SparseArray<>();
+
+
+
+    private OcrDetectorProcessor ocrDetectorProcessor = null;
     /**
      * Initializes the UI and creates the detector pipeline.
      */
@@ -107,6 +147,26 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         Snackbar.make(mGraphicOverlay, "Tap to capture. Pinch/Stretch to zoom",
                 Snackbar.LENGTH_LONG)
                 .show();
+
+        // collect all selected Textblocks and go forward
+        ImageButton btn_forward = (ImageButton) findViewById(R.id.forward_button);
+        btn_forward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detectImageActivity = new Intent(getApplicationContext(), DetectImageActivity.class);
+                detectImageActivity.putExtra(IMAGE_FILE_NAME, file.getAbsolutePath());
+                startActivity(detectImageActivity);
+            }
+        });
+
+        // go back to main activity
+        ImageButton btn_back = (ImageButton) findViewById(R.id.back_button);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     /**
@@ -166,7 +226,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         // is set to receive the text recognition results and display graphics for each text block
         // on screen.
         TextRecognizer textRecognizer = new TextRecognizer.Builder(context).build();
-        textRecognizer.setProcessor(new OcrDetectorProcessor(mGraphicOverlay));
+        ocrDetectorProcessor = new OcrDetectorProcessor(mGraphicOverlay);
+        textRecognizer.setProcessor(ocrDetectorProcessor);
 
         if (!textRecognizer.isOperational()) {
             // Note: The first time that an app using a Vision API is installed on a
@@ -321,15 +382,81 @@ public final class OcrCaptureActivity extends AppCompatActivity {
      * @return true if the activity is ending.
      */
     private boolean onTap(float rawX, float rawY) {
-        OcrGraphic graphic = mGraphicOverlay.getGraphicAtLocation(rawX, rawY);
+        final OcrGraphic graphic = mGraphicOverlay.getGraphicAtLocation(rawX, rawY);
         TextBlock text = null;
         if (graphic != null) {
             text = graphic.getTextBlock();
+            final TextBlock final_text = text;
             if (text != null && text.getValue() != null) {
-                Intent data = new Intent();
+
+                mCameraSource.takePicture(new CameraSource.ShutterCallback() {
+                    @Override
+                    public void onShutter() {
+
+                    }
+                }, new CameraSource.PictureCallback() {
+                    @Override
+                    public void onPictureTaken(byte[] data) {
+                        if (data != null){
+
+                            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+
+                            // save the image
+                            currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+
+
+                            try {
+
+                                //give the file a unique name
+                                imageFileName = "detect" + currentDateTimeString.replace(" ","");
+
+                                file = new File(storageDir, imageFileName + ".jpg");
+
+                                FileOutputStream fOut = new FileOutputStream(file);
+
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+                                fOut.flush();
+                                fOut.close();
+
+                            }catch (IOException e){
+                                Log.e(LOG_TAG, e + "file not created");
+                            }
+
+                            if (ocrDetectorProcessor != null)
+                            {
+                                //items = ocrDetectorProcessor.getTextBlocks();
+                                items.append(items.size(), final_text);
+
+                                if (items != null){
+                                    for (int i = 0; i < items.size(); i++){
+                                        if (items.get(i) != null){
+                                            Log.d(LOG_TAG, "Text blocks in snapshot" + items.get(i).getValue());
+
+                                        }
+
+                                    }
+                                }
+
+                            }
+
+                            /*Intent intent = new Intent (getApplicationContext(), DetectImageActivity.class);
+                            intent.putExtra(IMAGE_FILE_NAME, file.getAbsolutePath());
+
+
+                            startActivity(intent);
+                            finish();*/
+
+                        }
+                    }
+                });
+
+
+                /*Intent data = new Intent();
                 data.putExtra(TextBlockObject, text.getValue());
-                setResult(CommonStatusCodes.SUCCESS, data);
-                finish();
+                setResult(CommonStatusCodes.SUCCESS, data);*/
+
+                //finish();
             }
             else {
                 Log.d(TAG, "text data is null");
@@ -340,6 +467,37 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         }
         return text != null;
     }
+
+
+    private void createFile(){
+
+        imageFileName = "detect" + currentDateTimeString.replace(" ","");
+
+        /*try{
+            //imageFile = File.createTempFile(
+              //      imageFileName,  /* prefix */
+               //     ".jpg",         /* suffix */
+                //    storageDir      /* directory */);
+
+            /*if(!imageFile.exists())
+                imageFile.mkdirs();*/
+            //File yourFile = openFileOutput(imageFileName,0); //new File(imageFileName);
+            //yourFile.createNewFile();
+
+       // }catch (IOException e){
+         //   Log.e(LOG_TAG, e + " could not create file ");
+        //}
+
+    }
+
+
+
+    private Uri GetFileUri(){
+        createFile();
+        return FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".com.google.android.gms.samples.vision.ocrreader.provider", imageFile);
+
+    }
+
 
     private class CaptureGestureListener extends GestureDetector.SimpleOnGestureListener {
 

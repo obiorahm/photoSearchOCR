@@ -40,17 +40,26 @@ public class MealMenuActivity extends AppCompatActivity implements TextToSpeech.
         checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
 
-        final String mealText = "Beer-Battered Wisconsin Cheese Curds" /*getIntent().getStringExtra(MainActivity.MEAL)*/;
+        //get meal from intent
+        String mealText = getIntent().getStringExtra(DetectImageActivity.MEAL_TO_GET);
+
+        if (mealText == null)
+            mealText = "Beer-Battered Wisconsin Cheese Curds" /*getIntent().getStringExtra(MainActivity.MEAL)*/;
+
+        //final String mealText = getIntent().getStringExtra(MainActivity.MEAL);
         TextView mealTextView = (TextView) findViewById(R.id.meal_text);
         mealTextView.setText(mealText);
         //mealTextView.setText("Pepperoni Pizza with pineapple toppings");
 
         myTTS = new TextToSpeech(this, this);
 
+        // we need finalMealText for static click context
+        final String finalMealText = mealText;
+
         mealTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myTTS.speak(mealText, TextToSpeech.QUEUE_FLUSH, null);
+                myTTS.speak(finalMealText, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 

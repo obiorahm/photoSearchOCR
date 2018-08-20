@@ -2,34 +2,61 @@ package com.google.android.gms.samples.vision.ocrreader;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSource;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
+import com.google.firebase.FirebaseApp;
 
 import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by mgo983 on 8/17/18.
  */
 
-public class DetectImageActivity extends Activity {
+public class DetectImageActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     String LOG_TAG = DetectImageActivity.class.getSimpleName();
 
     private GraphicOverlay<OcrGraphic> mGraphicOverlay;
+
+    //Text to speech variables
+    private int MY_DATA_CHECK_CODE = 0;
+    public TextToSpeech myTTS;
+
+    public static final String MEAL_TO_GET = "com.google.android.gms.samples.vision.ocrreader.MEAL_TO_GET";
+
+    private GestureDetector gestureDetector;
+
+    private TextBlock selectedTextBlock = null;
 
 
 @Override
@@ -40,12 +67,35 @@ public class DetectImageActivity extends Activity {
 
     mGraphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.second_graphic_overlay);
 
+    gestureDetector = new GestureDetector(this, new DetectImageActivity.CaptureGestureListener());
+
+
+
+    //start text to speech
+    Intent checkTTSIntent = new Intent();
+    checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+    startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
+
 
     Context context = getApplicationContext();
 
+    //get image byte data
     Frame outputFrame = null;
 
-    ImageView imageView = findViewById(R.id.image_to_detect);
+    ImageView imageView = (ImageView) findViewById(R.id.image_to_detect);
+
+    /*byte[] imageData = getIntent().getByteArrayExtra(OcrCaptureActivity.IMAGE_DATA_KEY);
+
+    Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
+
+    Frame outputFrame = new Frame.Builder().setBitmap(bitmap).build();*/
+
+    String fileName = getIntent().getStringExtra(OcrCaptureActivity.IMAGE_FILE_NAME);
+    File file = new File(fileName);
+
+    Uri uri = Uri.parse(fileName);
+
+
 
 
 
@@ -53,13 +103,15 @@ public class DetectImageActivity extends Activity {
 
     //get image and convert to frame
     try{
-        InputStream inputStream = getAssets().open("farmhouse.png");
+        //InputStream inputStream = getAssets().open("farmhouse.png");
+
+        InputStream inputStream = new FileInputStream(fileName);
 
         BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 
         Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream);
 
-        Glide.with(this).load(Uri.parse("file:///android_asset/farmhouse.png")).into(imageView);
+        Glide.with(this).load(file).into(imageView);
 
         //bitmap to frame
         outputFrame = new Frame.Builder().setBitmap(bmp).build();
@@ -70,17 +122,135 @@ public class DetectImageActivity extends Activity {
 
     }
     //detect image
-    TextRecognizer textRecognizer = new TextRecognizer.Builder(context).build();
-    SparseArray<TextBlock> result = textRecognizer.detect(outputFrame);
+    //TextRecognizer textRecognizer = new TextRecognizer.Builder(context).build();
+    //SparseArray<TextBlock> result = textRecognizer.detect(outputFrame);
     //textRecognizer.setProcessor(new OcrDetectorProcessor(mGraphicOverlay));
+    final SparseArray<TextBlock> result = OcrCaptureActivity.items;
+
 
     for (int i = 0; i < result.size(); i++){
         if (result.get(i) != null){
             OcrGraphic graphic = new OcrGraphic(mGraphicOverlay, result.get(i));
             mGraphicOverlay.add(graphic);
+            String textStr[] = result.get(i).getValue().split("\\r\\n|\\n|\\r");
+
+            for(int j = 0; j < textStr.length; j++){
+                Log.d(LOG_TAG + "text lines: ",  textStr[j] + "");
+            }
             Log.d(LOG_TAG + " size : ", result.get(i).getValue() + "");
         }
     }
 
-}
+    //back button
+
+    ImageButton back_btn = (ImageButton) findViewById(R.id.back_btn_di);
+    back_btn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            finish();
+        }
+    });
+
+    ImageButton next_btn = (ImageButton) findViewById(R.id.next_btn_di);
+    next_btn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent mealMenuActivity = new Intent(getApplicationContext(), MealMenuActivity.class);
+            String word = "";
+            if (selectedTextBlock != null){
+                word = selectedTextBlock.getValue();
+            }
+            mealMenuActivity.putExtra(MEAL_TO_GET, word);
+            startActivity(mealMenuActivity);
+        }
+    });
+
+    }
+
+    //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_DATA_CHECK_CODE) {
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                myTTS = new TextToSpeech(this, this);
+            } else {
+                Intent installTTSIntent = new Intent();
+                installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installTTSIntent);
+            }
+        }
+    }
+    @Override
+    public void onInit(int initStatus){
+        //initialize firebase
+        FirebaseApp.initializeApp(this);
+        if (initStatus == TextToSpeech.SUCCESS) {
+            myTTS.setLanguage(Locale.US);
+            myTTS.setSpeechRate(0.6f);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        // Don't forget to shutdown tts!
+        if (myTTS != null) {
+            myTTS.stop();
+            myTTS.shutdown();
+        }
+        super.onDestroy();
+    }
+
+    /*classes and functions for gesture activities for
+    *
+    **/
+
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+
+        boolean c = gestureDetector.onTouchEvent(e);
+
+        return c || super.onTouchEvent(e);
+    }
+
+
+    private class CaptureGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            return onTap(e.getRawX(), e.getRawY()) || super.onSingleTapConfirmed(e);
+        }
+    }
+
+    /**
+     * onTap is called to capture the first TextBlock under the tap location and return it to
+     * the Initializing Activity.
+     *
+     * @param rawX - the raw position of the tap
+     * @param rawY - the raw position of the tap.
+     * @return true if the activity is ending.
+     */
+    private boolean onTap(float rawX, float rawY) {
+        final OcrGraphic graphic = mGraphicOverlay.getGraphicAtLocation(rawX, rawY);
+        TextBlock text = null;
+        if (graphic != null) {
+            text = graphic.getTextBlock();
+            final TextBlock final_text = text;
+            if (text != null && text.getValue() != null) {
+                String text_block_content = "";
+                text_block_content = text.getValue();
+                selectedTextBlock = text;
+                //Rect rect = text.getBoundingBox();
+                graphic.setsRectPaint(Color.RED);
+
+                myTTS.speak(text_block_content, TextToSpeech.QUEUE_FLUSH, null);
+            }
+            else {
+                Log.d(LOG_TAG, "text data is null");
+            }
+        }
+        else {
+            Log.d(LOG_TAG,"no text detected");
+        }
+        return text != null;
+    }
 }

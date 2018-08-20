@@ -18,8 +18,18 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:src="@drawable/baseline_navigate_before_white_48dp"
-        android:layout_margin="20sp"/>
+        android:layout_margin="20sp"
+        android:id = "@+id/back_btn_di"/>
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circular_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/baseline_navigate_next_white_48dp"
+        android:layout_margin="20sp"
+        android:id = "@+id/next_btn_di"/>
 
 
 

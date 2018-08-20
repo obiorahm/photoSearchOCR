@@ -20,10 +20,14 @@ public class EdmanJasonReader {
 
     public EdmanJasonReader(String JSONString){
         try{
+
             JSONEntry = new JSONObject(JSONString);
 
         }catch (JSONException e ){
+            Log.e(LOG_TAG, e + "");
 
+        }catch (NullPointerException e){
+            Log.e(LOG_TAG, e + "");
         }
     }
 
