@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
@@ -33,10 +34,12 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
 
     public static class ViewHolder extends  RecyclerView.ViewHolder{
         public TextView mTextView;
+        public RecyclerView mRelativeLayout;
 
-        public ViewHolder(View convertView){
+        public ViewHolder(View convertView, View parent){
             super(convertView);
             mTextView = convertView.findViewById(R.id.recognized_text);
+            mRelativeLayout = (RecyclerView) parent;
         }
 
     }
@@ -53,14 +56,14 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
     @Override
     public TextByTextAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recognized_text_item, null);
-        TextByTextAdapter.ViewHolder viewHolder = new TextByTextAdapter.ViewHolder(convertView);
+        TextByTextAdapter.ViewHolder viewHolder = new TextByTextAdapter.ViewHolder(convertView, parent);
 
         return viewHolder;
     }
 
 
     @Override
-    public void onBindViewHolder(TextByTextAdapter.ViewHolder holder, int position){
+    public void onBindViewHolder(final TextByTextAdapter.ViewHolder holder, int position){
 
         final String word = mData.get(position);
         holder.mTextView.setText(word);
@@ -69,8 +72,18 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
             @Override
             public void onClick(View view) {
                 myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
+                holder.mRelativeLayout.setSelected(true);
+                DetectImageActivity.selected_meal = getSelectedString();
             }
         });
+    }
+
+    public String getSelectedString(){
+        String appendMData = "";
+        for (String child : mData){
+            appendMData += child + " ";
+        }
+        return appendMData;
     }
 
     @Override

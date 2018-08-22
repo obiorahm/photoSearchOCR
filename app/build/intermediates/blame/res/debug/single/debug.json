@@ -16,20 +16,20 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-hdpi-v4/abc_ic_star_black_36dp.png"
     },
     {
-        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi_baseline_autorenew_black_18dp.png.flat",
-        "source": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-hdpi/baseline_autorenew_black_18dp.png"
-    },
-    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_dark_normal.xml.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-10.2.1.aar/978ced63215819fd26cd56e695b3d478/res/drawable/common_google_signin_btn_text_dark_normal.xml"
     },
     {
-        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_common_google_signin_btn_text_dark_normal.9.png.flat",
-        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/res/drawable-mdpi-v4/common_google_signin_btn_text_dark_normal.9.png"
+        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi_baseline_autorenew_black_18dp.png.flat",
+        "source": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-hdpi/baseline_autorenew_black_18dp.png"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_text_dark_normal.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/res/drawable-xxhdpi-v4/common_google_signin_btn_text_dark_normal.9.png"
+    },
+    {
+        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_common_google_signin_btn_text_dark_normal.9.png.flat",
+        "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/res/drawable-mdpi-v4/common_google_signin_btn_text_dark_normal.9.png"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
@@ -1586,6 +1586,10 @@
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-tvdpi-v4_common_plus_signin_btn_icon_dark_pressed.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/res/drawable-tvdpi-v4/common_plus_signin_btn_icon_dark_pressed.9.png"
+    },
+    {
+        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_selector_row.xml.flat",
+        "source": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable/selector_row.xml"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/layout_abc_action_bar_title_item.xml.flat",

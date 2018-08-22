@@ -46,6 +46,8 @@ public class MealMenuActivity extends AppCompatActivity implements TextToSpeech.
         if (mealText == null)
             mealText = "Beer-Battered Wisconsin Cheese Curds" /*getIntent().getStringExtra(MainActivity.MEAL)*/;
 
+        mealText = mealText.replaceAll("[0-9]","");
+
         //final String mealText = getIntent().getStringExtra(MainActivity.MEAL);
         TextView mealTextView = (TextView) findViewById(R.id.meal_text);
         mealTextView.setText(mealText);

@@ -1,13 +1,20 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
@@ -33,11 +40,12 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
 
     public static class ViewHolder extends  RecyclerView.ViewHolder{
 
-        public RecyclerView mRecyclerView;
+        private RecyclerView mRecyclerView;
+        private RelativeLayout mBackground;
 
         public ViewHolder(View convertView){
             super(convertView);
-
+            mBackground = convertView.findViewById(R.id.relative_layout);
             mRecyclerView = convertView.findViewById(R.id.text_by_text);
         }
 
@@ -58,8 +66,9 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
         return viewHolder;
     }
 
+
     @Override
-    public void onBindViewHolder(RecognizedTextAdapter.ViewHolder holder, final int position){
+    public void onBindViewHolder(final RecognizedTextAdapter.ViewHolder holder, final int position){
         final String word = mData.get(position);
 
         // setup horizontal text by text adapter
@@ -76,10 +85,18 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
 
         holder.mRecyclerView.setAdapter(adapter);
 
+
+        holder.mBackground.setSelected(false);
+        //((DetectImageActivity) context).fetchSuggestionsFor("theer aer a coupel of mistaeks in this senence");
+
+
         holder.mRecyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 currentClick = position;
+                holder.mRecyclerView.setSelected(true);
+                //view.setSelected(true);
+
 
                 Log.d(LOG_TAG, " position " + position );
             }

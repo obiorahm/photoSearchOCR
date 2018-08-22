@@ -6,11 +6,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,19 +19,17 @@ import android.view.View;
 import android.view.textservice.SentenceSuggestionsInfo;
 import android.view.textservice.SpellCheckerSession;
 import android.view.textservice.SuggestionsInfo;
-import android.widget.GridView;
+import android.view.textservice.TextInfo;
+import android.view.textservice.TextServicesManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
+
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecognizedTextAdapter;
-import com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSource;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay;
-import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
-import com.google.android.gms.vision.text.TextRecognizer;
 import com.google.firebase.FirebaseApp;
 
 import java.io.BufferedInputStream;
@@ -50,7 +46,7 @@ import java.util.Locale;
  * Created by mgo983 on 8/17/18.
  */
 
-public class DetectImageActivity extends AppCompatActivity implements TextToSpeech.OnInitListener, SpellCheckerSession.SpellCheckerSessionListener {
+public class DetectImageActivity extends Activity implements TextToSpeech.OnInitListener, SpellCheckerSession.SpellCheckerSessionListener {
 
     String LOG_TAG = DetectImageActivity.class.getSimpleName();
 
@@ -68,12 +64,21 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
 
     private RecognizedTextAdapter recognizedTextAdapter = null;
 
+    TextServicesManager tsm;
+
+    SpellCheckerSession session;
+
+    public static String selected_meal = "";
 
 @Override
     public void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
 
     setContentView(R.layout.activity_image_detection);
+
+    tsm = (TextServicesManager) getSystemService(TEXT_SERVICES_MANAGER_SERVICE);
+
+    session = tsm.newSpellCheckerSession(null, Locale.ENGLISH, this, true);
 
     mGraphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.second_graphic_overlay);
 
@@ -131,7 +136,8 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
     //textRecognizer.setProcessor(new OcrDetectorProcessor(mGraphicOverlay));
     final SparseArray<TextBlock> result = OcrCaptureActivity.items;
 
-    myTTS = new TextToSpeech(this, this);
+    if (myTTS == null)
+        myTTS = new TextToSpeech(this, this);
 
     //initialize adapter
     recognizedTextAdapter = new RecognizedTextAdapter(this, R.layout.horizontal_text);
@@ -172,11 +178,8 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
         @Override
         public void onClick(View view) {
             Intent mealMenuActivity = new Intent(getApplicationContext(), MealMenuActivity.class);
-            String word = "";
-            if (selectedTextBlock != null){
-                word = selectedTextBlock.getValue();
-            }
-            mealMenuActivity.putExtra(MEAL_TO_GET, word);
+
+            mealMenuActivity.putExtra(MEAL_TO_GET, selected_meal);
             startActivity(mealMenuActivity);
         }
     });
@@ -191,6 +194,8 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
 
 
     recyclerView.setAdapter(recognizedTextAdapter);
+
+    fetchSuggestionsFor("Peter livs in Brlin");
 
     }
 
@@ -215,6 +220,7 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
             myTTS.setLanguage(Locale.US);
             myTTS.setSpeechRate(0.6f);
         }
+
     }
 
     @Override
@@ -270,6 +276,7 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
                 graphic.setsRectPaint(Color.RED);
 
                 myTTS.speak(text_block_content, TextToSpeech.QUEUE_FLUSH, null);
+
             }
             else {
                 Log.d(LOG_TAG, "text data is null");
@@ -283,9 +290,64 @@ public class DetectImageActivity extends AppCompatActivity implements TextToSpee
 
     @Override
     public void onGetSuggestions(SuggestionsInfo[] results) {
+        final StringBuffer sb = new StringBuffer("");
+        for(SuggestionsInfo result:results){
+            int n = result.getSuggestionsCount();
+            for(int i=0; i < n; i++){
+                int m = result.getSuggestionsCount();
+                sb.append(result.getSuggestionAt(i));
+            }
+        }
+        Log.d(LOG_TAG, " spell-checker "+ sb.length() + " sb length ");
+
+        for (int i = 0; i < sb.length(); i++){
+            Log.d(LOG_TAG, " spell-checker "+ sb.substring(i) + i);
+
+        }
     }
 
     @Override
     public void onGetSentenceSuggestions(SentenceSuggestionsInfo[] results) {
+        final StringBuffer sb = new StringBuffer("");
+        for(SentenceSuggestionsInfo result:results){
+            int n = result.getSuggestionsCount();
+            for(int i=0; i < n; i++){
+                int m = result.getSuggestionsInfoAt(i).getSuggestionsCount();
+
+                for(int k=0; k < m; k++) {
+                    sb.append(result.getSuggestionsInfoAt(i).getSuggestionAt(k));
+                            //.append("\n");
+                }
+                //sb.append("\n");
+            }
+        }
+        Log.d(LOG_TAG, " spell-checker "+ sb.length() + " sb length ");
+
+        for (int i = 0; i < sb.length(); i++){
+            Log.d(LOG_TAG, " spell-checker "+ sb.substring(i) + i);
+
+        }
+
     }
+@Override
+public void onResume(){
+        super.onResume();
+// start spell checker service
+    tsm = (TextServicesManager) getSystemService(TEXT_SERVICES_MANAGER_SERVICE);
+
+    session = tsm.newSpellCheckerSession(null, Locale.ENGLISH, this, true);
+
+}
+
+public void fetchSuggestionsFor(String sentence){
+
+        TextInfo textInfo = new TextInfo(sentence);
+
+        TextInfo [] textInfos = {textInfo};
+        //Log.d(LOG_TAG, " spell-checker "+ Locale.getDefault().getDisplayLanguage());
+        session.getSentenceSuggestions(textInfos, 5);
+        //session.getSuggestions(textInfo, 5);
+
+    }
+
 }

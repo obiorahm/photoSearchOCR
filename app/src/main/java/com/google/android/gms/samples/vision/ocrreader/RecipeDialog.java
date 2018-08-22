@@ -158,6 +158,11 @@ public class RecipeDialog extends DialogFragment {
             if (firebaseUser == null){
                 signInAnonymously();
             }
+
+            // ingredient is null return
+            if (tokenizedIngredient.length == 0){
+                return;
+            }
             Query databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD).child(tokenizedIngredient[0].toLowerCase()).limitToFirst(1);
 
             databaseReference.addValueEventListener(new ValueEventListener() {
@@ -320,6 +325,11 @@ public class RecipeDialog extends DialogFragment {
         measurementHypernyms.add("sales_outlet");
         measurementHypernyms.add("retail_store");
         measurementHypernyms.add("mercantile_establishment");
+        measurementHypernyms.add("metric_weight_unit");
+        measurementHypernyms.add("weight_unit");
+        measurementHypernyms.add("apothecaries'_unit");
+        measurementHypernyms.add("apothecaries'_weight");
+        measurementHypernyms.add("troy_unit");
 
         //first do some natural language processing
         // remove all special characters and numbers
