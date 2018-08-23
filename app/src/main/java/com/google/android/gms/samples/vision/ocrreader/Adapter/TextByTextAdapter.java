@@ -28,18 +28,20 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
 
     private TextToSpeech myTTS;
 
+    private static RecyclerView lastParent = null;
+
     public TextByTextAdapter(){
 
     }
 
     public static class ViewHolder extends  RecyclerView.ViewHolder{
         public TextView mTextView;
-        public RecyclerView mRelativeLayout;
+        public RecyclerView mRecyclerView;
 
         public ViewHolder(View convertView, View parent){
             super(convertView);
             mTextView = convertView.findViewById(R.id.recognized_text);
-            mRelativeLayout = (RecyclerView) parent;
+            mRecyclerView = (RecyclerView) parent;
         }
 
     }
@@ -50,6 +52,7 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
         inflater = LayoutInflater.from(context);
         this.context = context;
         myTTS = ((DetectImageActivity) context).myTTS;
+
     }
 
 
@@ -72,10 +75,23 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
             @Override
             public void onClick(View view) {
                 myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
-                holder.mRelativeLayout.setSelected(true);
-                DetectImageActivity.selected_meal = getSelectedString();
+                lastParent = DetectImageActivity.last_parent_di;
+                if (lastParent != null && lastParent != holder.mRecyclerView){
+                    lastParent.setSelected(false);
+                }
+                if(holder.mRecyclerView.isSelected()){
+                    holder.mRecyclerView.setSelected(false);
+                }else{
+                    DetectImageActivity.selected_meal = getSelectedString();
+                    holder.mRecyclerView.setSelected(true);
+                }
+                DetectImageActivity.last_parent_di = holder.mRecyclerView;
+                //lastParent = holder.mRecyclerView;
+
             }
         });
+
+
     }
 
     public String getSelectedString(){

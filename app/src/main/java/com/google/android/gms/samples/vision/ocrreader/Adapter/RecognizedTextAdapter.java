@@ -38,14 +38,16 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
 
     private static  final String LOG_TAG = RecognizedTextAdapter.class.getSimpleName();
 
+    private RecyclerView last_selected = null;
+
     public static class ViewHolder extends  RecyclerView.ViewHolder{
 
         private RecyclerView mRecyclerView;
-        private RelativeLayout mBackground;
+        private View mBackground;
 
         public ViewHolder(View convertView){
             super(convertView);
-            mBackground = convertView.findViewById(R.id.relative_layout);
+            mBackground = convertView;
             mRecyclerView = convertView.findViewById(R.id.text_by_text);
         }
 
@@ -86,7 +88,7 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
         holder.mRecyclerView.setAdapter(adapter);
 
 
-        holder.mBackground.setSelected(false);
+        holder.mRecyclerView.setSelected(false);
         //((DetectImageActivity) context).fetchSuggestionsFor("theer aer a coupel of mistaeks in this senence");
 
 
@@ -101,6 +103,25 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
                 Log.d(LOG_TAG, " position " + position );
             }
         });
+        holder.mBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                last_selected = DetectImageActivity.last_parent_di;
+                if (last_selected != null && last_selected != holder.mRecyclerView){
+                    ViewHolder lastViewHolder = new ViewHolder(last_selected);
+                    lastViewHolder.mRecyclerView.setSelected(false);
+                }
+                if(holder.mRecyclerView.isSelected()){
+                    holder.mRecyclerView.setSelected(false);
+                }else{
+                    holder.mRecyclerView.setSelected(true);
+                    DetectImageActivity.selected_meal = word;
+                }
+                DetectImageActivity.last_parent_di = holder.mRecyclerView;
+
+            }
+        });
+
         /*holder.mTextView.setText(word);
 
         //speak onClick

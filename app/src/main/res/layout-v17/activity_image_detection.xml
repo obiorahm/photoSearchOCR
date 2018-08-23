@@ -13,6 +13,15 @@
         android:layout_height="match_parent"
         android:visibility="invisible"/>
 
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/detected_text_list_view">
+
+    </android.support.v7.widget.RecyclerView>
+
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,13 +41,6 @@
         android:src="@drawable/baseline_navigate_next_white_48dp"
         android:layout_margin="20sp"
         android:id = "@+id/next_btn_di"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/detected_text_list_view">
-
-    </android.support.v7.widget.RecyclerView>
 
 
 

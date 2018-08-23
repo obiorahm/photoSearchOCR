@@ -70,9 +70,13 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
 
     public static String selected_meal = "";
 
+    public static RecyclerView last_parent_di;
+
 @Override
     public void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
+
+    RecyclerView last_parent_di = new RecyclerView(this);
 
     setContentView(R.layout.activity_image_detection);
 
@@ -103,7 +107,7 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
 
     Frame outputFrame = new Frame.Builder().setBitmap(bitmap).build();*/
 
-    String fileName = getIntent().getStringExtra(OcrCaptureActivity.IMAGE_FILE_NAME);
+    /*String fileName = getIntent().getStringExtra(OcrCaptureActivity.IMAGE_FILE_NAME);
     File file = new File(fileName);
 
     Uri uri = Uri.parse(fileName);
@@ -129,7 +133,7 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
 
         Log.e(LOG_TAG, e + "");
 
-    }
+    }*/
     //detect image
     //TextRecognizer textRecognizer = new TextRecognizer.Builder(context).build();
     //SparseArray<TextBlock> result = textRecognizer.detect(outputFrame);
@@ -141,7 +145,7 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
 
     //initialize adapter
     recognizedTextAdapter = new RecognizedTextAdapter(this, R.layout.horizontal_text);
-
+/*
     for (int i = 0; i < result.size(); i++){
         if (result.get(i) != null){
             OcrGraphic graphic = new OcrGraphic(mGraphicOverlay, result.get(i));
@@ -162,6 +166,29 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
             Log.d(LOG_TAG + " size : ", result.get(i).getValue() );
         }
     }
+    */
+
+//test menu for development
+    recognizedTextAdapter.addItem("Beer-Battered Wisconsin Cheese Curds");
+    recognizedTextAdapter.addItem("Cinnamon Pecan Monkey Bread");
+    recognizedTextAdapter.addItem("Bavarian Pretzel");
+    recognizedTextAdapter.addItem("Norwegian Smoked Salmon");
+    recognizedTextAdapter.addItem("Amish Chicken Soup");
+    recognizedTextAdapter.addItem("Farm Green Salad");
+    recognizedTextAdapter.addItem("Chopped Salad");
+    recognizedTextAdapter.addItem("Farmer Breakfast");
+    recognizedTextAdapter.addItem("Farm Eggs Benedict");
+    recognizedTextAdapter.addItem("Spinach and Mighty Vine Tomato Frittata");
+    recognizedTextAdapter.addItem("Brown Sugar Brioche French Toast");
+    recognizedTextAdapter.addItem("Strauss Farms Grass Fed Steak and Farm Eggs");
+    recognizedTextAdapter.addItem("White Breakfast Flatbread");
+    recognizedTextAdapter.addItem("Veggie Burger");
+    recognizedTextAdapter.addItem("Open Faced Breakfast Sandwich");
+    recognizedTextAdapter.addItem("Heirloom Grains Breakfast Bowl");
+    recognizedTextAdapter.addItem("Mimosa");
+    recognizedTextAdapter.addItem("Farmhouse Bloody Mary");
+    recognizedTextAdapter.addItem("Sparrow Coffee and Tea");
+    recognizedTextAdapter.addItem("Mac and Cheese");
 
     //back button
 
