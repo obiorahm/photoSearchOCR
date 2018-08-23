@@ -375,7 +375,7 @@ public class RecipeDialog extends DialogFragment {
 
                                         }
                                         if(count_children.size()  == dataSnapshot.getChildrenCount() &&
-                                                tokenCount + 1 >= tokengizedIngredient.length &&
+                                                tokenCount + 1 >= tokenizedIngredient.length &&
                                                 category.size() == 0){
                                             category.add(childValue[0]);
                                             my_uri.add(uri.toString());
