@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -44,11 +45,17 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
 
         private RecyclerView mRecyclerView;
         private View mBackground;
+        private RelativeLayout mRelativeLayout;
+        private ImageButton mImageButton;
+
 
         public ViewHolder(View convertView){
             super(convertView);
             mBackground = convertView;
             mRecyclerView = convertView.findViewById(R.id.text_by_text);
+            mRelativeLayout = convertView.findViewById(R.id.relative_layout);
+            mImageButton = convertView.findViewById(R.id.speak_whole_text);
+
         }
 
     }
@@ -64,6 +71,7 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
     public RecognizedTextAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.horizontal_text, null);
         RecognizedTextAdapter.ViewHolder viewHolder = new RecognizedTextAdapter.ViewHolder(convertView);
+
 
         return viewHolder;
     }
@@ -92,21 +100,11 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
         //((DetectImageActivity) context).fetchSuggestionsFor("theer aer a coupel of mistaeks in this senence");
 
 
-        holder.mRecyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currentClick = position;
-                holder.mRecyclerView.setSelected(true);
-                //view.setSelected(true);
-
-
-                Log.d(LOG_TAG, " position " + position );
-            }
-        });
         holder.mBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 last_selected = DetectImageActivity.last_parent_di;
+
                 if (last_selected != null && last_selected != holder.mRecyclerView){
                     ViewHolder lastViewHolder = new ViewHolder(last_selected);
                     lastViewHolder.mRecyclerView.setSelected(false);
@@ -122,6 +120,24 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
             }
         });
 
+        holder.mRecyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                control_select(holder, word);
+
+            }
+        });
+
+        holder.mImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
+                control_select(holder, word);
+            }
+        });
+
+
+
         /*holder.mTextView.setText(word);
 
         //speak onClick
@@ -132,6 +148,23 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
             }
         });*/
 
+
+    }
+
+
+    private void control_select(ViewHolder holder, String word){
+        last_selected = DetectImageActivity.last_parent_di;
+        if (last_selected != null && last_selected != holder.mRecyclerView){
+            ViewHolder lastViewHolder = new ViewHolder(last_selected);
+            lastViewHolder.mRecyclerView.setSelected(false);
+        }
+        if(holder.mRecyclerView.isSelected()){
+            holder.mRecyclerView.setSelected(false);
+        }else{
+            holder.mRecyclerView.setSelected(true);
+            DetectImageActivity.selected_meal = word;
+        }
+        DetectImageActivity.last_parent_di = holder.mRecyclerView;
 
     }
 

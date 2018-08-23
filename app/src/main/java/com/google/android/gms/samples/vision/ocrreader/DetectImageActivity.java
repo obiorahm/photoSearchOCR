@@ -72,6 +72,10 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
 
     public static RecyclerView last_parent_di;
 
+    //parent of last_parent
+
+    public static RecyclerView parent;
+
 @Override
     public void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
@@ -212,6 +216,7 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
     });
 
     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.detected_text_list_view);
+    parent = recyclerView;
 
 
 // apparently the recycler view does not work without setting up a layout manager

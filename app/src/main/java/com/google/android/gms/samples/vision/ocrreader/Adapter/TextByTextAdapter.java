@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -37,11 +38,15 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
     public static class ViewHolder extends  RecyclerView.ViewHolder{
         public TextView mTextView;
         public RecyclerView mRecyclerView;
+        public View mConvertView;
+
 
         public ViewHolder(View convertView, View parent){
             super(convertView);
             mTextView = convertView.findViewById(R.id.recognized_text);
             mRecyclerView = (RecyclerView) parent;
+            mConvertView = convertView;
+
         }
 
     }
@@ -86,10 +91,11 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
                     holder.mRecyclerView.setSelected(true);
                 }
                 DetectImageActivity.last_parent_di = holder.mRecyclerView;
-                //lastParent = holder.mRecyclerView;
+
 
             }
         });
+
 
 
     }
