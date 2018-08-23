@@ -129,13 +129,17 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String Result){
         //JSONObject newJSONObject = new JSONObject(Result);
+        try{
+            EdmanJasonReader edmanJasonReader = new EdmanJasonReader(Result);
+            ArrayList<String[]> edmanInfo = edmanJasonReader.getRecipe();
 
-        EdmanJasonReader edmanJasonReader = new EdmanJasonReader(Result);
-        ArrayList<String[]> edmanInfo = edmanJasonReader.getRecipe();
+            for (String[] recipeInformation : edmanInfo){
+                //recipeInformation[1] = "val";
+                adapter.addItem(recipeInformation);
+            }
 
-        for (String[] recipeInformation : edmanInfo){
-            //recipeInformation[1] = "val";
-            adapter.addItem(recipeInformation);
+        }catch (NullPointerException e){
+            Log.e(LOG_TAG, e + "");
         }
 
         GridView wholeWordGridView = (GridView) ((Activity) context).findViewById(R.id.gridview_edit_meal);

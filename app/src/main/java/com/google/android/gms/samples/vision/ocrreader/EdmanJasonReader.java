@@ -50,7 +50,10 @@ public class EdmanJasonReader {
             return tenRecipes;
 
         }catch (JSONException e){
+            Log.e(LOG_TAG, e + "");
 
+        }catch (NullPointerException e){
+            Log.e(LOG_TAG, e + "");
         }
         return null;
     }

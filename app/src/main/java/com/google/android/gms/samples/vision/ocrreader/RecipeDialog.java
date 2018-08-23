@@ -72,6 +72,7 @@ public class RecipeDialog extends DialogFragment {
     private String LOG_TAG = RecipeDialog.class.getSimpleName();
 
     HashSet<String> measurementHypernyms = new HashSet<>();
+    HashSet<String> foodCategories = new HashSet<>();
 
 
     public static FirebaseAuth firebaseAuth;
@@ -86,10 +87,13 @@ public class RecipeDialog extends DialogFragment {
 
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recipe_list, container, false);
+
+        populateFoodCategories();
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -163,7 +167,20 @@ public class RecipeDialog extends DialogFragment {
             if (tokenizedIngredient.length == 0){
                 return;
             }
-            Query databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD).child(tokenizedIngredient[0].toLowerCase()).limitToFirst(1);
+
+            // use image of food in sentence rather than first word
+            ArrayList<String> category = new ArrayList<>();
+            ArrayList<String > my_uri = new ArrayList<>();
+            findFoodInSentence(tokenizedIngredient,
+                    category,
+                    0,
+                    ingredient,
+                    imageUrlsArray,
+                    ingredientArray,
+                    count,
+                    my_uri);
+
+            /*Query databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD).child(tokenizedIngredient[0].toLowerCase()).limitToFirst(1);
 
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -179,12 +196,17 @@ public class RecipeDialog extends DialogFragment {
                                 ingredientArray,
                                 count);
                     }
+
                     // should have an else but else works by default
+                    //check for food category image
                     for (DataSnapshot child : dataSnapshot.getChildren()){
 
                         //now that we have the file name retrieve image from firebase storage
                         String childValue [] = child.getValue().toString().split("/");
-                        Log.d(LOG_TAG + " child ", WORD_IMAGE_REFERENCE + "/" + childValue[0] +"/" + childValue[1]);
+
+
+
+                        Log.d(LOG_TAG + " child ", WORD_IMAGE_REFERENCE + "/" + childValue[0] +"/" + childValue[1] + "/" + childValue[2]);
 
 
 
@@ -226,7 +248,7 @@ public class RecipeDialog extends DialogFragment {
                 public void onCancelled(DatabaseError databaseError) {
 
                 }
-            });
+            });*/
 
         }
 
@@ -241,6 +263,193 @@ public class RecipeDialog extends DialogFragment {
         recipeListAdapter.addImage(imageUrlsArray);
         getImageUrlsForOtherTokens(tokenizedIngredient, 1, imageUrlsArray);
         search(ingredientArray, count);
+
+    }
+
+
+    private void findFoodInSentence(final String[] tokenizedIngredient,
+                                    final ArrayList<String> category,
+                                    final int tokenCount,
+                                    final ArrayList<String[]> ingredient,
+                                    final ArrayList<String[]> imageUrlsArray,
+                                    final JSONArray ingredientArray,
+                                    final int count,
+                                    final ArrayList<String> my_uri ){
+
+        if (tokenCount < tokenizedIngredient.length ){
+            if (tokenizedIngredient[tokenCount].equals("eggs")){
+                Log.d(LOG_TAG + " salt ", "token_count " + tokenCount );
+                Log.d(LOG_TAG + " salt ", "tokenized Ingredient count " + tokenizedIngredient.length );
+
+            }
+        }
+        String luri = my_uri.size() >= 1 ? my_uri.get(my_uri.size() - 1) : "";
+        Log.d(LOG_TAG + " firebase url ", luri + " luri size" + my_uri.size() );
+
+
+        if (tokenCount >= tokenizedIngredient.length){
+            //check for null uri
+            addItemToAdapters(luri,
+                    ingredient,
+                    imageUrlsArray,
+                    tokenizedIngredient,
+                    ingredientArray,
+                    count);
+            return;
+        }
+
+        final String finalCategory = category.size() >= 1 ? category.get(category.size() - 1) : null ;
+
+        if ( foodCategories.contains(finalCategory) ){
+            //check for null uri
+            addItemToAdapters(luri,
+                    ingredient,
+                    imageUrlsArray,
+                    tokenizedIngredient,
+                    ingredientArray,
+                    count);
+            return;
+        }
+
+        Query databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD).child(tokenizedIngredient[tokenCount].toLowerCase());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot dataSnapshot) {
+
+                final ArrayList<Integer> count_children = new ArrayList<>();
+
+                // if the data does not exist then load the next set of item
+
+                if  (!dataSnapshot.exists()){
+                    findFoodInSentence(tokenizedIngredient,
+                            category,
+                            tokenCount + 1,
+                            ingredient,
+                            imageUrlsArray,
+                            ingredientArray,
+                            count,
+                            my_uri);
+                    return;
+
+                }
+                // should have an else but else works by default
+                //check for food category image
+                for (DataSnapshot child : dataSnapshot.getChildren()){
+                    //now that we have the file name retrieve image from firebase storage
+                    final String childValue [] = child.getValue().toString().split("/");
+
+
+                        //now that we have the file name retrieve image from firebase storage
+                        StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
+
+                        firebaseStorage.child( WORD_IMAGE_REFERENCE + "/" + childValue[0] + "/" + childValue[2]).getDownloadUrl()
+                                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        count_children.add(1);
+                                        Log.d(LOG_TAG + " firebase url ", my_uri.size() + " luri size " );
+
+                                        Log.d(LOG_TAG + " firebase url ", count_children.size() + " " );
+
+                                        int local_token_count = tokenCount + 1;
+
+
+                                        if (foodCategories.contains(childValue[0]) &&
+                                                category.size() == 0){
+
+                                            //save the uri
+                                            category.add(childValue[0]);
+                                            my_uri.add(uri.toString());
+
+                                        }
+
+                                        if (tokenizedIngredient[tokenCount].equals("eggs")) {
+
+                                            Log.d(LOG_TAG, " found eggs ");
+                                            Log.d(LOG_TAG, " found eggs  category " + category.size());
+                                            Log.d(LOG_TAG, " found eggs " +childValue[0] + foodCategories.contains(childValue[0]) + " ");
+                                            Log.d(LOG_TAG, " found eggs " + count_children.size());
+                                            Log.d(LOG_TAG + " found eggs ", "datasnapshotchildren " + dataSnapshot.getChildrenCount() );
+
+
+                                        }
+                                        if(count_children.size()  == dataSnapshot.getChildrenCount() &&
+                                                tokenCount + 1 >= tokengizedIngredient.length &&
+                                                category.size() == 0){
+                                            category.add(childValue[0]);
+                                            my_uri.add(uri.toString());
+
+                                        }
+
+
+                                        if(count_children.size()  == dataSnapshot.getChildrenCount()){
+                                            if (tokenizedIngredient[tokenCount].equals("eggs")){
+                                                Log.d(LOG_TAG + " eggs ", "category " + category.size() );
+                                                Log.d(LOG_TAG + " eggs ", "myuri " + my_uri.size() );
+                                                Log.d(LOG_TAG + " eggs ", "countchildren " + count_children.size() + 1 );
+                                                Log.d(LOG_TAG + " eggs ", "datasnapshotchildren " + dataSnapshot.getChildrenCount() );
+                                            }
+                                            findFoodInSentence(tokenizedIngredient,
+                                                    category,
+                                                    tokenCount + 1,
+                                                    ingredient,
+                                                    imageUrlsArray,
+                                                    ingredientArray,
+                                                    count,
+                                                    my_uri);
+
+
+                                        }
+
+
+
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                count_children.add(1);
+
+                                if(count_children.size() + 1 == dataSnapshot.getChildrenCount()){
+                                    findFoodInSentence(tokenizedIngredient,
+                                            category,
+                                            tokenCount + 1,
+                                            ingredient,
+                                            imageUrlsArray,
+                                            ingredientArray,
+                                            count,
+                                            my_uri);
+
+                                }
+                            }
+                        });
+
+
+                    Log.d(LOG_TAG + " child ", WORD_IMAGE_REFERENCE + "/" + childValue[0] +"/" + childValue[1] + "/" + childValue[2] + finalCategory);
+
+
+                    Log.d(LOG_TAG, child.toString());
+                }
+
+
+
+               /* findFoodInSentence(tokenizedIngredient,
+                        category,
+                        tokenCount + 1,
+                        ingredient,
+                        imageUrlsArray,
+                        ingredientArray,
+                        count,
+                        my_uri);*/
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
     }
 
@@ -307,7 +516,33 @@ public class RecipeDialog extends DialogFragment {
     }
 
 
+private void populateFoodCategories(){
+// list of food categories we are interested in
+        foodCategories.add("alcoholic_beverage");
+        foodCategories.add("canned_food");
+        foodCategories.add("condiments");
+        foodCategories.add("dairy");
+        foodCategories.add("drinks");
+        foodCategories.add("fast_food");
+        foodCategories.add("fish");
+        foodCategories.add("fishes");
+        foodCategories.add("food");
+        foodCategories.add("foods");
+        foodCategories.add("fruits");
+        foodCategories.add("grains");
+        foodCategories.add("herbs_and_spices");
+        foodCategories.add("juices");
+        foodCategories.add("junk_food");
+        foodCategories.add("meat");
+        foodCategories.add("sandwiches");
+        foodCategories.add("seafood");
+        foodCategories.add("snacks");
+        foodCategories.add("soups");
+        foodCategories.add("sweets");
+        foodCategories.add("vegetables");
 
+
+}
 
 
     private String findFoodInIngredient(String anIngredient) throws IOException {
@@ -330,6 +565,21 @@ public class RecipeDialog extends DialogFragment {
         measurementHypernyms.add("apothecaries'_unit");
         measurementHypernyms.add("apothecaries'_weight");
         measurementHypernyms.add("troy_unit");
+        measurementHypernyms.add("small_indefinite_quantity");
+        measurementHypernyms.add("small_indefinite_amount");
+        measurementHypernyms.add("linear_unit");
+        measurementHypernyms.add("linear_measure");
+        measurementHypernyms.add("degree");
+        measurementHypernyms.add("metric_linear_unit");
+        measurementHypernyms.add("metric_capacity_unit");
+        measurementHypernyms.add("common_fraction");
+        measurementHypernyms.add("simple_fraction");
+        measurementHypernyms.add("digit");
+        measurementHypernyms.add("figure");
+        measurementHypernyms.add("British_capacity_unit");
+        measurementHypernyms.add("Imperial_capacity_unit");
+
+
 
         //first do some natural language processing
         // remove all special characters and numbers
