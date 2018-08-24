@@ -103,19 +103,7 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
         holder.mBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                last_selected = DetectImageActivity.last_parent_di;
-
-                if (last_selected != null && last_selected != holder.mRecyclerView){
-                    ViewHolder lastViewHolder = new ViewHolder(last_selected);
-                    lastViewHolder.mRecyclerView.setSelected(false);
-                }
-                if(holder.mRecyclerView.isSelected()){
-                    holder.mRecyclerView.setSelected(false);
-                }else{
-                    holder.mRecyclerView.setSelected(true);
-                    DetectImageActivity.selected_meal = word;
-                }
-                DetectImageActivity.last_parent_di = holder.mRecyclerView;
+                control_select(holder, word);
 
             }
         });

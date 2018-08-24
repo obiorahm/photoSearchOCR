@@ -28,6 +28,7 @@ import com.google.android.gms.samples.vision.ocrreader.R;
 import java.util.ArrayList;
 
 
+import java.util.HashSet;
 import java.util.TreeSet;
 
 
@@ -56,6 +57,9 @@ public class RecipeListAdapter extends ArrayAdapter {
     private TreeSet fullContentSet = new TreeSet();
 
 
+//public variables for none and extra
+    private HashSet<String> mExtra = new HashSet<>();
+    private HashSet<String> mNone = new HashSet<>();
 
     public RecipeListAdapter(Context context, int resource){
         super(context, resource);
@@ -132,9 +136,11 @@ public class RecipeListAdapter extends ArrayAdapter {
         switch (type){
             case TYPE_FULL_CONTENT:
 
-                ViewHolderTypeFullContent viewHolder = new ViewHolderTypeFullContent();
+                final ViewHolderTypeFullContent viewHolder = new ViewHolderTypeFullContent();
 
                 viewHolder.mTextView = (TextView) convertView.findViewById(R.id.ingredient_name);
+                viewHolder.mCheckExclude = (CheckBox) convertView.findViewById(R.id.get_none);
+                viewHolder.mCheckExtra = (CheckBox) convertView.findViewById(R.id.get_extra);
 
                 //Log.d(LOG_TAG, "the ingredients" + ingredients.get(position).get(0)[0]);
 
@@ -163,6 +169,29 @@ public class RecipeListAdapter extends ArrayAdapter {
 
                 //getImageUrls(ingredients.get(position).get(0),position ,viewHolder.mImageView);
                 final View newConvertView = null;
+
+
+                viewHolder.mCheckExtra.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (viewHolder.mCheckExtra.isChecked()){
+                            mExtra.add(spoken_food);
+                        }else{
+                            mExtra.remove(spoken_food);
+                        }
+                    }
+                });
+
+                viewHolder.mCheckExclude.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (viewHolder.mCheckExclude.isChecked()){
+                            mNone.add(spoken_food);
+                        }else{
+                            mNone.add(spoken_food);
+                        }
+                    }
+                });
 
 
                 viewHolder.mImageView.setOnClickListener(new View.OnClickListener() {
@@ -339,5 +368,13 @@ public class RecipeListAdapter extends ArrayAdapter {
         this.getView(position, convertView, parent);
     }
 
+
+    public HashSet<String> getExtraItems(){
+       return mExtra;
+    }
+
+    public HashSet<String> getNone(){
+        return mNone;
+    }
 
 }

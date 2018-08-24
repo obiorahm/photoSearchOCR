@@ -43,11 +43,17 @@ public class WordAdapter extends ArrayAdapter {
 
     public static String RECIPE_INGREDIENTS = "com.google.android.gms.samples.vision.ocrreader.RecognizedTextAdapter.RECIPE_INGREDIENTS";
 
-    public WordAdapter(Context context, int resource, TextToSpeech myTTS){
+    public static String MEAL_NAME = "com.google.android.gms.samples.vision.ocrreader.RecognizedTextAdapter.MEAL_NAME";
+
+    private String mealText;
+
+
+    public WordAdapter(Context context, int resource, TextToSpeech myTTS, String mealText){
         super(context,resource);
         this.myTTs = myTTS;
         this.context = context;
         this.inflater = LayoutInflater.from(context);
+        this.mealText = mealText;
     }
 
     public void addItem(String[] wordInMeal){
@@ -92,10 +98,8 @@ public class WordAdapter extends ArrayAdapter {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String wholeString = mData.get(0)[1];
-                for (int i = 1; i < mData.size(); i++){
-                    wholeString += " " + mData.get(i)[1];
-                }
+                String wholeString = getMealName();
+
                 myTTs.speak(wholeString, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
@@ -108,7 +112,7 @@ public class WordAdapter extends ArrayAdapter {
                 Bundle bundle = new Bundle();
                 bundle.putString(RECIPE_INGREDIENTS, mData.get(position)[1]);
                 //bundle.putString(EXTRA_DIALOG_IMAGE, imgFile.toString());
-
+                bundle.putString(MEAL_NAME, mealText);
                 newFragment.setArguments(bundle);
                 newFragment.show(((Activity) context).getFragmentManager(),"what?");
             }
@@ -121,5 +125,13 @@ public class WordAdapter extends ArrayAdapter {
 
 
         return convertView;
+    }
+
+    private String getMealName(){
+        String wholeString = mData.get(0)[1];
+        for (int i = 1; i < mData.size(); i++){
+            wholeString += " " + mData.get(i)[1];
+        }
+        return wholeString;
     }
 }

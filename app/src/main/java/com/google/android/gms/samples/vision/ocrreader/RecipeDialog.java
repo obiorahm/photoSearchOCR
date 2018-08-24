@@ -1,10 +1,12 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -15,6 +17,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.samples.vision.ocrreader.Adapter.ImageAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecipeListAdapter;
@@ -83,6 +87,7 @@ public class RecipeDialog extends DialogFragment {
     static final File DocumentDir = new File(Environment.getExternalStoragePublicDirectory(DOCUMENT), WNDICT);
     static final String DB_REF_WORD = "word";
     final String WORD_IMAGE_REFERENCE  = "symbols";
+    public static final String  ORDER_MEAL_TEXT = "com.google.android.gms.samples.vision.ocrreader.ORDER_MEAL_TEXT";
 
 
 
@@ -101,8 +106,11 @@ public class RecipeDialog extends DialogFragment {
         recipeListAdapter = new RecipeListAdapter(getActivity(), R.layout.recipe_item_list);
 
         try {
+
             JSONArray ingredientArray = new JSONArray(this.getArguments().getString(WordAdapter.RECIPE_INGREDIENTS));
 
+            /*test with testRecipeDialog
+            JSONArray ingredientArray = testRecipeDialog();*/
             int n = 0;
             search(ingredientArray, n);
 
@@ -112,7 +120,11 @@ public class RecipeDialog extends DialogFragment {
 
         }catch (JSONException e){
             Log.e(LOG_TAG, e + "");
+        }catch (NullPointerException e){
+
         }
+
+        final String meal_name = getArguments().getString(WordAdapter.MEAL_NAME);
 
         ImageButton imageButton = rootView.findViewById(R.id.next_item);
 
@@ -120,17 +132,82 @@ public class RecipeDialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 //recipeListAdapter.
+
+                String order = makeOrder(meal_name);
+                DialogFragment newFragment = new OrderDialog();
+                Bundle bundle = new Bundle();
+                bundle.putString(ORDER_MEAL_TEXT, order );
+
+
+                newFragment.setArguments(bundle);
+                newFragment.show(getFragmentManager(),"ORDER_MEAL");
             }
         });
+
+        //speak no and extra
+        final TextView textViewExtra = (TextView) rootView.findViewById(R.id.no_item);
+        textViewExtra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MealMenuActivity.myTTS.speak(textViewExtra.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+
+         final TextView textViewNone = (TextView) rootView.findViewById(R.id.more_item);
+         textViewNone.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 MealMenuActivity.myTTS.speak(textViewNone.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+             }
+         });
 
         return rootView;
     }
 
+    private String makeOrder(String meal_name){
+        HashSet<String> extras = recipeListAdapter.getExtraItems();
+        String more = "";
+        for (String item : extras){
+            Log.d(LOG_TAG,  " I want more " + item);
+            more += item + " ";
+        }
+
+        HashSet<String> nones = recipeListAdapter.getNone();
+        String none = "";
+        for (String item : nones){
+            Log.d(LOG_TAG,  " I want no " + item);
+            none += item + " ";
+        }
+        String order = "I'll have " + meal_name ;
+
+        if (more.length() > 0)
+            order += " extra " + more;
+
+        if (none.length() > 0)
+            order += " and no " + none;
+
+        //((MealMenuActivity) getContext()).myTTS.speak(order, TextToSpeech.QUEUE_FLUSH, null);
+
+        return order;
+
+    }
+
+    private JSONArray testRecipeDialog(){
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put("rice");
+        jsonArray.put("beans");
+        jsonArray.put("sugar");
+        jsonArray.put("salt");
+
+        return jsonArray;
+
+    }
 
     private void search(final JSONArray ingredientArray, int n){
         if (n < ingredientArray.length())
         {
             final int count = n + 1;
+            Log.d(LOG_TAG, " count: " + count + " ingredient length: " + ingredientArray.length());
             final ArrayList<String[]> ingredient = new ArrayList<>();
             try{
                 String food = findFoodInIngredient(ingredientArray.getString(n));
@@ -156,6 +233,9 @@ public class RecipeDialog extends DialogFragment {
             final int ITEM = 0;
 
             final String tokenizedIngredient [] = simpleTokenizer.tokenize(ingredient.get(FIRST_RECIPE_ITEM)[ITEM]);
+            //String first_item = ingredient.get(FIRST_RECIPE_ITEM)[ITEM];
+            //final String tokenizedIngredient [] = first_item.split(" ");
+
 
             //sign in anonymously to Firebase
             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -163,8 +243,12 @@ public class RecipeDialog extends DialogFragment {
                 signInAnonymously();
             }
 
+            Log.d(LOG_TAG, " tokenized_ingredient_now " + tokenizedIngredient.length);
+            Log.d(LOG_TAG, "recipe item " + ingredient.get(FIRST_RECIPE_ITEM)[ITEM]);
+
             // ingredient is null return
             if (tokenizedIngredient.length == 0){
+                search(ingredientArray, count);
                 return;
             }
 
@@ -276,13 +360,13 @@ public class RecipeDialog extends DialogFragment {
                                     final int count,
                                     final ArrayList<String> my_uri ){
 
-        if (tokenCount < tokenizedIngredient.length ){
-            if (tokenizedIngredient[tokenCount].equals("eggs")){
-                Log.d(LOG_TAG + " salt ", "token_count " + tokenCount );
-                Log.d(LOG_TAG + " salt ", "tokenized Ingredient count " + tokenizedIngredient.length );
+
+            if (tokenizedIngredient[0].equals("beans")){
+                Log.d(LOG_TAG + " beans ", "token_count " + tokenCount );
+                Log.d(LOG_TAG + " beans ", "tokenized Ingredient count " + tokenizedIngredient.length );
 
             }
-        }
+
         String luri = my_uri.size() >= 1 ? my_uri.get(my_uri.size() - 1) : "";
         Log.d(LOG_TAG + " firebase url ", luri + " luri size" + my_uri.size() );
 
@@ -310,6 +394,7 @@ public class RecipeDialog extends DialogFragment {
                     count);
             return;
         }
+        Log.d(LOG_TAG + " token ",   tokenizedIngredient[tokenCount] );
 
         Query databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD).child(tokenizedIngredient[tokenCount].toLowerCase());
 
@@ -384,11 +469,11 @@ public class RecipeDialog extends DialogFragment {
 
 
                                         if(count_children.size()  == dataSnapshot.getChildrenCount()){
-                                            if (tokenizedIngredient[tokenCount].equals("eggs")){
-                                                Log.d(LOG_TAG + " eggs ", "category " + category.size() );
-                                                Log.d(LOG_TAG + " eggs ", "myuri " + my_uri.size() );
-                                                Log.d(LOG_TAG + " eggs ", "countchildren " + count_children.size() + 1 );
-                                                Log.d(LOG_TAG + " eggs ", "datasnapshotchildren " + dataSnapshot.getChildrenCount() );
+                                            if (tokenizedIngredient[tokenCount].equals("rice")){
+                                                Log.d(LOG_TAG + " rice ", "category " + category.size() );
+                                                Log.d(LOG_TAG + " rice ", "myuri " + my_uri.size() );
+                                                Log.d(LOG_TAG + " rice ", "countchildren " + count_children.size() + 1 );
+                                                Log.d(LOG_TAG + " rice ", "datasnapshotchildren " + dataSnapshot.getChildrenCount() );
                                             }
                                             findFoodInSentence(tokenizedIngredient,
                                                     category,
@@ -595,6 +680,8 @@ private void populateFoodCategories(){
 
 
         Log.d(LOG_TAG + " nlp", processedIngredient);
+        String x = tokens.length > 0 ? tokens[0] : "no string ";
+        Log.d(LOG_TAG , "measurement tokens " + x);
 
         String path = DocumentDir.getAbsolutePath();
 

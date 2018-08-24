@@ -10,7 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NO"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@id/more_item"
+
         android:id="@+id/no_item"
         android:drawableLeft="@drawable/baseline_not_interested_white_18dp"
         android:drawablePadding="10sp"
@@ -21,10 +22,11 @@
         android:layout_height="wrap_content"
         android:text="EXTRA"
         android:id="@+id/more_item"
-        android:layout_toLeftOf="@id/no_item"
         android:drawableLeft="@drawable/baseline_add_circle_outline_white_18dp"
         android:drawablePadding="10sp"
-        android:padding="10sp"/>
+        android:padding="10sp"
+        android:layout_alignParentRight="true"
+        />
 
     <ListView
         android:layout_width="match_parent"

@@ -1468,6 +1468,10 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/layout/select_dialog_singlechoice_material.xml"
     },
     {
+        "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/layout-v17_order_meal.xml.flat",
+        "source": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/src/main/res/layout-v17/order_meal.xml"
+    },
+    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_common_google_signin_btn_text_dark_normal_background.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-10.2.1.aar/978ced63215819fd26cd56e695b3d478/res/drawable-mdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
     },

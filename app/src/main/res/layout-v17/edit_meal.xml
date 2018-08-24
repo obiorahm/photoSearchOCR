@@ -52,9 +52,15 @@
         android:listSelector="@color/colorPrimaryDark" >
 
     </GridView>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/back_to_food_list"
+        android:src="@drawable/baseline_navigate_before_white_48dp"
+        android:background="@drawable/circular_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="10sp"/>
 
 </RelativeLayout>

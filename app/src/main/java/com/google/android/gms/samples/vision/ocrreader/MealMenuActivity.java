@@ -6,6 +6,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.samples.vision.ocrreader.Adapter.ImageAdapter;
@@ -24,7 +25,7 @@ import java.util.Locale;
 public class MealMenuActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     private int MY_DATA_CHECK_CODE = 0;
-    public TextToSpeech myTTS;
+    public static TextToSpeech myTTS;
     private WordAdapter adapter;
 
 
@@ -66,13 +67,11 @@ public class MealMenuActivity extends AppCompatActivity implements TextToSpeech.
         });
 
         //initialize adapter
-        adapter = new WordAdapter(this, R.layout.gridview_item, myTTS);
+        adapter = new WordAdapter(this, R.layout.gridview_item, myTTS, mealText);
 
         //place each word in a single text view
         String [] wordInMealText = mealText.split(" ");
-        /*for(int i = 0; i < wordInMealText.length; i++){
-            adapter.addItem(wordInMealText[i]);
-        }*/
+
 
         //Async task expects a string array, so we make one of length one
         // adapter is set in the fetchMeal AsyncTask
@@ -84,7 +83,32 @@ public class MealMenuActivity extends AppCompatActivity implements TextToSpeech.
         //GridView wholeWordGridView = (GridView) findViewById(R.id.gridview_edit_meal);
         //wholeWordGridView.setAdapter(adapter);
 
+        /* for testing replace FetchMealDetails with testadapter
+        testadapter(adapter);*/
+
+        ImageButton imageButton = (ImageButton) findViewById(R.id.back_to_food_list);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
     }
+
+    private void testadapter(WordAdapter adapter){
+        String foodItem [] = {"https://www.mcdonalds.com/content/dam/usa/documents/mcdelivery/mcdelivery_new11.jpg", "meat"};
+        adapter.addItem(foodItem);
+        adapter.addItem(foodItem);
+        adapter.addItem(foodItem);
+        adapter.addItem(foodItem);
+
+        GridView wholeWordGridView = (GridView) findViewById(R.id.gridview_edit_meal);
+        wholeWordGridView.setAdapter(adapter);
+    }
+
+
 
     //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.
     @Override
