@@ -6,21 +6,32 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.View;
 import android.view.textservice.SentenceSuggestionsInfo;
 import android.view.textservice.SpellCheckerSession;
 import android.view.textservice.SuggestionsInfo;
 import android.view.textservice.TextInfo;
 import android.view.textservice.TextServicesManager;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -28,11 +39,21 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecognizedTextAdapter;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.vision.Frame;
+import com.google.android.gms.vision.text.Line;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
+import com.google.firebase.ml.vision.text.RecognizedLanguage;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -40,6 +61,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -51,7 +73,7 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
     String LOG_TAG = DetectImageActivity.class.getSimpleName();
 
     private GraphicOverlay<OcrGraphic> mGraphicOverlay;
-
+    private GraphicOverlay<OcrGraphicFB> mGraphicOverlayFB;
     //Text to speech variables
     private int MY_DATA_CHECK_CODE = 0;
     public TextToSpeech myTTS;
@@ -89,6 +111,7 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
     session = tsm.newSpellCheckerSession(null, Locale.ENGLISH, this, true);
 
     mGraphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.second_graphic_overlay);
+    mGraphicOverlayFB = (GraphicOverlay<OcrGraphicFB>) findViewById(R.id.second_graphic_overlay);
 
     gestureDetector = new GestureDetector(this, new DetectImageActivity.CaptureGestureListener());
 
@@ -103,7 +126,7 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
     //get image byte data
     Frame outputFrame = null;
 
-    ImageView imageView = (ImageView) findViewById(R.id.image_to_detect);
+    final ImageView imageView = (ImageView) findViewById(R.id.image_to_detect);
 
     /*byte[] imageData = getIntent().getByteArrayExtra(OcrCaptureActivity.IMAGE_DATA_KEY);
 
@@ -115,6 +138,13 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
     File file = new File(fileName);
 
     Uri uri = Uri.parse(fileName);
+
+    if (myTTS == null)
+        myTTS = new TextToSpeech(this, this);
+
+    //initialize adapter
+    recognizedTextAdapter = new RecognizedTextAdapter(this, R.layout.horizontal_text);
+
 
 
 
@@ -128,10 +158,16 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
 
         Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream);
 
-        Glide.with(this).load(file).into(imageView);
+        //Glide.with(this).load(file).into(imageView);
+
+
+        imageView.setImageBitmap(bmp);
 
         //bitmap to frame
         //outputFrame = new Frame.Builder().setBitmap(bmp).build();
+
+
+        firebaseTextDetection(uri, bmp, recognizedTextAdapter);
 
     }catch (IOException e){
 
@@ -144,23 +180,21 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
     //textRecognizer.setProcessor(new OcrDetectorProcessor(mGraphicOverlay));
     final SparseArray<TextBlock> result = OcrCaptureActivity.items;
 
-    if (myTTS == null)
-        myTTS = new TextToSpeech(this, this);
 
-    //initialize adapter
-    recognizedTextAdapter = new RecognizedTextAdapter(this, R.layout.horizontal_text);
-
-    for (int i = 0; i < result.size(); i++){
+    /*for (int i = 0; i < result.size(); i++){
         if (result.get(i) != null){
             OcrGraphic graphic = new OcrGraphic(mGraphicOverlay, result.get(i));
             mGraphicOverlay.add(graphic);
-            String textStr[] = result.get(i).getValue().split("\\r\\n|\\n|\\r");
+            //regular expressions to catch spaces, tabs, commas and full stops
+            String textStr[] = result.get(i).getValue().split("\\r\\n|\\n|\\r|\\.|\\,");
 
             for(int j = 0; j < textStr.length; j++){
 
                 String line_detected = textStr[j];
                 //test for null string or empty string
                 if (line_detected != null && line_detected != "" ){
+                    // replace & with "and"
+                    line_detected = line_detected.replace("&", "and");
                     recognizedTextAdapter.addItem(line_detected);
                     Log.d(LOG_TAG + "text lines: ",  " added item ");
 
@@ -169,7 +203,7 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
             }
             Log.d(LOG_TAG + " size : ", result.get(i).getValue() );
         }
-    }
+    }*/
 
 
 //test menu for development
@@ -196,7 +230,7 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
         }
     });
 
-    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.detected_text_list_view);
+    final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.detected_text_list_view);
     parent = recyclerView;
 
 
@@ -206,11 +240,107 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
 
 
 
+
+    final CompoundButton togglelistImageOn = (CompoundButton) findViewById(R.id.switch_view);
+    togglelistImageOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            if (b){
+                recyclerView.setVisibility(View.INVISIBLE);
+                imageView.setVisibility(View.VISIBLE);
+                mGraphicOverlayFB.setVisibility(View.VISIBLE);
+            }else{
+                recyclerView.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.INVISIBLE);
+                mGraphicOverlayFB.setVisibility(View.INVISIBLE);
+            }
+        }
+    });
+
+
     recyclerView.setAdapter(recognizedTextAdapter);
 
     fetchSuggestionsFor("Peter livs in Brlin");
 
     }
+// Firebase  detection
+    private void firebaseTextDetection(Uri uri, Bitmap bmp, final RecognizedTextAdapter recognizedTextAdapter){
+
+        try {
+
+            InputStream inputStream = getResources().getAssets().open("farmhouse.png");
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+
+            Bitmap bitmap = BitmapFactory.decodeStream(bufferedInputStream);
+
+            //FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
+
+            FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(doBrightness(bmp, 10));
+
+            //FirebaseVisionImage image = FirebaseVisionImage.fromFilePath(this, uri);
+
+            FirebaseVisionTextRecognizer textRecognizer = FirebaseVision.getInstance()
+                    .getOnDeviceTextRecognizer();
+
+            textRecognizer.processImage(image)
+                    .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+                        @Override
+                        public void onSuccess(FirebaseVisionText result) {
+                            // Task completed successfully
+                            // ...
+                            String resultText = result.getText();
+                            for (FirebaseVisionText.TextBlock block: result.getTextBlocks()) {
+                                String blockText = block.getText();
+
+                                OcrGraphicFB graphic = new OcrGraphicFB(mGraphicOverlay, block);
+                                mGraphicOverlayFB.add(graphic);
+                                recognizedTextAdapter.addItem(blockText);
+
+                                Float blockConfidence = block.getConfidence();
+                                List<RecognizedLanguage> blockLanguages = block.getRecognizedLanguages();
+                                Point[] blockCornerPoints = block.getCornerPoints();
+                                Rect blockFrame = block.getBoundingBox();
+                                for (FirebaseVisionText.Line line: block.getLines()) {
+                                    String lineText = line.getText();
+
+                                    Float lineConfidence = line.getConfidence();
+                                    List<RecognizedLanguage> lineLanguages = line.getRecognizedLanguages();
+                                    Point[] lineCornerPoints = line.getCornerPoints();
+                                    Rect lineFrame = line.getBoundingBox();
+                                    for (FirebaseVisionText.Element element: line.getElements()) {
+                                        String elementText = element.getText();
+                                        Float elementConfidence = element.getConfidence();
+                                        List<RecognizedLanguage> elementLanguages = element.getRecognizedLanguages();
+                                        Point[] elementCornerPoints = element.getCornerPoints();
+                                        Rect elementFrame = element.getBoundingBox();
+                                    }
+                                }
+                            }
+                        }
+                    })
+                    .addOnFailureListener(
+                            new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    // Task failed with an exception
+                                    // ...
+                                }
+                            });
+        } catch (NullPointerException e){
+            /*catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+
+
+    }
+
+
+
 
     private void test_di(RecognizedTextAdapter recognizedTextAdapter){
         recognizedTextAdapter.addItem("Beer-Battered Wisconsin Cheese Curds");
@@ -388,4 +518,47 @@ public void fetchSuggestionsFor(String sentence){
 
     }
 
+    //increase image brightness
+
+    public static Bitmap doBrightness(Bitmap src, int value) {
+        // image size
+        int width = src.getWidth();
+        int height = src.getHeight();
+        // create output bitmap
+        Bitmap bmOut = Bitmap.createBitmap(width, height, src.getConfig());
+        // color information
+        int A, R, G, B;
+        int pixel;
+
+        // scan through all pixels
+        for(int x = 0; x < width; ++x) {
+            for(int y = 0; y < height; ++y) {
+                // get pixel color
+                pixel = src.getPixel(x, y);
+                A = Color.alpha(pixel);
+                R = Color.red(pixel);
+                G = Color.green(pixel);
+                B = Color.blue(pixel);
+
+                // increase/decrease each channel
+                R += value;
+                if(R > 255) { R = 255; }
+                else if(R < 0) { R = 0; }
+
+                G += value;
+                if(G > 255) { G = 255; }
+                else if(G < 0) { G = 0; }
+
+                B += value;
+                if(B > 255) { B = 255; }
+                else if(B < 0) { B = 0; }
+
+                // apply new pixel color to output bitmap
+                bmOut.setPixel(x, y, Color.argb(A, R, G, B));
+            }
+        }
+
+        // return final image
+        return bmOut;
+    }
 }

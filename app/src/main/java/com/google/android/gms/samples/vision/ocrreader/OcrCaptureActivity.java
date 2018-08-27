@@ -411,11 +411,11 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                                 //give the file a unique name
                                 imageFileName = "detect" + currentDateTimeString.replace(" ","");
 
-                                file = new File(storageDir, imageFileName + ".jpg");
+                                file = new File(storageDir, imageFileName + ".PNG");
 
                                 FileOutputStream fOut = new FileOutputStream(file);
 
-                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
                                 fOut.flush();
                                 fOut.close();
 

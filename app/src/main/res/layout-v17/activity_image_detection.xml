@@ -10,7 +10,7 @@
     <com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay
         android:id="@+id/second_graphic_overlay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:visibility="invisible"/>
 
 
@@ -18,7 +18,9 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/detected_text_list_view">
+        android:id="@+id/detected_text_list_view"
+        android:visibility="visible"
+        android:layout_below="@id/switch_view">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -41,6 +43,31 @@
         android:src="@drawable/baseline_navigate_next_white_48dp"
         android:layout_margin="20sp"
         android:id = "@+id/next_btn_di"/>
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch_view"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:backgroundTint="@color/teal"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@id/switch_view"
+        android:src="@drawable/baseline_format_list_bulleted_white_48dp"
+        android:background="@color/transparent"
+        android:layout_marginEnd="15dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_photo_white_48dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/switch_view"
+        android:background="@color/transparent"
+        android:layout_marginStart="15dp"/>
 
 
 
