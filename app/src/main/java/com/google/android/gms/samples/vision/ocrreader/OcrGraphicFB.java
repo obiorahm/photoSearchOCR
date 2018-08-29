@@ -39,7 +39,7 @@ public class OcrGraphicFB extends GraphicOverlayFB.Graphic {
         if (sTextPaint == null) {
             sTextPaint = new Paint();
             sTextPaint.setColor(TEXT_COLOR);
-            sTextPaint.setTextSize(50.0f);
+            sTextPaint.setTextSize(35.0f);
 
         }
         // Redraw the overlay, as this graphic has been added.
@@ -74,7 +74,7 @@ public class OcrGraphicFB extends GraphicOverlayFB.Graphic {
         if (sTextPaint == null) {
             sTextPaint = new Paint();
             sTextPaint.setColor(TEXT_COLOR);
-            sTextPaint.setTextSize(50.0f);
+            sTextPaint.setTextSize(35.0f);
         }
         // Redraw the overlay, as this graphic has been added.
         postInvalidate();

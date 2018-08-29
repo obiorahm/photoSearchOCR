@@ -5,7 +5,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.gms.samples.vision.ocrreader.Adapter.WordAdapter;
 
@@ -133,6 +136,16 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
             EdmanJasonReader edmanJasonReader = new EdmanJasonReader(Result);
             ArrayList<String[]> edmanInfo = edmanJasonReader.getRecipe();
 
+            // make progress bar invisible
+            ProgressBar searchingEdmame = ((Activity) context).findViewById(R.id.searching_edmame);
+            searchingEdmame.setVisibility(View.GONE);
+
+            // no results returned
+            if (edmanInfo.size() == 0){
+                TextView textViewNoResult = ((Activity) context).findViewById(R.id.no_result);
+                textViewNoResult.setVisibility(View.VISIBLE);
+            }
+
             for (String[] recipeInformation : edmanInfo){
                 //recipeInformation[1] = "val";
                 adapter.addItem(recipeInformation);
@@ -142,7 +155,7 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
             Log.e(LOG_TAG, e + "");
         }
 
-        GridView wholeWordGridView = (GridView) ((Activity) context).findViewById(R.id.gridview_edit_meal);
+        GridView wholeWordGridView =  ((Activity) context).findViewById(R.id.gridview_edit_meal);
         wholeWordGridView.setAdapter(adapter);
 
 

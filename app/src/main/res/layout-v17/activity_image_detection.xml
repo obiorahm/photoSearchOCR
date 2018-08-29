@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/detected_text_list_view"
         android:visibility="gone"
-        android:layout_below="@id/switch_view">
+        android:layout_below="@id/horizontal_bar">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -50,14 +50,24 @@
         android:layout_margin="20sp"
         android:id = "@+id/next_btn_di"/>
 
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:id="@+id/horizontal_bar"
+        android:background="@drawable/solid_border"
+        android:layout_alignParentTop="true"
+      />
+
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/switch_view"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:backgroundTint="@color/teal"
-        android:checked="true"/>
+        android:checked="true"
+        android:layout_margin="2dp"/>
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,7 +75,10 @@
         android:layout_toStartOf="@id/switch_view"
         android:src="@drawable/baseline_format_list_bulleted_white_48dp"
         android:background="@color/transparent"
-        android:layout_marginEnd="15dp"/>
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:id="@+id/list_mode"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -74,7 +87,20 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@id/switch_view"
         android:background="@color/transparent"
-        android:layout_marginStart="15dp"/>
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:id="@+id/image_mode"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_clear_white_48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/transparent"
+        android:id="@+id/clear_overlay"
+        android:layout_margin="2dp"/>
 
 
 

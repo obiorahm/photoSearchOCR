@@ -42,7 +42,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Locale;
+import java.util.TreeSet;
 
 /**
  * Created by mgo983 on 8/17/18.
@@ -83,6 +85,13 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
     public static RecyclerView parent;
 
     //public static String LOG_TAG  = DetectImageActivity.class.getSimpleName();
+
+    //track graphic
+
+    private ArrayList<OcrGraphicFB> graphics = new ArrayList<>();
+
+    private float NORMAL_STROKE_WIDTH = 4.0f;
+    private float SELECTED_STROKE_WIDTH = 7.0f;
 
 @Override
     public void onCreate(Bundle savedInstanceState){
@@ -236,15 +245,40 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
             if (b){
-                recyclerView.setVisibility(View.GONE);
-                imageViewPreview.setVisibility(View.VISIBLE);
-                imageView.setVisibility(View.VISIBLE);
-                mGraphicOverlayFB.setVisibility(View.VISIBLE);
+                    imageMode(imageView, recyclerView);
             }else{
-                recyclerView.setVisibility(View.VISIBLE);
-                imageViewPreview.setVisibility(View.GONE);
-                imageView.setVisibility(View.INVISIBLE);
-                mGraphicOverlayFB.setVisibility(View.GONE);
+                    listMode(imageView, recyclerView);
+            }
+        }
+    });
+
+    ImageView imageViewList = findViewById(R.id.list_mode);
+    imageViewList.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            listMode(imageView, recyclerView);
+            togglelistImageOn.setChecked(false);
+        }
+    });
+
+    ImageView imageViewImage = findViewById(R.id.image_mode);
+    imageViewImage.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            imageMode(imageView, recyclerView);
+            togglelistImageOn.setChecked(true);
+        }
+    });
+
+    ImageView imageViewClear = findViewById(R.id.clear_overlay);
+    imageViewClear.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Log.d(LOG_TAG,"length of graphic " + graphics.size());
+            for(OcrGraphicFB graphic : graphics){
+                graphic.setsRectPaint(Color.WHITE);
+                graphic.setRecPaintStrokeWidth(NORMAL_STROKE_WIDTH);
+                recognizedTextAdapter.removeItem(graphic.getLine().getText());;
             }
         }
     });
@@ -254,6 +288,22 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
 
     fetchSuggestionsFor("Peter livs in Brlin");
 
+    }
+
+
+    private void imageMode(ImageView imageView, RecyclerView recyclerView){
+        recyclerView.setVisibility(View.GONE);
+        imageViewPreview.setVisibility(View.VISIBLE);
+        imageView.setVisibility(View.VISIBLE);
+        mGraphicOverlayFB.setVisibility(View.VISIBLE);
+
+    }
+
+    private void listMode(ImageView imageView, RecyclerView recyclerView){
+        recyclerView.setVisibility(View.VISIBLE);
+        imageViewPreview.setVisibility(View.GONE);
+        imageView.setVisibility(View.INVISIBLE);
+        mGraphicOverlayFB.setVisibility(View.GONE);
     }
 
 /*orc detection()
@@ -440,13 +490,16 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
 
                 if (graphic.getsRectPaint() == Color.WHITE){
                     graphic.setsRectPaint(Color.RED);
-                    graphic.setRecPaintStrokeWidth(7.0f);
+                    graphic.setRecPaintStrokeWidth(SELECTED_STROKE_WIDTH);
                     recognizedTextAdapter.addItem(text_line_content);
+                    // track tapped graphics
+                    graphics.add(graphic);
 
                 }else{
                     recognizedTextAdapter.removeItem(text_line_content);
                     graphic.setsRectPaint(Color.WHITE);
-                    graphic.setRecPaintStrokeWidth(4.0f);
+                    graphic.setRecPaintStrokeWidth(NORMAL_STROKE_WIDTH);
+                    graphics.remove(graphic);
 
                 }
 

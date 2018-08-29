@@ -175,6 +175,8 @@ public class GraphicOverlayFB <T extends GraphicOverlayFB.Graphic> extends View 
 
         synchronized (mLock) {
             if ((mPreviewWidth != 0) && (mPreviewHeight != 0)) {
+
+                // use the display metrics instrad of the size of the canvas
                 DisplayMetrics displayMetrics = new DisplayMetrics();
                 ((DetectImageActivity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
                 int width = displayMetrics.widthPixels;
