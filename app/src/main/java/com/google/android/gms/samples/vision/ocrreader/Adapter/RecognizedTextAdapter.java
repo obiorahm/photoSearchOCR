@@ -41,6 +41,8 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
 
     private static  final String LOG_TAG = RecognizedTextAdapter.class.getSimpleName();
 
+
+
     private RecyclerView last_selected = null;
 
     public static class ViewHolder extends  RecyclerView.ViewHolder{

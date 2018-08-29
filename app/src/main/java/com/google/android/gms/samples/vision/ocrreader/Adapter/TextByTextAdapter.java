@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.ViewHolder> {
 
-    private ArrayList<String> mData = new ArrayList<String>();
+    private ArrayList<String> mData = new ArrayList<>();
     private LayoutInflater inflater;
     private Context context;
 
@@ -31,9 +31,6 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
 
     private static RecyclerView lastParent = null;
 
-    public TextByTextAdapter(){
-
-    }
 
     public static class ViewHolder extends  RecyclerView.ViewHolder{
         public TextView mTextView;
@@ -63,7 +60,7 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
 
     @Override
     public TextByTextAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recognized_text_item, null);
+        View convertView = inflater.inflate(R.layout.recognized_text_item, null);
         TextByTextAdapter.ViewHolder viewHolder = new TextByTextAdapter.ViewHolder(convertView, parent);
 
         return viewHolder;
@@ -91,13 +88,8 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
                     holder.mRecyclerView.setSelected(true);
                 }
                 DetectImageActivity.last_parent_di = holder.mRecyclerView;
-
-
             }
         });
-
-
-
     }
 
     public String getSelectedString(){

@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
 
 /**
  * Created by mgo983 on 8/27/18.
@@ -17,7 +20,6 @@ public class ImageViewPreview extends ViewGroup {
     private String TAG = ImageViewPreview.class.getSimpleName();
 
     private Context mContext;
-    private ImageView mImageView;
     private Bitmap mBitmap;
     private GraphicOverlayFB mGraphicOverlay;
 
@@ -25,8 +27,6 @@ public class ImageViewPreview extends ViewGroup {
         super(context, attrs);
         mContext = context;
 
-        mImageView = new ImageView(context);
-        addView(mImageView);
     }
 
     public void setmBitmap(Bitmap bitmap){
@@ -41,11 +41,15 @@ public class ImageViewPreview extends ViewGroup {
         int previewWidth = 320;
         int previewHeight = 240;
 
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((DetectImageActivity) mContext).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
         if (mBitmap != null) {
             previewWidth = mBitmap.getWidth();
             previewHeight = mBitmap.getHeight();
             Log.d(TAG, " previewWidth " + previewWidth + " previewHeight " + previewHeight );
+            Log.d(TAG, " width " + displayMetrics.widthPixels + " height " + displayMetrics.heightPixels );
+
         }
 
 
@@ -56,8 +60,11 @@ public class ImageViewPreview extends ViewGroup {
             previewHeight = tmp;
         }
 
-        final int viewWidth = right - left;
+        final int viewWidth = 2666;//right - left;
         final int viewHeight = bottom - top;
+
+        Log.d(TAG, " view width " + viewWidth + " view height " + viewHeight );
+
 
         int childWidth;
         int childHeight;
@@ -103,7 +110,7 @@ public class ImageViewPreview extends ViewGroup {
                 }
 
             }
-            mImageView.setImageBitmap(mBitmap);
+            //mImageView.setImageBitmap(mBitmap);
 
             //startIfReady();
         } catch (SecurityException se) {

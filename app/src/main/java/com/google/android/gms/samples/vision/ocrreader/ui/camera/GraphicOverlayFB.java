@@ -3,8 +3,11 @@ package com.google.android.gms.samples.vision.ocrreader.ui.camera;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 
+import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
 import com.google.android.gms.vision.*;
 
 import java.util.HashSet;
@@ -23,6 +26,7 @@ public class GraphicOverlayFB <T extends GraphicOverlayFB.Graphic> extends View 
     private float mHeightScaleFactor = 1.0f;
     private int mFacing = com.google.android.gms.vision.CameraSource.CAMERA_FACING_BACK;
     private Set<T> mGraphics = new HashSet<>();
+    private Context context;
 
     /**
      * Base class for a custom graphics object to be rendered within the graphic overlay.  Subclass
@@ -97,6 +101,7 @@ public class GraphicOverlayFB <T extends GraphicOverlayFB.Graphic> extends View 
 
     public GraphicOverlayFB(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
     }
 
     /**
@@ -170,8 +175,19 @@ public class GraphicOverlayFB <T extends GraphicOverlayFB.Graphic> extends View 
 
         synchronized (mLock) {
             if ((mPreviewWidth != 0) && (mPreviewHeight != 0)) {
-                mWidthScaleFactor = (float) canvas.getWidth() / (float) mPreviewWidth;
-                mHeightScaleFactor = (float) canvas.getHeight() / (float) mPreviewHeight;
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                ((DetectImageActivity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int width = displayMetrics.widthPixels;
+                int height = displayMetrics.heightPixels;
+
+                mWidthScaleFactor = (float) width / (float) mPreviewWidth;
+                mHeightScaleFactor = (float) height / (float) mPreviewHeight;
+
+
+                /*mWidthScaleFactor = (float) canvas.getWidth() / (float) mPreviewWidth;
+                mHeightScaleFactor = (float) canvas.getHeight() / (float) mPreviewHeight;*/
+                Log.d("graphic overlay on draw", " width " + width + " height " + height );
+
             }
 
             for (GraphicOverlayFB.Graphic graphic : mGraphics) {
