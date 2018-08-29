@@ -5,18 +5,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
-import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay;
-import com.google.android.gms.vision.text.Text;
-import com.google.android.gms.vision.text.TextBlock;
+import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlayFB;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
-
-import java.util.List;
 
 /**
  * Created by mgo983 on 8/24/18.
  */
 
-public class OcrGraphicFB extends GraphicOverlay.Graphic {
+public class OcrGraphicFB extends GraphicOverlayFB.Graphic {
 
     private int mId;
 
@@ -24,9 +20,11 @@ public class OcrGraphicFB extends GraphicOverlay.Graphic {
 
     private Paint sRectPaint;
     private static Paint sTextPaint;
-    private final FirebaseVisionText.TextBlock mText;
+    private FirebaseVisionText.TextBlock mText = null;
 
-    OcrGraphicFB(GraphicOverlay overlay, FirebaseVisionText.TextBlock text) {
+    private FirebaseVisionText.Line mLine = null;
+
+    OcrGraphicFB(GraphicOverlayFB overlay, FirebaseVisionText.TextBlock text) {
         super(overlay);
 
         mText = text;
@@ -42,9 +40,46 @@ public class OcrGraphicFB extends GraphicOverlay.Graphic {
             sTextPaint = new Paint();
             sTextPaint.setColor(TEXT_COLOR);
             sTextPaint.setTextSize(50.0f);
+
         }
         // Redraw the overlay, as this graphic has been added.
         postInvalidate();
+    }
+
+    public void  setsRectPaint(int color){
+        sRectPaint.setColor(color);
+        //redraw the overlay as this graphic has been added
+        postInvalidate();
+    }
+
+    public void setRecPaintStrokeWidth(float strokeWidth){
+        sRectPaint.setStrokeWidth(strokeWidth);
+    }
+
+    public int getsRectPaint(){
+        return sRectPaint.getColor();
+    }
+
+    OcrGraphicFB(GraphicOverlayFB overlay, FirebaseVisionText.Line line ){
+        super(overlay);
+
+        mLine = line;
+        if (sRectPaint == null) {
+            sRectPaint = new Paint();
+            sRectPaint.setColor(TEXT_COLOR);
+            sRectPaint.setStyle(Paint.Style.STROKE);
+            sRectPaint.setStrokeWidth(4.0f);
+        }
+
+        if (sTextPaint == null) {
+            sTextPaint = new Paint();
+            sTextPaint.setColor(TEXT_COLOR);
+            sTextPaint.setTextSize(50.0f);
+        }
+        // Redraw the overlay, as this graphic has been added.
+        postInvalidate();
+
+
     }
 
     public int getId() {
@@ -55,25 +90,50 @@ public class OcrGraphicFB extends GraphicOverlay.Graphic {
         this.mId = id;
     }
 
+    public FirebaseVisionText.TextBlock getTextBlock() {
+        return mText;
+    }
+
+    public FirebaseVisionText.Line getLine() {return  mLine; }
+
     @Override
     public void draw(Canvas canvas) {
         FirebaseVisionText.TextBlock text = mText;
-        if (text == null) {
+        FirebaseVisionText.Line line = mLine;
+        /**if (text == null) {
             return;
-        }
+        }*/
 
-        // Draws the bounding box around the TextBlock.
-        RectF rect = new RectF(text.getBoundingBox());
-        rect.left = translateX(rect.left);
-        rect.top = translateY(rect.top);
-        rect.right = translateX(rect.right);
-        rect.bottom = translateY(rect.bottom);
-        canvas.drawRect(rect, sRectPaint);
+        if (text != null){
+            // Draws the bounding box around the TextBlock.
+            RectF rect = new RectF(text.getBoundingBox());
+            rect.left = translateX(rect.left);
+            rect.top = translateY(rect.top);
+            rect.right = translateX(rect.right);
+            rect.bottom = translateY(rect.bottom);
+            canvas.drawRect(rect, sRectPaint);
 
 
             float left = translateX(text.getBoundingBox().left);
             float bottom = translateY(text.getBoundingBox().bottom);
-        canvas.drawText(mText.getText(), left, bottom, sTextPaint);
+            canvas.drawText(mText.getText(), left, bottom, sTextPaint);
+
+        }else if (line != null){
+
+            RectF rect = new RectF(line.getBoundingBox());
+            rect.left = translateX(rect.left);
+            rect.top = translateY(rect.top);
+            rect.right = translateX(rect.right);
+            rect.bottom = translateY(rect.bottom);
+            canvas.drawRect(rect, sRectPaint);
+
+
+            float left = translateX(line.getBoundingBox().left);
+            float bottom = translateY(line.getBoundingBox().bottom);
+            canvas.drawText(line.getText(), left, bottom, sTextPaint);
+        }
+
+
 
     }
 
@@ -86,15 +146,26 @@ public class OcrGraphicFB extends GraphicOverlay.Graphic {
      */
     public boolean contains(float x, float y) {
         FirebaseVisionText.TextBlock text = mText;
-        if (text == null) {
+        FirebaseVisionText.Line line = mLine;
+        if (text != null){
+            RectF rect = new RectF(text.getBoundingBox());
+            rect.left = translateX(rect.left);
+            rect.top = translateY(rect.top);
+            rect.right = translateX(rect.right);
+            rect.bottom = translateY(rect.bottom);
+            return (rect.left < x && rect.right > x && rect.top < y && rect.bottom > y);
+
+        }
+        else if(line != null){
+            RectF rect = new RectF(line.getBoundingBox());
+            rect.left = translateX(rect.left);
+            rect.top = translateY(rect.top);
+            rect.right = translateX(rect.right);
+            rect.bottom = translateY(rect.bottom);
+            return (rect.left < x && rect.right > x && rect.top < y && rect.bottom > y);
+        }else{
             return false;
         }
-        RectF rect = new RectF(text.getBoundingBox());
-        rect.left = translateX(rect.left);
-        rect.top = translateY(rect.top);
-        rect.right = translateX(rect.right);
-        rect.bottom = translateY(rect.bottom);
-        return (rect.left < x && rect.right > x && rect.top < y && rect.bottom > y);
     }
 
 }

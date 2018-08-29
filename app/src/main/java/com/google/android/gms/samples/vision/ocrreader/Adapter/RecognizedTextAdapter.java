@@ -22,6 +22,7 @@ import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 
 import java.util.ArrayList;
+import java.util.TreeSet;
 import java.util.zip.Inflater;
 
 /**
@@ -31,6 +32,7 @@ import java.util.zip.Inflater;
 public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAdapter.ViewHolder> {
 
     private  ArrayList<String> mData = new ArrayList<>();
+    //private TreeSet<String> mData = new TreeSet<>();
     private LayoutInflater inflater;
     private Context context;
     private TextToSpeech myTTS;
@@ -162,10 +164,20 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
     }
 
     public void addItem(String line){
-        mData.add(line);
+        if (!mData.contains(line)){
+            mData.add(line);
+        }
         notifyDataSetChanged();
     }
 
+    public void removeItem(String line){
+        if (mData.contains(line)){
+            int pos = mData.indexOf(line);
+            mData.remove(pos);
+        }
+        notifyDataSetChanged();
+
+    }
     public int getCurrentClick(){ return currentClick;}
 
 }

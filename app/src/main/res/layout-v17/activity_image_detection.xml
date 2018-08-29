@@ -7,11 +7,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/image_to_detect"
         android:visibility="invisible"/>
-    <com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay
-        android:id="@+id/second_graphic_overlay"
+    <com.google.android.gms.samples.vision.ocrreader.ui.camera.ImageViewPreview
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"/>
+        android:id="@+id/image_view_preview"
+        android:visibility="visible">
+        <com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlayFB
+            android:id="@+id/second_graphic_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"/>
+    </com.google.android.gms.samples.vision.ocrreader.ui.camera.ImageViewPreview>
 
 
 
@@ -19,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/detected_text_list_view"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_below="@id/switch_view">
 
     </android.support.v7.widget.RecyclerView>
@@ -50,7 +56,8 @@
         android:id="@+id/switch_view"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:backgroundTint="@color/teal"/>
+        android:backgroundTint="@color/teal"
+        android:checked="true"/>
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
