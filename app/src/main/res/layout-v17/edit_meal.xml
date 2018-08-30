@@ -35,13 +35,15 @@
         android:layout_alignRight="@id/meal_text"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textSize="25dp"
         android:text="@string/no_result"
         android:visibility="gone"
         android:id="@+id/no_result"
+        android:drawableStart="@drawable/baseline_not_interested_white_48dp"
+        android:drawablePadding="10dp"
         />
     <ProgressBar
         android:layout_width="wrap_content"

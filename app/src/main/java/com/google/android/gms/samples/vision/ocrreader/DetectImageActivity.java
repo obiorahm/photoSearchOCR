@@ -208,26 +208,7 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
 //test menu for development
     //test_di(recognizedTextAdapter);
 
-    //back button
 
-    ImageButton back_btn =  findViewById(R.id.back_btn_di);
-    back_btn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            finish();
-        }
-    });
-
-    ImageButton next_btn =  findViewById(R.id.next_btn_di);
-    next_btn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent mealMenuActivity = new Intent(getApplicationContext(), MealMenuActivity.class);
-
-            mealMenuActivity.putExtra(MEAL_TO_GET, selected_meal);
-            startActivity(mealMenuActivity);
-        }
-    });
 
     final RecyclerView recyclerView = findViewById(R.id.detected_text_list_view);
     parent = recyclerView;
@@ -282,6 +263,38 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
             }
         }
     });
+
+    //back button
+
+    ImageButton back_btn =  findViewById(R.id.back_btn_di);
+    back_btn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (togglelistImageOn.isChecked()){
+                finish();
+            }else{
+                imageMode(imageView, recyclerView);
+                togglelistImageOn.setChecked(true);
+            }
+        }
+    });
+
+    ImageButton next_btn =  findViewById(R.id.next_btn_di);
+    next_btn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            if (togglelistImageOn.isChecked()){
+                listMode(imageView, recyclerView);
+                togglelistImageOn.setChecked(false);
+            }else{
+                Intent mealMenuActivity = new Intent(getApplicationContext(), MealMenuActivity.class);
+                mealMenuActivity.putExtra(MEAL_TO_GET, selected_meal);
+                startActivity(mealMenuActivity);
+            }
+        }
+    });
+
 
 
     recyclerView.setAdapter(recognizedTextAdapter);

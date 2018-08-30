@@ -66,6 +66,14 @@ public class MealMenuActivity extends AppCompatActivity implements TextToSpeech.
             }
         });
 
+        final TextView textViewNoResult = (TextView) findViewById(R.id.no_result);
+        textViewNoResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myTTS.speak(textViewNoResult.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+
         //initialize adapter
         adapter = new WordAdapter(this, R.layout.gridview_item, myTTS, mealText);
 
