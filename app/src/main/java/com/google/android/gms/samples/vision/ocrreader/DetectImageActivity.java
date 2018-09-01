@@ -339,9 +339,10 @@ public class DetectImageActivity extends Activity implements TextToSpeech.OnInit
 
             //Bitmap bitmap = BitmapFactory.decodeStream(bufferedInputStream);
 
-            //FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
+            FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bmp);
 
-            FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(doBrightness(bmp, 10));
+            //FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(doBrightness(bmp, 10));
+
 
             //FirebaseVisionImage image = FirebaseVisionImage.fromFilePath(this, uri);
 

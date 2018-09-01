@@ -401,6 +401,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
                             Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 
+
                             // save the image
                             currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
@@ -415,8 +416,12 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
                                 FileOutputStream fOut = new FileOutputStream(file);
 
-                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+                                //save as bitmap
+                                /*bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
                                 fOut.flush();
+                                fOut.close();*/
+
+                                fOut.write(data);
                                 fOut.close();
 
                             }catch (IOException e){
