@@ -45,6 +45,16 @@ public class RecipeListAdapter extends ArrayAdapter {
     private String LOG_TAG = RecipeListAdapter.class.getSimpleName();
     private TextToSpeech myTTS;
 
+    private ArrayList<Integer[]> state = new ArrayList<>();
+    /** state will hold the visibility of the corresponding view as well as the state of the check boxes
+     * the visibility state is in position 0
+     * the no checkbox check state is in position 1
+     * the extra checkbox state is in position 2*/
+
+    private int STATE_VISIBILITY = 0;
+    private int STATE_NO_INGREDIENT = 1;
+    private int STATE_EXTRA_INGREDIENT = 2;
+
     //ImageAdapter adapter;
 
 
@@ -71,11 +81,15 @@ public class RecipeListAdapter extends ArrayAdapter {
 
     public void addItem(ArrayList an_ingredient){
         ingredients.add(an_ingredient);
+        Integer states [] = {0, 0, 0};
+        state.add(states);
         notifyDataSetChanged();
     }
 
     public void addImage(ArrayList imageUrl){
         ingredients.add(imageUrl);
+        Integer states [] = {0, 0, 0};
+        state.add(states);
         imageSet.add(ingredients.size() - 1);
         notifyDataSetChanged();
     }
