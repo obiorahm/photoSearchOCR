@@ -1,15 +1,15 @@
 #Internal package file, do not edit.
-#Wed Aug 22 11:30:43 CDT 2018
-1.base=/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/1
-2.path=farmhouse.png
+#Thu Sep 06 22:32:54 CDT 2018
+1.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/assets/debug
+2.path=classes.dex
 0.baseType=DIRECTORY
-2.base=/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/assets/debug
-2.set=ASSET
+2.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/2
+2.set=DEX
 1.baseType=DIRECTORY
 count=3
-1.set=DEX
+1.set=ASSET
 0.path=classes.dex
 0.set=DEX
-0.base=/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/2
+0.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/4
 2.baseType=DIRECTORY
-1.path=classes.dex
+1.path=farmhouse.png

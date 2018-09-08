@@ -92,18 +92,77 @@
         android:layout_marginBottom="2dp"
         android:id="@+id/image_mode"/>
 
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gridview_edit_meal"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/text_border"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/searching_edmame"
+        android:visibility="gone"
+        android:layout_margin="20dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:textSize="25dp"
+        android:text="@string/no_result"
+        android:visibility="gone"
+        android:id="@+id/no_result"
+        android:drawableStart="@drawable/baseline_not_interested_white_48dp"
+        android:drawablePadding="10dp"
+        android:background="@drawable/text_border"
+        />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancel_gridview_edit_meal"
+        android:layout_alignTop="@id/gridview_edit_meal"
+        android:layout_alignRight="@id/gridview_edit_meal"
+        android:src="@drawable/baseline_clear_white_48dp"
+        android:visibility="gone"
+        android:backgroundTint="@color/darkTeal"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_group_work_white_36"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/circular_button"
+        android:layout_margin="20dp"
+        android:id="@+id/group_lines" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_photo_white_48dp"
+        android:layout_alignParentRight="true"
+        android:layout_above="@id/group_lines"
+        android:background="@drawable/circular_button"
+        android:layout_margin="20dp"
+        android:id="@+id/see_selection" />
+
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_clear_white_48dp"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/group_lines"
         android:layout_alignParentRight="true"
-        android:background="@color/transparent"
+        android:background="@drawable/circular_button"
         android:id="@+id/clear_overlay"
-        android:layout_margin="2dp"/>
-
-
-
-
+        android:layout_margin="20dp"/>
 
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.google.android.gms.samples.vision.ocrreader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlayFB;
@@ -113,10 +114,16 @@ public class OcrGraphicFB extends GraphicOverlayFB.Graphic {
             rect.bottom = translateY(rect.bottom);
             canvas.drawRect(rect, sRectPaint);
 
+            // for each to draw line by line
+            for (FirebaseVisionText.Line block_line : text.getLines()){
 
-            float left = translateX(text.getBoundingBox().left);
-            float bottom = translateY(text.getBoundingBox().bottom);
-            canvas.drawText(mText.getText(), left, bottom, sTextPaint);
+
+
+                float left = translateX(block_line.getBoundingBox().left);
+                float bottom = translateY(block_line.getBoundingBox().bottom);
+                canvas.drawText(block_line.getText(), left, bottom, sTextPaint);
+
+            }
 
         }else if (line != null){
 

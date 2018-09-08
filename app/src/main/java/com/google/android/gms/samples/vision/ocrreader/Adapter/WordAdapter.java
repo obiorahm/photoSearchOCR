@@ -82,7 +82,7 @@ public class WordAdapter extends ArrayAdapter {
             convertView = inflater.inflate(R.layout.gridview_item, null);
         }
 
-        final TextView textView = (TextView) convertView.findViewById(R.id.word_in_text);
+        //final TextView textView = (TextView) convertView.findViewById(R.id.word_in_text);
         //textView.setText(mData.get(position)[1]);
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.recipe_image);
@@ -95,14 +95,14 @@ public class WordAdapter extends ArrayAdapter {
 
 
         //say all the words
-        textView.setOnClickListener(new View.OnClickListener() {
+        /*textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String wholeString = getMealName();
 
                 myTTs.speak(wholeString, TextToSpeech.QUEUE_FLUSH, null);
             }
-        });
+        });*/
 
 
         imageView.setOnClickListener(new View.OnClickListener() {

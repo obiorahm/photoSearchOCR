@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.samples.vision.ocrreader.Adapter.ImageAdapter;
+import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.WordAdapter;
 import com.google.android.gms.samples.vision.ocrreader.FetchMealDetails;
 import com.google.android.gms.samples.vision.ocrreader.R;
@@ -22,11 +25,11 @@ import java.util.Locale;
  * Created by mgo983 on 8/5/18.
  */
 
-public class MealMenuActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+public class MealMenuActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener {
 
     private int MY_DATA_CHECK_CODE = 0;
     public static TextToSpeech myTTS;
-    private WordAdapter adapter;
+    private RecyclerWordAdapter adapter;
 
 
 
@@ -75,7 +78,7 @@ public class MealMenuActivity extends AppCompatActivity implements TextToSpeech.
         });
 
         //initialize adapter
-        adapter = new WordAdapter(this, R.layout.gridview_item, myTTS, mealText);
+        adapter = new RecyclerWordAdapter(this, R.layout.gridview_item, myTTS, mealText);
 
         //place each word in a single text view
         String [] wordInMealText = mealText.split(" ");
@@ -116,6 +119,13 @@ public class MealMenuActivity extends AppCompatActivity implements TextToSpeech.
         wholeWordGridView.setAdapter(adapter);
     }
 
+@Override
+public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView){
+        int numberOfColumns = 4;
+    recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+    recyclerView.setAdapter(adapter);
+
+}
 
 
     //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.

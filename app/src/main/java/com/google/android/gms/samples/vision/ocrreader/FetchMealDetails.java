@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.WordAdapter;
 
 import org.json.JSONArray;
@@ -37,14 +41,23 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
 
     private final String LOG_TAG = FetchMealDetails.class.getSimpleName();
 
-    private WordAdapter adapter;
+    //private WordAdapter adapter;
+    private RecyclerWordAdapter adapter;
     private Context context;
+    private UseRecyclerActivity useRecyclerActivity;
 
-    public FetchMealDetails(WordAdapter wordAdapter, Context context){
+
+
+    /*public FetchMealDetails(WordAdapter wordAdapter, Context context){
         adapter = wordAdapter;
         this.context = context;
-    }
+    }*/
 
+    public FetchMealDetails(RecyclerWordAdapter recyclerWordAdapter, Context context){
+        adapter = recyclerWordAdapter;
+        this.context = context;
+        useRecyclerActivity = ((UseRecyclerActivity) context);
+    }
 
 
 
@@ -147,7 +160,6 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
             }
 
             for (String[] recipeInformation : edmanInfo){
-                //recipeInformation[1] = "val";
                 adapter.addItem(recipeInformation);
             }
 
@@ -155,12 +167,13 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
             Log.e(LOG_TAG, e + "");
         }
 
-        GridView wholeWordGridView =  ((Activity) context).findViewById(R.id.gridview_edit_meal);
-        wholeWordGridView.setAdapter(adapter);
+        /*GridView wholeWordGridView =  ((Activity) context).findViewById(R.id.gridview_edit_meal);
+        wholeWordGridView.setAdapter(adapter);*/
+
+        //setView(((Activity) context), (RecyclerView) ((Activity) context).findViewById(R.id.gridview_edit_meal));
+        useRecyclerActivity.setView(adapter, (RecyclerView) ((Activity) context).findViewById(R.id.gridview_edit_meal));
 
 
     }
-
-
 
 }

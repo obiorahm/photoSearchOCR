@@ -2,19 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+    <!--TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/word_in_text"/>
+        android:id="@+id/word_in_text"/-->
 
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:id="@+id/recipe_image"
         android:background="@drawable/image_border"
-        android:src="@drawable/outline_edit_white_18dp"/>
+        android:src="@drawable/outline_edit_white_18dp"
+        android:layout_margin="10dp"/>
 
-    <TextView
+    <!--TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/include_item"
@@ -22,6 +23,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/remove_item"/>
+        android:id="@+id/remove_item"/-->
 
 </LinearLayout>
