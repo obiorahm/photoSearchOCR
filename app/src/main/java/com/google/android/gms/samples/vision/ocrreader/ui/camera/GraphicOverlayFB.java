@@ -135,6 +135,14 @@ public class GraphicOverlayFB <T extends GraphicOverlayFB.Graphic> extends View 
     }
 
     /**
+     * gets a graphic from the overlay
+     */
+
+    public void get(T grapic){
+
+    }
+
+    /**
      * Returns the first graphic, if any, that exists at the provided absolute screen coordinates.
      * These coordinates will be offset by the relative screen position of this view.
      * @return First graphic containing the point, or null if no text is detected.

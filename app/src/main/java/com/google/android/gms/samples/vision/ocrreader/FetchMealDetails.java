@@ -157,11 +157,13 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
             if (edmanInfo.size() == 0){
                 TextView textViewNoResult = ((Activity) context).findViewById(R.id.no_result);
                 textViewNoResult.setVisibility(View.VISIBLE);
+            }else{
+                for (String[] recipeInformation : edmanInfo){
+                    adapter.addItem(recipeInformation);
+                }
+
             }
 
-            for (String[] recipeInformation : edmanInfo){
-                adapter.addItem(recipeInformation);
-            }
 
         }catch (NullPointerException e){
             Log.e(LOG_TAG, e + "");
