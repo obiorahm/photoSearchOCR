@@ -3,7 +3,6 @@ package com.google.android.gms.samples.vision.ocrreader;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,13 +10,10 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.google.android.gms.samples.vision.ocrreader.Adapter.ImageAdapter;
+
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
-import com.google.android.gms.samples.vision.ocrreader.Adapter.WordAdapter;
-import com.google.android.gms.samples.vision.ocrreader.FetchMealDetails;
-import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
+
 
 import java.util.Locale;
 
@@ -28,7 +24,7 @@ import java.util.Locale;
 public class MealMenuActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener {
 
     private int MY_DATA_CHECK_CODE = 0;
-    public static TextToSpeech myTTS;
+    //public static TextToSpeech myTTS;
     private RecyclerWordAdapter adapter;
 
 
@@ -78,7 +74,8 @@ public class MealMenuActivity extends UseRecyclerActivity implements TextToSpeec
         });
 
         //initialize adapter
-        adapter = new RecyclerWordAdapter(this, R.layout.gridview_item, myTTS, mealText);
+
+        adapter = new RecyclerWordAdapter(this, R.layout.gridview_item, myTTS, mealText, false);
 
         //place each word in a single text view
         String [] wordInMealText = mealText.split(" ");
@@ -108,15 +105,15 @@ public class MealMenuActivity extends UseRecyclerActivity implements TextToSpeec
 
     }
 
-    private void testadapter(WordAdapter adapter){
+    private void testadapter(RecyclerWordAdapter adapter){
         String foodItem [] = {"https://www.mcdonalds.com/content/dam/usa/documents/mcdelivery/mcdelivery_new11.jpg", "meat"};
         adapter.addItem(foodItem);
         adapter.addItem(foodItem);
         adapter.addItem(foodItem);
         adapter.addItem(foodItem);
 
-        GridView wholeWordGridView = (GridView) findViewById(R.id.gridview_edit_meal);
-        wholeWordGridView.setAdapter(adapter);
+        RecyclerView wholeWordRecyclerView = (RecyclerView) findViewById(R.id.gridview_edit_meal);
+        wholeWordRecyclerView.setAdapter(adapter);
     }
 
 @Override

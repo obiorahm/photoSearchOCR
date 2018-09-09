@@ -18,11 +18,6 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.textservice.SentenceSuggestionsInfo;
-import android.view.textservice.SpellCheckerSession;
-import android.view.textservice.SuggestionsInfo;
-import android.view.textservice.TextInfo;
-import android.view.textservice.TextServicesManager;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,7 +27,6 @@ import android.widget.TextView;
 
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecognizedTextAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
-import com.google.android.gms.samples.vision.ocrreader.Adapter.WordAdapter;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlayFB;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.ImageViewPreview;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,7 +38,6 @@ import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,7 +46,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.TreeSet;
 
 /**
  * Created by mgo983 on 8/17/18.
@@ -63,15 +55,12 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
     public static String LOG_TAG = DetectImageActivity.class.getSimpleName();
 
-    public static String newline = System.getProperty("line.separator");
-
-
     private GraphicOverlayFB<OcrGraphicFB> mGraphicOverlayFB;
 
     private ImageViewPreview imageViewPreview;
     //Text to speech variables
     private int MY_DATA_CHECK_CODE = 0;
-    public TextToSpeech myTTS;
+    //public TextToSpeech myTTS;
 
     public static final String MEAL_TO_GET = "com.google.android.gms.samples.vision.ocrreader.MEAL_TO_GET";
 
@@ -225,6 +214,7 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
             newTextBlock = null;
             selectedGraphic = null;
             currentLineSelection = null;
+            takeDownRecyclerView();
 
         }
     });
@@ -274,6 +264,7 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
         @Override
         public void onClick(View view) {
             group_selected_lines();
+            takeDownRecyclerView();
         }
     });
 
@@ -282,7 +273,20 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
     imageButtonSeeSelection.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            SeeSelection();
+            if (currentLineSelection != null){
+                setUpRecyclerView(currentLineSelection, getBlockOrText());
+            }
+        }
+    });
+
+
+    ImageButton imageButtonMakeOrder = findViewById(R.id.make_order);
+    imageButtonMakeOrder.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            ProgressBar progressBar = findViewById(R.id.dialog_progress);
+            progressBar.setVisibility(View.VISIBLE);
+            makeOrder();
         }
     });
 
@@ -293,15 +297,25 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
     }
 
-    private void SeeSelection(){
-        if (currentLineSelection != null){
-            /*feedback for selected graphic
-            selectedGraphic.setRecPaintStrokeWidth(SELECTED_STROKE_WIDTH);
-            selectedGraphic.setsRectPaint(R.color.teal);*/
 
-            setUpRecyclerView(currentLineSelection);
+    private void makeOrder(){
+        if (currentLineSelection != null){
+
+            String mealText = currentLineSelection.replaceAll("[0-9]","");
+
+            FetchMealDetails fetchMealDetails = new FetchMealDetails(this);
+            fetchMealDetails.execute(mealText);
         }
     }
+
+
+
+    private boolean getBlockOrText(){
+        if (selectedGraphic != null)
+            return (selectedGraphic.getTextBlock() != null);
+        return false;
+    }
+
 
     private void group_selected_lines(){
         //replace lines in current block
@@ -310,8 +324,8 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
         //draw on the overlay a block selector
         draw_block();
-        //hide line selectors
 
+        //hide line selectors
         hide_lines_in_block();
 
         //set currentLineSelection to title meal
@@ -332,73 +346,78 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
     }
 
     private void draw_block(){
+        try{
+            if (graphics.size() > 0){
+                FirebaseVisionText.Line firstLine = graphics.get(0).getLine();
+                if (firstLine == null)
+                    return;
+                Rect rect = firstLine.getBoundingBox();
+                if (rect == null)
+                    return;
+                int min_rect_top = rect.top;
+                int min_rect_left = rect.left;
+                int max_rect_bottom = rect.bottom;
+                int max_rect_right = rect.right;
 
-        if (graphics.size() > 0){
-            FirebaseVisionText.Line firstLine = graphics.get(0).getLine();
-            if (firstLine == null)
-                return;
-            Rect rect = firstLine.getBoundingBox();
-            if (rect == null)
-                return;
-            int min_rect_top = rect.top;
-            int min_rect_left = rect.left;
-            int max_rect_bottom = rect.bottom;
-            int max_rect_right = rect.right;
+                Rect new_rect = new Rect();
+                ArrayList<FirebaseVisionText.Line> line_array = new ArrayList<FirebaseVisionText.Line>();
 
-            Rect new_rect = new Rect();
-            ArrayList<FirebaseVisionText.Line> line_array = new ArrayList<FirebaseVisionText.Line>();
-
-            // variables for combining string
-            ArrayList<Integer> rect_top_values = new ArrayList<>();
-            HashMap<Integer, String> line_texts = new HashMap<>();
+                // variables for combining string
+                ArrayList<Integer> rect_top_values = new ArrayList<>();
+                HashMap<Integer, String> line_texts = new HashMap<>();
 
 
-            for (OcrGraphicFB child : graphics){
-                FirebaseVisionText.Line curr_line = child.getLine();
-                Rect curr_rect = curr_line.getBoundingBox();
-                if (curr_rect.top < min_rect_top)
-                    min_rect_top = curr_rect.top;
+                for (OcrGraphicFB child : graphics){
+                    FirebaseVisionText.Line curr_line = child.getLine();
+                    Rect curr_rect = curr_line.getBoundingBox();
+                    if (curr_rect.top < min_rect_top)
+                        min_rect_top = curr_rect.top;
 
-                if (curr_rect.left < min_rect_left)
-                    min_rect_left = curr_rect.left;
+                    if (curr_rect.left < min_rect_left)
+                        min_rect_left = curr_rect.left;
 
-                if (curr_rect.bottom > max_rect_bottom)
-                    max_rect_bottom = curr_rect.bottom;
+                    if (curr_rect.bottom > max_rect_bottom)
+                        max_rect_bottom = curr_rect.bottom;
 
-                if (curr_rect.right > max_rect_right)
-                    max_rect_right = curr_rect.right;
+                    if (curr_rect.right > max_rect_right)
+                        max_rect_right = curr_rect.right;
 
-                line_array.add(child.getLine());
+                    line_array.add(child.getLine());
 
-                rect_top_values.add(curr_rect.top);
-                line_texts.put(curr_rect.top, curr_line.getText());
+                    rect_top_values.add(curr_rect.top);
+                    line_texts.put(curr_rect.top, curr_line.getText());
+
+                }
+
+                new_rect.right = max_rect_right;
+                new_rect.bottom = max_rect_bottom;
+                new_rect.left = min_rect_left;
+                new_rect.top = min_rect_top;
+
+                newTextBlock = new FirebaseVisionText.TextBlock(
+                        combineText(rect_top_values, line_texts),
+                        new_rect,
+                        firstLine.getRecognizedLanguages(),
+                        line_array,
+                        firstLine.getConfidence()
+                );
+                //clear current graphic
+                if (selectedGraphic != null)
+                    mGraphicOverlayFB.remove(selectedGraphic);
+
+                selectedGraphic = new OcrGraphicFB(mGraphicOverlayFB, newTextBlock);
+                selectedGraphic.setsRectPaint(Color.GREEN);
+                selectedGraphic.setRecPaintStrokeWidth(SELECTED_STROKE_WIDTH);
+                mGraphicOverlayFB.add(selectedGraphic);
+                //imageViewPreview.setmGraphicOverlay(mGraphicOverlayFB);
+
 
             }
 
-            new_rect.right = max_rect_right;
-            new_rect.bottom = max_rect_bottom;
-            new_rect.left = min_rect_left;
-            new_rect.top = min_rect_top;
-
-            newTextBlock = new FirebaseVisionText.TextBlock(
-                    combineText(rect_top_values, line_texts),
-                    new_rect,
-                    firstLine.getRecognizedLanguages(),
-                    line_array,
-                    firstLine.getConfidence()
-                    );
-            //clear current graphic
-            if (selectedGraphic != null)
-                mGraphicOverlayFB.remove(selectedGraphic);
-
-            selectedGraphic = new OcrGraphicFB(mGraphicOverlayFB, newTextBlock);
-            selectedGraphic.setsRectPaint(Color.GREEN);
-            selectedGraphic.setRecPaintStrokeWidth(SELECTED_STROKE_WIDTH);
-            mGraphicOverlayFB.add(selectedGraphic);
-            //imageViewPreview.setmGraphicOverlay(mGraphicOverlayFB);
-
-
+        }catch (NullPointerException e){
+            Log.d(LOG_TAG, e + "");
         }
+
 
     }
 
@@ -700,7 +719,6 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
      * @param rawY - the raw position of the tap.
      * @return true if the activity is ending.
      */
-    int counter = 0;
     private boolean onTap(float rawX, float rawY) {
 
         final OcrGraphicFB graphic = mGraphicOverlayFB.getGraphicAtLocation(rawX, rawY);
@@ -709,7 +727,6 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
         if (graphic != null) {
             line = graphic.getLine();
             block = graphic.getTextBlock();
-            Log.d("graphic", "just got touched " + ++counter + (line == null));
             //final FirebaseVisionText.Line final_text = line;
             if (line != null && line.getText()!= null) {
                 String text_line_content;
@@ -814,14 +831,19 @@ public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView){
 }
 
 
+    public void fetchOrder(String mealText){
+
+    }
 
 
-
-    public void setUpRecyclerView(String mealText){
+    public void setUpRecyclerView(String mealText, Boolean blockOrText){
 
         mealText = mealText.replaceAll("[0-9]","");
 
-        RecyclerWordAdapter recyclerWordAdapter = new RecyclerWordAdapter(this, R.layout.gridview_item, myTTS, mealText);
+        RecyclerWordAdapter recyclerWordAdapter = new RecyclerWordAdapter(this, R.layout.gridview_item, myTTS, mealText, blockOrText);
+
+        ProgressBar progressBar = findViewById(R.id.searching_edmame);
+        progressBar.setVisibility(View.VISIBLE);
 
         FetchMealDetails fetchMealDetails = new FetchMealDetails(recyclerWordAdapter, this);
         fetchMealDetails.execute(mealText);

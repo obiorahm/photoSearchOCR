@@ -1,9 +1,11 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -33,11 +35,11 @@ import java.util.ArrayList;
 
 public class FetchMealDetails extends AsyncTask<String, Void, String> {
 
-    public final static String BASEURL = "https://api.edamam.com/search";
-    public final static String API_KEY = "37345295e38efe1ea020cbc391ee11a8";
-    public final static String API_ID = "0940281c";
-    public final static String NUM_TO = "10";
-    public final static String NUM_FROM = "0";
+    private final static String BASEURL = "https://api.edamam.com/search";
+    private final static String API_KEY = "37345295e38efe1ea020cbc391ee11a8";
+    private final static String API_ID = "0940281c";
+    private String NUM_TO = "10";
+    private final static String NUM_FROM = "0";
 
     private final String LOG_TAG = FetchMealDetails.class.getSimpleName();
 
@@ -57,6 +59,11 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
         adapter = recyclerWordAdapter;
         this.context = context;
         useRecyclerActivity = ((UseRecyclerActivity) context);
+    }
+
+    public FetchMealDetails(Context context){
+        this.context = context;
+        this.NUM_TO = "1";
     }
 
 
@@ -99,8 +106,7 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
             //Log.d(LOG_TAG, buffer.toString());
 
 
-            String  testString = buffer.toString();
-            return testString;
+            return buffer.toString();
 
         }catch (IOException e){
             Log.e(LOG_TAG, "Error", e);
@@ -144,36 +150,59 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String Result){
-        //JSONObject newJSONObject = new JSONObject(Result);
+
+        selectActivityToLoad(Result);
+
+    }
+
+    private void selectActivityToLoad(String Result){
         try{
             EdmanJasonReader edmanJasonReader = new EdmanJasonReader(Result);
             ArrayList<String[]> edmanInfo = edmanJasonReader.getRecipe();
 
-            // make progress bar invisible
-            ProgressBar searchingEdmame = ((Activity) context).findViewById(R.id.searching_edmame);
-            searchingEdmame.setVisibility(View.GONE);
-
-            // no results returned
-            if (edmanInfo.size() == 0){
-                TextView textViewNoResult = ((Activity) context).findViewById(R.id.no_result);
-                textViewNoResult.setVisibility(View.VISIBLE);
+            if (adapter != null){
+                setRecycler(edmanInfo);
             }else{
-                for (String[] recipeInformation : edmanInfo){
-                    adapter.addItem(recipeInformation);
-                }
-
+                setDialog(edmanInfo);
             }
 
 
         }catch (NullPointerException e){
             Log.e(LOG_TAG, e + "");
         }
+    }
 
-        /*GridView wholeWordGridView =  ((Activity) context).findViewById(R.id.gridview_edit_meal);
-        wholeWordGridView.setAdapter(adapter);*/
 
-        //setView(((Activity) context), (RecyclerView) ((Activity) context).findViewById(R.id.gridview_edit_meal));
+    private void setRecycler(ArrayList<String[]> edmanInfo){
+        // make progress bar invisible
+        ProgressBar searchingEdmame = ((Activity) context).findViewById(R.id.searching_edmame);
+        searchingEdmame.setVisibility(View.GONE);
+
+        // no results returned
+        if (edmanInfo.size() == 0){
+            TextView textViewNoResult = ((Activity) context).findViewById(R.id.no_result);
+            textViewNoResult.setVisibility(View.VISIBLE);
+        }else{
+            for (String[] recipeInformation : edmanInfo){
+                adapter.addItem(recipeInformation);
+            }
+        }
         useRecyclerActivity.setView(adapter, (RecyclerView) ((Activity) context).findViewById(R.id.gridview_edit_meal));
+    }
+
+    private void setDialog(ArrayList<String[]> edmanInfo){
+            String uri = "";
+            if (edmanInfo != null && edmanInfo.size() > 0){
+                uri = edmanInfo.get(0)[0];
+            }
+
+        ProgressBar progressBar = ((DetectImageActivity) context).findViewById(R.id.dialog_progress);
+            progressBar.setVisibility(View.GONE);
+        DialogFragment blockDialogFragment = new BlockSelectDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString( RecyclerWordAdapter.IMAGE_URI , uri);
+        blockDialogFragment.setArguments(bundle);
+        blockDialogFragment.show(((Activity) context).getFragmentManager(), "blockDialogFragment");
 
 
     }

@@ -15,8 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
 import com.google.android.gms.samples.vision.ocrreader.MealMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
+import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
 import java.util.ArrayList;
 
@@ -54,8 +56,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
-        myTTS = ((MealMenuActivity) context).myTTS;
+        myTTS = ((UseRecyclerActivity) context).myTTS;
     }
+
+
 
     @Override
     public ImageAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.samples.vision.ocrreader.BlockSelectDialog;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.RecipeDialog;
 
@@ -32,11 +33,15 @@ public class RecyclerWordAdapter extends RecyclerView.Adapter<RecyclerWordAdapte
     private LayoutInflater inflater;
     private ArrayList<String[]> mData = new ArrayList<String[]>();
 
-    public static String RECIPE_INGREDIENTS = "com.google.android.gms.samples.vision.ocrreader.RecognizedTextAdapter.RECIPE_INGREDIENTS";
+    public static String RECIPE_INGREDIENTS = "com.google.android.gms.samples.vision.ocrreader.RecyclerWordAdapter.RECIPE_INGREDIENTS";
 
-    public static String MEAL_NAME = "com.google.android.gms.samples.vision.ocrreader.RecognizedTextAdapter.MEAL_NAME";
+    public static String MEAL_NAME = "com.google.android.gms.samples.vision.ocrreader.RecyclerWordAdapter.MEAL_NAME";
+
+    public static String IMAGE_URI = "com.google.android.gms.samples.vision.ocrreader.RecyclerWordAdapter.IMAGE_URI";
 
     private final String LOG_TAG = RecyclerWordAdapter.class.getSimpleName();
+
+    private boolean blockOrText = false;
 
 
 
@@ -54,12 +59,13 @@ public class RecyclerWordAdapter extends RecyclerView.Adapter<RecyclerWordAdapte
 
     }
 
-    public RecyclerWordAdapter(Context context, int resource, TextToSpeech myTTS, String mealText){
+    public RecyclerWordAdapter(Context context, int resource, TextToSpeech myTTS, String mealText, boolean blockOrText){
         super();
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.myTTS = myTTS;
         this.mealText = mealText;
+        this.blockOrText = blockOrText;
     }
 
     @Override
@@ -75,7 +81,7 @@ public class RecyclerWordAdapter extends RecyclerView.Adapter<RecyclerWordAdapte
 
 
 
-        Uri uri = Uri.parse(mData.get(position)[0]);
+        final Uri uri = Uri.parse(mData.get(position)[0]);
 
         Log.d(LOG_TAG, mData.get(position)[0]);
 
@@ -96,13 +102,18 @@ public class RecyclerWordAdapter extends RecyclerView.Adapter<RecyclerWordAdapte
         holder.mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new RecipeDialog();
-                Bundle bundle = new Bundle();
-                bundle.putString(RECIPE_INGREDIENTS, mData.get(position)[1]);
-                //bundle.putString(EXTRA_DIALOG_IMAGE, imgFile.toString());
-                bundle.putString(MEAL_NAME, mealText);
-                newFragment.setArguments(bundle);
-                newFragment.show(((Activity) context).getFragmentManager(),"what?");
+                if (blockOrText){
+                    setBlockDialog(uri);
+                }else {
+                    DialogFragment newFragment = new RecipeDialog();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(RECIPE_INGREDIENTS, mData.get(position)[1]);
+                    //bundle.putString(EXTRA_DIALOG_IMAGE, imgFile.toString());
+                    bundle.putString(MEAL_NAME, mealText);
+                    newFragment.setArguments(bundle);
+                    newFragment.show(((Activity) context).getFragmentManager(),"recipeDialogFragment");
+
+                }
             }
 
         });
@@ -124,6 +135,14 @@ public class RecyclerWordAdapter extends RecyclerView.Adapter<RecyclerWordAdapte
 
     public void addItem(String[] wordInMeal){
         mData.add(wordInMeal);
+    }
+
+    private void setBlockDialog(Uri uri){
+        DialogFragment blockDialogFragment = new BlockSelectDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString( IMAGE_URI , uri.toString());
+        blockDialogFragment.setArguments(bundle);
+        blockDialogFragment.show(((Activity) context).getFragmentManager(), "blockDialogFragment");
     }
 
 }

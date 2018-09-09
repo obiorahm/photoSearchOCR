@@ -67,6 +67,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 startActivity(mealMenuActivityIntent);
             }
         });
+
+        String a = "$ab";
+        String b  = "&$ab";
+        String c = "9ab and ";
+        String [] d = {a, b, c, "ab(serious)" };
+        for (String child : d){
+            ProcessTextBlock y = new ProcessTextBlock(child);
+            Log.d("Process Text", child + " : " + y.processText());
+
+        }
     }
 
     /**

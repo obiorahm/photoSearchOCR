@@ -18,9 +18,9 @@
         android:drawableLeft="@drawable/ic_volume_up_white_18dp"
         android:drawablePadding="5dp"/>
     <ImageView
-        android:layout_width="400dp"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_photo_camera_black_48dp"
+        android:src="@drawable/baseline_not_interested_white_48dp"
         android:id="@+id/image"
         android:layout_margin="10dp"
 
@@ -32,26 +32,6 @@
         android:layout_toRightOf="@id/image"
         android:padding="10dp"
         />
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_navigate_next_white_48dp"
-        android:background="@drawable/circular_button"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/questions"
-        android:layout_margin="20sp"
-        android:id="@+id/next_image"
-        />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_navigate_before_white_48dp"
-        android:background="@drawable/circular_button"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="20sp"
-        android:id="@+id/previous_image"
-        />
 
 </RelativeLayout>

@@ -24,6 +24,10 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-hdpi-v4/abc_textfield_default_mtrl_alpha.9.png"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi_baseline_reorder_24.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/generated/res/pngs/debug/drawable-hdpi/baseline_reorder_24.png"
+    },
+    {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_baseline_not_interested_white_48dp.png.flat",
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxhdpi/baseline_not_interested_white_48dp.png"
     },
@@ -60,12 +64,12 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-xhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_photo_camera_black_48dp.png.flat",
-        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xhdpi/ic_photo_camera_black_48dp.png"
-    },
-    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/color-v23_abc_tint_switch_thumb.xml.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/color-v23/abc_tint_switch_thumb.xml"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_photo_camera_black_48dp.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xhdpi/ic_photo_camera_black_48dp.png"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_action_info.png.flat",
@@ -384,6 +388,10 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-ldrtl-hdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_baseline_reorder_white_48.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxxhdpi/baseline_reorder_white_48.png"
+    },
+    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_plus_signin_btn_icon_light_focused.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/res/drawable-xxhdpi-v4/common_plus_signin_btn_icon_light_focused.9.png"
     },
@@ -594,6 +602,10 @@
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi_ic_clear_black_18dp.png.flat",
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-mdpi/ic_clear_black_18dp.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi_baseline_reorder_white_24.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xhdpi/baseline_reorder_white_24.png"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_common_plus_signin_btn_icon_dark_normal.9.png.flat",
@@ -934,6 +946,10 @@
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_clear_black_18dp.png.flat",
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxhdpi/ic_clear_black_18dp.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_baseline_reorder_24.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/generated/res/pngs/debug/drawable-xxxhdpi/baseline_reorder_24.png"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_clear_black_18dp.png.flat",
@@ -1660,6 +1676,10 @@
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/layout/dialog_block_select.xml"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/layout_list_view_items.xml.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/layout/list_view_items.xml"
+    },
+    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_add_black_18dp.png.flat",
         "source": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxhdpi/ic_add_black_18dp.png"
     },
@@ -1730,6 +1750,10 @@
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_common_plus_signin_btn_text_light_normal.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/res/drawable-mdpi-v4/common_plus_signin_btn_text_light_normal.9.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_option_button_on.xml.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable/option_button_on.xml"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/color_common_plus_signin_btn_text_light.xml.flat",
@@ -2124,6 +2148,10 @@
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-hdpi/ic_done_black_18dp.png"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_baseline_reorder_24.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/generated/res/pngs/debug/drawable-xxhdpi/baseline_reorder_24.png"
+    },
+    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/dc8d6753abab0c67536ff9ef32f0a4b1/res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
     },
@@ -2138,6 +2166,10 @@
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_common_google_signin_btn_icon_dark_normal_background.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/dc8d6753abab0c67536ff9ef32f0a4b1/res/drawable-mdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_baseline_reorder_white_48.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxhdpi/baseline_reorder_white_48.png"
     },
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_volume_up_black_48dp.png.flat",
@@ -2408,6 +2440,10 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/layout/select_dialog_multichoice_material.xml"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_baseline_reorder_white_18.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxxhdpi/baseline_reorder_white_18.png"
+    },
+    {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_btn_radio_to_on_mtrl_000.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_000.png"
     },
@@ -2580,6 +2616,10 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/layout/abc_popup_menu_item_layout.xml"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi_baseline_reorder_24.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/generated/res/pngs/debug/drawable-xhdpi/baseline_reorder_24.png"
+    },
+    {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-mdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
     },
@@ -2722,6 +2762,10 @@
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/dc8d6753abab0c67536ff9ef32f0a4b1/res/drawable-hdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi_baseline_reorder_white_36.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-mdpi/baseline_reorder_white_36.png"
     },
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
@@ -2988,6 +3032,10 @@
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-hdpi/ic_photo_camera_black_48dp.png"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi_baseline_reorder_white_36.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-hdpi/baseline_reorder_white_36.png"
+    },
+    {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png"
     },
@@ -3018,6 +3066,10 @@
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_notify_panel_notification_icon_bg.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f90ebb0786da93a9ce9a905f01ba2642/res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-ldpi_baseline_reorder_24.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/generated/res/pngs/debug/drawable-ldpi/baseline_reorder_24.png"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi_ic_send_black_24dp.png.flat",
@@ -3054,6 +3106,10 @@
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_dark_focused.xml.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/dc8d6753abab0c67536ff9ef32f0a4b1/res/drawable/common_google_signin_btn_text_dark_focused.xml"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_line_drawable.xml.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable/line_drawable.xml"
     },
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
@@ -3110,6 +3166,10 @@
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_expand_more_black_24dp.png.flat",
         "source": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxhdpi/ic_expand_more_black_24dp.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_baseline_reorder_white_24.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxhdpi/baseline_reorder_white_24.png"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_half_black_36dp.png.flat",
@@ -3596,6 +3656,10 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f90ebb0786da93a9ce9a905f01ba2642/res/drawable-hdpi-v4/notification_bg_low_pressed.9.png"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi_baseline_reorder_white_18.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-hdpi/baseline_reorder_white_18.png"
+    },
+    {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_abc_ratingbar_material.xml.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable/abc_ratingbar_material.xml"
     },
@@ -3712,6 +3776,10 @@
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-hdpi/ic_clear_black_18dp.png"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi_baseline_reorder_24.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/generated/res/pngs/debug/drawable-mdpi/baseline_reorder_24.png"
+    },
+    {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-xhdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
     },
@@ -3746,6 +3814,10 @@
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_image_black_24dp.png.flat",
         "source": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-hdpi/ic_image_black_24dp.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi_baseline_reorder_white_18.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-mdpi/baseline_reorder_white_18.png"
     },
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/layout_notification_template_part_time.xml.flat",
@@ -3854,6 +3926,10 @@
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-xhdpi-v4/abc_switch_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_baseline_reorder_white_24.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxxhdpi/baseline_reorder_white_24.png"
     },
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/layout_design_navigation_item_separator.xml.flat",
@@ -4116,6 +4192,10 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-ldrtl-hdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi_baseline_reorder_white_48.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xhdpi/baseline_reorder_white_48.png"
+    },
+    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_list_pressed_holo_light.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-hdpi-v4/abc_list_pressed_holo_light.9.png"
     },
@@ -4218,6 +4298,10 @@
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_save_white_18dp.png.flat",
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxhdpi/ic_save_white_18dp.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_baseline_reorder_white_18.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxhdpi/baseline_reorder_white_18.png"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_navigation_empty_icon.xml.flat",
@@ -4612,6 +4696,10 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/layout/abc_screen_toolbar.xml"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi_baseline_reorder_white_48.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-mdpi/baseline_reorder_white_48.png"
+    },
+    {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/layout_block_select_item.xml.flat",
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/layout/block_select_item.xml"
     },
@@ -4640,8 +4728,16 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/layout/abc_screen_content_include.xml"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_no_result_border.xml.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable/no_result_border.xml"
+    },
+    {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/layout_abc_list_menu_item_radio.xml.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_option_button.xml.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable/option_button.xml"
     },
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/color-v23_abc_btn_colored_borderless_text_material.xml.flat",
@@ -4706,6 +4802,10 @@
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi_baseline_reorder_white_36.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xhdpi/baseline_reorder_white_36.png"
     },
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/color_common_google_signin_btn_tint.xml.flat",
@@ -4876,6 +4976,10 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-xhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_baseline_reorder_white_36.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxxhdpi/baseline_reorder_white_36.png"
+    },
+    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/color_design_tint_password_toggle.xml.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/design-24.2.0.aar/6867bc155a216d14ddb2e31494ceb056/res/color/design_tint_password_toggle.xml"
     },
@@ -4948,6 +5052,10 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/dc8d6753abab0c67536ff9ef32f0a4b1/res/drawable/common_google_signin_btn_text_dark_normal.xml"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi_baseline_reorder_white_18.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xhdpi/baseline_reorder_white_18.png"
+    },
+    {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_done_black_18dp.png.flat",
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xhdpi/ic_done_black_18dp.png"
     },
@@ -4966,6 +5074,10 @@
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/layout-land_edit_meal.xml.flat",
         "source": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/src/main/res/layout-land/edit_meal.xml"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_baseline_reorder_24.xml.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/generated/res/pngs/debug/drawable-anydpi-v21/baseline_reorder_24.xml"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_expand_more_black_24dp.png.flat",
@@ -5184,6 +5296,10 @@
         "source": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xhdpi/ic_share_black_48dp.png"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/layout_list_view_icon_item.xml.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/layout/list_view_icon_item.xml"
+    },
+    {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_edit_black_18dp.png.flat",
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxhdpi/ic_edit_black_18dp.png"
     },
@@ -5316,6 +5432,10 @@
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_015.png"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_baseline_reorder_white_36.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxhdpi/baseline_reorder_white_36.png"
+    },
+    {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_black_16dp.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/drawable-mdpi-v4/abc_ic_star_black_16dp.png"
     },
@@ -5358,6 +5478,10 @@
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_volume_up_white_48dp.png.flat",
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxhdpi/ic_volume_up_white_48dp.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi_baseline_reorder_white_48.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-hdpi/baseline_reorder_white_48.png"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_send_black_24dp.png.flat",
@@ -5434,6 +5558,10 @@
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notify_panel_notification_icon_bg.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f90ebb0786da93a9ce9a905f01ba2642/res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-mdpi_baseline_reorder_white_24.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-mdpi/baseline_reorder_white_24.png"
     },
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_chevron_left_black_18dp.png.flat",
@@ -5530,6 +5658,10 @@
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi_baseline_autorenew_white_18dp.png.flat",
         "source": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xhdpi/baseline_autorenew_white_18dp.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-hdpi_baseline_reorder_white_24.png.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-hdpi/baseline_reorder_white_24.png"
     },
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-tvdpi-v4_common_google_signin_btn_text_light_normal.9.png.flat",
@@ -5646,6 +5778,10 @@
     {
         "merged": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-tvdpi-v4_common_plus_signin_btn_icon_light_focused.9.png.flat",
         "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-9.4.0.aar/a009585dee787e1812aa77ead4fcb4db/res/drawable-tvdpi-v4/common_plus_signin_btn_icon_light_focused.9.png"
+    },
+    {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_layer_drawable.xml.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable/layer_drawable.xml"
     },
     {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_border.xml.flat",

@@ -111,6 +111,7 @@
         android:id="@+id/searching_edmame"
         android:visibility="gone"
         android:layout_margin="20dp"
+        android:backgroundTint="@color/darkTeal"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -124,7 +125,8 @@
         android:id="@+id/no_result"
         android:drawableStart="@drawable/baseline_not_interested_white_48dp"
         android:drawablePadding="10dp"
-        android:background="@drawable/text_border"
+        android:textColor="@color/black"
+        android:background="@drawable/no_result_border"
         />
     <ImageButton
         android:layout_width="wrap_content"
@@ -135,12 +137,13 @@
         android:src="@drawable/baseline_clear_white_48dp"
         android:visibility="gone"
         android:backgroundTint="@color/darkTeal"/>
+
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_group_work_white_36"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:layout_above="@id/see_selection"
         android:background="@drawable/circular_button"
         android:layout_margin="20dp"
         android:id="@+id/group_lines" />
@@ -150,7 +153,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_photo_white_48dp"
         android:layout_alignParentRight="true"
-        android:layout_above="@id/group_lines"
+        android:layout_centerVertical="true"
         android:background="@drawable/circular_button"
         android:layout_margin="20dp"
         android:id="@+id/see_selection" />
@@ -158,11 +161,30 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/baseline_reorder_white_48"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/see_selection"
+        android:background="@drawable/circular_button"
+        android:layout_margin="20dp"
+        android:id="@+id/make_order" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/baseline_clear_white_48dp"
-        android:layout_below="@id/group_lines"
+        android:layout_below="@id/make_order"
         android:layout_alignParentRight="true"
         android:background="@drawable/circular_button"
         android:id="@+id/clear_overlay"
         android:layout_margin="20dp"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_progress"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

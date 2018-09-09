@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.samples.vision.ocrreader.OrderInstructions;
 import com.google.android.gms.samples.vision.ocrreader.R;
 
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
     TextToSpeech myTTS;
     ArrayList<String> mData = new ArrayList<String>();
     ArrayList<ImageRecyclerAdapter> mImageRecyclerAdapter = new ArrayList<ImageRecyclerAdapter>();
+    private OrderInstructions orderInstructions;
+    private View parentView;
 
     static final HashMap<String, String[]> mDataPair = new HashMap<>();
     static {
@@ -68,14 +71,16 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
 
         public ViewHolder(View convertView){
             super(convertView);
-            //mRecyclerView= convertView.findViewById(R.id.options_icon);
+            mRecyclerView= convertView.findViewById(R.id.option_icons);
         }
     }
 
-    public BlockRecyclerAdapter(Context context, TextToSpeech myTTS){
+    public BlockRecyclerAdapter(Context context, int resources, TextToSpeech myTTS, View parent,OrderInstructions orderInstructions){
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.myTTS = myTTS;
+        this.orderInstructions = orderInstructions;
+        this.parentView = parent;
     }
 
     public void addItem(String wordInMeal){
@@ -86,7 +91,7 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
          * Don't initialize in get view else new image adapters are created
          * */
 
-        ImageRecyclerAdapter imageRecyclerAdapter = new ImageRecyclerAdapter();
+        ImageRecyclerAdapter imageRecyclerAdapter = new ImageRecyclerAdapter(context, parentView, myTTS,  orderInstructions);
 
         String [] options = mDataPair.get(wordInMeal);
 
