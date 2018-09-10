@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.samples.vision.ocrreader.Adapter.ImageAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecipeListAdapter;
+import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.WordAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -107,7 +108,7 @@ public class RecipeDialog extends DialogFragment {
 
         try {
 
-            JSONArray ingredientArray = new JSONArray(this.getArguments().getString(WordAdapter.RECIPE_INGREDIENTS));
+            JSONArray ingredientArray = new JSONArray(this.getArguments().getString(RecyclerWordAdapter.RECIPE_INGREDIENTS));
 
             /*test with testRecipeDialog
             JSONArray ingredientArray = testRecipeDialog();*/
@@ -121,6 +122,8 @@ public class RecipeDialog extends DialogFragment {
         }catch (JSONException e){
             Log.e(LOG_TAG, e + "");
         }catch (NullPointerException e){
+
+            Log.e(LOG_TAG, e + " ");
 
         }
 

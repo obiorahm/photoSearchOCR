@@ -568,6 +568,18 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
         ImageButton imageButtonMakeOrder = findViewById(R.id.make_order);
         imageButtonMakeOrder.setVisibility(View.VISIBLE);
 
+        TextView textViewGroupLines = findViewById(R.id.group_lines_text);
+        textViewGroupLines.setVisibility(View.VISIBLE);
+
+        TextView textViewPhoto = findViewById(R.id.see_selection_text);
+        textViewPhoto.setVisibility(View.VISIBLE);
+
+        TextView textViewOrder = findViewById(R.id.make_order_text);
+        textViewOrder.setVisibility(View.VISIBLE);
+
+        TextView textViewClearSelection = findViewById(R.id.clear_overlay_text);
+        textViewClearSelection.setVisibility(View.VISIBLE);
+
 
     }
 
@@ -585,6 +597,18 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
         ImageButton imageButtonMakeOrder = findViewById(R.id.make_order);
         imageButtonMakeOrder.setVisibility(View.GONE);
+
+        TextView textViewGroupLines = findViewById(R.id.group_lines_text);
+        textViewGroupLines.setVisibility(View.GONE);
+
+        TextView textViewPhoto = findViewById(R.id.see_selection_text);
+        textViewPhoto.setVisibility(View.GONE);
+
+        TextView textViewOrder = findViewById(R.id.make_order_text);
+        textViewOrder.setVisibility(View.GONE);
+
+        TextView textViewClearSelection = findViewById(R.id.clear_overlay_text);
+        textViewClearSelection.setVisibility(View.GONE);
 
     }
 

@@ -36,9 +36,6 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
    LinkedHashMap<String, String[]> mDataPair = new LinkedHashMap<>();
 
 
-
-
-
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         RecyclerView mRecyclerView;
