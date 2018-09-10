@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Sep 10 09:50:56 CDT 2018
+#Mon Sep 10 13:46:47 CDT 2018
 17.baseType=DIRECTORY
 4.path=icons/cheese_sauce.png
 25.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/assets/debug

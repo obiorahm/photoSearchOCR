@@ -70,16 +70,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         });*/
 
-        String a = "$ab";
-        String b  = "&$ab";
-        String c = "9ab and ";
-        String [] d = {a, b, c, "ab(serious)" };
-        for (String child : d){
-            ProcessTextBlock y = new ProcessTextBlock(child);
-            Log.d("Process Text", child + " : " + y.processText());
-            Log.d("Process Text", android.hardware.Camera.getNumberOfCameras() + " ");
+            //Test.testDynamicOptions(this);
 
-        }
     }
 
     /**

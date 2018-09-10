@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.samples.vision.ocrreader.DynamicOptions;
 import com.google.android.gms.samples.vision.ocrreader.OrderInstructions;
 import com.google.android.gms.samples.vision.ocrreader.R;
 
@@ -38,6 +39,35 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     private int reject = R.drawable.option_button_on;
 
     private View rootView;
+
+    private static final ArrayList<String> icon_names = new ArrayList<>();
+    static {
+        icon_names.add("big.png");
+        icon_names.add("bigger.png");
+        icon_names.add("biggest.png");
+        icon_names.add("blue_rare.png");
+        icon_names.add("cheese_sauce.png");
+        icon_names.add("dressing.png");
+        icon_names.add("egg_substitute.png");
+        icon_names.add("ice.png");
+        icon_names.add("main_dish.png");
+        icon_names.add("mayonnaise.png");
+        icon_names.add("medium.png");
+        icon_names.add("medium_rare.png");
+        icon_names.add("medium_well.png");
+        icon_names.add("mustard.png");
+        icon_names.add("nutrition_facts.png");
+        icon_names.add("rare.png");
+        icon_names.add("share.png");
+        icon_names.add("sliced.png");
+        icon_names.add("substitution.png");
+        icon_names.add("vegetables.png");
+        icon_names.add("vegetarian.png");
+        icon_names.add("warm.png");
+        icon_names.add("water.png");
+        icon_names.add("well_done.png");
+        icon_names.add("whole.png");
+    }
 
     private int[] STATES = { normal, select, reject };
 
@@ -83,7 +113,9 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
         final String fileName = currData[OPTION];
 
-        Glide.with(context).load(Uri.parse("file:///android_asset/icons/" + fileName)).into(holder.mImageView);
+        loadImage(fileName, holder.mImageView);
+
+        //Glide.with(context).load(Uri.parse("file:///android_asset/icons/" + fileName)).into(holder.mImageView);
 
         LayoutInflater layoutInflater;
 
@@ -138,6 +170,19 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
             return new_state;
 
     }
+
+
+    private void loadImage(String fileName, ImageView imageView){
+
+        if (icon_names.contains(fileName))
+            Glide.with(context).load("file:///android_asset/icons/" + fileName).into(imageView);
+        else{
+            DynamicOptions dynamicOptions = new DynamicOptions(imageView, fileName, context);
+            dynamicOptions.load();
+        }
+
+    }
+
 
     /**
      * change text based on state of icon
