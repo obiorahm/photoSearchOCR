@@ -42,9 +42,13 @@ public class BlockSelectDialog extends DialogFragment {
 
         myTTS = DetectImageActivity.myTTS;
 
-        questionsAdapter = new BlockRecyclerAdapter(getActivity(), R.layout.list_view_items, myTTS, rootView, orderInstructions);
+        String wholeOrder = getArguments().getString(FetchMealDetails.WHOLE_ORDER);
 
-        addAdapterItems(questionsAdapter);
+        questionsAdapter = new BlockRecyclerAdapter(getActivity(), R.layout.list_view_items, myTTS, rootView, orderInstructions, wholeOrder);
+
+        questionsAdapter.addItem();
+
+        //addAdapterItems(questionsAdapter);
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.questions);
 
@@ -63,21 +67,6 @@ public class BlockSelectDialog extends DialogFragment {
 
 
         return rootView;
-
-    }
-
-    private void addAdapterItems(BlockRecyclerAdapter questionAdapter){
-        questionAdapter.addItem("Can I order an appetizer size or half-size entrée?");
-        questionAdapter.addItem("Can I split a dish with someone at my table?");
-        questionAdapter.addItem("Could you give me a larger portion of vegetables and a smaller portion of the main dish? ");
-        questionAdapter.addItem("What can I substitute?");
-        questionAdapter.addItem("Could you leave off the (sour cream, cheese sauce, dressing, mayonnaise, etc.)?");
-        questionAdapter.addItem("Can you make this dish with sliced chicken breast?");
-        questionAdapter.addItem("Which dishes do you recommend for vegetarians?");
-        questionAdapter.addItem("Do you have nutrition information on any of your dishes?");
-        questionAdapter.addItem("No ice please?");
-        questionAdapter.addItem("Can I have my meat well done?");
-
 
     }
 
@@ -104,4 +93,20 @@ public class BlockSelectDialog extends DialogFragment {
         // Call super onResume after sizing
         super.onResume();
     }
+
+    /*private void addAdapterItems(BlockRecyclerAdapter questionAdapter){
+        questionAdapter.addItem("Can I order an appetizer size or half-size entrée?");
+        questionAdapter.addItem("Can I split a dish with someone at my table?");
+        questionAdapter.addItem("Could you give me a larger portion of vegetables and a smaller portion of the main dish? ");
+        questionAdapter.addItem("What can I substitute?");
+        questionAdapter.addItem("Could you leave off the (sour cream, cheese sauce, dressing, mayonnaise, etc.)?");
+        questionAdapter.addItem("Can you make this dish with sliced chicken breast?");
+        questionAdapter.addItem("Which dishes do you recommend for vegetarians?");
+        questionAdapter.addItem("Do you have nutrition information on any of your dishes?");
+        questionAdapter.addItem("No ice please?");
+        questionAdapter.addItem("Can I have my meat well done?");
+
+
+    }*/
+
 }

@@ -12,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.samples.vision.ocrreader.OrderInstructions;
+import com.google.android.gms.samples.vision.ocrreader.ProcessTextBlock;
 import com.google.android.gms.samples.vision.ocrreader.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created by mgo983 on 9/7/18.
@@ -31,8 +33,23 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
     private OrderInstructions orderInstructions;
     private View parentView;
 
-    static final HashMap<String, String[]> mDataPair = new HashMap<>();
-    static {
+   LinkedHashMap<String, String[]> mDataPair = new LinkedHashMap<>();
+
+
+
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+
+        RecyclerView mRecyclerView;
+
+        public ViewHolder(View convertView){
+            super(convertView);
+            mRecyclerView= convertView.findViewById(R.id.option_icons);
+        }
+    }
+
+    private void staticPopulate(){
         String[] big = {"big.png", "bigger.png", "biggest.png"};
         mDataPair.put("Can I order an appetizer size or half-size entrée?", big);
 
@@ -62,34 +79,53 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
 
         String[] meat = { "blue_rare.png", "rare.png" , "medium_rare.png", "medium.png","medium_well.png", "well_done.png"};
         mDataPair.put("Can I have my meat well done?", meat);
+
     }
 
+    private void dynamicPopulate(String wholeOrder){
+        ProcessTextBlock processTextBlock = new ProcessTextBlock(wholeOrder);
+        String wholeOrderProcessed = processTextBlock.processText();
+        String [] ArrayWholeOrderProcessed = wholeOrderProcessed.split(",");
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+        //String [] share = {"share.png"};
 
-        RecyclerView mRecyclerView;
+        for (String val : ArrayWholeOrderProcessed){
+            String temp_val = val.trim();
+            if (!(temp_val.equals("") || temp_val == null)){
+                String[] share = { val};
+                mDataPair.put(val, share);
 
-        public ViewHolder(View convertView){
-            super(convertView);
-            mRecyclerView= convertView.findViewById(R.id.option_icons);
+            }
+
         }
     }
 
-    public BlockRecyclerAdapter(Context context, int resources, TextToSpeech myTTS, View parent,OrderInstructions orderInstructions){
+    public BlockRecyclerAdapter(Context context, int resources, TextToSpeech myTTS, View parent,OrderInstructions orderInstructions, String wholeOrder){
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.myTTS = myTTS;
         this.orderInstructions = orderInstructions;
         this.parentView = parent;
+
+        dynamicPopulate(wholeOrder);
+        staticPopulate();
     }
 
-    public void addItem(String wordInMeal){
+    public BlockRecyclerAdapter(Context context, int resources, TextToSpeech myTTS, View parent, OrderInstructions orderInstructions){
+        this.context = context;
+        this.inflater = LayoutInflater.from(context);
+        this.myTTS = myTTS;
+        this.orderInstructions = orderInstructions;
+        this.parentView = parent;
+
+        staticPopulate();
+    }
+
+    /*public void addItem(String wordInMeal){
 
         mData.add(wordInMeal);
 
-        /* Initialize image adapter here so that states are saved when the views are loaded
-         * Don't initialize in get view else new image adapters are created
-         * */
+
 
         ImageRecyclerAdapter imageRecyclerAdapter = new ImageRecyclerAdapter(context, parentView, myTTS,  orderInstructions);
 
@@ -104,6 +140,26 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
 
 
 
+    }*/
+
+    public void addItem(){
+
+     /* Initialize image adapter here so that states are saved when the views are loaded
+         * Don't initialize in get view else new image adapters are created
+         * */
+
+        for (String key : mDataPair.keySet()){
+            ImageRecyclerAdapter imageRecyclerAdapter = new ImageRecyclerAdapter(context, parentView, myTTS,  orderInstructions);
+
+            String [] options = mDataPair.get(key);
+            for(String option : options){
+                String expanded_pair[] = {option, key};
+                imageRecyclerAdapter.addItem(expanded_pair);
+            }
+            mImageRecyclerAdapter.add(imageRecyclerAdapter);
+
+        }
+
     }
 
     @Override
@@ -116,7 +172,7 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
     @Override
     public void onBindViewHolder(final BlockRecyclerAdapter.ViewHolder holder, final int position) {
 
-        final String texttoSpeak =  mData.get(position);
+        //final String texttoSpeak =  mData.get(position);
 
         ImageRecyclerAdapter imageRecyclerAdapter = mImageRecyclerAdapter.get(position);
 
@@ -126,19 +182,12 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
         holder.mRecyclerView.setLayoutManager(layoutManager);
         holder.mRecyclerView.setAdapter(imageRecyclerAdapter);
 
-        /*convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TextView textViewQuestion = ((Activity) context).findViewById(R.id.selected_option);
-                textViewQuestion.setText(texttoSpeak);
-            }
-        });*/
 
     }
 
     @Override
     public int getItemCount(){
-        return mData.size();
+        return mDataPair.size();
     }
 
 

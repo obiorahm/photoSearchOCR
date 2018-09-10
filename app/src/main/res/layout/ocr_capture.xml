@@ -25,8 +25,9 @@
         android:background="@drawable/circular_button"
         android:src="@drawable/baseline_navigate_before_white_48dp"
         android:layout_alignParentLeft="true"
-        android:layout_margin="10sp"
-        android:layout_alignParentBottom="true"/>
+        android:layout_marginLeft="25sp"
+        android:layout_alignParentBottom="true"
+        />
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +35,30 @@
         android:background="@drawable/circular_button"
         android:src="@drawable/baseline_navigate_next_white_48dp"
         android:layout_alignParentRight="true"
-        android:layout_margin="10sp"
+        android:layout_marginRight="25sp"
         android:layout_alignParentBottom="true"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/capture_back_button"
+        android:background="@drawable/circular_button"
+        android:src="@drawable/baseline_photo_camera_white_48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="25sp"
+        android:layout_marginBottom="300dp"
+        android:layout_alignParentBottom="true"
+        />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/capture_forward_button"
+        android:background="@drawable/circular_button"
+        android:src="@drawable/baseline_photo_camera_white_48dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="25sp"
+        android:layout_marginBottom="300dp"
+        android:layout_alignParentBottom="true"/>
+
 
 </RelativeLayout>

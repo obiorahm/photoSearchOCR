@@ -14,4 +14,8 @@
     <string name="ocr_failure">No text captured</string>
     <string name="ocr_error">"Error reading text: %1$s"</string>
     <string name="no_result">"No results found"</string>
+    <string name="group">GROUP</string>
+    <string name="photo">PHOTO</string>
+    <string name="order">ORDER</string>
+    <string name="clear">CLEAR</string>
 </resources>

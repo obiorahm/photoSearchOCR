@@ -122,6 +122,7 @@ public class CameraSource {
 
     private int mFacing = CAMERA_FACING_BACK;
 
+
     /**
      * Rotation of the device, and thus the associated preview images captured from the device.
      * See {@link Frame.Metadata#getRotation()}.
@@ -340,6 +341,7 @@ public class CameraSource {
             }
 
             mCamera = createCamera();
+
 
             // SurfaceTexture was introduced in Honeycomb (11), so if we are running and
             // old version of Android. fall back to use SurfaceView.

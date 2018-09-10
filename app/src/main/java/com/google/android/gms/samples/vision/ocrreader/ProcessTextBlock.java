@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ProcessTextBlock {
     String textBlock;
 
-    ProcessTextBlock(String mTextBlock){
+    public ProcessTextBlock(String mTextBlock){
         textBlock = mTextBlock;
     }
 

@@ -42,11 +42,13 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
     private final static String NUM_FROM = "0";
 
     private final String LOG_TAG = FetchMealDetails.class.getSimpleName();
+    public final static String WHOLE_ORDER = "com.google.android.gms.samples.vision.ocrreader.WHOLE_ORDER";
 
     //private WordAdapter adapter;
     private RecyclerWordAdapter adapter;
     private Context context;
     private UseRecyclerActivity useRecyclerActivity;
+    private String mWholeOrder = "";
 
 
 
@@ -61,9 +63,10 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
         useRecyclerActivity = ((UseRecyclerActivity) context);
     }
 
-    public FetchMealDetails(Context context){
+    public FetchMealDetails(Context context, String wholeOrder){
         this.context = context;
         this.NUM_TO = "1";
+        this.mWholeOrder = wholeOrder;
     }
 
 
@@ -201,6 +204,7 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
         DialogFragment blockDialogFragment = new BlockSelectDialog();
         Bundle bundle = new Bundle();
         bundle.putString( RecyclerWordAdapter.IMAGE_URI , uri);
+        bundle.putString(WHOLE_ORDER, mWholeOrder);
         blockDialogFragment.setArguments(bundle);
         blockDialogFragment.show(((Activity) context).getFragmentManager(), "blockDialogFragment");
 

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Camera;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -303,11 +304,23 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
             String mealText = currentLineSelection.replaceAll("[0-9]","");
 
-            FetchMealDetails fetchMealDetails = new FetchMealDetails(this);
+            FetchMealDetails fetchMealDetails = new FetchMealDetails(this, ocrGraphicGetText());
             fetchMealDetails.execute(mealText);
         }
     }
 
+    private String ocrGraphicGetText(){
+        String finalText = "";
+        if (selectedGraphic == null)
+            return finalText;
+        FirebaseVisionText.TextBlock block = selectedGraphic.getTextBlock();
+        FirebaseVisionText.Line line = selectedGraphic.getLine();
+        if (block != null)
+            finalText = block.getText();
+        else if (line != null)
+            finalText = line.getText();
+        return finalText;
+    }
 
 
     private boolean getBlockOrText(){
@@ -530,16 +543,16 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
      */
 
     private String combineText(ArrayList<Integer> rect_top_values, HashMap<Integer, String> string_values){
-    //String finalString = "";
         Collections.sort(rect_top_values);
-        /*for (Integer child : rect_top_values){
-            finalString += string_values.get(child) + newline;
-        }*/
+        String finalString = string_values.get(rect_top_values.get(0)) + ",";
+        for (int i = 1; i < rect_top_values.size(); i++){
+            finalString += string_values.get(rect_top_values.get(i)) + " ";
+        }
 
-        return string_values.get(rect_top_values.get(0));
+        //return string_values.get(rect_top_values.get(0));
+        return finalString;
 
     }
-
     private void imageMode(ImageView imageView, RecyclerView recyclerView){
         recyclerView.setVisibility(View.GONE);
         imageViewPreview.setVisibility(View.VISIBLE);
@@ -551,6 +564,9 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
         ImageButton imageButtonGroupLines = findViewById(R.id.group_lines);
         imageButtonGroupLines.setVisibility(View.VISIBLE);
+
+        ImageButton imageButtonMakeOrder = findViewById(R.id.make_order);
+        imageButtonMakeOrder.setVisibility(View.VISIBLE);
 
 
     }
@@ -567,6 +583,9 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
         ImageButton imageButtonGroupLines = findViewById(R.id.group_lines);
         imageButtonGroupLines.setVisibility(View.GONE);
 
+        ImageButton imageButtonMakeOrder = findViewById(R.id.make_order);
+        imageButtonMakeOrder.setVisibility(View.GONE);
+
     }
 
 
@@ -577,11 +596,6 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
     private void firebaseTextDetection(/*Uri uri,*/ Bitmap bmp){
 
         try {
-
-            //InputStream inputStream = getResources().getAssets().open("farmhouse.png");
-            //BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-
-            //Bitmap bitmap = BitmapFactory.decodeStream(bufferedInputStream);
 
             FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bmp);
 
@@ -831,11 +845,6 @@ public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView){
 }
 
 
-    public void fetchOrder(String mealText){
-
-    }
-
-
     public void setUpRecyclerView(String mealText, Boolean blockOrText){
 
         mealText = mealText.replaceAll("[0-9]","");
@@ -868,6 +877,7 @@ public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView){
         imageButtonclearRecycler.setVisibility(View.GONE);
 
     }
+
 
 
 }

@@ -142,41 +142,121 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_group_work_white_36"
-        android:layout_alignParentRight="true"
-        android:layout_above="@id/see_selection"
+        android:layout_alignParentStart="true"
+        android:layout_above="@id/group_lines_text"
         android:background="@drawable/circular_button"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="2dp"
         android:id="@+id/group_lines" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/group"
+        android:layout_alignParentStart="true"
+        android:layout_above="@id/see_selection"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:shadowColor="@color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="1.5"
+        android:background="@color/transparent"
+        android:id="@+id/group_lines_text"/>
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_photo_white_48dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:background="@drawable/circular_button"
-        android:layout_margin="20dp"
-        android:id="@+id/see_selection" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="2dp"
+        android:id="@+id/see_selection"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/photo"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/see_selection"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:shadowColor="@color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="1.5"
+        android:background="@color/transparent"
+        android:id="@+id/see_selection_text"/>
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_reorder_white_48"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/see_selection"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/see_selection_text"
         android:background="@drawable/circular_button"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="2dp"
         android:id="@+id/make_order" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/order"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/make_order"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:shadowColor="@color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="1.5"
+        android:background="@color/transparent"
+        android:id="@+id/make_order_text"/>
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_clear_white_48dp"
-        android:layout_below="@id/make_order"
-        android:layout_alignParentRight="true"
+        android:layout_below="@id/make_order_text"
+        android:layout_alignParentStart="true"
         android:background="@drawable/circular_button"
         android:id="@+id/clear_overlay"
-        android:layout_margin="20dp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/clear_overlay"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:shadowColor="@color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="1.5"
+        android:background="@color/transparent"
+        android:id="@+id/clear_overlay_text"/>
 
     <ProgressBar
         android:layout_width="wrap_content"

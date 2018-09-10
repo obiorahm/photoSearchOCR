@@ -153,9 +153,10 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         btn_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent detectImageActivity = new Intent(getApplicationContext(), DetectImageActivity.class);
+                capture_image_and_start_detect();
+                /*Intent detectImageActivity = new Intent(getApplicationContext(), DetectImageActivity.class);
                 detectImageActivity.putExtra(IMAGE_FILE_NAME, file.getAbsolutePath());
-                startActivity(detectImageActivity);
+                startActivity(detectImageActivity);*/
             }
         });
 
@@ -167,6 +168,34 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+        //capture right
+        ImageButton right_capture = (ImageButton) findViewById(R.id.capture_forward_button);
+        right_capture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                capture_image_and_start_detect();
+            }
+        });
+
+
+        //capture left
+        ImageButton left_capture = (ImageButton) findViewById(R.id.capture_back_button);
+        left_capture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                capture_image_and_start_detect();
+            }
+        });
+    }
+
+
+    private void startDetectActivity(){
+        Intent detectImageActivity = new Intent(getApplicationContext(), DetectImageActivity.class);
+        detectImageActivity.putExtra(IMAGE_FILE_NAME, file.getAbsolutePath());
+        startActivity(detectImageActivity);
+
     }
 
     /**
@@ -401,11 +430,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
                             Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 
-
                             // save the image
                             currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-
-
 
                             try {
 
@@ -415,11 +441,6 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                                 file = new File(storageDir, imageFileName + ".PNG");
 
                                 FileOutputStream fOut = new FileOutputStream(file);
-
-                                //save as bitmap
-                                /*bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-                                fOut.flush();
-                                fOut.close();*/
 
                                 fOut.write(data);
                                 fOut.close();
@@ -445,23 +466,10 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
                             }
 
-                            /*Intent intent = new Intent (getApplicationContext(), DetectImageActivity.class);
-                            intent.putExtra(IMAGE_FILE_NAME, file.getAbsolutePath());
-
-
-                            startActivity(intent);
-                            finish();*/
-
                         }
                     }
                 });
 
-
-                /*Intent data = new Intent();
-                data.putExtra(TextBlockObject, text.getValue());
-                setResult(CommonStatusCodes.SUCCESS, data);*/
-
-                //finish();
             }
             else {
                 Log.d(TAG, "text data is null");
@@ -478,20 +486,44 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
         imageFileName = "detect" + currentDateTimeString.replace(" ","");
 
-        /*try{
-            //imageFile = File.createTempFile(
-              //      imageFileName,  /* prefix */
-               //     ".jpg",         /* suffix */
-                //    storageDir      /* directory */);
+    }
 
-            /*if(!imageFile.exists())
-                imageFile.mkdirs();*/
-            //File yourFile = openFileOutput(imageFileName,0); //new File(imageFileName);
-            //yourFile.createNewFile();
 
-       // }catch (IOException e){
-         //   Log.e(LOG_TAG, e + " could not create file ");
-        //}
+    private void capture_image_and_start_detect(){
+        mCameraSource.takePicture(new CameraSource.ShutterCallback() {
+            @Override
+            public void onShutter() {
+
+            }
+        }, new CameraSource.PictureCallback() {
+            @Override
+            public void onPictureTaken(byte[] data) {
+                if (data != null){
+
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                    // save the image
+                    currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+                    try {
+
+                        //give the file a unique name
+                        imageFileName = "detect" + currentDateTimeString.replace(" ","");
+
+                        file = new File(storageDir, imageFileName + ".PNG");
+
+                        FileOutputStream fOut = new FileOutputStream(file);
+
+                        fOut.write(data);
+                        fOut.close();
+
+                    }catch (IOException e){
+                        Log.e(LOG_TAG, e + "file not created");
+                    }
+
+                    startDetectActivity();
+                }
+            }
+        });
 
     }
 

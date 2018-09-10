@@ -17,6 +17,7 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
 import android.content.Intent;
+import android.graphics.Camera;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -58,15 +59,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
         useFlash = (CompoundButton) findViewById(R.id.use_flash);
 
         findViewById(R.id.read_text).setOnClickListener(this);
+        findViewById(R.id.capture_left).setOnClickListener(this);
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
+/*        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mealMenuActivityIntent = new Intent(getApplicationContext(), MealMenuActivity.class);
                 mealMenuActivityIntent.putExtra(MEAL, textValue.getText().toString());
                 startActivity(mealMenuActivityIntent);
             }
-        });
+        });*/
 
         String a = "$ab";
         String b  = "&$ab";
@@ -75,6 +77,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         for (String child : d){
             ProcessTextBlock y = new ProcessTextBlock(child);
             Log.d("Process Text", child + " : " + y.processText());
+            Log.d("Process Text", android.hardware.Camera.getNumberOfCameras() + " ");
 
         }
     }
@@ -86,7 +89,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.read_text) {
+        if (v.getId() == R.id.read_text || v.getId() == R.id.capture_left) {
             // launch Ocr capture activity.
             Intent intent = new Intent(this, OcrCaptureActivity.class);
             intent.putExtra(OcrCaptureActivity.AutoFocus, autoFocus.isChecked());
