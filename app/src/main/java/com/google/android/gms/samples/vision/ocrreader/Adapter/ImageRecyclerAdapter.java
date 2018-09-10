@@ -122,7 +122,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
         final TextView textViewQuestion = rootView.findViewById(R.id.selected_option);
 
-        final String orderKey = fileName.replace(".png","");
+        final String orderKey = fileName.replace(".png","").toLowerCase();
 
 
         holder.mTextView.setText(orderKey);
@@ -349,7 +349,12 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
                 };
                 return well_done[state];
             default:
-                return "";
+                String default_text [] = {
+                        "no " + switchString,
+                        switchString,
+                        switchString
+            } ;
+                return default_text[state];
 
         }
     }
