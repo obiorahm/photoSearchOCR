@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--tools:context="com.example.mgo983.myapplication.MainActivity"-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/selected_option"
-        android:layout_alignTop="@id/image"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@id/questions"
         android:textSize="20sp"
@@ -17,14 +14,31 @@
         android:layout_margin="10dp"
         android:drawableLeft="@drawable/ic_volume_up_white_18dp"
         android:drawablePadding="5dp"/>
+
     <ImageView
         android:layout_width="300dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:src="@drawable/baseline_not_interested_white_48dp"
         android:id="@+id/image"
         android:layout_margin="10dp"
+        android:background="@drawable/text_border"
 
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/meal_name"
+        android:layout_below="@id/selected_option"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="100dp"
+        android:textSize="25dp"
+
+        />
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

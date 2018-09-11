@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.BlockSelectDialog;
+import com.google.android.gms.samples.vision.ocrreader.FetchMealDetails;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.RecipeDialog;
 
@@ -140,6 +141,7 @@ public class RecyclerWordAdapter extends RecyclerView.Adapter<RecyclerWordAdapte
     private void setBlockDialog(Uri uri){
         DialogFragment blockDialogFragment = new BlockSelectDialog();
         Bundle bundle = new Bundle();
+        bundle.putString(FetchMealDetails.WHOLE_ORDER, mealText);
         bundle.putString( IMAGE_URI , uri.toString());
         blockDialogFragment.setArguments(bundle);
         blockDialogFragment.show(((Activity) context).getFragmentManager(), "blockDialogFragment");

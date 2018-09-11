@@ -39,6 +39,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:16.0.1'
     implementation 'com.google.firebase:firebase-ml-vision:17.0.0'
 
+
     implementation files('libs/opennlp-tools-1.6.0.jar')
     implementation files('libs/opennlp-uima-1.6.0.jar')
 

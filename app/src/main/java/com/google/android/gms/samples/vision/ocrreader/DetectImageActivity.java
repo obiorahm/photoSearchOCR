@@ -275,7 +275,8 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
         @Override
         public void onClick(View view) {
             if (currentLineSelection != null){
-                setUpRecyclerView(currentLineSelection, getBlockOrText());
+                //setUpRecyclerView(currentLineSelection, getBlockOrText());
+                setUpRecyclerView(ocrGraphicGetText(), getBlockOrText());
             }
         }
     });
@@ -544,7 +545,7 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
     private String combineText(ArrayList<Integer> rect_top_values, HashMap<Integer, String> string_values){
         Collections.sort(rect_top_values);
-        String finalString = string_values.get(rect_top_values.get(0)) + ",";
+        String finalString = string_values.get(rect_top_values.get(0)) + ", ";
         for (int i = 1; i < rect_top_values.size(); i++){
             finalString += string_values.get(rect_top_values.get(i)) + " ";
         }
@@ -567,6 +568,9 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
         ImageButton imageButtonMakeOrder = findViewById(R.id.make_order);
         imageButtonMakeOrder.setVisibility(View.VISIBLE);
+
+        ImageButton imageButtonClearOverlay = findViewById(R.id.clear_overlay);
+        imageButtonClearOverlay.setVisibility(View.VISIBLE);
 
         TextView textViewGroupLines = findViewById(R.id.group_lines_text);
         textViewGroupLines.setVisibility(View.VISIBLE);
@@ -597,6 +601,9 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
         ImageButton imageButtonMakeOrder = findViewById(R.id.make_order);
         imageButtonMakeOrder.setVisibility(View.GONE);
+
+        ImageButton imageButtonClearOverlay = findViewById(R.id.clear_overlay);
+        imageButtonClearOverlay.setVisibility(View.GONE);
 
         TextView textViewGroupLines = findViewById(R.id.group_lines_text);
         textViewGroupLines.setVisibility(View.GONE);

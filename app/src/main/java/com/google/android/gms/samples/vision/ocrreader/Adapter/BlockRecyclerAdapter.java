@@ -2,7 +2,10 @@ package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -118,26 +121,6 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
         staticPopulate();
     }
 
-    /*public void addItem(String wordInMeal){
-
-        mData.add(wordInMeal);
-
-
-
-        ImageRecyclerAdapter imageRecyclerAdapter = new ImageRecyclerAdapter(context, parentView, myTTS,  orderInstructions);
-
-        String [] options = mDataPair.get(wordInMeal);
-
-        for(String option : options){
-            String expanded_pair[] = {option, wordInMeal};
-            imageRecyclerAdapter.addItem(expanded_pair);
-        }
-        mImageRecyclerAdapter.add(imageRecyclerAdapter);
-
-
-
-
-    }*/
 
     public void addItem(){
 
@@ -175,6 +158,8 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
 
+        holder.mRecyclerView.setBackground(ContextCompat.getDrawable(context,R.drawable.line_drawable));
+
 
         holder.mRecyclerView.setLayoutManager(layoutManager);
         holder.mRecyclerView.setAdapter(imageRecyclerAdapter);
@@ -186,6 +171,5 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
     public int getItemCount(){
         return mDataPair.size();
     }
-
 
 }

@@ -11,12 +11,12 @@ public class ProcessTextBlock {
     String textBlock;
 
     public ProcessTextBlock(String mTextBlock){
-        textBlock = mTextBlock;
+        textBlock = mTextBlock.toLowerCase();
     }
 
     private String replaceConjunctions(String text){
 
-        return text.replaceAll(" on | or | with | and |\\&", ",");
+        return text.replaceAll(" on | or | with | and |\\&|\\.", ",");
 
     }
 
