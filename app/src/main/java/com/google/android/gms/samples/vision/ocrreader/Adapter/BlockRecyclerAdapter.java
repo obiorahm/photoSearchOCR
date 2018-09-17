@@ -11,9 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
 import com.google.android.gms.samples.vision.ocrreader.OrderInstructions;
 import com.google.android.gms.samples.vision.ocrreader.ProcessTextBlock;
 import com.google.android.gms.samples.vision.ocrreader.R;
@@ -42,15 +44,17 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         RecyclerView mRecyclerView;
+        ImageButton mImageButton;
 
         public ViewHolder(View convertView){
             super(convertView);
             mRecyclerView= convertView.findViewById(R.id.option_icons);
+            mImageButton = convertView.findViewById(R.id.speak_recycler_all);
         }
     }
 
     private void staticPopulate(){
-        String[] big = {"big.png", "bigger.png", "biggest.png"};
+        String[] big = {"small_portion.png", "normal_size.png", "large_portion.png"};
         mDataPair.put("Can I order an appetizer size or half-size entrée?", big);
 
         String [] share = {"share.png"};
@@ -152,17 +156,25 @@ public class BlockRecyclerAdapter extends RecyclerView.Adapter<BlockRecyclerAdap
     @Override
     public void onBindViewHolder(final BlockRecyclerAdapter.ViewHolder holder, final int position) {
 
-        //final String texttoSpeak =  mData.get(position);
-
-        ImageRecyclerAdapter imageRecyclerAdapter = mImageRecyclerAdapter.get(position);
+        final ImageRecyclerAdapter imageRecyclerAdapter = mImageRecyclerAdapter.get(position);
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
 
-        holder.mRecyclerView.setBackground(ContextCompat.getDrawable(context,R.drawable.line_drawable));
-
-
         holder.mRecyclerView.setLayoutManager(layoutManager);
         holder.mRecyclerView.setAdapter(imageRecyclerAdapter);
+
+        final TextView textViewQuestion = parentView.findViewById(R.id.selected_option);
+
+
+        holder.mImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String order = imageRecyclerAdapter.getOrder();
+                textViewQuestion.setText(order);
+                myTTS.speak(order,TextToSpeech.QUEUE_FLUSH, null);
+
+            }
+        });
 
 
     }

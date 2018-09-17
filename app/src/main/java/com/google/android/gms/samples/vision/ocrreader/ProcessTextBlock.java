@@ -30,7 +30,7 @@ public class ProcessTextBlock {
         newText = removeSpecialCharacters(newText);
         newText = replaceConjunctions(newText);
 
-        return newText; /*.split(",")*/
+        return newText;
     }
 
 

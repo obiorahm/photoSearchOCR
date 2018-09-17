@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,9 +43,9 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
     private static final ArrayList<String> icon_names = new ArrayList<>();
     static {
-        icon_names.add("big.png");
-        icon_names.add("bigger.png");
-        icon_names.add("biggest.png");
+        icon_names.add("small_portion.png");
+        icon_names.add("normal_size.png");
+        icon_names.add("large_portion.png");
         icon_names.add("blue_rare.png");
         icon_names.add("cheese_sauce.png");
         icon_names.add("dressing.png");
@@ -125,7 +126,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
         final String orderKey = fileName.replace(".png","").toLowerCase();
 
 
-        holder.mTextView.setText(orderKey);
+        holder.mTextView.setText(orderKey.replace("_", " "));
 
         holder.mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +137,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
                 holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[nextstate]));
 
-                textViewQuestion.setText(getTextToSpeak(orderKey, nextstate));
+                //textViewQuestion.setText(getTextToSpeak(orderKey, nextstate));
 
                 orderInstructions.putOrder(orderKey, nextstate);
 
@@ -184,6 +185,21 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     }
 
 
+    public String getOrder(){
+        String textToSpeak = "";
+        for (int i = 0; i < mData.size(); i++){
+            int icon_state = state.get(i);
+            if (icon_state != STATE_NORMAL){
+                String orderKey = mData.get(i)[0].replace(".png", "");
+                String currString = getTextToSpeak(orderKey, icon_state );
+                textToSpeak += currString + ", ";
+            }
+        }
+
+        return textToSpeak;
+    }
+
+
     /**
      * change text based on state of icon
      * @param switchString text that selects the question topic
@@ -193,21 +209,21 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
     private String getTextToSpeak(String switchString, int state){
         switch (switchString){
-            case "big":
+            case "small_portion":
                 String big[] = {
                         "",
                         "Can I order an appetizer size or half-size entree?",
-                        "I don't want the appetizer size"
+                        "I don't want an appetizer size"
                 };
                 return big[state];
-            case "bigger":
+            case "normal_size":
                 String bigger[] = {
                         "",
                         "Can I have the normal size meal?",
-                        "I don't want the normal size meal?"
+                        "I don't want the normal size meal"
                 };
                 return bigger[state];
-            case "biggest":
+            case "large_portion":
                 String biggest[] = {
                         "",
                         "Can I have a large size meal?",
@@ -259,7 +275,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
             case "cheese_sauce":
                 String cheese_sauce[] = {
                         "",
-                        "I'll have cheese_sauce",
+                        "I'll have cheese sauce",
                         "Can you leave off the cheese sauce"
                 };
                 return cheese_sauce[state];
@@ -280,7 +296,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
             case "whole":
                 String whole [] = {
                         "",
-                        "Don't slice the chicken breast",
+                        "I don't want my chicken breast sliced",
                         "Can you make this dish with sliced chicken breast?"
                 };
                 return whole[state];
@@ -294,14 +310,14 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
             case "nutrition_facts":
                 String nutrition_facts [] = {
                         "",
-                        "Do you have nutrition information on any of your dishes?",
+                        "Do you have nutrition information on this dish?",
                         ""
                 };
                 return nutrition_facts[state];
             case "ice":
                 String ice [] = {
                         "",
-                        "ice please",
+                        "Can I have ice please?",
                         "no ice please"
                 };
                 return ice[state];
@@ -309,50 +325,51 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
             case "medium":
                 String medium [] = {
                         "",
-                        "medium please",
+                        "I'll like my meat medium please.",
                         ""
                 };
                 return medium[state];
             case "blue_rare":
                 String blue_rare [] = {
                         "",
-                        "blue rare",
+                        "I'll like my meat blue rare please.",
                         ""
                 };
                 return blue_rare[state];
             case "rare":
                 String rare [] = {
                         "",
-                        "rare",
+                        "I'll have my meat rare please",
                         ""
                 };
                 return rare[state];
             case "medium_rare":
                 String medium_rare [] = {
                         "",
-                        "medium_rare",
+                        "I'll have my meat medium_rare please",
                         ""
                 };
                 return medium_rare[state];
             case "medium_well":
                 String medium_well [] = {
                         "",
-                        "medium_well",
+                        "I'll have my meat medium_well please",
                         ""
                 };
                 return medium_well[state];
             case "well_done":
                 String well_done [] = {
                         "",
-                        "well_done",
+                        "I'll have my meat well_done please",
                         ""
                 };
                 return well_done[state];
             default:
                 String default_text [] = {
-                        "no " + switchString,
-                        switchString,
-                        switchString
+                        "",
+                        "",
+                        "Please, leave off the " + switchString
+
             } ;
                 return default_text[state];
 

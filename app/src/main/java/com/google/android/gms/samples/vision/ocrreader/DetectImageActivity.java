@@ -245,7 +245,7 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
                 togglelistImageOn.setChecked(false);
             }else{
                 Intent mealMenuActivity = new Intent(getApplicationContext(), MealMenuActivity.class);
-                mealMenuActivity.putExtra(MEAL_TO_GET, selected_meal);
+                mealMenuActivity.putExtra(MEAL_TO_GET, currentLineSelection);
                 startActivity(mealMenuActivity);
             }
         }
@@ -256,6 +256,7 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
         @Override
         public void onClick(View view) {
             takeDownRecyclerView();
+            speak("clear");
         }
     });
 
@@ -266,6 +267,7 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
         public void onClick(View view) {
             group_selected_lines();
             takeDownRecyclerView();
+            speak("group");
         }
     });
 
@@ -277,6 +279,8 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
             if (currentLineSelection != null){
                 //setUpRecyclerView(currentLineSelection, getBlockOrText());
                 setUpRecyclerView(ocrGraphicGetText(), getBlockOrText());
+                speak("see photo");
+
             }
         }
     });
@@ -289,6 +293,8 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
             ProgressBar progressBar = findViewById(R.id.dialog_progress);
             progressBar.setVisibility(View.VISIBLE);
             makeOrder();
+            speak("order");
+
         }
     });
 
@@ -297,6 +303,10 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
     recyclerView.setAdapter(recognizedTextAdapter);
 
 
+    }
+
+    private void speak(String toSpeak){
+        myTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
     }
 
 
@@ -876,11 +886,15 @@ public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView){
 }
 
 
-    public void setUpRecyclerView(String mealText, Boolean blockOrText){
+    public void setUpRecyclerView(String wholeMealText, Boolean blockOrText){
 
-        mealText = mealText.replaceAll("[0-9]","");
+        String mealText = "";
+        if (currentLineSelection != null)
+            mealText = currentLineSelection.replaceAll("[0-9]","");
 
-        RecyclerWordAdapter recyclerWordAdapter = new RecyclerWordAdapter(this, R.layout.gridview_item, myTTS, mealText, blockOrText);
+
+
+        RecyclerWordAdapter recyclerWordAdapter = new RecyclerWordAdapter(this, R.layout.gridview_item, myTTS, wholeMealText, blockOrText);
 
         ProgressBar progressBar = findViewById(R.id.searching_edmame);
         progressBar.setVisibility(View.VISIBLE);

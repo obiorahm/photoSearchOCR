@@ -11,9 +11,9 @@ public class OrderInstructions {
 
     // sizes
 
-    public int big;
-    public int bigger;
-    public int biggest;
+    public int small_portion;
+    public int normal_size;
+    public int large_portion;
     public int blue_rare;
     public int share;
     public int vegetables;
@@ -37,9 +37,9 @@ public class OrderInstructions {
     public int well_done;
 
     public OrderInstructions(int val){
-        this.big = 0;
-        this.bigger = 0;
-        this.biggest = 0;
+        this.small_portion = 0;
+        this.normal_size = 0;
+        this.large_portion = 0;
         this.blue_rare = 0;
         this.share = 0;
         this.vegetables = 0;
@@ -67,9 +67,9 @@ public class OrderInstructions {
 
 
 
-    public void setBig(int big){this.big = big;}
-    public void setBigger(int bigger){this.bigger = bigger;}
-    public void setBiggest(int biggest){this.biggest = biggest;}
+    public void setSmall_portion(int big){this.small_portion = big;}
+    public void setNormal_size(int bigger){this.normal_size = bigger;}
+    public void setLarge_portion(int biggest){this.large_portion = biggest;}
     public void setShare(int share){this.share = share;}
     public void setVegetables(int vegetables){this.vegetables = vegetables;}
     public void setMain_dish(int main_dish){this.main_dish = main_dish;}
@@ -94,9 +94,9 @@ public class OrderInstructions {
 
 
     public void clone(OrderInstructions orderInstructions){
-        this.big = orderInstructions.big;
-        this.bigger = orderInstructions.bigger;
-        this.biggest = orderInstructions.biggest;
+        this.small_portion = orderInstructions.small_portion;
+        this.normal_size = orderInstructions.normal_size;
+        this.large_portion = orderInstructions.large_portion;
         this.blue_rare = orderInstructions.blue_rare;
         this.share = orderInstructions.share;
         this.vegetables = orderInstructions.vegetables;
@@ -122,14 +122,14 @@ public class OrderInstructions {
 
     public void putOrder(String order, Integer choice){
         switch (order){
-            case "big":
-                setBig(choice);
+            case "small_portion":
+                setSmall_portion(choice);
                 break;
-            case "bigger":
-                setBigger(choice);
+            case "normal_size":
+                setNormal_size(choice);
                 break;
-            case "biggest":
-                setBiggest(choice);
+            case "large_portion":
+                setLarge_portion(choice);
                 break;
             case "share":
                 setShare(choice);
@@ -199,12 +199,12 @@ public class OrderInstructions {
 
     public int getOrder(String order){
         switch (order){
-            case "big":
-                return big;
-            case "bigger":
-                return bigger;
-            case "biggest":
-                return biggest;
+            case "small_portion":
+                return small_portion;
+            case "normal_size":
+                return normal_size;
+            case "large_portion":
+                return large_portion;
             case "share":
                 return share;
             case "vegetables":
@@ -254,9 +254,9 @@ public class OrderInstructions {
 
     public Map toMap(){
         HashMap<String, Integer> completeOrder = new HashMap<>();
-        completeOrder.put("big", big);
-        completeOrder.put("bigger", bigger);
-        completeOrder.put("biggest", biggest);
+        completeOrder.put("small_portion", small_portion);
+        completeOrder.put("normal_size", normal_size);
+        completeOrder.put("large_portion", large_portion);
         completeOrder.put("blue_rare", blue_rare);
         completeOrder.put("share", share);
         completeOrder.put("vegetables", vegetables);

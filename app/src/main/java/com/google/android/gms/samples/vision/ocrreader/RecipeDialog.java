@@ -127,7 +127,7 @@ public class RecipeDialog extends DialogFragment {
 
         }
 
-        final String meal_name = getArguments().getString(WordAdapter.MEAL_NAME);
+        final String meal_name = getArguments().getString(RecyclerWordAdapter.MEAL_NAME);
 
         ImageButton imageButton = rootView.findViewById(R.id.next_item);
 
