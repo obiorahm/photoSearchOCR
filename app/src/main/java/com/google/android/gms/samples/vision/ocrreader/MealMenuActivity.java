@@ -49,7 +49,7 @@ public class MealMenuActivity extends UseRecyclerActivity implements TextToSpeec
         mealText = mealText.replaceAll("[0-9]","");
 
         //final String mealText = getIntent().getStringExtra(MainActivity.MEAL);
-        TextView mealTextView = (TextView) findViewById(R.id.meal_text);
+        TextView mealTextView = findViewById(R.id.meal_text);
         mealTextView.setText(mealText);
         //mealTextView.setText("Pepperoni Pizza with pineapple toppings");
 
@@ -65,7 +65,7 @@ public class MealMenuActivity extends UseRecyclerActivity implements TextToSpeec
             }
         });
 
-        final TextView textViewNoResult = (TextView) findViewById(R.id.no_result);
+        final TextView textViewNoResult = findViewById(R.id.no_result);
         textViewNoResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +78,7 @@ public class MealMenuActivity extends UseRecyclerActivity implements TextToSpeec
         adapter = new RecyclerWordAdapter(this, R.layout.gridview_item, myTTS, mealText, false);
 
         //place each word in a single text view
-        String [] wordInMealText = mealText.split(" ");
+        //String [] wordInMealText = mealText.split(" ");
 
 
         //Async task expects a string array, so we make one of length one
@@ -94,7 +94,7 @@ public class MealMenuActivity extends UseRecyclerActivity implements TextToSpeec
         /* for testing replace FetchMealDetails with testadapter
         testadapter(adapter);*/
 
-        ImageButton imageButton = (ImageButton) findViewById(R.id.back_to_food_list);
+        ImageButton imageButton = findViewById(R.id.back_to_food_list);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +112,7 @@ public class MealMenuActivity extends UseRecyclerActivity implements TextToSpeec
         adapter.addItem(foodItem);
         adapter.addItem(foodItem);
 
-        RecyclerView wholeWordRecyclerView = (RecyclerView) findViewById(R.id.gridview_edit_meal);
+        RecyclerView wholeWordRecyclerView = findViewById(R.id.gridview_edit_meal);
         wholeWordRecyclerView.setAdapter(adapter);
     }
 
