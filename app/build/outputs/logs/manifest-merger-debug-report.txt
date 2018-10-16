@@ -1,23 +1,24 @@
 -- Merging decision tree log ---
 provider#com.google.android.gms.samples.vision.ocrreader.GenericFileProvider
-INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:57:9-65:20
+INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:65:9-73:20
 	android:grantUriPermissions
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:61:13-47
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:69:13-47
 	android:authorities
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:59:13-80
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:67:13-80
 	android:exported
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:60:13-37
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:68:13-37
 	android:name
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:58:13-95
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:66:13-95
 manifest
-ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-69:12
-INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-69:12
-INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-69:12
-INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-69:12
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-79:12
+INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-79:12
+INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-79:12
+INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-79:12
 MERGED from [com.android.support:design:24.2.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/design-24.2.0.aar/6867bc155a216d14ddb2e31494ceb056/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-ml-vision:17.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-ml-vision-17.0.0.aar/9e06199b548fa34d761b85bfa2392862/AndroidManifest.xml:2:1-8:12
 MERGED from [com.google.android.gms:play-services-vision:15.0.2] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-vision-15.0.2.aar/c1da088fa8d3238f21ee43a2e6f45b85/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-location:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/86fbd9c50adbf6548112c7e22c079953/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:firebase-database:16.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.1.aar/45b7cb565e6a3e3e2283e767d644ebc3/AndroidManifest.xml:2:1-8:12
 MERGED from [com.google.firebase:firebase-auth:16.0.2] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.2.aar/88bad6581d8370402faa5012715b649a/AndroidManifest.xml:17:1-38:12
 MERGED from [com.google.firebase:firebase-storage:16.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.1.aar/448d1ab866583f67ba04676895faec4d/AndroidManifest.xml:2:1-7:12
@@ -36,6 +37,7 @@ MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] /Users/mgo983/.
 MERGED from [com.google.firebase:firebase-iid:16.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-iid-16.0.0.aar/03cad87a9ba6df562ac4128531b31ad9/AndroidManifest.xml:17:1-65:12
 MERGED from [com.google.firebase:firebase-iid-interop:16.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.0.aar/4ed07220e2e54cb4e1cf734149279180/AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.android.gms:play-services-base:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/dc8d6753abab0c67536ff9ef32f0a4b1/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/4310019a82974fffce8e205f732b4b73/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-database-connection:16.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-database-connection-16.0.1.aar/b6f49bc027732a1511395543d5cfae58/AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.firebase:firebase-common:16.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.0.aar/e9134c845e18096dfba335cd663a68cc/AndroidManifest.xml:2:1-16:12
 MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/2cb26334ff608cd25705a2622416008b/AndroidManifest.xml:2:1-9:12
@@ -58,20 +60,20 @@ MERGED from [com.android.support:support-core-ui:26.1.0] /Users/mgo983/.gradle/c
 MERGED from [com.android.support:support-compat:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f90ebb0786da93a9ce9a905f01ba2642/AndroidManifest.xml:17:1-31:12
 MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.0.aar/a52b4cacf737f779fa2d048a02c9f11c/AndroidManifest.xml:17:1-24:12
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/91fc334fae4a9b5d0f3dd024741689eb/AndroidManifest.xml:17:1-30:12
-INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-69:12
-INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-69:12
-INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-69:12
+INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-79:12
+INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-79:12
+INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-79:12
 	package
 		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:3:5-62
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-69:12
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-79:12
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-69:12
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-79:12
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:11-69
@@ -105,12 +107,18 @@ uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:9:5-80
 	android:name
 		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:9:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:10:5-78
+	android:name
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:10:22-76
 application
-ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:13:5-67:19
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:13:5-77:19
 MERGED from [com.android.support:design:24.2.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/design-24.2.0.aar/6867bc155a216d14ddb2e31494ceb056/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:24.2.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/design-24.2.0.aar/6867bc155a216d14ddb2e31494ceb056/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-vision:15.0.2] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-vision-15.0.2.aar/c1da088fa8d3238f21ee43a2e6f45b85/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-vision:15.0.2] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-vision-15.0.2.aar/c1da088fa8d3238f21ee43a2e6f45b85/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/86fbd9c50adbf6548112c7e22c079953/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/86fbd9c50adbf6548112c7e22c079953/AndroidManifest.xml:7:5-20
 MERGED from [com.google.firebase:firebase-auth:16.0.2] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.2.aar/88bad6581d8370402faa5012715b649a/AndroidManifest.xml:22:5-36:19
 MERGED from [com.google.firebase:firebase-auth:16.0.2] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.2.aar/88bad6581d8370402faa5012715b649a/AndroidManifest.xml:22:5-36:19
 MERGED from [com.google.android.gms:play-services-vision-image-label:15.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-vision-image-label-15.0.0.aar/29f992d234a88f56579ecc1e1fa08bc4/AndroidManifest.xml:7:5-20
@@ -137,6 +145,8 @@ MERGED from [com.google.firebase:firebase-iid-interop:16.0.0] /Users/mgo983/.gra
 MERGED from [com.google.firebase:firebase-iid-interop:16.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.0.aar/4ed07220e2e54cb4e1cf734149279180/AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.android.gms:play-services-base:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/dc8d6753abab0c67536ff9ef32f0a4b1/AndroidManifest.xml:22:5-27:19
 MERGED from [com.google.android.gms:play-services-base:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/dc8d6753abab0c67536ff9ef32f0a4b1/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/4310019a82974fffce8e205f732b4b73/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/4310019a82974fffce8e205f732b4b73/AndroidManifest.xml:22:5-20
 MERGED from [com.google.firebase:firebase-common:16.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.0.aar/e9134c845e18096dfba335cd663a68cc/AndroidManifest.xml:8:5-14:19
 MERGED from [com.google.firebase:firebase-common:16.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.0.aar/e9134c845e18096dfba335cd663a68cc/AndroidManifest.xml:8:5-14:19
 MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/2cb26334ff608cd25705a2622416008b/AndroidManifest.xml:7:5-20
@@ -227,12 +237,24 @@ action#android.intent.action.MAIN
 ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:49:17-69
 	android:name
 		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:49:25-66
-activity#com.google.android.gms.samples.vision.ocrreader.OcrCaptureActivity
-ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:55:9-56:41
+activity#com.google.android.gms.samples.vision.ocrreader.GeographyActivity
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:54:9-61:20
 	android:label
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:56:13-38
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:55:13-38
 	android:name
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:55:19-100
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:54:19-99
+activity#com.google.android.gms.samples.vision.ocrreader.OcrCaptureActivity
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:63:9-64:41
+	android:label
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:64:13-38
+	android:name
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:63:19-100
+service#com.google.android.gms.samples.vision.ocrreader.FetchAddressIntentService
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:74:9-76:39
+	android:exported
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:76:13-37
+	android:name
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:75:13-101
 uses-sdk
 INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
@@ -243,6 +265,8 @@ MERGED from [com.google.firebase:firebase-ml-vision:17.0.0] /Users/mgo983/.gradl
 MERGED from [com.google.firebase:firebase-ml-vision:17.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-ml-vision-17.0.0.aar/9e06199b548fa34d761b85bfa2392862/AndroidManifest.xml:6:5-44
 MERGED from [com.google.android.gms:play-services-vision:15.0.2] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-vision-15.0.2.aar/c1da088fa8d3238f21ee43a2e6f45b85/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-vision:15.0.2] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-vision-15.0.2.aar/c1da088fa8d3238f21ee43a2e6f45b85/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/86fbd9c50adbf6548112c7e22c079953/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/86fbd9c50adbf6548112c7e22c079953/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-database:16.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.1.aar/45b7cb565e6a3e3e2283e767d644ebc3/AndroidManifest.xml:6:5-44
 MERGED from [com.google.firebase:firebase-database:16.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.1.aar/45b7cb565e6a3e3e2283e767d644ebc3/AndroidManifest.xml:6:5-44
 MERGED from [com.google.firebase:firebase-auth:16.0.2] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.2.aar/88bad6581d8370402faa5012715b649a/AndroidManifest.xml:20:5-44
@@ -279,6 +303,8 @@ MERGED from [com.google.firebase:firebase-iid-interop:16.0.0] /Users/mgo983/.gra
 MERGED from [com.google.firebase:firebase-iid-interop:16.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.0.aar/4ed07220e2e54cb4e1cf734149279180/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-base:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/dc8d6753abab0c67536ff9ef32f0a4b1/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-base:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/dc8d6753abab0c67536ff9ef32f0a4b1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/4310019a82974fffce8e205f732b4b73/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/4310019a82974fffce8e205f732b4b73/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-database-connection:16.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-database-connection-16.0.1.aar/b6f49bc027732a1511395543d5cfae58/AndroidManifest.xml:6:5-44
 MERGED from [com.google.firebase:firebase-database-connection:16.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-database-connection-16.0.1.aar/b6f49bc027732a1511395543d5cfae58/AndroidManifest.xml:6:5-44
 MERGED from [com.google.firebase:firebase-common:16.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.0.aar/e9134c845e18096dfba335cd663a68cc/AndroidManifest.xml:5:5-6:37
@@ -336,11 +362,11 @@ INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development 
 		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:62:13-64:57
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:70:13-72:57
 	android:resource
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:64:17-55
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:72:17-55
 	android:name
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:63:17-67
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:71:17-67
 activity#com.google.firebase.auth.internal.FederatedSignInActivity
 ADDED from [com.google.firebase:firebase-auth:16.0.2] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.2.aar/88bad6581d8370402faa5012715b649a/AndroidManifest.xml:23:9-29:75
 	android:excludeFromRecents

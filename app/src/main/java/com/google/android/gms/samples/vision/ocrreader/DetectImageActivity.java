@@ -653,6 +653,10 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
                             //String resultText = result.getText();
                             for (FirebaseVisionText.TextBlock block: result.getTextBlocks()) {
 
+                                //test block
+                                //OcrGraphicFB graphicFB = new OcrGraphicFB(mGraphicOverlayFB, block);
+                                //mGraphicOverlayFB.add(graphicFB);
+
                                 for (FirebaseVisionText.Line line: block.getLines()) {
 
                                     OcrGraphicFB graphic = new OcrGraphicFB(mGraphicOverlayFB, line);

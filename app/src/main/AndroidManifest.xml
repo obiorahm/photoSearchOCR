@@ -7,7 +7,7 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
 
     <application
@@ -51,6 +51,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.google.android.gms.samples.vision.ocrreader.GeographyActivity"
+            android:label="Geography">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
 
         <activity android:name="com.google.android.gms.samples.vision.ocrreader.OcrCaptureActivity"
             android:label="Read Text" />
@@ -63,7 +71,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
         </provider>
-
+        <service
+            android:name="com.google.android.gms.samples.vision.ocrreader.FetchAddressIntentService"
+            android:exported="false"/>
     </application>
 
 </manifest>
