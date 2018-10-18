@@ -9,36 +9,60 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.samples.vision.ocrreader.ui.camera.FetchWebPage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
+
+import java.util.Locale;
 
 /**
  * Created by mgo983 on 10/5/18.
  */
 
-public class GeographyActivity extends Activity {
+public class GeographyActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener{
 
     FusedLocationProviderClient mFusedLocationClient;
     Handler handler = new Handler();
     private AddressResultReceiver mResultReceiver = new AddressResultReceiver(handler);
     String mAddressOutput;
     TextView globalTextView;
+    //Text to speech variables
+    private int MY_DATA_CHECK_CODE = 0;
+
+
+    public static String selected_restaurant = "";
+
+    public static RecyclerView last_parent_di;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
-        setContentView(R.layout.recognized_text_item);
+        setContentView(R.layout.display_nearby_restaurants);
 
-        final TextView textView = findViewById(R.id.recognized_text);
-        globalTextView = findViewById(R.id.recognized_text);
+        final TextView textView = findViewById(R.id.current_location);
+        globalTextView = findViewById(R.id.current_location);
+
+        //start text to speech
+        Intent checkTTSIntent = new Intent();
+        checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
+
+        if (myTTS == null)
+            myTTS = new TextToSpeech(this, this);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
             checkPermission();
@@ -70,6 +94,7 @@ public class GeographyActivity extends Activity {
             Log.e("Geography", e + " ");
         }
         }
+
     }
 
 
@@ -87,10 +112,12 @@ public class GeographyActivity extends Activity {
 
     protected void  startIntentService(Location location){
         Intent intent = new Intent(this, FetchAddressIntentService.class);
-        intent.putExtra(FetchAddressIntentService.Constants.RECEIVER, mResultReceiver);
-        intent.putExtra(FetchAddressIntentService.Constants.LOCATION_DATA_EXTRA, location);
+        intent.putExtra(Constants.RECEIVER, mResultReceiver);
+        intent.putExtra(Constants.LOCATION_DATA_EXTRA, location);
         startService(intent);
     }
+
+    Activity thisActivity = this;
 
     class AddressResultReceiver extends ResultReceiver {
         public AddressResultReceiver(Handler handler) {
@@ -106,13 +133,13 @@ public class GeographyActivity extends Activity {
 
             // Display the address string
             // or an error message sent from the intent service.
-            mAddressOutput = resultData.getString(FetchAddressIntentService.Constants.RESULT_DATA_KEY);
+            mAddressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
             if (mAddressOutput == null) {
                 mAddressOutput = "";
             }
 
             // Show a toast message if an address was found.
-            if (resultCode == FetchAddressIntentService.Constants.SUCCESS_RESULT) {
+            if (resultCode == Constants.SUCCESS_RESULT) {
                // showToast(getString(R.string.address_found));
             }
             displayAddressOutput();
@@ -121,7 +148,49 @@ public class GeographyActivity extends Activity {
 
         private void displayAddressOutput(){
             globalTextView.setText(mAddressOutput + " ");
+            FetchWebPage fetchWebPage = new FetchWebPage(thisActivity);
+            fetchWebPage.execute(mAddressOutput);
         }
+    }
+
+    //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_DATA_CHECK_CODE) {
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                myTTS = new TextToSpeech(this, this);
+            } else {
+                Intent installTTSIntent = new Intent();
+                installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installTTSIntent);
+            }
+        }
+    }
+    @Override
+    public void onInit(int initStatus){
+        //initialize firebase
+        FirebaseApp.initializeApp(this);
+        if (initStatus == TextToSpeech.SUCCESS) {
+            myTTS.setLanguage(Locale.US);
+            myTTS.setSpeechRate(0.6f);
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        // Don't forget to shutdown tts!
+        if (myTTS != null) {
+            myTTS.stop();
+            myTTS.shutdown();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
     }
 
 }

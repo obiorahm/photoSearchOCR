@@ -154,7 +154,8 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
             holder.mRecyclerView.setSelected(false);
         }else{
             holder.mRecyclerView.setSelected(true);
-            DetectImageActivity.selected_meal = word;
+            DetectImageActivity.selected_item = word;
+            //DetectImageActivity.selected_meal = word;
         }
         DetectImageActivity.last_parent_di = holder.mRecyclerView;
 

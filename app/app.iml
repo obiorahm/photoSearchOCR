@@ -141,6 +141,7 @@
     <orderEntry type="library" name="com.android.support:support-fragment-26.1.0" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-ml-common-16.1.2" level="project" />
     <orderEntry type="library" name="com.github.bumptech.glide:glide:3.5.2@jar" level="project" />
+    <orderEntry type="library" name="org.jsoup:jsoup:1.11.1@jar" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-auth-base-15.1.0" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-iid-16.0.0" level="project" />
     <orderEntry type="library" name="__local_aars__:/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/libs/opennlp-uima-1.6.0.jar:unspecified@jar" level="project" />

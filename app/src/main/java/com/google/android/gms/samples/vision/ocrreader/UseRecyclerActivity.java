@@ -14,6 +14,11 @@ public class UseRecyclerActivity extends Activity  {
 
     public static TextToSpeech myTTS;
 
+    //selected meal, restaurant
+    public static String selected_item = "";
+
+    public static RecyclerView last_parent_di;
+
     public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView){
 
     }

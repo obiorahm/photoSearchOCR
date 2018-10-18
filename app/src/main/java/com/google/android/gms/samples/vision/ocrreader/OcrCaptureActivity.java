@@ -79,7 +79,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     // Permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
 
-    // Constants used to pass extra data in the intent
+    // com.google.android.gms.samples.vision.ocrreader.Constants used to pass extra data in the intent
     public static final String AutoFocus = "AutoFocus";
     public static final String UseFlash = "UseFlash";
     public static final String TextBlockObject = "String";

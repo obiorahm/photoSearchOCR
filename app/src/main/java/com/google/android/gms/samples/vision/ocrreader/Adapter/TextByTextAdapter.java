@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
+import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
 import java.util.ArrayList;
 
@@ -53,7 +54,8 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
-        myTTS = ((DetectImageActivity) context).myTTS;
+        //myTTS = ((DetectImageActivity) context).myTTS;
+        myTTS = ((UseRecyclerActivity) context).myTTS;
 
     }
 
@@ -77,14 +79,16 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
             @Override
             public void onClick(View view) {
                 myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
-                lastParent = DetectImageActivity.last_parent_di;
+                //lastParent = DetectImageActivity.last_parent_di;
+                lastParent = UseRecyclerActivity.last_parent_di;
                 if (lastParent != null && lastParent != holder.mRecyclerView){
                     lastParent.setSelected(false);
                 }
                 if(holder.mRecyclerView.isSelected()){
                     holder.mRecyclerView.setSelected(false);
                 }else{
-                    DetectImageActivity.selected_meal = getSelectedString();
+                    UseRecyclerActivity.selected_item = getSelectedString();
+                    //DetectImageActivity.selected_meal = getSelectedString();
                     holder.mRecyclerView.setSelected(true);
                 }
                 DetectImageActivity.last_parent_di = holder.mRecyclerView;

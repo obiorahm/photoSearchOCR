@@ -69,10 +69,11 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
     private RecognizedTextAdapter recognizedTextAdapter = null;
 
-
+    /*
     public static String selected_meal = "";
 
     public static RecyclerView last_parent_di;
+    */
 
     public static RecyclerView parent;
 
