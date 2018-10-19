@@ -16,14 +16,21 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.FetchWebPage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
+
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.Locale;
 
@@ -46,15 +53,25 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     public static RecyclerView last_parent_di;
 
+    public static String RESTAURANT_NAME = "com.google.android.gms.samples.vision.ocrreader.RESTAURANT_NAME";
+
+    public static String RESTAURANT_URL = "com.google.android.gms.samples.vision.ocrreader.RESTAURANT_URL";
+
+    public static String selected_url = "";
+
+    private RecyclerView recyclerView;
+
+    private RestaurantAdapter adapter;
+
+    private String LOG_TAG = GeographyActivity.class.getSimpleName();
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         setContentView(R.layout.display_nearby_restaurants);
-
-        final TextView textView = findViewById(R.id.current_location);
-        globalTextView = findViewById(R.id.current_location);
 
         //start text to speech
         Intent checkTTSIntent = new Intent();
@@ -63,6 +80,19 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
         if (myTTS == null)
             myTTS = new TextToSpeech(this, this);
+
+        recyclerView = findViewById(R.id.detected_location_list_view);
+        adapter = new RestaurantAdapter(this, R.layout.horizontal_text);
+
+        // apparently the recycler view does not work without setting up a layout manager
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+
+        final TextView textView = findViewById(R.id.current_location);
+        globalTextView = findViewById(R.id.current_location);
+
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
             checkPermission();
@@ -94,6 +124,18 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
             Log.e("Geography", e + " ");
         }
         }
+
+
+        ImageButton nxt_btn = findViewById(R.id.next_btn_dr);
+        nxt_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openRestaurantIntent = new Intent(getApplicationContext(), OpenRestaurantMenuActivity.class);
+                openRestaurantIntent.putExtra(RESTAURANT_NAME, UseRecyclerActivity.selected_item);
+                openRestaurantIntent.putExtra(RESTAURANT_URL, selected_url);
+                startActivity(openRestaurantIntent);
+            }
+        });
 
     }
 
@@ -149,8 +191,30 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         private void displayAddressOutput(){
             globalTextView.setText(mAddressOutput + " ");
             FetchWebPage fetchWebPage = new FetchWebPage(thisActivity);
-            fetchWebPage.execute(mAddressOutput);
+            fetchWebPage.execute(mAddressOutput, "encode");
         }
+    }
+
+    @Override
+    public void processWebResults(Document document){
+
+        try {
+            String testString = document.body().html();
+            Elements testElement = document.select(".restaurant-list .name a" );
+            for (Element element : testElement){
+                String[] item = {element.attr("href"), element.text()};
+                adapter.addItem(item);
+                Log.d(LOG_TAG, element.attr("href") +" " + element.text());
+            }
+
+        }catch (NullPointerException e){
+            Log.e(LOG_TAG, e + " null pointer");
+
+        }
+
+        recyclerView.setAdapter(adapter);
+
+
     }
 
     //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.

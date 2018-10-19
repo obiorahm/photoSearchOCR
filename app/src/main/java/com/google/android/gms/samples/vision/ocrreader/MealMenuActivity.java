@@ -44,11 +44,11 @@ public class MealMenuActivity extends UseRecyclerActivity implements TextToSpeec
         String mealText = getIntent().getStringExtra(DetectImageActivity.MEAL_TO_GET);
 
         if (mealText == null)
-            mealText = "Beer-Battered Wisconsin Cheese Curds" /*getIntent().getStringExtra(MainActivity.MEAL)*/;
+            mealText = "Beer-Battered Wisconsin Cheese Curds" /*getIntent().getStringExtra(TextMenuActivity.MEAL)*/;
 
         mealText = mealText.replaceAll("[0-9]","");
 
-        //final String mealText = getIntent().getStringExtra(MainActivity.MEAL);
+        //final String mealText = getIntent().getStringExtra(TextMenuActivity.MEAL);
         TextView mealTextView = findViewById(R.id.meal_text);
         mealTextView.setText(mealText);
         //mealTextView.setText("Pepperoni Pizza with pineapple toppings");

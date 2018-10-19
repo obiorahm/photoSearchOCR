@@ -102,7 +102,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mBackground.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    control_select(holder, word);
+                    control_select(holder, restaurantData);
 
                 }
             });
@@ -110,7 +110,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mRecyclerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    control_select(holder, word);
+                    control_select(holder, restaurantData);
 
                 }
             });
@@ -119,7 +119,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 @Override
                 public void onClick(View view) {
                     myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
-                    control_select(holder, word);
+                    control_select(holder, restaurantData);
                 }
             });
 
@@ -127,8 +127,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         }
 
-    private void control_select(RestaurantAdapter.ViewHolder holder, String word){
-        last_selected = DetectImageActivity.last_parent_di;
+    private void control_select(RestaurantAdapter.ViewHolder holder, String[] restaurantData){
+            String restaurantUrl = restaurantData[0];
+            String restaurantName = restaurantData[1];
+        last_selected = GeographyActivity.last_parent_di;
         if (last_selected != null && last_selected != holder.mRecyclerView){
             RestaurantAdapter.ViewHolder lastViewHolder = new RestaurantAdapter.ViewHolder(last_selected);
             lastViewHolder.mRecyclerView.setSelected(false);
@@ -137,7 +139,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mRecyclerView.setSelected(false);
         }else{
             holder.mRecyclerView.setSelected(true);
-            GeographyActivity.selected_restaurant = word;
+            GeographyActivity.selected_item = restaurantName;
+            GeographyActivity.selected_url = restaurantUrl;
         }
         GeographyActivity.last_parent_di = holder.mRecyclerView;
 
