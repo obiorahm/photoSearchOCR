@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="@string/app_name"
+        android:fontFamily="serif-monospace"
+        android:textSize="60sp"
+        android:layout_above="@id/location_based_menu"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/main_title" />
+
+    <Button
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:drawableTop="@drawable/baseline_my_location_white_36"
+        android:text="@string/location_menu"
+        android:textSize="20sp"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/location_based_menu"/>
+
+    <Button
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:drawableTop="@drawable/baseline_photo_camera_white_48dp"
+        android:text="@string/paper_menu"
+        android:textSize="20sp"
+        android:layout_below="@id/location_based_menu"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/text_based_menu"/>
+
+    <Button
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:drawableTop="@drawable/baseline_format_list_bulleted_white_48dp"
+        android:text="@string/image_menu"
+        android:textSize="20sp"
+        android:layout_below="@id/text_based_menu"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/image_based_menu"/>
+
+</RelativeLayout>

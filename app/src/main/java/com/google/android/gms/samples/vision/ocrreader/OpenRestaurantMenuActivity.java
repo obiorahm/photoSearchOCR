@@ -8,13 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantMenuAdapter;
-import com.google.android.gms.samples.vision.ocrreader.ui.camera.FetchWebPage;
 import com.google.firebase.FirebaseApp;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -66,13 +66,56 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
     @Override
     public void processWebResults(Document document){
 
-        try {
-            String testString = document.body().html();
+        /*try {
             Elements testElement = document.select(".category-name" );
             for (Element element : testElement){
                 String[] item = {element.text()};
                 adapter.addItem(item);
+
+                String[] foodItems = getFoodItems(element);
                 Log.d(LOG_TAG, element.attr("category-name") +" " + element.text());
+            }
+
+        }catch (NullPointerException e){
+            Log.e(LOG_TAG, e + " null pointer");
+
+        }*/
+
+        getFoodItems(document);
+
+        recyclerView.setAdapter(adapter);
+
+
+    }
+
+    public void getFoodItems(Document document){
+        try{
+            Elements testElement = document.select(".menu-category");
+            for(Element element : testElement){
+
+                Elements ElementCategoryName  = element.select(".category-name");
+                Elements ElementCategoryDescription = element.select(".category-description");
+                /*String categoryName = "";
+                String categoryDescription = "";*/
+
+                String categoryName = element.select(".category-name").text();
+                String categoryDescription = element.select(".category-description").text();
+
+                /*for(Element category_element : ElementCategoryName){
+                    categoryName = category_element.text();
+                }*/
+                Log.d(LOG_TAG, categoryName);
+
+                ArrayList categoryItems = new ArrayList();
+                Elements food_items = element.select(".item-title");
+
+                for(Element food_item : food_items){
+                    String string_food_item = food_item.text();
+                    Log.d(LOG_TAG, string_food_item);
+                    categoryItems.add(string_food_item);
+                }
+                String [] category = {categoryName, categoryDescription};
+                adapter.addItem(category, categoryItems);
             }
 
         }catch (NullPointerException e){
@@ -80,10 +123,9 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
         }
 
-        recyclerView.setAdapter(adapter);
-
 
     }
+
 
     //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.
     @Override

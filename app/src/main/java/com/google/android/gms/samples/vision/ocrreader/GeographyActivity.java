@@ -1,7 +1,6 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -23,7 +22,6 @@ import android.widget.TextView;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
-import com.google.android.gms.samples.vision.ocrreader.ui.camera.FetchWebPage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;

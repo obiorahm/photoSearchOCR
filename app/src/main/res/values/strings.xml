@@ -18,4 +18,7 @@
     <string name="photo">PHOTO</string>
     <string name="order">ORDER</string>
     <string name="clear">CLEAR</string>
+    <string name="location_menu">LOCATION</string>
+    <string name="image_menu">CAPTURE FOOD</string>
+    <string name="paper_menu">CAPTURE MENU</string>
 </resources>

@@ -2,6 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:id="@+id/horizontal_bar"
+        android:background="@drawable/solid_border"
+        android:layout_alignParentTop="true"
+        />
 
     <Switch
         android:layout_width="wrap_content"
@@ -17,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@id/switch_view"
         android:layout_toLeftOf="@id/switch_view"
-        android:src="@drawable/baseline_near_me_black_48"
+        android:src="@drawable/baseline_near_me_white_48"
         android:background="@color/transparent"
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
@@ -28,7 +35,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_my_location_black_48"
+        android:src="@drawable/baseline_my_location_white_48"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@id/switch_view"
         android:layout_toRightOf="@id/switch_view"
@@ -39,14 +46,6 @@
         android:layout_marginBottom="2dp"
         android:id="@+id/image_mode"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:id="@+id/horizontal_bar"
-        android:background="@drawable/solid_border"
-        android:layout_alignParentTop="true"
-        />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,8 +54,9 @@
         android:textSize="25dp"/>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:id="@+id/detected_location_list_view"
         android:layout_below="@id/current_location">
 

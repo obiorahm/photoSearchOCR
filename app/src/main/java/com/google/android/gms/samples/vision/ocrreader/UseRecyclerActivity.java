@@ -3,6 +3,7 @@ package com.google.android.gms.samples.vision.ocrreader;
 import android.app.Activity;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.RecyclerView;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
 
@@ -20,6 +21,8 @@ public class UseRecyclerActivity extends Activity  {
     public static String selected_item = "";
 
     public static RecyclerView last_parent_di;
+
+    public static RelativeLayout last_rl_parent;
 
     public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView){
 
