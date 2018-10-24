@@ -1,3 +1,3 @@
-# Referenced at /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/manifests/full/debug/AndroidManifest.xml:30
+# Referenced at /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/manifests/full/debug/AndroidManifest.xml:37
 -keep class android.support.multidex.MultiDexApplication { <init>(...); }
 

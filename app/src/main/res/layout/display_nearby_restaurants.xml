@@ -51,14 +51,42 @@
         android:layout_height="wrap_content"
         android:id="@+id/current_location"
         android:layout_below="@+id/horizontal_bar"
-        android:textSize="25dp"/>
+        android:layout_toRightOf="@id/location_image"
+        android:textSize="25dp"
+        android:padding="10dp"/>
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/horizontal_bar"
+        android:id="@+id/location_image"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/restaurant_title"
+        android:layout_below="@+id/current_location"
+        android:layout_toRightOf="@id/restaurant_image"
+        android:textSize="25dp"
+        android:padding="10dp"
+        android:text="@string/restaurants_nearby"/>
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/current_location"
+        android:id="@+id/restaurant_image"
+        android:layout_margin="10dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:id="@+id/detected_location_list_view"
-        android:layout_below="@id/current_location">
+        android:layout_below="@id/restaurant_image">
 
     </android.support.v7.widget.RecyclerView>
 

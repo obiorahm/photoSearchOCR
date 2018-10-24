@@ -21,6 +21,10 @@
         android:name="android.support.multidex.MultiDexApplication">
 
         <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC-W1DgpWK4sfOPngXLGDA6j62aGxWMMaU"/>
+
+        <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="ocr" />
         <activity

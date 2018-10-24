@@ -3,7 +3,10 @@ package com.google.android.gms.samples.vision.ocrreader;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,26 +20,43 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.location.places.PlaceDetectionClient;
+import com.google.android.gms.location.places.PlaceLikelihood;
+import com.google.android.gms.location.places.PlaceLikelihoodBufferResponse;
+import com.google.android.gms.location.places.PlacePhotoMetadata;
+import com.google.android.gms.location.places.PlacePhotoMetadataBuffer;
+import com.google.android.gms.location.places.PlacePhotoMetadataResponse;
+import com.google.android.gms.location.places.PlacePhotoResponse;
+import com.google.android.gms.location.places.Places;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Locale;
 
 /**
  * Created by mgo983 on 10/5/18.
  */
 
-public class GeographyActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener{
+public class GeographyActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener, GoogleApiClient.OnConnectionFailedListener{
 
     FusedLocationProviderClient mFusedLocationClient;
     Handler handler = new Handler();
@@ -63,13 +83,48 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     private String LOG_TAG = GeographyActivity.class.getSimpleName();
 
+    protected GeoDataClient mGeoDataClient;
 
+    protected PlaceDetectionClient mPlaceDetectionClient;
+
+    private GoogleApiClient mGoogleApiClient;
 
 
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         setContentView(R.layout.display_nearby_restaurants);
+
+        // construct a GeoDataClient
+        mGeoDataClient = Places.getGeoDataClient(this, null);
+
+        // construct a PlaceDetectionClient.
+        mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .addOnConnectionFailedListener(this)
+                .build();
+
+        //getPhotos();
+
+        AssetManager assetManager = getAssets();
+        try{
+            final String allAssets[] = assetManager.list("general");
+
+            String locationIcon = allAssets[0];
+            String restaurantIcon = allAssets[1];
+            //InputStream ims = getAssets().open("location.png");
+            ImageView locationImageView = findViewById(R.id.location_image);
+            ImageView restaurantIconImageView = findViewById(R.id.restaurant_image);
+            Glide.with(this).load(Uri.parse("file:///android_asset/general/" + locationIcon)).into(locationImageView);
+
+            Glide.with(this).load(Uri.parse("file:///android_asset/general/" + restaurantIcon)).into(restaurantIconImageView);
+
+        }catch (IOException e){
+            Log.e(LOG_TAG, e +" ");
+        }
 
         //start text to speech
         Intent checkTTSIntent = new Intent();
@@ -95,7 +150,9 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
             checkPermission();
 
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+            getCurrentLocation();
+
+        /*mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         try{
             mFusedLocationClient.getLastLocation()
                     .addOnSuccessListener(this, new OnSuccessListener<Location>() {
@@ -120,7 +177,7 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
         }catch (SecurityException e){
             Log.e("Geography", e + " ");
-        }
+        }*/
         }
 
 
@@ -134,6 +191,11 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
                 startActivity(openRestaurantIntent);
             }
         });
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
 
     }
 
@@ -213,6 +275,76 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         recyclerView.setAdapter(adapter);
 
 
+    }
+
+    private void getCurrentLocation(){
+        try{
+            Task<PlaceLikelihoodBufferResponse> placeResult = mPlaceDetectionClient.getCurrentPlace(null);
+            placeResult.addOnCompleteListener(new OnCompleteListener<PlaceLikelihoodBufferResponse>() {
+                @Override
+                public void onComplete(@NonNull Task<PlaceLikelihoodBufferResponse> task) {
+                    if (task.isSuccessful() && task.getResult() != null){
+                        PlaceLikelihoodBufferResponse likelyPlaces = task.getResult();
+
+                        PlaceLikelihood firstplace = likelyPlaces.get(0);
+
+                        String address = (String) firstplace.getPlace().getAddress();
+                        String placeId = (String) firstplace.getPlace().getId();
+
+                        displayCurrentLocation(address, placeId);
+
+                        Log.d(LOG_TAG, "address " + address + " placeId " + placeId);
+                    }
+                }
+            });
+
+        }catch (SecurityException e){
+
+        }
+    }
+
+    private void displayCurrentLocation(String address, String placeId){
+        globalTextView.setText(address);
+        getPhotos(placeId);
+        FetchWebPage fetchWebPage = new FetchWebPage(thisActivity);
+        fetchWebPage.execute(address, "encode");
+    }
+
+    // Request photos and metadata for the specified place.
+    private void getPhotos(String placeId) {
+        //final String placeId = "ChIJa147K9HX3IAR-lwiGIQv9i4";
+        final Task<PlacePhotoMetadataResponse> photoMetadataResponse = mGeoDataClient.getPlacePhotos(placeId);
+        photoMetadataResponse.addOnCompleteListener(new OnCompleteListener<PlacePhotoMetadataResponse>() {
+            @Override
+            public void onComplete(@NonNull Task<PlacePhotoMetadataResponse> task) {
+                // Get the list of photos.
+                PlacePhotoMetadataResponse photos = task.getResult();
+                // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
+                PlacePhotoMetadataBuffer photoMetadataBuffer = photos.getPhotoMetadata();
+
+                if (photoMetadataBuffer.getCount() == 0 || photoMetadataBuffer == null)
+                    return;
+                // Get the first photo in the list.
+                PlacePhotoMetadata photoMetadata = photoMetadataBuffer.get(0);
+                // Get the attribution text.
+                CharSequence attribution = photoMetadata.getAttributions();
+                // Get a full-size bitmap for the photo.
+                Task<PlacePhotoResponse> photoResponse = mGeoDataClient.getPhoto(photoMetadata);
+                photoResponse.addOnCompleteListener(new OnCompleteListener<PlacePhotoResponse>() {
+                    @Override
+                    public void onComplete(@NonNull Task<PlacePhotoResponse> task) {
+                        PlacePhotoResponse photo = task.getResult();
+                        Bitmap bitmap = photo.getBitmap();
+
+                        ImageView locationImageView = thisActivity.findViewById(R.id.location_image);
+                        locationImageView.setImageBitmap(bitmap);
+
+                        //Glide.with(getApplicationContext()).load(bitmap).into(locationImageView);
+
+                    }
+                });
+            }
+        });
     }
 
     //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.

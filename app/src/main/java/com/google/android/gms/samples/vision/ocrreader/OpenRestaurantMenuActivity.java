@@ -6,6 +6,9 @@ import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantMenuAdapter;
 import com.google.firebase.FirebaseApp;
@@ -35,6 +38,17 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         super.onCreate(savedInstance);
         //we reuse the display_nearby_restaurants layout to display specific restaurant menus
         setContentView(R.layout.display_nearby_restaurants);
+
+        //hide unnecessary views
+        TextView textView = findViewById(R.id.restaurant_title);
+        textView.setVisibility(View.GONE);
+        ImageView imageView = findViewById(R.id.restaurant_image);
+        imageView.setVisibility(View.GONE);
+        TextView textView1 = findViewById(R.id.current_location);
+        textView1.setVisibility(View.GONE);
+        ImageView imageView1 = findViewById(R.id.location_image);
+        imageView1.setVisibility(View.GONE);
+
 
         //start text to speech
         Intent checkTTSIntent = new Intent();
