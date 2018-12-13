@@ -63,30 +63,20 @@
         android:id="@+id/location_image"
         android:layout_margin="10dp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/restaurant_title"
-        android:layout_below="@+id/current_location"
-        android:layout_toRightOf="@id/restaurant_image"
-        android:textSize="25dp"
-        android:padding="10dp"
-        android:text="@string/restaurants_nearby"/>
+<!--com.google.android.gms.samples.vision.ocrreader.ui.project.ProjectRecyclerView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:id="@+id/detected_location_list_view"
+    android:layout_below="@id/location_image">
 
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/current_location"
-        android:id="@+id/restaurant_image"
-        android:layout_margin="10dp"/>
-
+</com.google.android.gms.samples.vision.ocrreader.ui.project.ProjectRecyclerView-->
     <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:id="@+id/detected_location_list_view"
-        android:layout_below="@id/restaurant_image">
+        android:layout_below="@id/location_image">
 
     </android.support.v7.widget.RecyclerView>
 

@@ -5,12 +5,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.ResultReceiver;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -26,8 +23,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.PlaceDetectionClient;
 import com.google.android.gms.location.places.PlaceLikelihood;
@@ -37,10 +32,13 @@ import com.google.android.gms.location.places.PlacePhotoMetadataBuffer;
 import com.google.android.gms.location.places.PlacePhotoMetadataResponse;
 import com.google.android.gms.location.places.PlacePhotoResponse;
 import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
+import com.google.android.gms.maps.StreetViewPanorama;
+import com.google.android.gms.maps.StreetViewPanoramaFragment;
+import com.google.android.gms.maps.StreetViewPanoramaView;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 
@@ -49,19 +47,16 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
  * Created by mgo983 on 10/5/18.
  */
 
-public class GeographyActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener, GoogleApiClient.OnConnectionFailedListener{
+public class GeographyActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener, GoogleApiClient.OnConnectionFailedListener, OnStreetViewPanoramaReadyCallback{
 
-    FusedLocationProviderClient mFusedLocationClient;
-    Handler handler = new Handler();
-    private AddressResultReceiver mResultReceiver = new AddressResultReceiver(handler);
-    String mAddressOutput;
     TextView globalTextView;
     //Text to speech variables
     private int MY_DATA_CHECK_CODE = 0;
@@ -89,23 +84,27 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     private GoogleApiClient mGoogleApiClient;
 
+    private Bundle mSavedInstance;
 
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         setContentView(R.layout.display_nearby_restaurants);
 
+        mSavedInstance = savedInstance;
+
         // construct a GeoDataClient
-        mGeoDataClient = Places.getGeoDataClient(this, null);
+        mGeoDataClient = Places.getGeoDataClient(this);
 
         // construct a PlaceDetectionClient.
-        mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
+        mPlaceDetectionClient = Places.getPlaceDetectionClient(this);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Places.GEO_DATA_API)
                 .addApi(Places.PLACE_DETECTION_API)
                 .addOnConnectionFailedListener(this)
                 .build();
+
 
         //getPhotos();
 
@@ -117,10 +116,8 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
             String restaurantIcon = allAssets[1];
             //InputStream ims = getAssets().open("location.png");
             ImageView locationImageView = findViewById(R.id.location_image);
-            ImageView restaurantIconImageView = findViewById(R.id.restaurant_image);
             Glide.with(this).load(Uri.parse("file:///android_asset/general/" + locationIcon)).into(locationImageView);
 
-            Glide.with(this).load(Uri.parse("file:///android_asset/general/" + restaurantIcon)).into(restaurantIconImageView);
 
         }catch (IOException e){
             Log.e(LOG_TAG, e +" ");
@@ -141,43 +138,14 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-
-        final TextView textView = findViewById(R.id.current_location);
+        //final TextView textView = findViewById(R.id.current_location);
         globalTextView = findViewById(R.id.current_location);
-
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
             checkPermission();
 
             getCurrentLocation();
 
-        /*mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        try{
-            mFusedLocationClient.getLastLocation()
-                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            if (location != null){
-                                textView.setText("Longitute: " + location.getLongitude()+" Latitude: " + location.getLatitude());
-                                startIntentService(location);
-                                Log.d("Geography output", location.getLongitude() + "");
-                            }else{
-                                Log.d("Geography output", "location is null");
-
-                            }
-                        }
-                    }).addOnFailureListener(this, new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.e("Geography", e + " ");
-                }
-            });
-
-
-        }catch (SecurityException e){
-            Log.e("Geography", e + " ");
-        }*/
         }
 
 
@@ -192,8 +160,28 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
             }
         });
 
+        ImageButton back_btn = findViewById(R.id.back_btn_dr);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(mainActivityIntent);
+            }
+        });
+
     }
 
+    @Override
+    public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView){
+        streetViewPanoramaView.onCreate(mSavedInstance);
+        streetViewPanoramaView.getStreetViewPanoramaAsync(this);
+
+    }
+
+    @Override
+    public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
+        panorama.setPosition(new LatLng(-33.87365, 151.20689));
+    }
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
@@ -212,69 +200,96 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     }
 
-    protected void  startIntentService(Location location){
-        Intent intent = new Intent(this, FetchAddressIntentService.class);
-        intent.putExtra(Constants.RECEIVER, mResultReceiver);
-        intent.putExtra(Constants.LOCATION_DATA_EXTRA, location);
-        startService(intent);
-    }
 
     Activity thisActivity = this;
 
-    class AddressResultReceiver extends ResultReceiver {
-        public AddressResultReceiver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-
-            if (resultData == null) {
-                return;
-            }
-
-            // Display the address string
-            // or an error message sent from the intent service.
-            mAddressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
-            if (mAddressOutput == null) {
-                mAddressOutput = "";
-            }
-
-            // Show a toast message if an address was found.
-            if (resultCode == Constants.SUCCESS_RESULT) {
-               // showToast(getString(R.string.address_found));
-            }
-            displayAddressOutput();
-
-        }
-
-        private void displayAddressOutput(){
-            globalTextView.setText(mAddressOutput + " ");
-            FetchWebPage fetchWebPage = new FetchWebPage(thisActivity);
-            fetchWebPage.execute(mAddressOutput, "encode");
-        }
-    }
 
     @Override
     public void processWebResults(Document document){
 
+        ArrayList<String> addresses = new ArrayList<>();
+
         try {
-            String testString = document.body().html();
-            Elements testElement = document.select(".restaurant-list .name a" );
+            Elements testElement = document.select(".restaurant-list-item" );
             for (Element element : testElement){
-                String[] item = {element.attr("href"), element.text()};
+                //get name
+                Elements name_element = element.select(".name a");
+                String restaurant_name = name_element.text();
+                String restaurant_url = name_element.attr("href");
+                String restaurant_address = "";
+                Elements addressElements = element.select(".address");
+                for (Element address : addressElements){
+                    restaurant_address += address.text() + " ";
+                }
+                String placeId = "";
+                String item[] = {restaurant_url, restaurant_name, restaurant_address, placeId};
+                addresses.add(restaurant_address);
                 adapter.addItem(item);
-                Log.d(LOG_TAG, element.attr("href") +" " + element.text());
+                Log.d(LOG_TAG, "restaurant name " +restaurant_name + " restaurant_url " + restaurant_url + " restaurant_address " + restaurant_address);
             }
+
+
 
         }catch (NullPointerException e){
             Log.e(LOG_TAG, e + " null pointer");
 
         }
-
+        getLocationFromAddress(addresses);
         recyclerView.setAdapter(adapter);
 
 
+    }
+
+    private void getLocationFromAddress(ArrayList<String> addresses){
+        FetchRestaurantPlaceID fetchRestaurantPlaceID = new FetchRestaurantPlaceID(this);
+        fetchRestaurantPlaceID.execute(addresses);
+
+
+    }
+
+    @Override
+    public void addPlaceIdToAdapter(HashMap<String, String[]> placesId){
+        adapter.addPlaceIds(placesId);
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void getRestaurantPhoto(String placesId, final ImageView imageView){
+        final Task<PlacePhotoMetadataResponse> photoMetadataResponse = mGeoDataClient.getPlacePhotos("ChIJ4Yie9T_QD4gRt9XlU-4KZTI");
+        photoMetadataResponse.addOnCompleteListener(new OnCompleteListener<PlacePhotoMetadataResponse>() {
+            @Override
+            public void onComplete(@NonNull Task<PlacePhotoMetadataResponse> task) {
+                // Get the list of photos.
+                PlacePhotoMetadataResponse photos = task.getResult();
+                // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
+                PlacePhotoMetadataBuffer photoMetadataBuffer = photos.getPhotoMetadata();
+
+                Log.d(LOG_TAG, photoMetadataBuffer.getCount() + "count");
+
+                if (photoMetadataBuffer.getCount() == 0)
+                    return;
+                // Get the first photo in the list.
+                PlacePhotoMetadata photoMetadata = photoMetadataBuffer.get(0);
+                // Get the attribution text.
+                CharSequence attribution = photoMetadata.getAttributions();
+                // Get a full-size bitmap for the photo.
+                Task<PlacePhotoResponse> photoResponse = mGeoDataClient.getPhoto(photoMetadata);
+                photoResponse.addOnCompleteListener(new OnCompleteListener<PlacePhotoResponse>() {
+                    @Override
+                    public void onComplete(@NonNull Task<PlacePhotoResponse> task) {
+                        PlacePhotoResponse photo = task.getResult();
+                        Bitmap bitmap = photo.getBitmap();
+
+                        imageView.setImageBitmap(bitmap);
+
+                        //Glide.with(getApplicationContext()).load(bitmap).into(locationImageView);
+
+                    }
+                });
+
+                photoMetadataBuffer.release();
+            }
+        });
     }
 
     private void getCurrentLocation(){
@@ -289,63 +304,30 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
                         PlaceLikelihood firstplace = likelyPlaces.get(0);
 
                         String address = (String) firstplace.getPlace().getAddress();
-                        String placeId = (String) firstplace.getPlace().getId();
+                        String placeId = firstplace.getPlace().getId();
 
                         displayCurrentLocation(address, placeId);
 
                         Log.d(LOG_TAG, "address " + address + " placeId " + placeId);
+                        likelyPlaces.release();
                     }
                 }
             });
 
         }catch (SecurityException e){
-
+            Log.e(LOG_TAG, e + " ");
         }
     }
 
     private void displayCurrentLocation(String address, String placeId){
         globalTextView.setText(address);
-        getPhotos(placeId);
+        ImageView locationImageView = thisActivity.findViewById(R.id.location_image);
+        getRestaurantPhoto(placeId, locationImageView );
+        //getPhotos(placeId);
         FetchWebPage fetchWebPage = new FetchWebPage(thisActivity);
         fetchWebPage.execute(address, "encode");
     }
 
-    // Request photos and metadata for the specified place.
-    private void getPhotos(String placeId) {
-        //final String placeId = "ChIJa147K9HX3IAR-lwiGIQv9i4";
-        final Task<PlacePhotoMetadataResponse> photoMetadataResponse = mGeoDataClient.getPlacePhotos(placeId);
-        photoMetadataResponse.addOnCompleteListener(new OnCompleteListener<PlacePhotoMetadataResponse>() {
-            @Override
-            public void onComplete(@NonNull Task<PlacePhotoMetadataResponse> task) {
-                // Get the list of photos.
-                PlacePhotoMetadataResponse photos = task.getResult();
-                // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
-                PlacePhotoMetadataBuffer photoMetadataBuffer = photos.getPhotoMetadata();
-
-                if (photoMetadataBuffer.getCount() == 0 || photoMetadataBuffer == null)
-                    return;
-                // Get the first photo in the list.
-                PlacePhotoMetadata photoMetadata = photoMetadataBuffer.get(0);
-                // Get the attribution text.
-                CharSequence attribution = photoMetadata.getAttributions();
-                // Get a full-size bitmap for the photo.
-                Task<PlacePhotoResponse> photoResponse = mGeoDataClient.getPhoto(photoMetadata);
-                photoResponse.addOnCompleteListener(new OnCompleteListener<PlacePhotoResponse>() {
-                    @Override
-                    public void onComplete(@NonNull Task<PlacePhotoResponse> task) {
-                        PlacePhotoResponse photo = task.getResult();
-                        Bitmap bitmap = photo.getBitmap();
-
-                        ImageView locationImageView = thisActivity.findViewById(R.id.location_image);
-                        locationImageView.setImageBitmap(bitmap);
-
-                        //Glide.with(getApplicationContext()).load(bitmap).into(locationImageView);
-
-                    }
-                });
-            }
-        });
-    }
 
     //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.
     @Override

@@ -55,6 +55,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
             mFoodItemRecyclerView = convertView.findViewById(R.id.food_item);
             //mRelativeLayout = convertView.findViewById(R.id.relative_layout);
             mRelativeLayout = convertView.findViewById(R.id.enclosing_layout);
+            //mRelativeLayout = convertView.findViewById(R.id.internal_relative_layout);
             mImageButton = convertView.findViewById(R.id.speak_whole_text);
             mInfoTextView = convertView.findViewById(R.id.info_text);
             mInfoImageButton = convertView.findViewById(R.id.more_info);

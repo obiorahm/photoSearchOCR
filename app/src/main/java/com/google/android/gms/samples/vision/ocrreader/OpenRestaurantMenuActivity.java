@@ -39,11 +39,9 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         //we reuse the display_nearby_restaurants layout to display specific restaurant menus
         setContentView(R.layout.display_nearby_restaurants);
 
+        last_rl_parent = null;
+
         //hide unnecessary views
-        TextView textView = findViewById(R.id.restaurant_title);
-        textView.setVisibility(View.GONE);
-        ImageView imageView = findViewById(R.id.restaurant_image);
-        imageView.setVisibility(View.GONE);
         TextView textView1 = findViewById(R.id.current_location);
         textView1.setVisibility(View.GONE);
         ImageView imageView1 = findViewById(R.id.location_image);

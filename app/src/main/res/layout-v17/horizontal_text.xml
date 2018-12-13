@@ -18,14 +18,24 @@
             android:layout_alignParentLeft="true"
             android:visibility="gone"
             android:layout_margin="10dp"/>
-        <android.support.v7.widget.RecyclerView
+        <com.google.android.gms.samples.vision.ocrreader.ui.project.ProjectRecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_by_text"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_toRightOf="@id/descriptive_image">
+
+        </com.google.android.gms.samples.vision.ocrreader.ui.project.ProjectRecyclerView>
+
+        <!--android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/text_by_text"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:layout_toRightOf="@id/descriptive_image"
-            />
+            /-->
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,6 +45,16 @@
             android:paddingBottom="5dp"
             android:backgroundTint="@color/transparent"
             android:id="@+id/speak_whole_text"/>
+
+        <com.google.android.gms.maps.StreetViewPanoramaView
+            android:name="com.google.android.gms.maps.StreetViewPanoramaView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/speak_whole_text"
+            android:id="@+id/streetviewpanorama"
+            android:layout_margin="10dp">
+        </com.google.android.gms.maps.StreetViewPanoramaView>
+
 
     </RelativeLayout>
 

@@ -112,7 +112,7 @@
 
         <provider
             android:name="com.google.android.gms.samples.vision.ocrreader.GenericFileProvider"
-            android:authorities="com.google.android.gms.samples.vision.ocrreader.org.tensorflow.demo.provider"
+            android:authorities="com.google.android.gms.samples.vision.ocrreader.provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data

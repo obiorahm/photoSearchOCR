@@ -59,6 +59,8 @@ import com.google.android.gms.vision.text.TextRecognizer;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -139,6 +141,13 @@ public final class OcrCaptureActivity extends AppCompatActivity {
             createCameraSource(autoFocus, useFlash);
         } else {
             requestCameraPermission();
+        }
+
+        //check for external storage permission
+        final String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+        if(Build.VERSION.SDK_INT>22){
+            ActivityCompat.requestPermissions(this,permissions, 1);
         }
 
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
@@ -345,20 +354,40 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        if (requestCode != RC_HANDLE_CAMERA_PERM) {
+        switch (requestCode) {
+
+            case RC_HANDLE_CAMERA_PERM:
+                if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d(TAG, "Camera permission granted - initialize the camera source");
+                    // We have permission, so create the camerasource
+                    boolean autoFocus = getIntent().getBooleanExtra(AutoFocus,false);
+                    boolean useFlash = getIntent().getBooleanExtra(UseFlash, false);
+                    createCameraSource(autoFocus, useFlash);
+                    return;
+                }
+                break;
+            case 1: {
+                if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Permission denied to access your location.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            default:
+
+                Log.d(TAG, "Got unexpected permission result: " + requestCode);
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                return;
+
+        }
+        /*if (requestCode != RC_HANDLE_CAMERA_PERM) {
             Log.d(TAG, "Got unexpected permission result: " + requestCode);
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
             return;
-        }
+        }*/
 
-        if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "Camera permission granted - initialize the camera source");
-            // We have permission, so create the camerasource
-            boolean autoFocus = getIntent().getBooleanExtra(AutoFocus,false);
-            boolean useFlash = getIntent().getBooleanExtra(UseFlash, false);
-            createCameraSource(autoFocus, useFlash);
-            return;
-        }
+
+
+
 
         Log.e(TAG, "Permission not granted: results len = " + grantResults.length +
                 " Result code = " + (grantResults.length > 0 ? grantResults[0] : "(empty)"));
@@ -438,12 +467,24 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                                 //give the file a unique name
                                 imageFileName = "detect" + currentDateTimeString.replace(" ","");
 
-                                file = new File(storageDir, imageFileName + ".PNG");
+                                File imagePath = new File(OcrCaptureActivity.this.getApplicationContext().getFilesDir(), "Detectors");
+                                File newFile = new File(imagePath, imageFileName);
+                                Uri contentUri = FileProvider.getUriForFile(OcrCaptureActivity.this.getApplicationContext(), "com.google.android.gms.samples.vision.ocrreader.provider", newFile);
 
-                                FileOutputStream fOut = new FileOutputStream(file);
+
+                                Log.d(LOG_TAG, "file name: " + contentUri.toString());
+
+
+                                FileOutputStream fOut = new FileOutputStream(contentUri.toString());
+
+                                //FileOutputStream fOut = new FileOutputStream(file);
 
                                 fOut.write(data);
                                 fOut.close();
+
+                                //Uri photoURI = GetFileUri();
+
+
 
                             }catch (IOException e){
                                 Log.e(LOG_TAG, e + "file not created");
@@ -486,6 +527,21 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
         imageFileName = "detect" + currentDateTimeString.replace(" ","");
 
+        try{
+            imageFile = File.createTempFile(
+                    imageFileName,  /* prefix */
+                    ".PNG",         /* suffix */
+                    storageDir      /* directory */);
+
+        }catch (IOException e){
+        }
+
+    }
+
+    private Uri GetFileUri(){
+        createFile();
+        return FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".com.google.android.gms.samples.vision.ocrreader.provider", imageFile);
+
     }
 
 
@@ -506,15 +562,29 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
                     try {
 
+                        Log.d(LOG_TAG, "file name 1 : " + getApplicationContext()+ ".com.google.android.gms.samples.vision.ocrreader.provider");
+
                         //give the file a unique name
-                        imageFileName = "detect" + currentDateTimeString.replace(" ","");
+                        imageFileName = "detect" + currentDateTimeString.replace(" ","").replace(":","").replace(",","");
 
-                        file = new File(storageDir, imageFileName + ".PNG");
+                        //File imagePath = new File(OcrCaptureActivity.this.getApplicationContext().getFilesDir(), "Detector");
+                        file = new File(storageDir, imageFileName + ".png");
 
-                        FileOutputStream fOut = new FileOutputStream(file);
+                        //File file = new File(imagePath, imageFileName + ".PNG");
+                        Log.d(LOG_TAG, "file name 2 : " + file.getAbsolutePath());
+                        Uri contentUri = FileProvider.getUriForFile( ((Context) OcrCaptureActivity.this), "com.google.android.gms.samples.vision.ocrreader.provider", file);
+
+                        Log.d(LOG_TAG, "file name 3 : " + contentUri.getPath());
+
+                        FileOutputStream fOut = new FileOutputStream( contentUri.getPath());
+
+                        //FileOutputStream fOut = new FileOutputStream(file);
 
                         fOut.write(data);
                         fOut.close();
+
+                        Log.d(LOG_TAG, "file name 4 : " + contentUri.getPath());
+
 
                     }catch (IOException e){
                         Log.e(LOG_TAG, e + "file not created");
@@ -529,11 +599,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
 
 
-    private Uri GetFileUri(){
-        createFile();
-        return FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".com.google.android.gms.samples.vision.ocrreader.provider", imageFile);
 
-    }
 
 
     private class CaptureGestureListener extends GestureDetector.SimpleOnGestureListener {
@@ -543,6 +609,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
             return onTap(e.getRawX(), e.getRawY()) || super.onSingleTapConfirmed(e);
         }
     }
+
+
 
     private class ScaleListener implements ScaleGestureDetector.OnScaleGestureListener {
 
@@ -596,5 +664,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         public void onScaleEnd(ScaleGestureDetector detector) {
             mCameraSource.doZoom(detector.getScaleFactor());
         }
+
+
     }
 }

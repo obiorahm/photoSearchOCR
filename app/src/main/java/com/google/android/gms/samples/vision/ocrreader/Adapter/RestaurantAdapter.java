@@ -1,6 +1,7 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.speech.tts.TextToSpeech;
@@ -15,12 +16,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
+import com.google.android.gms.maps.StreetViewPanoramaFragment;
+import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
 import com.google.android.gms.samples.vision.ocrreader.GeographyActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
+import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by mgo983 on 10/17/18.
@@ -31,10 +37,16 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     LayoutInflater inflater;
     Context context;
     TextToSpeech myTTS;
+    //HashMap<String, String[]> mData = new HashMap<>();
     ArrayList<String[]> mData = new ArrayList<>();
     private RecyclerView last_selected = null;
     private RelativeLayout last_selected_rl = null;
     static String LOG_TAG = RestaurantAdapter.class.getSimpleName();
+
+    final int URL_POS = 0;
+    final int TITLE_POS = 1;
+    final int ADDRESS_POS = 2;
+    final int PLACE_ID_POS = 3;
 
 
 
@@ -45,6 +57,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         private RelativeLayout mRelativeLayout;
         private ImageButton mImageButton;
         private ImageView mImageView;
+        private StreetViewPanoramaView mStreetViewPanoramaView;
+        //private Fragment mFragemnt;
 
 
         public ViewHolder(View convertView) {
@@ -54,6 +68,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             mRelativeLayout = convertView.findViewById(R.id.internal_relative_layout);
             mImageButton = convertView.findViewById(R.id.speak_whole_text);
             mImageView = convertView.findViewById(R.id.descriptive_image);
+            mStreetViewPanoramaView = convertView.findViewById(R.id.streetviewpanorama);
+
 
         }
     }
@@ -63,6 +79,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         }
 
         public void addItem(String[] item){
+            //final int POS_RESTAURANT_NAME = 1;
+            //mData.put(item[POS_RESTAURANT_NAME], item);
             mData.add(item);
             notifyDataSetChanged();
         }
@@ -86,12 +104,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         @Override
         public void onBindViewHolder(final RestaurantAdapter.ViewHolder holder, final int position){
             final String[] restaurantData =  mData.get(position);
-            final int URL_POS = 0;
-            final int TITLE_POS = 1;
             final String word = restaurantData[TITLE_POS];
 
             holder.mImageView.setVisibility(View.VISIBLE);
-            try{
+            /*try{
                 final String allAssets[] = ((Activity) context).getAssets().list("general");
 
                 String restaurantIcon = allAssets[1];
@@ -101,7 +117,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
             }catch (IOException e){
                 Log.e(LOG_TAG, e +" ");
-            }
+            }*/
 
             // setup horizontal text by text adapter
             TextByTextAdapter adapter = new TextByTextAdapter(context, R.layout.recognized_text_item);
@@ -147,25 +163,33 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             });
 
 
+            Log.d(LOG_TAG, restaurantData[PLACE_ID_POS]);
+            if (!restaurantData[PLACE_ID_POS].equals("")){
+                ((UseRecyclerActivity) context).getRestaurantPhoto(restaurantData[PLACE_ID_POS], holder.mImageView);
+            }
+
+            //setup paranoma fragment
+
+            ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView);
 
         }
 
     private void control_select(RestaurantAdapter.ViewHolder holder, String[] restaurantData){
             String restaurantUrl = restaurantData[0];
             String restaurantName = restaurantData[1];
-        last_selected = GeographyActivity.last_parent_di;
-        if (last_selected != null && last_selected != holder.mRecyclerView){
-            RestaurantAdapter.ViewHolder lastViewHolder = new RestaurantAdapter.ViewHolder(last_selected);
-            lastViewHolder.mRecyclerView.setSelected(false);
+        last_selected_rl = GeographyActivity.last_rl_parent;
+        if (last_selected_rl != null && last_selected_rl != holder.mRelativeLayout){
+            RestaurantAdapter.ViewHolder lastViewHolder = new RestaurantAdapter.ViewHolder(last_selected_rl);
+            lastViewHolder.mRelativeLayout.setSelected(false);
         }
-        if(holder.mRecyclerView.isSelected()){
-            holder.mRecyclerView.setSelected(false);
+        if(holder.mRelativeLayout.isSelected()){
+            holder.mRelativeLayout.setSelected(false);
         }else{
-            holder.mRecyclerView.setSelected(true);
+            holder.mRelativeLayout.setSelected(true);
             GeographyActivity.selected_item = restaurantName;
             GeographyActivity.selected_url = restaurantUrl;
         }
-        GeographyActivity.last_parent_di = holder.mRecyclerView;
+        GeographyActivity.last_rl_parent = holder.mRelativeLayout;
 
     }
 
@@ -174,5 +198,19 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         return mData.size();
     }
 
+    public void addPlaceIds(HashMap<String, String[]> placeId){
+        final int PLACE_ID_PACK_POS = 1;
+        for (String[] item : mData){
 
+            Log.d(LOG_TAG, "length" + item.length + " ");
+
+            String address = item[ADDRESS_POS];
+            String[] placeIdPack = placeId.get(address);
+            if (placeId != null){
+                item[PLACE_ID_POS] = placeIdPack[PLACE_ID_PACK_POS];
+                notifyDataSetChanged();
+            }
+        }
+
+    }
 }
