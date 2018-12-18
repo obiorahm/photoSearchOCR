@@ -51,6 +51,7 @@ public class FetchRestaurantPlaceID extends AsyncTask<ArrayList<String>, Void, H
 
     }
 
+
     public String getJSON(Uri uri){
 
         HttpURLConnection urlConnection = null;
@@ -146,7 +147,7 @@ public class FetchRestaurantPlaceID extends AsyncTask<ArrayList<String>, Void, H
 
                 value[1] = placeId;
                 Log.d(LOG_TAG, " placeId " + placeId);
-
+                Log.d(LOG_TAG, placeData.toString());
 
             }catch (JSONException e){
                 Log.e(LOG_TAG, e + "");

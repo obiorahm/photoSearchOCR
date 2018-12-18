@@ -47,6 +47,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     final int TITLE_POS = 1;
     final int ADDRESS_POS = 2;
     final int PLACE_ID_POS = 3;
+    final int LONGITUDE = 4;
+    final int LATITUDE = 5;
 
 
 
@@ -163,14 +165,16 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             });
 
 
-            Log.d(LOG_TAG, restaurantData[PLACE_ID_POS]);
+            Log.d(LOG_TAG, restaurantData[PLACE_ID_POS]+  " Longitude " + restaurantData[LONGITUDE] + " Latitude" + restaurantData[LATITUDE]);
             if (!restaurantData[PLACE_ID_POS].equals("")){
                 ((UseRecyclerActivity) context).getRestaurantPhoto(restaurantData[PLACE_ID_POS], holder.mImageView);
             }
 
             //setup paranoma fragment
 
-            ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView);
+            //((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView);
+
+            //((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
 
         }
 
@@ -181,15 +185,26 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         if (last_selected_rl != null && last_selected_rl != holder.mRelativeLayout){
             RestaurantAdapter.ViewHolder lastViewHolder = new RestaurantAdapter.ViewHolder(last_selected_rl);
             lastViewHolder.mRelativeLayout.setSelected(false);
+            lastViewHolder.mStreetViewPanoramaView.setVisibility(View.GONE);
+
         }
         if(holder.mRelativeLayout.isSelected()){
             holder.mRelativeLayout.setSelected(false);
+            holder.mStreetViewPanoramaView.setVisibility(View.GONE);
+
         }else{
             holder.mRelativeLayout.setSelected(true);
             GeographyActivity.selected_item = restaurantName;
             GeographyActivity.selected_url = restaurantUrl;
+            holder.mStreetViewPanoramaView.setVisibility(View.VISIBLE);
+            ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
+
         }
         GeographyActivity.last_rl_parent = holder.mRelativeLayout;
+
+
+        //set up panorama
+
 
     }
 
@@ -212,5 +227,20 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             }
         }
 
+    }
+
+
+    public void addLngLat(HashMap<String, String[]> lngLat){
+        final int LNG = 0;
+        final int LAT = 1;
+        for (String[] item: mData){
+            String address = item[ADDRESS_POS];
+            String[] lngLatPack = lngLat.get(address);
+            if (lngLat != null){
+                item[LONGITUDE] = lngLatPack[LNG] ;
+                item[LATITUDE] = lngLatPack[LAT];
+                notifyDataSetChanged();
+            }
+        }
     }
 }

@@ -86,6 +86,10 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     private Bundle mSavedInstance;
 
+    double LONGITUDE = 151.20689;
+
+    double LATITUDE = -33.87365;
+
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
@@ -178,10 +182,24 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     }
 
+
+
+    @Override
+    public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView, String longitude, String latitude){
+        LONGITUDE = longitude.equals("")? LONGITUDE : new Double(longitude);
+        LATITUDE = latitude.equals("") ? LATITUDE : new Double(latitude);
+
+        Log.d(LOG_TAG, "latitude " + LONGITUDE + LATITUDE);
+
+        streetViewPanoramaView.onCreate(mSavedInstance);
+        streetViewPanoramaView.getStreetViewPanoramaAsync(this);
+    }
+
     @Override
     public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
-        panorama.setPosition(new LatLng(-33.87365, 151.20689));
+        panorama.setPosition(new LatLng(LATITUDE, LONGITUDE));
     }
+
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
@@ -222,7 +240,9 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
                     restaurant_address += address.text() + " ";
                 }
                 String placeId = "";
-                String item[] = {restaurant_url, restaurant_name, restaurant_address, placeId};
+                String longitude = "";
+                String latitude = "";
+                String item[] = {restaurant_url, restaurant_name, restaurant_address, placeId, longitude, latitude};
                 addresses.add(restaurant_address);
                 adapter.addItem(item);
                 Log.d(LOG_TAG, "restaurant name " +restaurant_name + " restaurant_url " + restaurant_url + " restaurant_address " + restaurant_address);
@@ -241,9 +261,11 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
     }
 
     private void getLocationFromAddress(ArrayList<String> addresses){
-        FetchRestaurantPlaceID fetchRestaurantPlaceID = new FetchRestaurantPlaceID(this);
-        fetchRestaurantPlaceID.execute(addresses);
+        /*FetchRestaurantPlaceID fetchRestaurantPlaceID = new FetchRestaurantPlaceID(this);
+        fetchRestaurantPlaceID.execute(addresses);*/
 
+        FetchRestaurantLongLat fetchRestaurantLongLat = new FetchRestaurantLongLat(this);
+        fetchRestaurantLongLat.execute(addresses);
 
     }
 
@@ -254,8 +276,15 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
     }
 
     @Override
+    public void addLongLatToAdapter(HashMap<String, String[]> lngLatPack){
+        adapter.addLngLat(lngLatPack);
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
     public void getRestaurantPhoto(String placesId, final ImageView imageView){
-        final Task<PlacePhotoMetadataResponse> photoMetadataResponse = mGeoDataClient.getPlacePhotos("ChIJ4Yie9T_QD4gRt9XlU-4KZTI");
+//        final Task<PlacePhotoMetadataResponse> photoMetadataResponse = mGeoDataClient.getPlacePhotos("ChIJ4Yie9T_QD4gRt9XlU-4KZTI");
+        final Task<PlacePhotoMetadataResponse> photoMetadataResponse = mGeoDataClient.getPlacePhotos(placesId);
         photoMetadataResponse.addOnCompleteListener(new OnCompleteListener<PlacePhotoMetadataResponse>() {
             @Override
             public void onComplete(@NonNull Task<PlacePhotoMetadataResponse> task) {

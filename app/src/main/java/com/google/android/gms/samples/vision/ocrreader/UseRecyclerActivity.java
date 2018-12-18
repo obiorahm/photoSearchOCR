@@ -50,11 +50,30 @@ public class UseRecyclerActivity extends Activity  {
 
     }
 
+    /**
+     *
+     * @param lngLatPack contains JSONdata for location in string
+     */
+    public void addLongLatToAdapter(HashMap<String, String[]> lngLatPack){
+
+    }
+
     /***
      * @param streetViewPanoramaView
      */
 
     public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView){
+
+    }
+
+    /**
+     *
+     * @param streetViewPanoramaView view to place the panorama
+     * @param longitude the longitude and latitude of the restaurant
+     *
+     */
+
+    public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView, String longitude, String Latitude ){
 
     }
 }

@@ -30,9 +30,10 @@ public class ProjectRecyclerView extends RecyclerView {
     long startClickTime = Calendar.getInstance().getTimeInMillis();
     final int MAX_CLICK_DURATION = 200;
 
+
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-
 
         switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_DOWN: {
@@ -41,27 +42,7 @@ public class ProjectRecyclerView extends RecyclerView {
 
                 break;
             }
-            case MotionEvent.ACTION_UP: {
-                long clickDuration = Calendar.getInstance().getTimeInMillis() - startClickTime;
-                Log.d("ProjectRecycler up", " "+ clickDuration + " ");
-                if(clickDuration < MAX_CLICK_DURATION) {
-                    callOnClick();
-                }
-                break;
-            }
-            case MotionEvent.ACTION_BUTTON_RELEASE:{
-                Log.d("ProjectRecycler release", " "+  " ");
-                break;
-
-            }
-
-
         }
-        Log.d("ProjectRecycler action", " "+ ev.getAction() +  " ");
-
-        //callOnClick();
-        //onTouchEvent(ev);
-
         return false;
 
     }
@@ -69,7 +50,7 @@ public class ProjectRecyclerView extends RecyclerView {
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        Log.d("ProjectRecycler action", " "+ e.getAction() +  " ");
+
         switch (e.getActionMasked()) {
 
             case MotionEvent.ACTION_UP: {
