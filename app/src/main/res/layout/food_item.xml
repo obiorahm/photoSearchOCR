@@ -24,6 +24,7 @@
             android:id="@+id/more_info"
             android:src="@drawable/baseline_info_white_18"
             android:layout_toRightOf="@id/text_by_text"
+            android:layout_toEndOf="@id/text_by_text"
             android:layout_alignTop="@id/text_by_text"
             android:backgroundTint="@color/transparent" />
 
@@ -32,8 +33,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/info_text"
             android:layout_toRightOf="@id/more_info"
+            android:layout_toEndOf="@id/more_info"
             android:layout_alignTop="@id/more_info"
             android:layout_toLeftOf="@id/speak_whole_text"
+            android:layout_toStartOf="@id/speak_whole_text"
             android:textSize="10sp"
             android:visibility="gone"/>
 

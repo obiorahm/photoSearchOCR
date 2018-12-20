@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
 import com.google.android.gms.samples.vision.ocrreader.GeographyActivity;
+import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
@@ -41,14 +43,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     ArrayList<String[]> mData = new ArrayList<>();
     private RecyclerView last_selected = null;
     private RelativeLayout last_selected_rl = null;
-    static String LOG_TAG = RestaurantAdapter.class.getSimpleName();
+    private static String LOG_TAG = RestaurantAdapter.class.getSimpleName();
 
-    final int URL_POS = 0;
-    final int TITLE_POS = 1;
-    final int ADDRESS_POS = 2;
-    final int PLACE_ID_POS = 3;
-    final int LONGITUDE = 4;
-    final int LATITUDE = 5;
+    private final int URL_POS = 0;
+    private final int TITLE_POS = 1;
+    private final int ADDRESS_POS = 2;
+    private final int PLACE_ID_POS = 3;
+    private final int LONGITUDE = 4;
+    private final int LATITUDE = 5;
 
 
 
@@ -136,7 +138,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mRecyclerView.setAdapter(adapter);
 
 
-            holder.mRecyclerView.setSelected(false);
+            //holder.mRecyclerView.setSelected(false);
             //((DetectImageActivity) context).fetchSuggestionsFor("theer aer a coupel of mistaeks in this senence");
 
 
@@ -170,12 +172,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 ((UseRecyclerActivity) context).getRestaurantPhoto(restaurantData[PLACE_ID_POS], holder.mImageView);
             }
 
-            //setup paranoma fragment
-
-            //((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView);
-
-            //((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
-
+            //hide progressBar
+            ProgressBar progressBar = ((GeographyActivity) context).findViewById(R.id.menu_progress);
+            progressBar.setVisibility(View.GONE);
         }
 
     private void control_select(RestaurantAdapter.ViewHolder holder, String[] restaurantData){
@@ -236,7 +235,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         for (String[] item: mData){
             String address = item[ADDRESS_POS];
             String[] lngLatPack = lngLat.get(address);
-            if (lngLat != null){
+            if (lngLat != null && item != null && lngLatPack != null){
                 item[LONGITUDE] = lngLatPack[LNG] ;
                 item[LATITUDE] = lngLatPack[LAT];
                 notifyDataSetChanged();

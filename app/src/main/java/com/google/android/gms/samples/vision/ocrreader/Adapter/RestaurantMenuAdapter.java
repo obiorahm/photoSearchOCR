@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -180,27 +181,13 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
         holder.mFoodItemRecyclerView.setAdapter(foodItemAdapter);
 
-
+        //hide progressBar
+        ProgressBar progressBar = ((OpenRestaurantMenuActivity) context).findViewById(R.id.menu_progress);
+        progressBar.setVisibility(View.GONE);
 
 
     }
 
-/*    private void control_select(RestaurantMenuAdapter.ViewHolder holder, String[] MenuData){
-        String mealCategory = MenuData[0];
-        last_selected = OpenRestaurantMenuActivity.last_parent_di;
-        if (last_selected != null && last_selected != holder.mRecyclerView){
-            RestaurantMenuAdapter.ViewHolder lastViewHolder = new RestaurantMenuAdapter.ViewHolder(last_selected);
-            lastViewHolder.mRecyclerView.setSelected(false);
-        }
-        if(holder.mRecyclerView.isSelected()){
-            holder.mRecyclerView.setSelected(false);
-        }else{
-            holder.mRecyclerView.setSelected(true);
-            OpenRestaurantMenuActivity.selected_item = mealCategory;
-        }
-        OpenRestaurantMenuActivity.last_parent_di = holder.mRecyclerView;
-
-    }*/
 
 
     private void control_select(RestaurantMenuAdapter.ViewHolder holder, String[] MenuData){

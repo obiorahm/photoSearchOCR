@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,11 +42,18 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
         last_rl_parent = null;
 
+        Intent intent = getIntent();
+        String url = intent.getStringExtra(GeographyActivity.RESTAURANT_URL);
+        String name = intent.getStringExtra(GeographyActivity.RESTAURANT_NAME);
+        Log.d(LOG_TAG, "my url " + url);
+
         //hide unnecessary views
         TextView textView1 = findViewById(R.id.current_location);
-        textView1.setVisibility(View.GONE);
+        textView1.setText(name);
+        //textView1.setVisibility(View.GONE);
+
         ImageView imageView1 = findViewById(R.id.location_image);
-        imageView1.setVisibility(View.GONE);
+        //imageView1.setVisibility(View.GONE);
 
 
         //start text to speech
@@ -63,15 +71,23 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        Intent intent = getIntent();
-        String url = intent.getStringExtra(GeographyActivity.RESTAURANT_URL);
-        String name = intent.getStringExtra(GeographyActivity.RESTAURANT_NAME);
-        Log.d(LOG_TAG, "my url " + url);
+
 
 
 
         FetchWebPage fetchWebPage = new FetchWebPage(this);
         fetchWebPage.execute(url, "don't encode");
+
+
+        //do back button
+        ImageButton back_btn = findViewById(R.id.back_btn_dr);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
     }
 

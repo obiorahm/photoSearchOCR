@@ -29,5 +29,18 @@
         android:paddingBottom="5dp"
         android:backgroundTint="@color/transparent"
         android:id="@+id/speak_whole_text"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/speak_whole_text"
+        android:layout_toStartOf="@id/speak_whole_text"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:visibility="invisible"
+        android:id="@+id/food_item_options" />
 
 </RelativeLayout>

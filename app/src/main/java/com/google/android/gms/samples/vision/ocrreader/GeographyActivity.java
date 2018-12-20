@@ -1,6 +1,10 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
+import android.*;
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -34,7 +38,6 @@ import com.google.android.gms.location.places.PlacePhotoResponse;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
-import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
@@ -89,6 +92,9 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
     double LONGITUDE = 151.20689;
 
     double LATITUDE = -33.87365;
+
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
 
     @Override
     protected void onCreate(Bundle savedInstance){
@@ -186,8 +192,8 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     @Override
     public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView, String longitude, String latitude){
-        LONGITUDE = longitude.equals("")? LONGITUDE : new Double(longitude);
-        LATITUDE = latitude.equals("") ? LATITUDE : new Double(latitude);
+        LONGITUDE = longitude.equals("")? LONGITUDE : Double.valueOf(longitude);
+        LATITUDE = latitude.equals("") ? LATITUDE : Double.valueOf(latitude);
 
         Log.d(LOG_TAG, "latitude " + LONGITUDE + LATITUDE);
 
@@ -207,19 +213,91 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
 
     public void checkPermission(){
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+        /*if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 ){//Can add more as per requirement
 
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION},
                     123);
+        }else{
+            // No explanation needed, we can request the permission.
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+        }*/
+
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                new AlertDialog.Builder(this)
+                        .setTitle("title")
+                        .setMessage("title")
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //Prompt the user once explanation has been shown
+                                ActivityCompat.requestPermissions(GeographyActivity.this,
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        MY_PERMISSIONS_REQUEST_LOCATION);
+                            }
+                        })
+                        .create()
+                        .show();
+
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            //return false;
         }
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-    Activity thisActivity = this;
+                    // permission was granted, yay! Do the
+                    // location-related task you need to do.
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        getCurrentLocation();
+                        //Request location updates:
+                        //locationManager.requestLocationUpdates(provider, 400, 1, this);
+                    }
+
+                } /*else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+
+                }*/
+                //return;
+            }
+
+        }
+    }
+
+    //Activity thisActivity = this;
 
 
     @Override
@@ -278,7 +356,7 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
     @Override
     public void addLongLatToAdapter(HashMap<String, String[]> lngLatPack){
         adapter.addLngLat(lngLatPack);
-        recyclerView.setAdapter(adapter);
+        //recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -350,10 +428,10 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     private void displayCurrentLocation(String address, String placeId){
         globalTextView.setText(address);
-        ImageView locationImageView = thisActivity.findViewById(R.id.location_image);
+        ImageView locationImageView = GeographyActivity.this.findViewById(R.id.location_image);
         getRestaurantPhoto(placeId, locationImageView );
         //getPhotos(placeId);
-        FetchWebPage fetchWebPage = new FetchWebPage(thisActivity);
+        FetchWebPage fetchWebPage = new FetchWebPage(GeographyActivity.this);
         fetchWebPage.execute(address, "encode");
     }
 
@@ -392,10 +470,29 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         super.onDestroy();
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            getCurrentLocation();
+
+            //locationManager.requestLocationUpdates(provider, 400, 1, this);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            getCurrentLocation();
+
+            //locationManager.removeUpdates(this);
+        }
     }
 
 }
