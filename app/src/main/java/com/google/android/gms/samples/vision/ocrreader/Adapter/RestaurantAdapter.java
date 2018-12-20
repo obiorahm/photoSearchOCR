@@ -238,7 +238,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             if (lngLat != null && item != null && lngLatPack != null){
                 item[LONGITUDE] = lngLatPack[LNG] ;
                 item[LATITUDE] = lngLatPack[LAT];
-                notifyDataSetChanged();
+                //notifyDataSetChanged();
             }
         }
     }

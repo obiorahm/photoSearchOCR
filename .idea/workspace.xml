@@ -89,6 +89,7 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-12-19-17-36-03-329.rawproto" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-12-20-09-17-55-455.rawproto" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-12-20-09-25-26-069.rawproto" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-12-20-09-33-12-977.rawproto" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/smaller_layer_drawable.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/smaller_layer_selected.xml" />
@@ -152,6 +153,7 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-12-19-17-36-03-329.json" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-12-20-09-17-55-455.json" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-12-20-09-25-26-069.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-12-20-09-33-12-977.json" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/GeographyActivity$3$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/GeographyActivity$4$1.class" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/GeographyActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/GeographyActivity$5.class" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/GeographyActivity$3$1.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/GeographyActivity$4$1.dex" />
@@ -370,11 +372,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GeographyActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GeographyActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/GeographyActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="358" column="10" lean-forward="false" selection-start-line="358" selection-start-column="10" selection-end-line="358" selection-end-column="10" />
+            <state relative-caret-position="3156">
+              <caret line="356" column="22" lean-forward="false" selection-start-line="356" selection-start-column="16" selection-end-line="356" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -383,7 +385,7 @@
       <file leaf-file-name="FetchRestaurantLongLat.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/FetchRestaurantLongLat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
+            <state relative-caret-position="233">
               <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
               <folding />
             </state>
@@ -443,11 +445,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RestaurantAdapter.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RestaurantAdapter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="177" column="9" lean-forward="true" selection-start-line="177" selection-start-column="9" selection-end-line="177" selection-end-column="9" />
+            <state relative-caret-position="2427">
+              <caret line="243" column="5" lean-forward="false" selection-start-line="243" selection-start-column="5" selection-end-line="243" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -491,8 +493,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>assetManage</find>
-      <find>i</find>
       <find>ico</find>
       <find>icon</find>
       <find>icons</find>
@@ -519,8 +519,10 @@
       <find>drawable</find>
       <find>set</find>
       <find>orderInstructions</find>
-      <find>setAdapter</find>
       <find>processWebResults</find>
+      <find>getCurrentLocation</find>
+      <find>setAdapter</find>
+      <find>addLon</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/app/src/main/res/xml</dir>
@@ -2325,8 +2327,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/single_food_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/smaller_layer_selected.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/option_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/GeographyActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.java" />
       </list>
     </option>
   </component>
@@ -2931,7 +2933,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1545319977427" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1545320512035" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2986,7 +2988,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1545319977427" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1545320512036" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -3180,7 +3182,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1545319977449" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1545320512038" />
       </method>
     </configuration>
     <list size="1">
@@ -3232,12 +3234,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287841" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30769232" sideWeight="0.5114449" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29900745" sideWeight="0.48855507" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29900745" sideWeight="0.48855507" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3251,7 +3252,7 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16873449" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15508685" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15508685" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3025751" sideWeight="0.49411765" order="0" side_tool="false" content_ui="combo" />
@@ -3733,14 +3734,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="177" column="9" lean-forward="true" selection-start-line="177" selection-start-column="9" selection-end-line="177" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OpenRestaurantMenuActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="341">
@@ -3751,7 +3744,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/FetchRestaurantLongLat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
+        <state relative-caret-position="233">
           <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
           <folding />
         </state>
@@ -3759,8 +3752,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/GeographyActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="358" column="10" lean-forward="false" selection-start-line="358" selection-start-column="10" selection-end-line="358" selection-end-column="10" />
+        <state relative-caret-position="3156">
+          <caret line="356" column="22" lean-forward="false" selection-start-line="356" selection-start-column="16" selection-end-line="356" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2427">
+          <caret line="243" column="5" lean-forward="false" selection-start-line="243" selection-start-column="5" selection-end-line="243" selection-end-column="5" />
           <folding />
         </state>
       </provider>
