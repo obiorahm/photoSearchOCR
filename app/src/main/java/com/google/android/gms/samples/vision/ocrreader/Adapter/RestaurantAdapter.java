@@ -183,8 +183,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         last_selected_rl = GeographyActivity.last_rl_parent;
         if (last_selected_rl != null && last_selected_rl != holder.mRelativeLayout){
             RestaurantAdapter.ViewHolder lastViewHolder = new RestaurantAdapter.ViewHolder(last_selected_rl);
-            lastViewHolder.mRelativeLayout.setSelected(false);
-            lastViewHolder.mStreetViewPanoramaView.setVisibility(View.GONE);
+            if (lastViewHolder.mRelativeLayout != null){
+                lastViewHolder.mRelativeLayout.setSelected(false);
+                lastViewHolder.mStreetViewPanoramaView.setVisibility(View.GONE);
+
+            }
 
         }
         if(holder.mRelativeLayout.isSelected()){

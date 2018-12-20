@@ -148,6 +148,10 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
+        recyclerView.setAdapter(adapter);
+
+
+
         //final TextView textView = findViewById(R.id.current_location);
         globalTextView = findViewById(R.id.current_location);
 
@@ -178,6 +182,7 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
                 startActivity(mainActivityIntent);
             }
         });
+
 
     }
 
