@@ -5,7 +5,7 @@
     android:id="@+id/relative_layout"
 
     android:layout_margin="5dp">
-    <RelativeLayout
+    <com.google.android.gms.samples.vision.ocrreader.ui.project.InterceptRelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/internal_relative_layout"
@@ -19,7 +19,7 @@
             android:visibility="gone"
             android:layout_margin="10dp"/>
         <com.google.android.gms.samples.vision.ocrreader.ui.project.ProjectRecyclerView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/text_by_text"
             android:paddingTop="5dp"
@@ -57,7 +57,7 @@
         </com.google.android.gms.maps.StreetViewPanoramaView>
 
 
-    </RelativeLayout>
+    </com.google.android.gms.samples.vision.ocrreader.ui.project.InterceptRelativeLayout>
 
 
 </RelativeLayout>

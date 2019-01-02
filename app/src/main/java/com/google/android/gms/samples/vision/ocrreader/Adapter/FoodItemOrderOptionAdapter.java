@@ -39,10 +39,12 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
 
         private ImageView mImageView;
+        private TextView mTextView;
 
         public ViewHolder(View parent){
             super(parent);
             mImageView = parent.findViewById(R.id.order_option);
+            mTextView = parent.findViewById(R.id.order_option_text);
         }
 
     }
@@ -68,16 +70,26 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
         final int pos = position;
 
-        Glide.with(context).load(mData.get(position)).into(holder.mImageView);
+        String url = mData.get(position);
+
+        int firstPos = url.lastIndexOf('/');
+        int lastPos = url.lastIndexOf('.');
+
+        String label = url.substring(firstPos + 1, lastPos);
+
+        holder.mTextView.setText(label);
+
+        Glide.with(context).load(url).into(holder.mImageView);
 
         holder.mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int nextstate = next_state(state.get(pos));
+                /*int nextstate = next_state(state.get(pos));
 
                 holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[nextstate]));
 
-                state.set(pos, nextstate);
+                state.set(pos, nextstate);*/
+                next_state(holder);
 
             }
         });
@@ -108,6 +120,14 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
         else
             return new_state;
 
+    }
+
+    private void next_state(FoodItemOrderOptionAdapter.ViewHolder holder){
+        if (holder.mImageView.isSelected()){
+            holder.mImageView.setSelected(true);
+        }else{
+            holder.mImageView.setSelected(false);
+        }
     }
 
 }

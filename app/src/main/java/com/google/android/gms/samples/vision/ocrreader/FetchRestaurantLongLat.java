@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -89,7 +90,11 @@ public class FetchRestaurantLongLat extends AsyncTask<ArrayList<String>, Void, H
 
             return result;
 
-        }catch (IOException e){
+        } catch (FileNotFoundException e ){
+            Log.e(LOG_TAG, " " + e );
+            return null;
+        }
+        catch (IOException e){
             Log.e(LOG_TAG, "Error", e);
             return null;
         }finally {
@@ -164,6 +169,9 @@ public class FetchRestaurantLongLat extends AsyncTask<ArrayList<String>, Void, H
 
             }catch (JSONException e){
                 Log.e(LOG_TAG, e + "");
+            }catch (NullPointerException e){
+                Log.e(LOG_TAG, e + "");
+
             }
         }
 

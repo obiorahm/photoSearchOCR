@@ -40,12 +40,14 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         private TextView mTextView;
         private ImageButton mImageButton;
         private RecyclerView mRecyclerView;
+        private RelativeLayout mContainingRelativeLayout;
 
         public ViewHolder(View parent){
             super(parent);
             mTextView = parent.findViewById(R.id.single_food_item);
             mImageButton = parent.findViewById(R.id.speak_whole_text);
             mRecyclerView = parent.findViewById(R.id.food_item_options);
+            mContainingRelativeLayout = parent.findViewById(R.id.containing_relative_layout);
         }
 
     }
@@ -73,7 +75,22 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         final String word = mData.get(position);
         holder.mTextView.setText(word);
 
+        /*// the text view is parent wide
+        holder.mTextView.setSelected(false);
+
+
         holder.mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                select_view(word, holder);
+            }
+        });*/
+
+        //select with relative layout instead
+
+        holder.mContainingRelativeLayout.setSelected(false);
+
+        holder.mContainingRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 select_view(word, holder);
@@ -114,7 +131,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
 
     }
-    private void select_view(String word,FoodItemAdapter.ViewHolder holder){
+/*    private void select_view(String word,FoodItemAdapter.ViewHolder holder){
         myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
 
         if (holder.mTextView.isSelected()){
@@ -125,7 +142,21 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             holder.mTextView.setSelected(true);
             holder.mRecyclerView.setVisibility(View.VISIBLE);
         }
+    }*/
+
+    private void select_view(String word,FoodItemAdapter.ViewHolder holder){
+        myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
+
+        if (holder.mContainingRelativeLayout.isSelected()){
+            holder.mContainingRelativeLayout.setSelected(false);
+            holder.mRecyclerView.setVisibility(View.GONE);
+
+        }else{
+            holder.mContainingRelativeLayout.setSelected(true);
+            holder.mRecyclerView.setVisibility(View.VISIBLE);
+        }
     }
+
 
     @Override
     public int getItemCount(){

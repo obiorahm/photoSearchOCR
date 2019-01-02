@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <com.google.android.gms.samples.vision.ocrreader.ui.project.InterceptRelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_row"
@@ -54,8 +54,20 @@
 
 
 
-        <android.support.v7.widget.RecyclerView
+        <!--android.support.v7.widget.RecyclerView
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/food_item"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_below="@id/text_by_text"
+            android:visibility="visible"
+            /-->
+
+        <com.google.android.gms.samples.vision.ocrreader.ui.project.InterceptRecyclerView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/food_item"
             android:layout_marginLeft="10dp"
@@ -66,7 +78,7 @@
             android:visibility="gone"
             />
 
-    </RelativeLayout>
+    </com.google.android.gms.samples.vision.ocrreader.ui.project.InterceptRelativeLayout>
 
 
 

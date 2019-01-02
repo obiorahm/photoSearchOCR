@@ -38,7 +38,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         //we reuse the display_nearby_restaurants layout to display specific restaurant menus
-        setContentView(R.layout.display_nearby_restaurants);
+        setContentView(R.layout.display_nearby_restaurants_intercept);
 
         last_rl_parent = null;
 
@@ -70,9 +70,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         // apparently the recycler view does not work without setting up a layout manager
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-
-
-
+        recyclerView.setAdapter(adapter);
 
 
         FetchWebPage fetchWebPage = new FetchWebPage(this);

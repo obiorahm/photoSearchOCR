@@ -73,6 +73,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             mImageButton = convertView.findViewById(R.id.speak_whole_text);
             mImageView = convertView.findViewById(R.id.descriptive_image);
             mStreetViewPanoramaView = convertView.findViewById(R.id.streetviewpanorama);
+            //RecyclerView parentRecyclerView = (RecyclerView) convertView.getParent();
 
 
         }
@@ -165,6 +166,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                     control_select(holder, restaurantData);
                 }
             });
+
+
 
 
             Log.d(LOG_TAG, restaurantData[PLACE_ID_POS]+  " Longitude " + restaurantData[LONGITUDE] + " Latitude" + restaurantData[LATITUDE]);

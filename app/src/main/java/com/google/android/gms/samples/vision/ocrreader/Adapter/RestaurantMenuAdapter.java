@@ -4,6 +4,7 @@ import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,13 +36,18 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
     public RelativeLayout last_selected_rl = null;
 
+    private String LOG_TAG = RestaurantMenuAdapter.class.getSimpleName();
+
+    public static int counter = 0;
+
 
 
     public static class ViewHolder extends  RecyclerView.ViewHolder {
 
         private RecyclerView mRecyclerView;
         private RecyclerView mFoodItemRecyclerView;
-        private View mBackground;
+        //private View mBackground;
+        private RelativeLayout mBackground;
         private RelativeLayout mRelativeLayout;
         private ImageButton mImageButton;
         private TextView mTextView;
@@ -51,7 +57,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
         public ViewHolder(View convertView) {
             super(convertView);
-            mBackground = convertView;
+            mBackground = (RelativeLayout) convertView;
             mRecyclerView = convertView.findViewById(R.id.text_by_text);
             mFoodItemRecyclerView = convertView.findViewById(R.id.food_item);
             //mRelativeLayout = convertView.findViewById(R.id.relative_layout);
@@ -100,7 +106,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
         final String description = restaurantData[CATEGORY_DESCRIPTION];
 
         // setup horizontal text by text adapter
-        TextByTextAdapter adapter = new TextByTextAdapter(context, R.layout.recognized_text_item);
+        TextByTextAdapterIntercept adapter = new TextByTextAdapterIntercept(context, R.layout.recognized_text_item);
 
         String tokenizedString [] = word.split(" ");
 
@@ -118,21 +124,21 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
         //((DetectImageActivity) context).fetchSuggestionsFor("theer aer a coupel of mistaeks in this senence");
 
 
-        holder.mBackground.setOnClickListener(new View.OnClickListener() {
+        /*holder.mBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 control_select(holder, restaurantData);
 
             }
-        });
+        });*/
 
-        holder.mRecyclerView.setOnClickListener(new View.OnClickListener() {
+        /*holder.mRecyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 control_select(holder, restaurantData);
 
             }
-        });
+        });*/
 
         holder.mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,20 +197,26 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
 
     private void control_select(RestaurantMenuAdapter.ViewHolder holder, String[] MenuData){
+        counter++;
+        Log.d(LOG_TAG, counter + "");
         String mealCategory = MenuData[0];
         last_selected_rl = OpenRestaurantMenuActivity.last_rl_parent;
         if (last_selected_rl != null && last_selected_rl != holder.mRelativeLayout){
             RestaurantMenuAdapter.ViewHolder lastViewHolder = new RestaurantMenuAdapter.ViewHolder(last_selected_rl);
             lastViewHolder.mRelativeLayout.setSelected(false);
+            Log.d(LOG_TAG, "relative layout false 1");
+
             lastViewHolder.mFoodItemRecyclerView.setVisibility(View.GONE);
         }
         if(holder.mRelativeLayout.isSelected()){
             holder.mRelativeLayout.setSelected(false);
+            Log.d(LOG_TAG, "relative layout false 2");
             holder.mFoodItemRecyclerView.setVisibility(View.GONE);
 
         }else{
             holder.mRelativeLayout.setSelected(true);
             OpenRestaurantMenuActivity.selected_item = mealCategory;
+            Log.d(LOG_TAG, "relative layout true");
             holder.mFoodItemRecyclerView.setVisibility(View.VISIBLE);
 
         }

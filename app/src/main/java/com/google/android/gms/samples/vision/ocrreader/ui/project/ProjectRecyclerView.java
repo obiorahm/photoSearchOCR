@@ -42,10 +42,12 @@ public class ProjectRecyclerView extends RecyclerView {
 
                 break;
             }
+
         }
-        return false;
+        return true;
 
     }
+
 
 
     @Override
