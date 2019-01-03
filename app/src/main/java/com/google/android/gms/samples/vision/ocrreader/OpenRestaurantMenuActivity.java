@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantMenuAdapter;
 import com.google.firebase.FirebaseApp;
 
@@ -87,6 +89,31 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         });
 
 
+        ImageButton imageButtonClearOnSiteRecycler = findViewById(R.id.cancel_gridview_edit_meal);
+        imageButtonClearOnSiteRecycler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                takeDownRecyclerView();
+            }
+        });
+
+
+    }
+
+    public void takeDownRecyclerView(){
+
+
+        //clear the recycler from the page
+        RecyclerView recyclerView = findViewById(R.id.gridview_edit_meal);
+        recyclerView.setVisibility(View.GONE);
+
+        //clear textview if no results
+        TextView textViewNoResult = findViewById(R.id.no_result);
+        textViewNoResult.setVisibility(View.GONE);
+
+        ImageButton imageButtonclearRecycler = findViewById(R.id.cancel_gridview_edit_meal);
+        imageButtonclearRecycler.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -149,6 +176,17 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
         }
 
+
+    }
+
+    @Override
+    public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView){
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
+        //RecyclerView recyclerView = (RecyclerView) findViewById(R.id.gridview_edit_meal);
+        recyclerView.setVisibility(View.VISIBLE);
 
     }
 

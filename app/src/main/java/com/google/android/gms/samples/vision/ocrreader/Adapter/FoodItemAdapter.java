@@ -12,11 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
+import com.google.android.gms.samples.vision.ocrreader.FetchMealDetails;
+import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
@@ -39,6 +42,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
         private TextView mTextView;
         private ImageButton mImageButton;
+        private ImageButton mImageButtonShowFoodItem;
         private RecyclerView mRecyclerView;
         private RelativeLayout mContainingRelativeLayout;
 
@@ -46,6 +50,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             super(parent);
             mTextView = parent.findViewById(R.id.single_food_item);
             mImageButton = parent.findViewById(R.id.speak_whole_text);
+            mImageButtonShowFoodItem = parent.findViewById(R.id.show_food_item_image);
             mRecyclerView = parent.findViewById(R.id.food_item_options);
             mContainingRelativeLayout = parent.findViewById(R.id.containing_relative_layout);
         }
@@ -104,6 +109,16 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             }
         });
 
+        holder.mImageButtonShowFoodItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageView imageViewShowFoodItem = ((OpenRestaurantMenuActivity) context).findViewById(R.id.food_image);
+                setUpRecyclerView(word, false);
+                //imageViewShowFoodItem.setVisibility(View.VISIBLE);
+            }
+        });
+
+
         //set up food item adapter
         FoodItemOrderOptionAdapter foodItemOrderOptionAdapter = new FoodItemOrderOptionAdapter(context);
 
@@ -155,6 +170,29 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             holder.mContainingRelativeLayout.setSelected(true);
             holder.mRecyclerView.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void setUpRecyclerView(String wholeMealText, Boolean blockOrText){
+
+
+        OpenRestaurantMenuActivity openRestaurantMenuActivity = (OpenRestaurantMenuActivity) context;
+
+        RecyclerView recyclerView = openRestaurantMenuActivity.findViewById(R.id.gridview_edit_meal);
+
+        RecyclerWordAdapter recyclerWordAdapter = new RecyclerWordAdapter(context, R.layout.gridview_item, myTTS, wholeMealText, blockOrText);
+
+
+        ProgressBar progressBar = openRestaurantMenuActivity.findViewById(R.id.searching_edmame);
+        progressBar.setVisibility(View.VISIBLE);
+
+        FetchMealDetails fetchMealDetails = new FetchMealDetails(recyclerWordAdapter, context);
+        fetchMealDetails.execute(wholeMealText);
+
+        recyclerView.setAdapter(recyclerWordAdapter);
+
+        ImageButton imageButtonclearRecycler = openRestaurantMenuActivity.findViewById(R.id.cancel_gridview_edit_meal);
+        imageButtonclearRecycler.setVisibility(View.VISIBLE);
+
     }
 
 
