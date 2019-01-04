@@ -45,7 +45,7 @@ public class InterceptRelativeLayout extends RelativeLayout {
             }
 
         }
-        return false;
+        return true;
 
     }
 

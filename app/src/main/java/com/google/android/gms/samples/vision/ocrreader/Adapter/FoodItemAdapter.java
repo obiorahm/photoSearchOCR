@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.net.Uri;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -34,9 +35,20 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     LayoutInflater inflater;
     ArrayList<String> mData;
+    ArrayList<Integer> state = new ArrayList<>();
+    ArrayList<Integer[]> order = new ArrayList<>();
+
     TextToSpeech myTTS;
     Context context;
     private String LOG_TAG = FoodItemAdapter.class.getSimpleName();
+
+    private final static int STATE_NORMAL = 0;
+    private final static int STATE_SELECT = 1;
+
+    private int normal = R.drawable.border;
+    private int select = R.drawable.text_border;
+
+    private int[] STATES = { normal, select};
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -75,7 +87,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(final FoodItemAdapter.ViewHolder holder, int position){
+    public void onBindViewHolder(final FoodItemAdapter.ViewHolder holder, final int position){
 
         final String word = mData.get(position);
         holder.mTextView.setText(word);
@@ -98,14 +110,15 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         holder.mContainingRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_view(word, holder);
+                changeState(word, holder, position);
             }
         });
 
         holder.mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_view(word, holder);
+                changeState(word, holder, position);
+
             }
         });
 
@@ -146,20 +159,34 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
 
     }
-/*    private void select_view(String word,FoodItemAdapter.ViewHolder holder){
+
+
+    private void changeState(String word, FoodItemAdapter.ViewHolder holder, int position){
         myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
+        int current_state = state.get(position);
+        int next_state = current_state + 1;
+        switch (next_state){
 
-        if (holder.mTextView.isSelected()){
-            holder.mTextView.setSelected(false);
-            holder.mRecyclerView.setVisibility(View.GONE);
 
-        }else{
-            holder.mTextView.setSelected(true);
-            holder.mRecyclerView.setVisibility(View.VISIBLE);
+            case STATE_SELECT:
+                holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_SELECT]));
+                holder.mRecyclerView.setVisibility(View.VISIBLE);
+                state.set(position,STATE_SELECT);
+                break;
+            default:
+            case STATE_NORMAL:
+                holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
+                holder.mRecyclerView.setVisibility(View.GONE);
+                state.set(position,STATE_NORMAL);
+                break;
+
+
         }
-    }*/
 
-    private void select_view(String word,FoodItemAdapter.ViewHolder holder){
+
+    }
+
+/*    private void select_view(String word,FoodItemAdapter.ViewHolder holder){
         myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
 
         if (holder.mContainingRelativeLayout.isSelected()){
@@ -170,7 +197,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             holder.mContainingRelativeLayout.setSelected(true);
             holder.mRecyclerView.setVisibility(View.VISIBLE);
         }
-    }
+    }*/
 
     public void setUpRecyclerView(String wholeMealText, Boolean blockOrText){
 
@@ -196,6 +223,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     }
 
 
+
+
     @Override
     public int getItemCount(){
         return mData.size();
@@ -203,11 +232,17 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     public void addItem(String text){
         mData.add(text);
+        // initialize entry state to zero
+
+        state.add(STATE_NORMAL);
         notifyDataSetChanged();
     }
 
     public void addItem(ArrayList<String> foodItems){
         mData = foodItems;
+        for (String item : foodItems){
+            state.add(STATE_NORMAL);
+        }
     }
 
 }
