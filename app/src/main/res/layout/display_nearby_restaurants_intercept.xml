@@ -171,15 +171,16 @@
         android:visibility="gone"
         android:backgroundTint="@color/darkTeal"/>
 
+    <!--
+    show options-->
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/food_image"
-        android:layout_toEndOf="@id/food_image"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/order_option_items"
         />
 
 </RelativeLayout>

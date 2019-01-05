@@ -111,6 +111,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 changeState(word, holder, position);
+                ((OpenRestaurantMenuActivity) context).hideOptionResults();
             }
         });
 
@@ -127,6 +128,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             public void onClick(View view) {
                 ImageView imageViewShowFoodItem = ((OpenRestaurantMenuActivity) context).findViewById(R.id.food_image);
                 setUpRecyclerView(word, false);
+                ((OpenRestaurantMenuActivity) context).hideSelectedOptionRecycler();
                 //imageViewShowFoodItem.setVisibility(View.VISIBLE);
             }
         });

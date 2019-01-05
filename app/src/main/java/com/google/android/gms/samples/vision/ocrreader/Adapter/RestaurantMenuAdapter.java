@@ -152,6 +152,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
             @Override
             public void onClick(View view) {
                 control_select(holder, restaurantData);
+                ((OpenRestaurantMenuActivity) context).hideOptionResults();
             }
         });
 
@@ -193,6 +194,8 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
 
     }
+
+
 
 
 

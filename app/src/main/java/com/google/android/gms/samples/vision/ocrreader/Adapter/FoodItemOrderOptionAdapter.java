@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 
 import java.util.ArrayList;
@@ -29,6 +31,11 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
     TextToSpeech myTTS;
     Context context;
+
+    private final static String SAUCES = "sauces";
+    private final static String DRINKS = "drinks";
+    private final static String NUTRITION = "nutrition";
+    private final static String MEATS = "meats";
 
     private static int STATE_NORMAL = 0;
 
@@ -75,7 +82,7 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
         int firstPos = url.lastIndexOf('/');
         int lastPos = url.lastIndexOf('.');
 
-        String label = url.substring(firstPos + 1, lastPos);
+        final String label = url.substring(firstPos + 1, lastPos);
 
         holder.mTextView.setText(label);
 
@@ -89,12 +96,48 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
                 holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[nextstate]));
 
                 state.set(pos, nextstate);*/
+                handleOnClickListener(holder, label);
                 next_state(holder);
 
             }
         });
 
+
+
+
     }
+
+
+    public void handleOnClickListener(FoodItemOrderOptionAdapter.ViewHolder holder, String label){
+
+        ExpandOptionAdapter expandOptionAdapter = new ExpandOptionAdapter(context);
+        OpenRestaurantMenuActivity openRestaurantMenuActivity = (OpenRestaurantMenuActivity) context;
+
+        openRestaurantMenuActivity.hide_food_image_recycler();
+
+        RecyclerView recyclerView = openRestaurantMenuActivity.findViewById(R.id.order_option_items);
+
+        switch (label){
+            case SAUCES:
+                expandOptionAdapter.addItem(SAUCES);
+                break;
+            case DRINKS:
+                expandOptionAdapter.addItem(DRINKS);
+                break;
+            case NUTRITION:
+                expandOptionAdapter.addItem(NUTRITION);
+                break;
+            case MEATS:
+                expandOptionAdapter.addItem(MEATS);
+        }
+        LinearLayoutManager foodItemLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(foodItemLayoutManager);
+
+        recyclerView.setAdapter(expandOptionAdapter);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+
 
     @Override
     public int getItemCount(){

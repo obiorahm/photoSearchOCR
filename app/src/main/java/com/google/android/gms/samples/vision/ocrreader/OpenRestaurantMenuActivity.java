@@ -179,6 +179,30 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
     }
 
+    public void hideOptionResults(){
+        hideSelectedOptionRecycler();
+
+        hide_food_image_recycler();
+
+    }
+
+    public void hideSelectedOptionRecycler(){
+        RecyclerView option_selection_recyclerView = findViewById(R.id.order_option_items);
+        option_selection_recyclerView.setVisibility(View.GONE);
+    }
+
+    public void hide_food_image_recycler(){
+        RecyclerView food_image_recyclerView = findViewById(R.id.gridview_edit_meal);
+        food_image_recyclerView.setVisibility(View.GONE);
+
+        TextView no_result_textView = findViewById(R.id.no_result);
+        no_result_textView.setVisibility(View.GONE);
+
+        ImageButton remove_food_image_imageButton = findViewById(R.id.cancel_gridview_edit_meal);
+        remove_food_image_imageButton.setVisibility(View.GONE);
+
+    }
+
     @Override
     public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView){
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
