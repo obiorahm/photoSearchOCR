@@ -15,6 +15,7 @@
         android:layout_height="100dp"
         android:layout_below="@id/order_option"
         android:layout_centerHorizontal="true"
+        android:textAlignment="center"
         android:id="@+id/order_option_text"
         android:textColor="@color/white"/>
 

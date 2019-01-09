@@ -242,9 +242,11 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
         public void onClick(View view) {
 
             if (togglelistImageOn.isChecked()){
-                listMode(imageView, recyclerView);
-                togglelistImageOn.setChecked(false);
+
+                /*listMode(imageView, recyclerView);
+                togglelistImageOn.setChecked(false);*/
             }else{
+
                 Intent mealMenuActivity = new Intent(getApplicationContext(), MealMenuActivity.class);
                 mealMenuActivity.putExtra(MEAL_TO_GET, currentLineSelection);
                 startActivity(mealMenuActivity);

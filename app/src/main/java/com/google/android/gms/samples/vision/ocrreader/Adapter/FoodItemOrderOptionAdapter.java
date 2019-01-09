@@ -15,9 +15,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
+import com.google.android.gms.samples.vision.ocrreader.Order;
 import com.google.android.gms.samples.vision.ocrreader.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by mgo983 on 12/19/18.
@@ -31,6 +33,9 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
     TextToSpeech myTTS;
     Context context;
+    HashMap order = new HashMap();
+    String current_order;
+
 
     private final static String SAUCES = "sauces";
     private final static String DRINKS = "drinks";
@@ -56,9 +61,11 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
     }
 
-    public FoodItemOrderOptionAdapter(Context context){
+    public FoodItemOrderOptionAdapter(Context context, HashMap order, String current_order){
         this.context = context;
         inflater = LayoutInflater.from(context);
+        this.order = order;
+        this.current_order = current_order;
     }
 
     private int[] STATES = { normal, select};
@@ -82,7 +89,7 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
         int firstPos = url.lastIndexOf('/');
         int lastPos = url.lastIndexOf('.');
 
-        final String label = url.substring(firstPos + 1, lastPos);
+        final String label = url.substring(firstPos + 1, lastPos).replace("_", " ");
 
         holder.mTextView.setText(label);
 
@@ -110,7 +117,7 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
     public void handleOnClickListener(FoodItemOrderOptionAdapter.ViewHolder holder, String label){
 
-        ExpandOptionAdapter expandOptionAdapter = new ExpandOptionAdapter(context);
+        ExpandOptionAdapter expandOptionAdapter = new ExpandOptionAdapter(context, order, current_order);
         OpenRestaurantMenuActivity openRestaurantMenuActivity = (OpenRestaurantMenuActivity) context;
 
         openRestaurantMenuActivity.hide_food_image_recycler();

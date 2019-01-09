@@ -18,6 +18,7 @@ import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.microedition.khronos.opengles.GL;
 
@@ -35,6 +36,8 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
     LayoutInflater inflater;
     TextToSpeech myTTS;
     Context context;
+    HashMap order;
+    String current_order;
 
     String LOG_TAG = ExpandOptionAdapter.class.getSimpleName();
 
@@ -67,6 +70,16 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
 
     }
 
+    public ExpandOptionAdapter(Context context, HashMap order, String current_order){
+        super();
+        inflater = LayoutInflater.from(context);
+        this.context = context;
+        myTTS = ((UseRecyclerActivity) context).myTTS;
+        this.order = order;
+        this.current_order = current_order;
+
+    }
+
 
     @Override
     public ExpandOptionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -80,7 +93,7 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
 
         String image_file_name = mData.get(position)[NORMAL];
         int end_char = image_file_name.indexOf(".");
-        String label = image_file_name.substring(0, end_char);
+        final String label = image_file_name.substring(0, end_char).replace("_"," ");
 
         holder.mTextView.setText(label);
 
@@ -92,6 +105,7 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
         holder.mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myTTS.speak(label,TextToSpeech.QUEUE_FLUSH,null);
                 handleOnClickListener( position, holder);
             }
         });
@@ -211,7 +225,7 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
         mState.set(pos, new_choice);
         String image_file_name = mData.get(pos)[new_choice];
         int end_char = image_file_name.indexOf(".");
-        String label = image_file_name.substring(0, end_char);
+        String label = image_file_name.substring(0, end_char).replace("_", " ");
 
         holder.mTextView.setText(label);
         String url = "file:///android_asset/" + mTopLevel.get(pos) + "/" + image_file_name;

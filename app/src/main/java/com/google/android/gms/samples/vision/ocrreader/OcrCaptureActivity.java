@@ -36,6 +36,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -79,7 +80,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     private static final int RC_HANDLE_GMS = 9001;
 
     // Permission request codes need to be < 256
-    private static final int RC_HANDLE_CAMERA_PERM = 2;
+    public static final int RC_HANDLE_CAMERA_PERM = 2;
 
     // com.google.android.gms.samples.vision.ocrreader.Constants used to pass extra data in the intent
     public static final String AutoFocus = "AutoFocus";
@@ -163,9 +164,6 @@ public final class OcrCaptureActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 capture_image_and_start_detect();
-                /*Intent detectImageActivity = new Intent(getApplicationContext(), DetectImageActivity.class);
-                detectImageActivity.putExtra(IMAGE_FILE_NAME, file.getAbsolutePath());
-                startActivity(detectImageActivity);*/
             }
         });
 
@@ -354,6 +352,9 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
+
+        Log.d("Permission granted: ", PackageManager.PERMISSION_GRANTED + "");
+
         switch (requestCode) {
 
             case RC_HANDLE_CAMERA_PERM:
@@ -366,6 +367,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                     return;
                 }
                 break;
+
             case 1: {
                 if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "Permission denied to access your location.", Toast.LENGTH_SHORT).show();
@@ -447,70 +449,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
             final TextBlock final_text = text;
             if (text != null && text.getValue() != null) {
 
-                mCameraSource.takePicture(new CameraSource.ShutterCallback() {
-                    @Override
-                    public void onShutter() {
-
-                    }
-                }, new CameraSource.PictureCallback() {
-                    @Override
-                    public void onPictureTaken(byte[] data) {
-                        if (data != null){
-
-                            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-
-                            // save the image
-                            currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-
-                            try {
-
-                                //give the file a unique name
-                                imageFileName = "detect" + currentDateTimeString.replace(" ","");
-
-                                File imagePath = new File(OcrCaptureActivity.this.getApplicationContext().getFilesDir(), "Detectors");
-                                File newFile = new File(imagePath, imageFileName);
-                                Uri contentUri = FileProvider.getUriForFile(OcrCaptureActivity.this.getApplicationContext(), "com.google.android.gms.samples.vision.ocrreader.provider", newFile);
-
-
-                                Log.d(LOG_TAG, "file name: " + contentUri.toString());
-
-
-                                FileOutputStream fOut = new FileOutputStream(contentUri.toString());
-
-                                //FileOutputStream fOut = new FileOutputStream(file);
-
-                                fOut.write(data);
-                                fOut.close();
-
-                                //Uri photoURI = GetFileUri();
-
-
-
-                            }catch (IOException e){
-                                Log.e(LOG_TAG, e + "file not created");
-                            }
-
-                            if (ocrDetectorProcessor != null)
-                            {
-                                //items = ocrDetectorProcessor.getTextBlocks();
-                                items.append(items.size(), final_text);
-
-                                if (items != null){
-                                    for (int i = 0; i < items.size(); i++){
-                                        if (items.get(i) != null){
-                                            Log.d(LOG_TAG, "Text blocks in snapshot" + items.get(i).getValue());
-
-                                        }
-
-                                    }
-                                }
-
-                            }
-
-                        }
-                    }
-                });
-
+                capture_image_and_start_detect();
             }
             else {
                 Log.d(TAG, "text data is null");
