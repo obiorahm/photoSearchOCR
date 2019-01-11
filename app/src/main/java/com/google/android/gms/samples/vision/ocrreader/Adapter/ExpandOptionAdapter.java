@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.samples.vision.ocrreader.Order;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
@@ -32,12 +33,13 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
     private ArrayList<Integer> mState = new ArrayList<>();
     private ArrayList<Integer> mType = new ArrayList<>();
     private ArrayList<String> mTopLevel = new ArrayList<>();
+    private ArrayList<Integer> mTopLevelInteger = new ArrayList<>();
 
     LayoutInflater inflater;
     TextToSpeech myTTS;
     Context context;
-    HashMap order;
-    String current_order;
+    private HashMap order;
+    private String current_order_name;
 
     String LOG_TAG = ExpandOptionAdapter.class.getSimpleName();
 
@@ -62,21 +64,14 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
 
     }
 
-    public ExpandOptionAdapter(Context context){
-        super();
-        inflater = LayoutInflater.from(context);
-        this.context = context;
-        myTTS = ((UseRecyclerActivity) context).myTTS;
 
-    }
-
-    public ExpandOptionAdapter(Context context, HashMap order, String current_order){
+    public ExpandOptionAdapter(Context context, HashMap order, String current_order_name){
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
         myTTS = ((UseRecyclerActivity) context).myTTS;
         this.order = order;
-        this.current_order = current_order;
+        this.current_order_name = current_order_name;
 
     }
 
@@ -131,9 +126,9 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
     private final static int SELECT = 1;
     private final static int REJECT = 2;
 
+
+
     public void addItem(String top_level_option){
-
-
 
         AssetManager assetManager = context.getAssets();
         String allAssets[];
@@ -152,19 +147,24 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
             switch (top_level_option){
                 case SAUCES:
                     type[0] = MORE_CHOICES;
+                    mTopLevelInteger.add(Order.ORDER_SAUCE);
 
                     break;
                 case DRINKS:
                     type[0] = ZERO_SUM;
+                    mTopLevelInteger.add(Order.ORDER_DRINK);
 
                     break;
                 case NUTRITION:
                     type[0] = ZERO_SUM;
+                    mTopLevelInteger.add(Order.ORDER_NUTRITION);
 
                     break;
                 case MEATS:
                     second_level_option_array = meats_second_level_array;
                     type = meat_option_types;
+                    mTopLevelInteger.add(Order.ORDER_COOKED);
+                    mTopLevelInteger.add(Order.ORDER_SLICED);
                     break;
             }
 
@@ -185,6 +185,7 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
 
     }
 
+    // Types
     private final static int ZERO_SUM = 0;
     private final static int MORE_CHOICES = 1;
 
@@ -208,20 +209,25 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
      */
     private void switch_state (int pos, ExpandOptionAdapter.ViewHolder holder){
         int new_state = mState.get(pos) + 1;
-        if (new_state > REJECT){
-            new_state = NORMAL;
-        }
+        new_state = (new_state > REJECT)? NORMAL : new_state;
+        putOrder(mTopLevelInteger.get(pos), new_state);
+
         mState.set(pos, new_state);
         holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[new_state]));
     }
 
-
+    /**
+     * rotate choice rotates states through as many images are available for a group choice
+     * @param pos
+     * @param holder
+     */
     private void rotate_choices(int pos, ExpandOptionAdapter.ViewHolder holder ){
         int new_choice = mState.get(pos) + 1;
         int total = mData.get(pos).length;
-        if (new_choice >= total){
-            new_choice = NORMAL;
-        }
+        new_choice = new_choice >= total ? NORMAL : new_choice;
+
+        putOrder(mTopLevelInteger.get(pos), new_choice);
+
         mState.set(pos, new_choice);
         String image_file_name = mData.get(pos)[new_choice];
         int end_char = image_file_name.indexOf(".");
@@ -232,5 +238,11 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
         Glide.with(context).load(url).into(holder.mImageView);
         myTTS.speak(label,TextToSpeech.QUEUE_FLUSH,null);
 
+    }
+
+    private void putOrder(int option, int value ){
+        Order current_order = (Order) order.get(current_order_name);
+        Integer order_items [] = current_order.getOrderValues();
+        order_items[option] = value;
     }
 }

@@ -40,7 +40,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     LayoutInflater inflater;
     ArrayList<String> mData;
     ArrayList<Integer> state = new ArrayList<>();
-    HashMap<String, Order> order = new HashMap<>();
+    public static HashMap<String, Order> order = new HashMap<>();
 
 
     private
@@ -266,7 +266,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     }
 
     private void addOrder(String word){
-        Order current_order = new Order(word);
+        Integer order_items [] = new Integer[Order.OPTION_SIZE];
+        Order current_order = new Order(word, order_items);
         order.put(word, current_order);
     }
 

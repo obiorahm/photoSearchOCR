@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.samples.vision.ocrreader.Adapter.FoodItemAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantMenuAdapter;
 import com.google.firebase.FirebaseApp;
@@ -41,6 +42,8 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         super.onCreate(savedInstance);
         //we reuse the display_nearby_restaurants layout to display specific restaurant menus
         setContentView(R.layout.display_nearby_restaurants_intercept);
+
+        FoodItemAdapter.order.clear();
 
         last_rl_parent = null;
 
@@ -97,6 +100,21 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
             }
         });
 
+        ImageButton imageButtonNext = findViewById(R.id.next_btn_dr);
+        imageButtonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getOrder();
+            }
+        });
+
+
+    }
+
+
+    public void getOrder(){
+        Intent orderActivityIntent = new Intent(getApplicationContext(), OrderActivity.class);
+        startActivity(orderActivityIntent);
 
     }
 

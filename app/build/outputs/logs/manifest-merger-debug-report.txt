@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-100:12
-INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-100:12
-INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-100:12
-INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-100:12
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-107:12
+INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-107:12
+INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-107:12
+INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-107:12
 MERGED from [com.android.support:design:24.2.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/design-24.2.0.aar/6867bc155a216d14ddb2e31494ceb056/AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:appcompat-v7:24.2.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/AndroidManifest.xml:17:1-27:12
 MERGED from [com.google.firebase:firebase-ml-vision:17.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/firebase-ml-vision-17.0.0.aar/9e06199b548fa34d761b85bfa2392862/AndroidManifest.xml:2:1-8:12
@@ -51,20 +51,20 @@ MERGED from [com.android.support:support-core-ui:26.1.0] /Users/mgo983/.gradle/c
 MERGED from [com.android.support:support-compat:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f90ebb0786da93a9ce9a905f01ba2642/AndroidManifest.xml:17:1-31:12
 MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.0.aar/a52b4cacf737f779fa2d048a02c9f11c/AndroidManifest.xml:17:1-24:12
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/91fc334fae4a9b5d0f3dd024741689eb/AndroidManifest.xml:17:1-30:12
-INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-100:12
-INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-100:12
-INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-100:12
+INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-107:12
+INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-107:12
+INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-107:12
 	package
 		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:3:5-62
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-100:12
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-107:12
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-100:12
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:1-107:12
 		INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:2:11-69
@@ -109,7 +109,7 @@ ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Pro
 	android:name
 		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:11:22-78
 application
-ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:14:5-98:19
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:14:5-105:19
 MERGED from [com.android.support:design:24.2.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/design-24.2.0.aar/6867bc155a216d14ddb2e31494ceb056/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:24.2.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/design-24.2.0.aar/6867bc155a216d14ddb2e31494ceb056/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:appcompat-v7:24.2.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/AndroidManifest.xml:25:5-20
@@ -262,34 +262,40 @@ ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Pro
 		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:76:13-47
 	android:name
 		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:75:19-108
-activity#com.google.android.gms.samples.vision.ocrreader.OcrCaptureActivity
-ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:84:9-85:41
+activity#com.google.android.gms.samples.vision.ocrreader.OrderActivity
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:83:9-90:20
 	android:label
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:85:13-38
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:84:13-42
 	android:name
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:84:19-100
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:83:19-95
+activity#com.google.android.gms.samples.vision.ocrreader.OcrCaptureActivity
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:91:9-92:41
+	android:label
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:92:13-38
+	android:name
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:91:19-100
 provider#com.google.android.gms.samples.vision.ocrreader.GenericFileProvider
-ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:86:9-94:20
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:93:9-101:20
 	android:grantUriPermissions
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:90:13-47
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:97:13-47
 	android:authorities
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:88:13-91
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:95:13-91
 	android:exported
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:89:13-37
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:96:13-37
 	android:name
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:87:13-95
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:94:13-95
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:91:13-93:57
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:98:13-100:57
 	android:resource
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:93:17-55
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:100:17-55
 	android:name
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:92:17-67
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:99:17-67
 service#com.google.android.gms.samples.vision.ocrreader.FetchAddressIntentService
-ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:95:9-97:39
+ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:102:9-104:39
 	android:exported
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:97:13-37
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:104:13-37
 	android:name
-		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:96:13-101
+		ADDED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml:103:13-101
 uses-sdk
 INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/AndroidManifest.xml
