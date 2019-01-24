@@ -3,6 +3,7 @@ package com.google.android.gms.samples.vision.ocrreader;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,12 +29,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by mgo983 on 8/6/18.
  */
 
-public class FetchMealDetails extends AsyncTask<String, Void, String> {
+public class FetchMealDetails extends AsyncTask<String, Void, HashMap<String, String>> {
 
     private final static String BASEURL = "https://api.edamam.com/search";
     private final static String API_KEY = "37345295e38efe1ea020cbc391ee11a8";
@@ -51,6 +53,12 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
     private String mWholeOrder = "";
 
 
+    public static final int FOR_DIALOG = 0;
+    public static final int FOR_TEN_RECYCLER = 1;
+    public static final int FOR_ORDER = 2;
+    private int display;
+
+
 
     /*public FetchMealDetails(WordAdapter wordAdapter, Context context){
         adapter = wordAdapter;
@@ -61,18 +69,28 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
         adapter = recyclerWordAdapter;
         this.context = context;
         useRecyclerActivity = ((UseRecyclerActivity) context);
+        this.display = FOR_TEN_RECYCLER;
     }
 
     public FetchMealDetails(Context context, String wholeOrder){
         this.context = context;
         this.NUM_TO = "1";
         this.mWholeOrder = wholeOrder;
+        this.display = FOR_DIALOG;
+    }
+
+    public FetchMealDetails(Context context, int num_to, int purpose){
+        this.context = context;
+        useRecyclerActivity = ((UseRecyclerActivity) context);
+        this.NUM_TO = Integer.toString(num_to);
+        this.display = purpose;
+
     }
 
 
 
     @Override
-    protected  String doInBackground(String...params) {
+    protected  HashMap<String, String > doInBackground(String...params) {
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -80,36 +98,49 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
 
         try{
 
-            Uri uri = buildEdmamUri(params[0]);
+            HashMap<String, String> result = new HashMap<>();
 
-            URL url = new URL(uri.toString());
-            Log.v(LOG_TAG,"The built Uri " + url);
+            for (int i = 0; i < params.length; i++){
 
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
-            urlConnection.connect();
+                Uri uri = buildEdmamUri(params[i]);
 
-            InputStream inputStream = urlConnection.getInputStream();
-            StringBuffer buffer = new StringBuffer();
-            if(inputStream == null){
-                return null;
+                URL url = new URL(uri.toString());
+                Log.v(LOG_TAG,"The built Uri " + url);
+
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.connect();
+
+                InputStream inputStream = urlConnection.getInputStream();
+                StringBuffer buffer = new StringBuffer();
+                if(inputStream == null){
+                    return null;
+                }
+
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                String line;
+                while ((line = reader.readLine()) != null){
+                    buffer.append(line + "\n");
+                }
+
+                if (buffer.length() == 0){
+                    return null;
+                }
+                result.put(params[i], buffer.toString());
+                //result[i] = buffer.toString();
+
+
             }
 
-            reader = new BufferedReader(new InputStreamReader(inputStream));
 
-            String line;
-            while ((line = reader.readLine()) != null){
-                buffer.append(line + "\n");
-            }
-
-            if (buffer.length() == 0){
-                return null;
-            }
 
             //Log.d(LOG_TAG, buffer.toString());
 
 
-            return buffer.toString();
+            //return buffer.toString();
+
+            return result;
 
         }catch (IOException e){
             Log.e(LOG_TAG, "Error", e);
@@ -152,22 +183,34 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
 
 
     @Override
-    protected void onPostExecute(String Result){
+    protected void onPostExecute(HashMap<String, String> Result){
 
         selectActivityToLoad(Result);
 
     }
 
-    private void selectActivityToLoad(String Result){
+    private void selectActivityToLoad(HashMap<String, String> Result){
         try{
-            EdmanJasonReader edmanJasonReader = new EdmanJasonReader(Result);
-            ArrayList<String[]> edmanInfo = edmanJasonReader.getRecipe();
 
-            if (adapter != null){
+            EdmanJasonReader edmanJasonReader = new EdmanJasonReader();
+            ArrayList<String[]> edmanInfo = edmanJasonReader.getRecipe(Result);
+
+            switch (display){
+                case FOR_DIALOG:
+                    setDialog(edmanInfo);
+                    break;
+                case FOR_TEN_RECYCLER:
+                case FOR_ORDER:
+                    setRecycler(edmanInfo);
+                    break;
+
+            }
+
+            /*if (adapter != null){
                 setRecycler(edmanInfo);
             }else{
                 setDialog(edmanInfo);
-            }
+            }*/
 
 
         }catch (NullPointerException e){
@@ -178,7 +221,7 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
 
     private void setRecycler(ArrayList<String[]> edmanInfo){
         // make progress bar invisible
-        ProgressBar searchingEdmame = ((Activity) context).findViewById(R.id.searching_edmame);
+        /*ProgressBar searchingEdmame = ((Activity) context).findViewById(R.id.searching_edmame);
         searchingEdmame.setVisibility(View.GONE);
 
         // no results returned
@@ -189,8 +232,8 @@ public class FetchMealDetails extends AsyncTask<String, Void, String> {
             for (String[] recipeInformation : edmanInfo){
                 adapter.addItem(recipeInformation);
             }
-        }
-        useRecyclerActivity.setView(adapter, (RecyclerView) ((Activity) context).findViewById(R.id.gridview_edit_meal));
+        }*/
+        useRecyclerActivity.setView(adapter, edmanInfo);
     }
 
     private void setDialog(ArrayList<String[]> edmanInfo){

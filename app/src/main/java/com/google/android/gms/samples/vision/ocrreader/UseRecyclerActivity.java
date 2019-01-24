@@ -12,6 +12,7 @@ import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapt
 
 import org.jsoup.nodes.Document;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -29,17 +30,15 @@ public class UseRecyclerActivity extends Activity  {
 
     public static RelativeLayout last_rl_parent;
 
-    public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView){
+    public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView, ArrayList<String[]> edamanInfo){}
 
-    }
+    public void setView(RecyclerWordAdapter adapter, ArrayList<String[]> edamanInfo){}
 
-    public void processWebResults(Document document){
+    public void setView( ArrayList<String []> edmanInfo){}
 
-    }
+    public void processWebResults(Document document){}
 
-    public void getRestaurantPhoto(String placeId, ImageView imageView){
-
-    }
+    public void getRestaurantPhoto(String placeId, ImageView imageView){}
 
     /**
      *     Run in the activity and available to FetchRestaurantPlaceID. this function updates the adapter after the place ids have been

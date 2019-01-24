@@ -40,7 +40,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     LayoutInflater inflater;
     ArrayList<String> mData;
     ArrayList<Integer> state = new ArrayList<>();
-    public static HashMap<String, Order> order = new HashMap<>();
+    //public static HashMap<String, Order> order = new HashMap<>();
+    public static HashMap<String, Object[]> order = new HashMap<>();
 
 
     private
@@ -209,7 +210,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
                 holder.mRecyclerView.setVisibility(View.VISIBLE);
                 state.set(position,STATE_CURRENT_SELECT);
 
-                addOrder(word);
+                addOrder(word, position, holder);
 
                 break;
         }
@@ -252,7 +253,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
                 holder.mRecyclerView.setVisibility(View.VISIBLE);
                 state.set(position,STATE_CURRENT_SELECT);
 
-                addOrder(word);
+                addOrder(word, position, holder);
 
                 break;
         }
@@ -260,15 +261,33 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     }
 
+    public static final int ORDER = 0;
+    public static final int POSITION = 1;
+    public static final int HOLDER = 2;
+
+
 
     private void removeOrder(String word){
         order.remove(word);
     }
 
-    private void addOrder(String word){
+
+    private void addOrder(String word, int position, ViewHolder holder){
         Integer order_items [] = new Integer[Order.OPTION_SIZE];
         Order current_order = new Order(word, order_items);
-        order.put(word, current_order);
+        Object [] orderData = new Object[3];
+        orderData[ORDER] = current_order;
+        orderData[POSITION] = position;
+        orderData[HOLDER] = holder;
+        //order.put(word, current_order);
+        order.put(word, orderData);
+    }
+
+    private void resetLayout(ViewHolder holder, int position){
+        //holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
+        holder.mRecyclerView.setVisibility(View.GONE);
+        state.set(position,STATE_NORMAL);
+        //((OpenRestaurantMenuActivity) context).hide_food_image_recycler();
     }
 
 
@@ -318,5 +337,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             state.add(STATE_NORMAL);
         }
     }
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -15,6 +17,7 @@ import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapt
 import com.google.firebase.FirebaseApp;
 
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -117,8 +120,23 @@ public class MealMenuActivity extends UseRecyclerActivity implements TextToSpeec
     }
 
 @Override
-public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView){
-        int numberOfColumns = 4;
+public void setView(RecyclerWordAdapter adapter,  ArrayList<String []> edmanInfo){
+    int numberOfColumns = 4;
+    // make progress bar invisible
+    ProgressBar searchingEdmame = findViewById(R.id.searching_edmame);
+    searchingEdmame.setVisibility(View.GONE);
+
+    // no results returned
+    if (edmanInfo.size() == 0){
+        TextView textViewNoResult = findViewById(R.id.no_result);
+        textViewNoResult.setVisibility(View.VISIBLE);
+    }else{
+        for (String[] recipeInformation : edmanInfo){
+            adapter.addItem(recipeInformation);
+        }
+    }
+
+    RecyclerView recyclerView = findViewById(R.id.gridview_edit_meal);
     recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
     recyclerView.setAdapter(adapter);
 

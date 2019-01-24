@@ -19,7 +19,9 @@ import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanoramaFragment;
+import com.google.android.gms.maps.StreetViewPanoramaOptions;
 import com.google.android.gms.maps.StreetViewPanoramaView;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
 import com.google.android.gms.samples.vision.ocrreader.GeographyActivity;
 import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
@@ -39,7 +41,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     LayoutInflater inflater;
     Context context;
     TextToSpeech myTTS;
-    //HashMap<String, String[]> mData = new HashMap<>();
+    HashMap<String, String[]> mDataCheck = new HashMap<>();
     ArrayList<String[]> mData = new ArrayList<>();
     private RecyclerView last_selected = null;
     private RelativeLayout last_selected_rl = null;
@@ -51,6 +53,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     private final int PLACE_ID_POS = 3;
     private final int LONGITUDE = 4;
     private final int LATITUDE = 5;
+
+    private double DEFAULT_LONG = 151.20689;
+
+    private double DEFAULT_LAT = -33.87365;
 
 
 
@@ -86,8 +92,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         public void addItem(String[] item){
             //final int POS_RESTAURANT_NAME = 1;
             //mData.put(item[POS_RESTAURANT_NAME], item);
-            mData.add(item);
-            notifyDataSetChanged();
+            //check for duplicate restaurant name before adding items
+            String restaurantName = item[TITLE_POS];
+            if (!mDataCheck.containsKey(restaurantName)){
+                mDataCheck.put(restaurantName, item);
+                mData.add(item);
+                notifyDataSetChanged();
+            }
+
         }
 
         public RestaurantAdapter(Context context, int resource){
@@ -170,14 +182,17 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
 
-            Log.d(LOG_TAG, restaurantData[PLACE_ID_POS]+  " Longitude " + restaurantData[LONGITUDE] + " Latitude" + restaurantData[LATITUDE]);
+            Log.d(LOG_TAG, "place id " +restaurantData[ADDRESS_POS]+  " Longitude " + restaurantData[LONGITUDE] + " Latitude" + restaurantData[LATITUDE]);
             if (!restaurantData[PLACE_ID_POS].equals("")){
                 ((UseRecyclerActivity) context).getRestaurantPhoto(restaurantData[PLACE_ID_POS], holder.mImageView);
             }
 
+
             //hide progressBar
             ProgressBar progressBar = ((GeographyActivity) context).findViewById(R.id.menu_progress);
             progressBar.setVisibility(View.GONE);
+
+
         }
 
     private void control_select(RestaurantAdapter.ViewHolder holder, String[] restaurantData){
@@ -202,6 +217,15 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             GeographyActivity.selected_item = restaurantName;
             GeographyActivity.selected_url = restaurantUrl;
             holder.mStreetViewPanoramaView.setVisibility(View.VISIBLE);
+
+            String longitude = restaurantData[LONGITUDE];
+            String latitude = restaurantData[LATITUDE];
+
+
+            Double currLongitude = longitude.equals("")? DEFAULT_LONG : Double.valueOf(longitude);
+            Double currLatitude = latitude.equals("") ? DEFAULT_LAT: Double.valueOf(latitude);
+            //holder.mStreetViewPanoramaView = new StreetViewPanoramaView(context, new StreetViewPanoramaOptions().position(new LatLng(currLatitude, currLongitude)));
+
             ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
 
         }

@@ -1,5 +1,6 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -222,7 +223,22 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
     }
 
     @Override
-    public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView){
+    public void setView(RecyclerWordAdapter adapter, ArrayList<String []> edmanInfo){
+        // make progress bar invisible
+        ProgressBar searchingEdmame = findViewById(R.id.searching_edmame);
+        searchingEdmame.setVisibility(View.GONE);
+
+        // no results returned
+        if (edmanInfo.size() == 0){
+            TextView textViewNoResult = findViewById(R.id.no_result);
+            textViewNoResult.setVisibility(View.VISIBLE);
+        }else{
+            for (String[] recipeInformation : edmanInfo){
+                adapter.addItem(recipeInformation);
+            }
+        }
+
+        RecyclerView recyclerView = findViewById(R.id.gridview_edit_meal);
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

@@ -48,8 +48,8 @@
 
         <com.google.android.gms.maps.StreetViewPanoramaView
             android:name="com.google.android.gms.maps.StreetViewPanoramaView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="500dp"
             android:layout_below="@id/speak_whole_text"
             android:id="@+id/streetviewpanorama"
             android:visibility="gone"
