@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -41,6 +42,7 @@ import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
 import com.google.android.gms.maps.model.StreetViewSource;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -60,7 +62,7 @@ import java.util.Locale;
  * Created by mgo983 on 10/5/18.
  */
 
-public class GeographyActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener, GoogleApiClient.OnConnectionFailedListener, OnStreetViewPanoramaReadyCallback{
+public class GeographyActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener, GoogleApiClient.OnConnectionFailedListener, OnStreetViewPanoramaReadyCallback, Runnable{
 
     TextView globalTextView;
     //Text to speech variables
@@ -97,6 +99,11 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
+    public Handler handler = new Handler();
+
+    public boolean test = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstance){
@@ -105,18 +112,17 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
         mSavedInstance = savedInstance;
 
-        // construct a GeoDataClient
-        mGeoDataClient = Places.getGeoDataClient(this);
+            // construct a GeoDataClient
+            mGeoDataClient = Places.getGeoDataClient(this);
 
-        // construct a PlaceDetectionClient.
-        mPlaceDetectionClient = Places.getPlaceDetectionClient(this);
+            // construct a PlaceDetectionClient.
+            mPlaceDetectionClient = Places.getPlaceDetectionClient(this);
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API)
-                .addOnConnectionFailedListener(this)
-                .build();
-
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addApi(Places.GEO_DATA_API)
+                    .addApi(Places.PLACE_DETECTION_API)
+                    .addOnConnectionFailedListener(this)
+                    .build();
 
         //getPhotos();
 
@@ -160,7 +166,12 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
             checkPermission();
 
-            getCurrentLocation();
+            if (test){
+                testData();
+            }else{
+
+                getCurrentLocation();
+            }
 
         }
 
@@ -202,8 +213,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         LONGITUDE = longitude.equals("")? LONGITUDE : Double.valueOf(longitude);
         LATITUDE = latitude.equals("") ? LATITUDE : Double.valueOf(latitude);
 
-        Log.d(LOG_TAG, "latitude " + LONGITUDE + LATITUDE);
-
         streetViewPanoramaView.onCreate(mSavedInstance);
         streetViewPanoramaView.getStreetViewPanoramaAsync(this);
     }
@@ -211,6 +220,30 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
     @Override
     public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
         panorama.setPosition(new LatLng(LATITUDE, LONGITUDE), 50, StreetViewSource.OUTDOOR);
+        curr_panorama = panorama;
+        handler.postDelayed(this, 1000);
+
+
+    }
+
+    StreetViewPanorama curr_panorama;
+    private void panScreen(){
+// Keeping the zoom and tilt. Animate bearing by 60 degrees in 1000 milliseconds.
+        long duration = 2000;
+        StreetViewPanoramaCamera camera =
+                new StreetViewPanoramaCamera.Builder()
+                        .zoom(curr_panorama.getPanoramaCamera().zoom)
+                        .tilt(curr_panorama.getPanoramaCamera().tilt)
+                        .bearing(curr_panorama.getPanoramaCamera().bearing - 60)
+                        .build();
+        curr_panorama.animateTo(camera, duration);
+        handler.postDelayed(this, duration);
+    }
+
+
+    @Override
+    public void run(){
+        panScreen();
     }
 
     @Override
@@ -293,6 +326,21 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     //Activity thisActivity = this;
 
+
+private void testData(){
+
+    globalTextView.setText("860 Hinman Ave, Evanston, IL, 60202");
+
+
+    String items [][] ={{ "/il/evanston/272976-brothers-k-coffeehouse/menu/" ,"Brothers K Coffeehouse", "500 Main St Evanston, IL, 60202","","",""},
+            { "/il/evanston/274001-lucky-platter/menu/", "Lucky Platter" ,  "514 Main St Evanston, IL, 60202","","",""},
+            {   "/il/evanston/300039-siam-paragon/menu/", "Siam Paragon", "503 Main St Evanston, IL, 60202","","",""},
+            {  "/il/evanston/126438-subway/menu/", "Subway", "506 Main St Evanston, IL, 60202","","",""}};
+
+    for(String [] item : items){
+        adapter.addItem(item);
+    }
+}
 
     @Override
     public void processWebResults(Document document){
@@ -471,7 +519,7 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            getCurrentLocation();
+            //getCurrentLocation();
 
             //locationManager.requestLocationUpdates(provider, 400, 1, this);
         }
@@ -483,7 +531,7 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            getCurrentLocation();
+            //getCurrentLocation();
 
             //locationManager.removeUpdates(this);
         }

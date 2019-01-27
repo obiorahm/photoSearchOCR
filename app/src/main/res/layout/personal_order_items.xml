@@ -10,6 +10,7 @@
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         />
+
     <TextView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -17,6 +18,13 @@
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:id="@+id/order_option_text"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/order_option"
+        android:id="@+id/order_to_be_spoken"
         android:textColor="@color/white"/>
 
     <ImageButton

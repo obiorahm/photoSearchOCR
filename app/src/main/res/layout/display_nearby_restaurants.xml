@@ -83,7 +83,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:id="@+id/detected_location_list_view"
-        android:layout_below="@id/location_image">
+        android:layout_below="@id/location_image"
+        android:layout_above="@+id/next_btn_dr">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -94,7 +95,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:src="@drawable/baseline_navigate_before_white_48dp"
-        android:layout_margin="20sp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
         android:id = "@+id/back_btn_dr"/>
 
     <ImageButton
@@ -104,7 +107,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:src="@drawable/baseline_navigate_next_white_48dp"
-        android:layout_margin="20sp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
         android:id = "@+id/next_btn_dr"/>
 
 </RelativeLayout>

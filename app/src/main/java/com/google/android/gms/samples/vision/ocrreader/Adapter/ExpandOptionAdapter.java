@@ -210,7 +210,7 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
     private void switch_state (int pos, ExpandOptionAdapter.ViewHolder holder){
         int new_state = mState.get(pos) + 1;
         new_state = (new_state > REJECT)? NORMAL : new_state;
-        putOrder(mTopLevelInteger.get(pos), new_state);
+        //putOrder(mTopLevelInteger.get(pos), new_state);
 
         mState.set(pos, new_state);
         holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[new_state]));
@@ -226,7 +226,7 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
         int total = mData.get(pos).length;
         new_choice = new_choice >= total ? NORMAL : new_choice;
 
-        putOrder(mTopLevelInteger.get(pos), new_choice);
+        //putOrder(mTopLevelInteger.get(pos), new_choice);
 
         mState.set(pos, new_choice);
         String image_file_name = mData.get(pos)[new_choice];

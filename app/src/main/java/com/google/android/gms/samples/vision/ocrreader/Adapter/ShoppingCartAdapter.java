@@ -46,12 +46,14 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         private ImageView mImageView;
         private TextView mTextView;
         private ImageButton mImageButton;
+        private TextView mTextViewOrder;
 
         public ViewHolder(View parent){
             super(parent);
             mImageView = parent.findViewById(R.id.order_option);
             mTextView = parent.findViewById(R.id.order_option_text);
             mImageButton = parent.findViewById(R.id.remove_order);
+            mTextViewOrder = parent.findViewById(R.id.order_to_be_spoken);
         }
 
     }
@@ -108,4 +110,11 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public int getItemCount(){
         return mData.size();
     }
+
+
+    String [] meat = {};
+    String [] drink = {"no ice", "ice please"};
+    String [] sauce = {" "," "};
 }
+
+

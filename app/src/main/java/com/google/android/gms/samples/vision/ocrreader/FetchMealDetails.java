@@ -129,7 +129,7 @@ public class FetchMealDetails extends AsyncTask<String, Void, HashMap<String, St
                 }
                 result.put(params[i], buffer.toString());
                 //result[i] = buffer.toString();
-
+                //buffer.release();
 
             }
 

@@ -1,9 +1,7 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
-import android.net.Uri;
+
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,19 +14,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.bumptech.glide.Glide;
-import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
-import com.google.android.gms.maps.StreetViewPanoramaFragment;
-import com.google.android.gms.maps.StreetViewPanoramaOptions;
 import com.google.android.gms.maps.StreetViewPanoramaView;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
+
 import com.google.android.gms.samples.vision.ocrreader.GeographyActivity;
-import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -166,7 +157,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mRecyclerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    control_select(holder, restaurantData);
+                    //control_select(holder, restaurantData);
 
                 }
             });
@@ -175,14 +166,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 @Override
                 public void onClick(View view) {
                     myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
-                    control_select(holder, restaurantData);
+                    //control_select(holder, restaurantData);
                 }
             });
 
 
 
 
-            Log.d(LOG_TAG, "place id " +restaurantData[ADDRESS_POS]+  " Longitude " + restaurantData[LONGITUDE] + " Latitude" + restaurantData[LATITUDE]);
+            //Log.d(LOG_TAG, "place id " +restaurantData[ADDRESS_POS]+  " Longitude " + restaurantData[LONGITUDE] + " Latitude" + restaurantData[LATITUDE]);
             if (!restaurantData[PLACE_ID_POS].equals("")){
                 ((UseRecyclerActivity) context).getRestaurantPhoto(restaurantData[PLACE_ID_POS], holder.mImageView);
             }
@@ -199,6 +190,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             String restaurantUrl = restaurantData[0];
             String restaurantName = restaurantData[1];
         last_selected_rl = GeographyActivity.last_rl_parent;
+        Log.d(LOG_TAG, "last_selected_rl " + last_selected_rl );
         if (last_selected_rl != null && last_selected_rl != holder.mRelativeLayout){
             RestaurantAdapter.ViewHolder lastViewHolder = new RestaurantAdapter.ViewHolder(last_selected_rl);
             if (lastViewHolder.mRelativeLayout != null){
@@ -246,7 +238,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         final int PLACE_ID_PACK_POS = 1;
         for (String[] item : mData){
 
-            Log.d(LOG_TAG, "length" + item.length + " ");
+            //Log.d(LOG_TAG, "length" + item.length + " ");
 
             String address = item[ADDRESS_POS];
             String[] placeIdPack = placeId.get(address);

@@ -5,11 +5,12 @@
     android:id="@+id/relative_layout"
 
     android:layout_margin="5dp">
-    <com.google.android.gms.samples.vision.ocrreader.ui.project.InterceptRelativeLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/internal_relative_layout"
         android:background="@drawable/selector_row"
+        android:padding="5dp"
         android:layout_margin="10dp">
         <ImageView
             android:layout_width="40dp"
@@ -18,7 +19,7 @@
             android:layout_alignParentLeft="true"
             android:visibility="gone"
             android:layout_margin="10dp"/>
-        <com.google.android.gms.samples.vision.ocrreader.ui.project.ProjectRecyclerView
+        <!--com.google.android.gms.samples.vision.ocrreader.ui.project.ProjectRecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/text_by_text"
@@ -26,16 +27,16 @@
             android:paddingBottom="5dp"
             android:layout_toRightOf="@id/descriptive_image">
 
-        </com.google.android.gms.samples.vision.ocrreader.ui.project.ProjectRecyclerView>
+        </com.google.android.gms.samples.vision.ocrreader.ui.project.ProjectRecyclerView-->
 
-        <!--android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/text_by_text"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:layout_toRightOf="@id/descriptive_image"
-            /-->
+            />
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,7 +58,7 @@
         </com.google.android.gms.maps.StreetViewPanoramaView>
 
 
-    </com.google.android.gms.samples.vision.ocrreader.ui.project.InterceptRelativeLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>
