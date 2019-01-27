@@ -38,7 +38,7 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
     LayoutInflater inflater;
     TextToSpeech myTTS;
     Context context;
-    private HashMap order;
+    private HashMap<String, Object[]> order;
     private String current_order_name;
 
     String LOG_TAG = ExpandOptionAdapter.class.getSimpleName();
@@ -65,7 +65,7 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
     }
 
 
-    public ExpandOptionAdapter(Context context, HashMap order, String current_order_name){
+    public ExpandOptionAdapter(Context context, HashMap<String, Object []> order, String current_order_name){
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
@@ -210,7 +210,7 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
     private void switch_state (int pos, ExpandOptionAdapter.ViewHolder holder){
         int new_state = mState.get(pos) + 1;
         new_state = (new_state > REJECT)? NORMAL : new_state;
-        //putOrder(mTopLevelInteger.get(pos), new_state);
+        putOrder(mTopLevelInteger.get(pos), new_state);
 
         mState.set(pos, new_state);
         holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[new_state]));
@@ -226,7 +226,7 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
         int total = mData.get(pos).length;
         new_choice = new_choice >= total ? NORMAL : new_choice;
 
-        //putOrder(mTopLevelInteger.get(pos), new_choice);
+        putOrder(mTopLevelInteger.get(pos), new_choice);
 
         mState.set(pos, new_choice);
         String image_file_name = mData.get(pos)[new_choice];
@@ -241,8 +241,9 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
     }
 
     private void putOrder(int option, int value ){
-        Order current_order = (Order) order.get(current_order_name);
-        Integer order_items [] = current_order.getOrderValues();
+        Object[] current_order_info =  order.get(current_order_name);
+        Order current_order_items = (Order) current_order_info[FoodItemAdapter.ORDER];
+        Integer order_items [] = current_order_items.getOrderValues();
         order_items[option] = value;
     }
 }

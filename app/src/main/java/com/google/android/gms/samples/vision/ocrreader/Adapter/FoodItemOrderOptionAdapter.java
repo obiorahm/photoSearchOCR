@@ -33,7 +33,7 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
     TextToSpeech myTTS;
     Context context;
-    HashMap order = new HashMap();
+    HashMap<String, Object[] > order = new HashMap<String, Object[]>();
     String current_order;
 
 
@@ -61,7 +61,7 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
     }
 
-    public FoodItemOrderOptionAdapter(Context context, HashMap order, String current_order){
+    public FoodItemOrderOptionAdapter(Context context, HashMap<String, Object[]> order, String current_order){
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.order = order;
