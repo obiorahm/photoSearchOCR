@@ -2,6 +2,7 @@ package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,7 +40,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     String LOG_TAG = ShoppingCartAdapter.class.getSimpleName();
 
-
+    public static final String ORDER_PREFIX = "I'll have ";
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -48,14 +49,15 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         private ImageView mImageView;
         private TextView mTextView;
         private ImageButton mImageButton;
-        private TextView mTextViewOrder;
+        private RecyclerView mRecyclerView;
+
 
         public ViewHolder(View parent){
             super(parent);
             mImageView = parent.findViewById(R.id.order_option);
             mTextView = parent.findViewById(R.id.order_option_text);
             mImageButton = parent.findViewById(R.id.remove_order);
-            mTextViewOrder = parent.findViewById(R.id.order_to_be_spoken);
+            mRecyclerView = parent.findViewById(R.id.conversation_recycler);
         }
 
     }
@@ -81,7 +83,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
         final String meal_name = mData.get(position);
 
-        holder.mTextView.setText(meal_name);
+        holder.mTextView.setText(ORDER_PREFIX + meal_name);
 
         Glide.with(context).load(mUrl.get(position)).into(holder.mImageView);
 
@@ -95,7 +97,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             }
         });
 
-        setOrderLanguage(holder.mTextViewOrder, position);
+        setOrderLanguage(holder, position);
 
     }
 
@@ -115,13 +117,21 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         return mData.size();
     }
 
-    private void setOrderLanguage(TextView mTextViewOrder, int pos){
-        String language = "";
+    private void setOrderLanguage(ViewHolder holder, int pos){
+        LanguageAdapter languageAdapter= new LanguageAdapter(context);
+
         Integer[] specifics = mSpecificOptions.get(pos);
         for (int i = 0; i < specifics.length; i++){
-            language += Order.CONSOLIDATED_OPTION[i][specifics[i]] + '\n';
+            String current_sentence = Order.CONSOLIDATED_OPTION[i][specifics[i]];
+            String current_image_url = "";
+            String[] data = {current_sentence,current_image_url};
+            if (!current_sentence.equals(""))
+                languageAdapter.addItem(data);
         }
-        mTextViewOrder.setText(language);
+
+        holder.mRecyclerView.setAdapter(languageAdapter);
+        LinearLayoutManager languageLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false);
+        holder.mRecyclerView.setLayoutManager(languageLayoutManager);
     }
 }
 

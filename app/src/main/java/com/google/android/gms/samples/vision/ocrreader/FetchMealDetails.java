@@ -3,24 +3,16 @@ package com.google.android.gms.samples.vision.ocrreader;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.GridView;
-import android.widget.ListView;
+
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
 
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
-import com.google.android.gms.samples.vision.ocrreader.Adapter.WordAdapter;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;

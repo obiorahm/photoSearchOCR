@@ -19,28 +19,186 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/EdmanJasonReader.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/EdmanJasonReader.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/design/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/design/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/design/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/design/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/recyclerview/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/recyclerview/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/base/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/base/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/location/places/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/location/places/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/location/places/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/location/places/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/maps/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/maps/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/BlockRecyclerAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/BlockRecyclerAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/BlockRecyclerAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/BlockRecyclerAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageRecyclerAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageRecyclerAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageRecyclerAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageRecyclerAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RecipeListAdapter$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RecipeListAdapter$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RecipeListAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RecipeListAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RecognizedTextAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RecognizedTextAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RecognizedTextAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RecognizedTextAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RecyclerWordAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RecyclerWordAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RecyclerWordAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RecyclerWordAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantMenuAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantMenuAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantMenuAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantMenuAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/WordAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/WordAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/BlockSelectDialog.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/BlockSelectDialog.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/DetectImageActivity$10.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/DetectImageActivity$10.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/DetectImageActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/DetectImageActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/FetchMealDetails.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/FetchMealDetails.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/GeographyActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/GeographyActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/MainActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/MainActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/MealMenuActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/MealMenuActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/OcrCaptureActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/OcrCaptureActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/OpenRestaurantMenuActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/OpenRestaurantMenuActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Order.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Order.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/OrderActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/OrderActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/OrderDialog.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/OrderDialog.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$integer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$string.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$style.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$styleable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$xml.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/R$xml.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/RecipeDialog.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/RecipeDialog.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Test.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Test.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/TextMenuActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/TextMenuActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/firebase/firebase_common/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/firebase/firebase_common/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/firebase/firebase_common/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/firebase/firebase_common/R$layout.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/zip-cache/efPc3jxL1rjDjdgsLpBzetapyZ4=" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/zip-cache/efPc3jxL1rjDjdgsLpBzetapyZ4=" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_geography_order.xml.flat" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_geography_order.xml.flat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_personal_order_items.xml.flat" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_personal_order_items.xml.flat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/EdmanJasonReader.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/EdmanJasonReader.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/compat/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/compat/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/compat/R$layout.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/compat/R$layout.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/coreui/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/coreui/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/coreui/R$layout.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/coreui/R$layout.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/coreutils/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/coreutils/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/coreutils/R$layout.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/coreutils/R$layout.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/design/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/design/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/design/R$layout.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/design/R$layout.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/fragment/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/fragment/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/fragment/R$layout.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/fragment/R$layout.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/mediacompat/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/mediacompat/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/mediacompat/R$layout.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/mediacompat/R$layout.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/v4/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/v4/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/v4/R$layout.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/v4/R$layout.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/v7/appcompat/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/v7/appcompat/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/v7/appcompat/R$layout.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/v7/appcompat/R$layout.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/v7/recyclerview/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/android/support/v7/recyclerview/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/base/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/base/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/location/places/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/location/places/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/location/places/R$layout.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/location/places/R$layout.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/maps/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/maps/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/BlockRecyclerAdapter$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/BlockRecyclerAdapter$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/BlockRecyclerAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/BlockRecyclerAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemAdapter$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemAdapter$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageAdapter$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageAdapter$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageRecyclerAdapter$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageRecyclerAdapter$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageRecyclerAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ImageRecyclerAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RecipeListAdapter$4.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RecipeListAdapter$4.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RecipeListAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RecipeListAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RecognizedTextAdapter$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RecognizedTextAdapter$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RecognizedTextAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RecognizedTextAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RecyclerWordAdapter$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RecyclerWordAdapter$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RecyclerWordAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RecyclerWordAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantMenuAdapter$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantMenuAdapter$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantMenuAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantMenuAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$1.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$1.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/WordAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/WordAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/BlockSelectDialog.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/BlockSelectDialog.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/DetectImageActivity$10.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/DetectImageActivity$10.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/DetectImageActivity.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/DetectImageActivity.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/FetchMealDetails.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/FetchMealDetails.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/GeographyActivity.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/GeographyActivity.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/MainActivity.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/MainActivity.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/MealMenuActivity.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/MealMenuActivity.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/OcrCaptureActivity.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/OcrCaptureActivity.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/OpenRestaurantMenuActivity.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/OpenRestaurantMenuActivity.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Order.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Order.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/OrderActivity.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/OrderActivity.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/OrderDialog.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/OrderDialog.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$integer.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$integer.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$layout.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$layout.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$string.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$string.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$style.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$style.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$styleable.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$styleable.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$xml.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/R$xml.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/RecipeDialog.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/RecipeDialog.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Test.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Test.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/TextMenuActivity.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/TextMenuActivity.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/firebase/firebase_common/R$id.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/firebase/firebase_common/R$id.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/firebase/firebase_common/R$layout.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/firebase/firebase_common/R$layout.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/6/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/6/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/compat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/compat/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/coreui/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/coreui/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/coreutils/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/coreutils/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/design/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/design/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/fragment/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/fragment/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/mediacompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/mediacompat/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v4/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v4/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/recyclerview/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/recyclerview/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/base/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/base/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/location/places/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/location/places/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/maps/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/maps/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/samples/vision/ocrreader/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/samples/vision/ocrreader/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/firebase/firebase_common/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/firebase/firebase_common/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/dex-renamer-state.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/file-input-save-data.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/file-input-save-data.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/EdmanJasonReader.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/EdmanJasonReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OpenRestaurantMenuActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OpenRestaurantMenuActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Order.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Order.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OrderActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OrderActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/FetchMealDetails.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/FetchMealDetails.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/geography_order.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/geography_order.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/personal_order_items.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/personal_order_items.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -68,57 +226,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OrderActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OrderActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ShoppingCartAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-977">
-              <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+            <state relative-caret-position="341">
+              <caret line="85" column="48" lean-forward="false" selection-start-line="85" selection-start-column="48" selection-end-line="85" selection-end-column="48" />
               <folding>
-                <element signature="e#3385#3386#0" expanded="true" />
-                <element signature="e#3420#3421#0" expanded="true" />
+                <element signature="e#3504#3505#0" expanded="true" />
+                <element signature="e#3539#3540#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FoodItemOrderOptionAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-175">
-              <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-              <folding>
-                <element signature="e#1193#1211#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GeographyActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/GeographyActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="190" column="20" lean-forward="false" selection-start-line="190" selection-start-column="17" selection-end-line="190" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FoodItemAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="274" column="17" lean-forward="false" selection-start-line="274" selection-start-column="17" selection-end-line="274" selection-end-column="17" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -126,53 +242,100 @@
       <file leaf-file-name="FetchMealDetails.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/FetchMealDetails.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="131" column="18" lean-forward="false" selection-start-line="131" selection-start-column="18" selection-end-line="131" selection-end-column="18" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EdmanJasonReader.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/EdmanJasonReader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="69" column="22" lean-forward="false" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
+            <state relative-caret-position="60">
+              <caret line="4" column="31" lean-forward="false" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OpenRestaurantMenuActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OpenRestaurantMenuActivity.java">
+      <file leaf-file-name="RecyclerWordAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RecyclerWordAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="233" column="114" lean-forward="false" selection-start-line="233" selection-start-column="114" selection-end-line="233" selection-end-column="114" />
+            <state relative-caret-position="186">
+              <caret line="84" column="58" lean-forward="false" selection-start-line="84" selection-start-column="58" selection-end-line="84" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Order.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Order.java">
+      <file leaf-file-name="OrderActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OrderActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="29" column="19" lean-forward="false" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+            <state relative-caret-position="1080">
+              <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="personal_order_items.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="gridview_item.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-v17/gridview_item.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="148">
+              <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="personal_order_items.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/personal_order_items.xml">
           <provider editor-type-id="android-designer2">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="16" column="42" lean-forward="false" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+            <state relative-caret-position="180">
+              <caret line="12" column="51" lean-forward="false" selection-start-line="12" selection-start-column="51" selection-end-line="12" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="conversation_line_item.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/conversation_line_item.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="75" lean-forward="false" selection-start-line="2" selection-start-column="75" selection-end-line="2" selection-end-column="75" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RestaurantMenuAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantMenuAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="598">
+              <caret line="146" column="57" lean-forward="false" selection-start-line="146" selection-start-column="57" selection-end-line="146" selection-end-column="57" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="single_food_item.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/single_food_item.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="840">
+              <caret line="56" column="62" lean-forward="false" selection-start-line="56" selection-start-column="62" selection-end-line="56" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OpenRestaurantMenuActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OpenRestaurantMenuActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="65">
+              <caret line="225" column="23" lean-forward="false" selection-start-line="225" selection-start-column="16" selection-end-line="225" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -185,20 +348,14 @@
       <list>
         <option value="valueResourceFile" />
         <option value="resourceFile" />
-        <option value="layoutResourceFile" />
-        <option value="Class" />
         <option value="layoutResourceFile_vertical" />
+        <option value="Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ShoppingCa</find>
-      <find>ShoppingCar</find>
-      <find>ShoppingCart</find>
-      <find>HashMap</find>
-      <find>Or</find>
-      <find>OrderA</find>
       <find>OrderAc</find>
       <find>OrderActi</find>
       <find>OrderActiv</find>
@@ -220,8 +377,14 @@
       <find>addOrder</find>
       <find>swit</find>
       <find>Expand</find>
-      <find>add</find>
       <find>setVi</find>
+      <find>HashMap</find>
+      <find>add</find>
+      <find>g</find>
+      <find>grid</find>
+      <find>gridv</find>
+      <find>gridvie</find>
+      <find>gridview</find>
       <find>setView</find>
     </findStrings>
     <dirStrings>
@@ -1978,8 +2141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RecognizedTextAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/ui/camera/FetchWebPage.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/TextMenuActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/MainActivity.java" />
@@ -2017,18 +2178,20 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/food_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/display_nearby_restaurants_intercept.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout-v17/recognized_text_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/FetchMealDetails.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/GeographyActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/geography_order.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Order.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/personal_order_items.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OrderActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/EdmanJasonReader.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OpenRestaurantMenuActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/LanguageAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/geography_order.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/FetchMealDetails.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/conversation_line_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/personal_order_items.xml" />
       </list>
     </option>
   </component>
@@ -2619,7 +2782,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1548635997766" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1548693849176" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2674,7 +2837,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1548635997766" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1548693849176" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2710,6 +2873,27 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -2847,7 +3031,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1548635997770" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1548693849181" />
       </method>
     </configuration>
     <list size="1">
@@ -2899,11 +3083,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="827" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287841" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27915633" sideWeight="0.5150905" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34036568" sideWeight="0.48490945" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34036568" sideWeight="0.48490945" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2917,7 +3102,7 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1673699" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17299578" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17299578" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21816881" sideWeight="0.49411765" order="0" side_tool="false" content_ui="combo" />
@@ -3003,30 +3188,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/border.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/baseline_photo_24.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-v17/activity_image_detection.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="114" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/ui/project/InterceptRecyclerView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="479">
@@ -3073,16 +3234,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="8" lean-forward="false" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/single_food_item.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="56" column="62" lean-forward="false" selection-start-line="56" selection-start-column="62" selection-end-line="56" selection-end-column="62" />
         </state>
       </provider>
     </entry>
@@ -3159,13 +3310,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RecyclerWordAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-932">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/MealMenuActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
@@ -3216,16 +3360,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/display_nearby_restaurants_intercept.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="85" column="45" lean-forward="false" selection-start-line="85" selection-start-column="45" selection-end-line="85" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-v17/horizontal_text.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3249,29 +3383,6 @@
         <state relative-caret-position="585">
           <caret line="53" column="16" lean-forward="false" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/food_item.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="46" column="50" lean-forward="false" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantMenuAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1920">
-          <caret line="146" column="57" lean-forward="false" selection-start-line="146" selection-start-column="57" selection-end-line="146" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#8254#8255#0" expanded="false" />
-            <element signature="e#8289#8290#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3302,13 +3413,13 @@
         <state relative-caret-position="529">
           <caret line="159" column="61" lean-forward="false" selection-start-line="159" selection-start-column="61" selection-end-line="159" selection-end-column="61" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5343#5539#0" expanded="true" />
-            <element signature="e#5538#5539#0" expanded="true" />
-            <element signature="e#5595#5793#0" expanded="true" />
-            <element signature="e#5792#5793#0" expanded="true" />
-            <element signature="e#5848#6116#0" expanded="true" />
-            <element signature="e#6115#6116#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#5343#5539#0" expanded="false" />
+            <element signature="e#5538#5539#0" expanded="false" />
+            <element signature="e#5595#5793#0" expanded="false" />
+            <element signature="e#5792#5793#0" expanded="false" />
+            <element signature="e#5848#6116#0" expanded="false" />
+            <element signature="e#6115#6116#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3334,44 +3445,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/geography_order.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="42" lean-forward="false" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
-          <folding>
-            <element signature="e#354#369#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Order.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
           <caret line="29" column="19" lean-forward="false" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/personal_order_items.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="16" column="42" lean-forward="false" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-175">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding>
-            <element signature="e#1193#1211#0" expanded="true" />
+            <marker date="1548636345577" expanded="true" signature="1477:1666" ph="{...}" />
+            <marker date="1548636345577" expanded="true" signature="1704:1726" ph="{...}" />
+            <marker date="1548636345577" expanded="true" signature="1764:1785" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -3384,25 +3465,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-977">
-          <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding>
-            <element signature="e#3385#3386#0" expanded="true" />
-            <element signature="e#3420#3421#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OrderActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/GeographyActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -3411,28 +3473,161 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/FetchMealDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="131" column="18" lean-forward="false" selection-start-line="131" selection-start-column="18" selection-end-line="131" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/EdmanJasonReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="356">
           <caret line="69" column="22" lean-forward="false" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
+          <folding>
+            <marker date="1548636345576" expanded="true" signature="2716:2924" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="48" />
+          <folding>
+            <element signature="e#1193#1211#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/LanguageAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-88">
+          <caret line="31" column="48" lean-forward="false" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#630#640#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/geography_order.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/display_nearby_restaurants_intercept.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="177" column="43" lean-forward="true" selection-start-line="177" selection-start-column="43" selection-end-line="177" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/food_item.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-255">
+          <caret line="46" column="50" lean-forward="false" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/single_food_item.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="56" column="62" lean-forward="false" selection-start-line="56" selection-start-column="62" selection-end-line="56" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantMenuAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="146" column="57" lean-forward="false" selection-start-line="146" selection-start-column="57" selection-end-line="146" selection-end-column="57" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OpenRestaurantMenuActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="233" column="114" lean-forward="false" selection-start-line="233" selection-start-column="114" selection-end-line="233" selection-end-column="114" />
+        <state relative-caret-position="65">
+          <caret line="225" column="23" lean-forward="false" selection-start-line="225" selection-start-column="16" selection-end-line="225" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/FetchMealDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="31" lean-forward="false" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RecyclerWordAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="84" column="58" lean-forward="false" selection-start-line="84" selection-start-column="58" selection-end-line="84" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OrderActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="85" column="48" lean-forward="false" selection-start-line="85" selection-start-column="48" selection-end-line="85" selection-end-column="48" />
+          <folding>
+            <element signature="e#3504#3505#0" expanded="true" />
+            <element signature="e#3539#3540#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-v17/gridview_item.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/conversation_line_item.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="75" lean-forward="false" selection-start-line="2" selection-start-column="75" selection-end-line="2" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/personal_order_items.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="51" lean-forward="false" selection-start-line="12" selection-start-column="51" selection-end-line="12" selection-end-column="51" />
           <folding />
         </state>
       </provider>
