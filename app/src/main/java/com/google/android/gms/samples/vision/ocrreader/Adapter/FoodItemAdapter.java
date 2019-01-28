@@ -264,6 +264,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     public static final int ORDER = 0;
     public static final int POSITION = 1;
     public static final int HOLDER = 2;
+    public static final int FOOD_ITEM_ADAPTER = 3;
 
 
 
@@ -275,20 +276,29 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     private void addOrder(String word, int position, ViewHolder holder){
         Integer order_items [] = new Integer[Order.OPTION_SIZE];
         Order current_order = new Order(word, order_items);
-        Object [] orderData = new Object[3];
+        Object [] orderData = new Object[4];
         orderData[ORDER] = current_order;
         orderData[POSITION] = position;
         orderData[HOLDER] = holder;
+        orderData[FOOD_ITEM_ADAPTER] = this;
         //order.put(word, current_order);
         order.put(word, orderData);
     }
 
-    private void resetLayout(ViewHolder holder, int position){
-        //holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
+    public void resetLayout(String key){
+
+        Object[]  current_order_item = order.get(key);
+        ViewHolder holder = (ViewHolder) current_order_item[HOLDER];
+        holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
         holder.mRecyclerView.setVisibility(View.GONE);
+
+        Integer position = (Integer) current_order_item[POSITION];
         state.set(position,STATE_NORMAL);
         //((OpenRestaurantMenuActivity) context).hide_food_image_recycler();
     }
+
+
+
 
 
 

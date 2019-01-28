@@ -2,6 +2,7 @@ package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -50,6 +52,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         private TextView mTextView;
         private ImageButton mImageButton;
         private RecyclerView mRecyclerView;
+        private RelativeLayout mRelativeLayout;
 
 
         public ViewHolder(View parent){
@@ -58,6 +61,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             mTextView = parent.findViewById(R.id.order_option_text);
             mImageButton = parent.findViewById(R.id.remove_order);
             mRecyclerView = parent.findViewById(R.id.conversation_recycler);
+            mRelativeLayout = parent.findViewById(R.id.containing_relative_layout);
         }
 
     }
@@ -90,10 +94,16 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                FoodItemAdapter foodItemAdapter = (FoodItemAdapter) FoodItemAdapter.order.get(meal_name)[FoodItemAdapter.FOOD_ITEM_ADAPTER];
+                foodItemAdapter.resetLayout(meal_name);
                 FoodItemAdapter.order.remove(meal_name);
+
                 holder.mTextView.setVisibility(View.GONE);
                 holder.mImageView.setVisibility(View.GONE);
                 holder.mImageButton.setVisibility(View.GONE);
+                holder.mRecyclerView.setVisibility(View.GONE);
+                holder.mRelativeLayout.setVisibility(View.GONE);
             }
         });
 
