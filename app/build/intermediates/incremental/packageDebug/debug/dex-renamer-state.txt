@@ -1,4 +1,4 @@
-#Mon Jan 28 15:42:03 CST 2019
+#Mon Jan 28 17:18:23 CST 2019
 base.0=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/6
 path.1=classes.dex
 renamed.1=classes2.dex

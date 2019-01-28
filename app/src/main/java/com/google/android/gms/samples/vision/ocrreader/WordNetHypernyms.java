@@ -49,9 +49,79 @@ public class WordNetHypernyms {
             "coffee"
     };
 
+    public  boolean isHypernym(String [] hypernyms, String sentence) {
+
+        boolean booleanHypernym = false;
+        mHypernyms.clear();
+        //add measurement hypernyms
+        for (String item : hypernyms) {
+            mHypernyms.add(item);
+        }
+
+
+        try{
+            String minus_special_characters = sentence.replaceAll("[0-9/]", "");
+
+            //to lower case
+            String to_lower_case = minus_special_characters.toLowerCase();
+
+            // tokenize the string
+            SimpleTokenizer tokenizer = SimpleTokenizer.INSTANCE;
+            String[] tokens = tokenizer.tokenize(to_lower_case);
+
+
+            Log.d(LOG_TAG + " nlp", minus_special_characters);
+            String x = tokens.length > 0 ? tokens[0] : "no string ";
+            Log.d(LOG_TAG, "measurement tokens " + x);
+
+            //get wordNet dictionary
+            String path = DocumentDir.getAbsolutePath();
+
+            URL url = new URL("file", null, path);
+
+            // construct the dictionary object and open it
+            IDictionary dict = new Dictionary(url);
+
+
+            boolean dictIsOpen = dict.open();
+            Log.d(LOG_TAG, " " + dictIsOpen);
+
+            String finalWords = "";
+            for (String item : tokens) {
+
+                if (!(item == null)) {
+
+
+                    // look up the stem of the word
+                    WordnetStemmer wordnetStemmer = new WordnetStemmer(dict);
+                    List<String> stem_list = wordnetStemmer.findStems(item, POS.NOUN);
+                    for (String possible_stem : stem_list) {
+                        Log.d("JWI stem", item + ": " + possible_stem);
+                    }
+
+                    // collect the first stem, it is most likely to be the stem we are looking for
+                    String stem_item = stem_list.size() == 0 ? item : stem_list.get(0);
+                    if (mHypernyms.contains(stem_item)){
+                        booleanHypernym = true;
+                        return booleanHypernym;
+                    }
+
+                }
+            }
+
+        }catch (MalformedURLException e){
+
+        }catch (IOException e){
+
+        }
+        return booleanHypernym;
+
+    }
+
 
     public boolean getHypernym(String[] hypernyms, String sentence) {
         boolean containsHypernym = false;
+        mHypernyms.clear();
 
         try {
 
@@ -93,6 +163,8 @@ public class WordNetHypernyms {
             for (String item : tokens) {
 
                 if (!(item == null)) {
+
+
 
                     // look up the stem of the word
                     WordnetStemmer wordnetStemmer = new WordnetStemmer(dict);

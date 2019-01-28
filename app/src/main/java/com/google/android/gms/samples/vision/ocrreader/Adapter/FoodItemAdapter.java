@@ -150,7 +150,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         //set up food item adapter
         FoodItemOrderOptionAdapter foodItemOrderOptionAdapter = new FoodItemOrderOptionAdapter(context,order, word);
 
-        addAllItems(foodItemOrderOptionAdapter);
+        addAllItems(foodItemOrderOptionAdapter, word);
         LinearLayoutManager foodItemLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
         holder.mRecyclerView.setLayoutManager(foodItemLayoutManager);
 
@@ -165,11 +165,17 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     }
 
 
-    private void addAllItems(FoodItemOrderOptionAdapter adapter){
+    private void addAllItems(FoodItemOrderOptionAdapter adapter, String word){
         AssetManager assetManager = context.getAssets();
         WordNetHypernyms wordNetHypernyms = new WordNetHypernyms();
+
+        //check if hypernym of parent and child makes the required hypernym.
         boolean parentHypernym ;
         boolean selfHypernym;
+
+        // check if the words themselves are the required hypernyms.
+        boolean isSelfHypernym;
+        boolean isParentHypernym;
 
         try{
             final String allAssets[] = assetManager.list("top_level_icons");
@@ -183,18 +189,21 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
                 String option_image_url = "file:///android_asset/top_level_icons/" + option;
 
+                parentHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, mealCategory);
+                selfHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, word);
+                isSelfHypernym = wordNetHypernyms.isHypernym(WordNetHypernyms.DRINK_HYPERNYMS, word);
+                isParentHypernym = wordNetHypernyms.isHypernym(WordNetHypernyms.DRINK_HYPERNYMS, mealCategory);
+
                 switch (clean_option){
                     case FoodItemOrderOptionAdapter.DRINKS:
-                        parentHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, mealCategory);
-                        selfHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, clean_option);
-                        if (parentHypernym || selfHypernym)
+                        Log.d(LOG_TAG, "is_parent_hypernym " + parentHypernym + selfHypernym + isSelfHypernym + isParentHypernym);
+                        if (parentHypernym || selfHypernym || isSelfHypernym || isParentHypernym)
                             adapter.addItem(option_image_url);
                         break;
                     case FoodItemOrderOptionAdapter.MEATS:
                         // assume if drink then not meat
-                        parentHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, mealCategory);
-                        selfHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, clean_option);
-                        if (!(parentHypernym || selfHypernym))
+
+                        if (!(parentHypernym || selfHypernym || isParentHypernym || isSelfHypernym))
                             adapter.addItem(option_image_url);
 
                         break;
@@ -215,10 +224,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     }
 
 
-    private boolean getParentHypernym(String parentfoodItem){
-        WordNetHypernyms wordNetHypernyms = new WordNetHypernyms();
-        return wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, parentfoodItem);
-    }
 
 
     private void changeState(String word, FoodItemAdapter.ViewHolder holder, int position){

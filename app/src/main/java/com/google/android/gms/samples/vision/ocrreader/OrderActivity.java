@@ -75,7 +75,7 @@ public class OrderActivity extends UseRecyclerActivity {
         WordNetHypernyms wordNetHypernyms = new WordNetHypernyms();
 
         String[] hypernyms = {"drink", "liquid"};
-        wordNetHypernyms.getHypernym(hypernyms,"beverage soft drink masala chai lassi mango lassi beverages smoothies blenders soup coke sprite fanta shakes water beer sundae coffee hot cocoa espresso cappuccino tea cafe au lait americano latte milk juice lemonade");
+        wordNetHypernyms.getHypernym(hypernyms,"chicken lamb seafood ");
 
     }
 

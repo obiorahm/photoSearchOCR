@@ -81,7 +81,6 @@ public class RecyclerWordAdapter extends RecyclerView.Adapter<RecyclerWordAdapte
     public void onBindViewHolder(final RecyclerWordAdapter.ViewHolder holder, final int position){
 
 
-
         final Uri uri = Uri.parse(mData.get(position)[0]);
 
         Log.d(LOG_TAG, mData.get(position)[0]);
