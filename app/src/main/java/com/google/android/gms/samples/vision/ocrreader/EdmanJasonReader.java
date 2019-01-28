@@ -23,6 +23,7 @@ public class EdmanJasonReader {
     public static final int URL = 0;
     public static final int INGREDIENTS = 1;
     public static final int NAME = 2;
+    public static final String EMPTY = "";
 
     private final String LOG_TAG = EdmanJasonReader.class.getSimpleName();
 
@@ -57,20 +58,37 @@ public class EdmanJasonReader {
 
                 JSONArray hits = JSONEntry.getJSONArray("hits");
 
-                for (int i = 0; i < hits.length(); i++){
+                if (hits.length() == 0){
                     String[] recipeInfo = new String[3];
-                    JSONObject recipe = hits.getJSONObject(i);
-                    // get url
-                    recipeInfo[URL] = recipe.getJSONObject("recipe").getString("image");
+                    // set url
+                    recipeInfo[URL] = EMPTY;
                     //get ingredients
-                    recipeInfo[INGREDIENTS] = recipe.getJSONObject("recipe").getJSONArray("ingredientLines").toString();
+                    recipeInfo[INGREDIENTS] = EMPTY;
                     //include meal name
                     recipeInfo[NAME] = (String) item.getKey();
 
-                    Log.d(LOG_TAG, recipeInfo[2]);
+                    //Log.d(LOG_TAG, recipeInfo[2]);
                     AllRecipes.add(recipeInfo);
 
+                }else{
+                    for (int i = 0; i < hits.length(); i++){
+                        String[] recipeInfo = new String[3];
+                        JSONObject recipe = hits.getJSONObject(i);
+                        // get url
+                        recipeInfo[URL] = recipe.getJSONObject("recipe").getString("image");
+                        //get ingredients
+                        recipeInfo[INGREDIENTS] = recipe.getJSONObject("recipe").getJSONArray("ingredientLines").toString();
+                        //include meal name
+                        recipeInfo[NAME] = (String) item.getKey();
+
+                        Log.d(LOG_TAG, recipeInfo[2]);
+                        AllRecipes.add(recipeInfo);
+
+                    }
+
                 }
+
+
             }
 
         }catch (JSONException e ){

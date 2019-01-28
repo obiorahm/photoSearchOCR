@@ -22,15 +22,18 @@ public class Order {
             //ice
             {"", "Ice please!", "No ice please." },
             //cooked
-            {"Blue rare, please!", "Medium, please!", "Medium rare, please!", "Medium well, please!", "Rare, please!", "Well done, please!"},
+            {"", "Blue rare, please!", "Medium, please!", "Medium rare, please!", "Medium well, please!", "Rare, please!", "Well done, please!"},
             //sliced
             {"", "Please slice my meat!", "Don't slice my meat!"},
             //nutrition
             {"", "What's in this meal?", "" },
             //sauce
-            {"Can I have cheese sauce?", "Can I have some dressing?", "Can I have mayonnaise?", "Can I have mustard?" },
+            {"","Can I have cheese sauce?", "Can I have some dressing?", "Can I have mayonnaise?", "Can I have mustard?" },
             //ice
             {"", "Ice please!", "No ice please."}};
+
+    public static final String dummy_language = "a_dummy";
+
 
     public static final int DEFAULT_VAL = 0;
 

@@ -82,6 +82,7 @@ public class OrderActivity extends UseRecyclerActivity {
     @Override
     public void setView(RecyclerWordAdapter adapter, ArrayList<String[]> edamanInfo){
 
+
         for (String [] info : edamanInfo){
 
 

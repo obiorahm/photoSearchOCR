@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Jan 27 18:05:57 CST 2019
+#Sun Jan 27 18:39:33 CST 2019
 5.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/assets/debug
 42.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/assets/debug
 22.path=nutrition/nutrition_facts.png

@@ -228,8 +228,10 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         ProgressBar searchingEdmame = findViewById(R.id.searching_edmame);
         searchingEdmame.setVisibility(View.GONE);
 
+        int FIRST_ITEM = 0;
+
         // no results returned
-        if (edmanInfo.size() == 0){
+        if (edmanInfo.size() == 0 || edmanInfo.get(FIRST_ITEM)[EdmanJasonReader.URL].equals(EdmanJasonReader.EMPTY)){
             TextView textViewNoResult = findViewById(R.id.no_result);
             textViewNoResult.setVisibility(View.VISIBLE);
         }else{
