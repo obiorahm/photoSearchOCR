@@ -19,16 +19,27 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Order.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/samples/vision/ocrreader/Order.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/zip-cache/efPc3jxL1rjDjdgsLpBzetapyZ4=" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/zip-cache/efPc3jxL1rjDjdgsLpBzetapyZ4=" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_geography_order.xml.flat" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_geography_order.xml.flat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_personal_order_items.xml.flat" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_personal_order_items.xml.flat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$1.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$1.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$ViewHolder.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter$ViewHolder.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Order.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/473/com/google/android/gms/samples/vision/ocrreader/Order.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/6/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/6/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/dex-renamer-state.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Order.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Order.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/geography_order.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/geography_order.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/personal_order_items.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/personal_order_items.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -76,9 +87,24 @@
       <file leaf-file-name="OrderActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OrderActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="97" column="35" lean-forward="false" selection-start-line="97" selection-start-column="32" selection-end-line="97" selection-end-column="35" />
+            <state relative-caret-position="-59">
+              <caret line="24" column="4" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="geography_order.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/geography_order.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="42" lean-forward="false" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
+              <folding>
+                <element signature="e#354#369#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -86,11 +112,11 @@
       <file leaf-file-name="ShoppingCartAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="61" column="37" lean-forward="false" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
+            <state relative-caret-position="120">
+              <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
               <folding>
-                <element signature="e#3202#3203#0" expanded="true" />
-                <element signature="e#3237#3238#0" expanded="true" />
+                <element signature="e#3385#3386#0" expanded="true" />
+                <element signature="e#3420#3421#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,7 +125,7 @@
       <file leaf-file-name="FoodItemOrderOptionAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-556">
+            <state relative-caret-position="-175">
               <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
               <folding>
                 <element signature="e#1193#1211#0" expanded="true" />
@@ -111,18 +137,43 @@
       <file leaf-file-name="FoodItemAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="30" column="24" lean-forward="false" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="24" />
+            <state relative-caret-position="-384">
+              <caret line="187" column="12" lean-forward="false" selection-start-line="187" selection-start-column="8" selection-end-line="187" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ExpandOptionAdapter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ExpandOptionAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="240" column="5" lean-forward="true" selection-start-line="240" selection-start-column="5" selection-end-line="240" selection-end-column="5" />
+            <state relative-caret-position="2479">
+              <caret line="238" column="50" lean-forward="false" selection-start-line="238" selection-start-column="50" selection-end-line="238" selection-end-column="50" />
+              <folding>
+                <marker date="1548629294631" expanded="true" signature="7978:8039" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="enlarged_option_item.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/enlarged_option_item.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="17" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Order.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Order.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="32" column="47" lean-forward="false" selection-start-line="32" selection-start-column="47" selection-end-line="32" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -134,50 +185,9 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="27" column="42" lean-forward="false" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+            <state relative-caret-position="165">
+              <caret line="11" column="40" lean-forward="false" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GeographyActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/GeographyActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1905">
-              <caret line="183" column="96" lean-forward="false" selection-start-line="183" selection-start-column="83" selection-end-line="183" selection-end-column="96" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FetchMealDetails.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/FetchMealDetails.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1530">
-              <caret line="131" column="18" lean-forward="false" selection-start-line="131" selection-start-column="18" selection-end-line="131" selection-end-column="18" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OpenRestaurantMenuActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OpenRestaurantMenuActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2400">
-              <caret line="189" column="31" lean-forward="false" selection-start-line="189" selection-start-column="24" selection-end-line="189" selection-end-column="31" />
-              <folding>
-                <element signature="e#3256#3257#0" expanded="false" />
-                <element signature="e#3296#3297#0" expanded="false" />
-                <element signature="e#3563#3564#0" expanded="false" />
-                <element signature="e#3617#3618#0" expanded="false" />
-                <element signature="e#3839#3840#0" expanded="false" />
-                <element signature="e#3881#3882#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -197,27 +207,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Expand</find>
-      <find>current_order</find>
-      <find>FoodItemOt</find>
-      <find>FoodItemO</find>
-      <find>FoodItemOr</find>
-      <find>FoodItemOrde</find>
-      <find>FoodItemOrderOptionAdapt</find>
-      <find>Fo</find>
-      <find>Food</find>
-      <find>FoodItem</find>
-      <find>FoodItemOrd</find>
-      <find>FoodItemOrder</find>
-      <find>FoodItemOrderO</find>
-      <find>FoodItemOrderOp</find>
-      <find>FoodItemOrderOpt</find>
-      <find>FoodItemOrderOpti</find>
-      <find>FoodItemOrderOptio</find>
-      <find>FoodItemOrderOption</find>
-      <find>FoodItemOrderOptionA</find>
-      <find>FoodItemOrderOptionAd</find>
-      <find>FoodItemOrderOptionAda</find>
       <find>FoodItemOrderOptionAdap</find>
       <find>FoodItemOrderOptionAdapte</find>
       <find>Order</find>
@@ -227,6 +216,27 @@
       <find>F</find>
       <find>order</find>
       <find>HashMap</find>
+      <find>swit</find>
+      <find>order</find>
+      <find>Shop</find>
+      <find>Shopp</find>
+      <find>Shoppi</find>
+      <find>ShoppingCartA</find>
+      <find>ShoppingCartAd</find>
+      <find>ShoppingCartAda</find>
+      <find>ShoppingCartAdap</find>
+      <find>ShoppingCartAdapt</find>
+      <find>ShoppingCartAdapte</find>
+      <find>ShoppingCartAdapter</find>
+      <find>S</find>
+      <find>Shoppin</find>
+      <find>Shopping</find>
+      <find>ShoppingC</find>
+      <find>ShoppingCa</find>
+      <find>ShoppingCar</find>
+      <find>ShoppingCart</find>
+      <find>Expand</find>
+      <find>add</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/app/src/main/res/xml</dir>
@@ -2011,9 +2021,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/xml/provider_paths.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OcrCaptureActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Order.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/geography_order.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OpenRestaurantMenuActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/MealMenuActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/DetectImageActivity.java" />
@@ -2029,10 +2037,12 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/FetchMealDetails.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/GeographyActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/personal_order_items.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/personal_order_items.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Order.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/geography_order.xml" />
       </list>
     </option>
   </component>
@@ -2623,7 +2633,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1548629105400" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1548633952909" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2678,7 +2688,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1548629105400" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1548633952909" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2851,7 +2861,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1548629105412" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1548633952912" />
       </method>
     </configuration>
     <list size="1">
@@ -2957,6 +2967,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14449213" sideWeight="0.49411765" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32754344" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20171674" sideWeight="0.5058824" order="2" side_tool="true" content_ui="tabs" />
@@ -3162,13 +3173,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Order.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="9" lean-forward="false" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RecyclerWordAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-932">
@@ -3204,29 +3208,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/enlarged_option_item.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="17" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_clear_black_24dp.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/geography_order.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="35" lean-forward="false" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/FetchWebPage.java">
@@ -3285,7 +3269,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="585">
           <caret line="53" column="16" lean-forward="false" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3385,47 +3368,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/personal_order_items.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="27" column="42" lean-forward="false" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OrderActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="97" column="35" lean-forward="false" selection-start-line="97" selection-start-column="32" selection-end-line="97" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="61" column="37" lean-forward="false" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
-          <folding>
-            <element signature="e#3202#3203#0" expanded="true" />
-            <element signature="e#3237#3238#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="30" column="24" lean-forward="false" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemOrderOptionAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-556">
+        <state relative-caret-position="-175">
           <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding>
             <element signature="e#1193#1211#0" expanded="true" />
@@ -3433,11 +3378,83 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/FoodItemAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-384">
+          <caret line="187" column="12" lean-forward="false" selection-start-line="187" selection-start-column="8" selection-end-line="187" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Order.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="47" lean-forward="false" selection-start-line="32" selection-start-column="47" selection-end-line="32" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/personal_order_items.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="40" lean-forward="false" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ExpandOptionAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="240" column="5" lean-forward="true" selection-start-line="240" selection-start-column="5" selection-end-line="240" selection-end-column="5" />
+        <state relative-caret-position="2479">
+          <caret line="238" column="50" lean-forward="false" selection-start-line="238" selection-start-column="50" selection-end-line="238" selection-end-column="50" />
+          <folding>
+            <marker date="1548629294631" expanded="true" signature="7978:8039" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/enlarged_option_item.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="17" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/ShoppingCartAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding>
+            <element signature="e#3385#3386#0" expanded="true" />
+            <element signature="e#3420#3421#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/OrderActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-59">
+          <caret line="24" column="4" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/geography_order.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="42" lean-forward="false" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
+          <folding>
+            <element signature="e#354#369#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

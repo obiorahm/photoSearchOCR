@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.FetchMealDetails;
+import com.google.android.gms.samples.vision.ocrreader.Order;
 import com.google.android.gms.samples.vision.ocrreader.R;
+import com.google.android.gms.samples.vision.ocrreader.Test;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
 import java.util.ArrayList;
@@ -93,6 +95,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             }
         });
 
+        setOrderLanguage(holder.mTextViewOrder, position);
+
     }
 
 
@@ -111,10 +115,14 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         return mData.size();
     }
 
-
-    String [] meat = {};
-    String [] drink = {"no ice", "ice please"};
-    String [] sauce = {" "," "};
+    private void setOrderLanguage(TextView mTextViewOrder, int pos){
+        String language = "";
+        Integer[] specifics = mSpecificOptions.get(pos);
+        for (int i = 0; i < specifics.length; i++){
+            language += Order.CONSOLIDATED_OPTION[i][specifics[i]] + '\n';
+        }
+        mTextViewOrder.setText(language);
+    }
 }
 
 
