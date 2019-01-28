@@ -25,6 +25,7 @@ import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivit
 import com.google.android.gms.samples.vision.ocrreader.Order;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
+import com.google.android.gms.samples.vision.ocrreader.WordNetHypernyms;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,6 +63,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     private int current_selection = R.drawable.select_border;
 
     private int[] STATES = { normal, select, current_selection};
+    private String mealCategory = "";
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -82,12 +84,13 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     }
 
-    public FoodItemAdapter(Context context, int resource){
+    public FoodItemAdapter(Context context, int resource, String mealCategory){
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
         //myTTS = ((DetectImageActivity) context).myTTS;
         myTTS = ((UseRecyclerActivity) context).myTTS;
+        this.mealCategory = mealCategory;
 
     }
 
@@ -164,12 +167,44 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     private void addAllItems(FoodItemOrderOptionAdapter adapter){
         AssetManager assetManager = context.getAssets();
+        WordNetHypernyms wordNetHypernyms = new WordNetHypernyms();
+        boolean parentHypernym ;
+        boolean selfHypernym;
+
         try{
             final String allAssets[] = assetManager.list("top_level_icons");
 
             for (String option : allAssets){
+
+                int firstPos = 0;
+                int lastPos = option.lastIndexOf('.');
+                String clean_option =  option.substring(firstPos, lastPos).replace("_", " ");
+                Log.d(LOG_TAG, "clean option " + clean_option + "parent " + mealCategory);
+
                 String option_image_url = "file:///android_asset/top_level_icons/" + option;
-                adapter.addItem(option_image_url);
+
+                switch (clean_option){
+                    case FoodItemOrderOptionAdapter.DRINKS:
+                        parentHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, mealCategory);
+                        selfHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, clean_option);
+                        if (parentHypernym || selfHypernym)
+                            adapter.addItem(option_image_url);
+                        break;
+                    case FoodItemOrderOptionAdapter.MEATS:
+                        // assume if drink then not meat
+                        parentHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, mealCategory);
+                        selfHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, clean_option);
+                        if (!(parentHypernym || selfHypernym))
+                            adapter.addItem(option_image_url);
+
+                        break;
+                    default:
+                        adapter.addItem(option_image_url);
+                        break;
+
+                }
+
+
             }
 
         }catch (IOException e){
@@ -177,6 +212,12 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         }
 
 
+    }
+
+
+    private boolean getParentHypernym(String parentfoodItem){
+        WordNetHypernyms wordNetHypernyms = new WordNetHypernyms();
+        return wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, parentfoodItem);
     }
 
 

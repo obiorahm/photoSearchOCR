@@ -72,6 +72,11 @@ public class OrderActivity extends UseRecyclerActivity {
 
         textView.setText(complete_text);
 
+        WordNetHypernyms wordNetHypernyms = new WordNetHypernyms();
+
+        String[] hypernyms = {"drink", "liquid"};
+        wordNetHypernyms.getHypernym(hypernyms,"beverage soft drink masala chai lassi mango lassi beverages smoothies blenders soup coke sprite fanta shakes water beer sundae coffee hot cocoa espresso cappuccino tea cafe au lait americano latte milk juice lemonade");
+
     }
 
     public void fetchMealUrl(String[] meal_name){
@@ -111,6 +116,9 @@ public class OrderActivity extends UseRecyclerActivity {
         recyclerView.setAdapter(shoppingCartAdapter);
     }
 
-
+/**
+ * Possible hypernyms
+ * beverage drink drinkable brew beverage liquid espresso coffee
+ */
 
 }

@@ -37,10 +37,10 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
     String current_order;
 
 
-    private final static String SAUCES = "sauces";
-    private final static String DRINKS = "drinks";
-    private final static String NUTRITION = "nutrition";
-    private final static String MEATS = "meats";
+    public final static String SAUCES = "sauces";
+    public final static String DRINKS = "drinks";
+    public final static String NUTRITION = "nutrition";
+    public final static String MEATS = "meats";
 
     private static int STATE_NORMAL = 0;
 

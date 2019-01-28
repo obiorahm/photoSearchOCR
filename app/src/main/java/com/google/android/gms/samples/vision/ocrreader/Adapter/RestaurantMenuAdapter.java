@@ -179,7 +179,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
 
         //set up food item adapter
-        FoodItemAdapter foodItemAdapter = new FoodItemAdapter(context, R.layout.single_food_item);
+        FoodItemAdapter foodItemAdapter = new FoodItemAdapter(context, R.layout.single_food_item, word);
 
         foodItemAdapter.addItem(mfoodItems.get(position));
 
