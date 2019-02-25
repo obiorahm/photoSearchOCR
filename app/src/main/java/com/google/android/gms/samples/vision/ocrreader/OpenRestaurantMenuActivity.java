@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.FoodItemAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantMenuAdapter;
@@ -38,6 +39,8 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
     //Text to speech variables
     private int MY_DATA_CHECK_CODE = 0;
 
+    ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
@@ -58,7 +61,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         textView1.setText(name);
         //textView1.setVisibility(View.GONE);
 
-        ImageView imageView1 = findViewById(R.id.location_image);
+        imageView = findViewById(R.id.location_image);
         //imageView1.setVisibility(View.GONE);
 
 
@@ -162,12 +165,18 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
     public void getFoodItems(Document document){
         try{
+
+            //get the Internet address of restaurant
+            String internetAddress = document.select(".menu-link").attr("href");
+
+            Log.d(LOG_TAG, "internet address " + internetAddress);
+
             Elements testElement = document.select(".menu-category");
             for(Element element : testElement){
 
-                Elements ElementCategoryName  = element.select(".category-name");
+                /*Elements ElementCategoryName  = element.select(".category-name");
                 Elements ElementCategoryDescription = element.select(".category-description");
-                /*String categoryName = "";
+                String categoryName = "";
                 String categoryDescription = "";*/
 
                 String categoryName = element.select(".category-name").text();
@@ -188,6 +197,21 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
                 }
                 String [] category = {categoryName, categoryDescription};
                 adapter.addItem(category, categoryItems);
+            }
+            if (internetAddress != null || ! (internetAddress.equals(""))){
+                int start = internetAddress.indexOf("//");
+                int start1 = internetAddress.indexOf(".");
+                String newAddress = internetAddress.substring(start + 2);
+                int end = newAddress.indexOf("/");
+                Log.d(LOG_TAG, "internet address " + start + " " + end);
+
+                String extractAddress = (end > start) ? newAddress.substring(0, end) : internetAddress.substring(start1 + 1);
+
+                Log.d(LOG_TAG, "internet address " + extractAddress);
+
+                Glide.with(this).load("https://logo.clearbit.com/" + extractAddress).into(imageView);
+                imageView.setVisibility(View.VISIBLE);
+
             }
 
         }catch (NullPointerException e){

@@ -1,5 +1,6 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -115,10 +116,12 @@ public class FetchRestaurantLongLat extends AsyncTask<ArrayList<String>, Void, H
     protected void onPostExecute(HashMap<String, String[]> result){
 
         HashMap<String, String []> longLat = getLongLat(result);
-        //((UseRecyclerActivity) context).addPlaceIdToAdapter(result);
+
+
+        /*FetchRestaurantIcon fetchRestaurantLongLat = new FetchRestaurantIcon(this);
+        fetchRestaurantIcon.execute(longLat);*/
+
         ((UseRecyclerActivity) context).addLongLatToAdapter(longLat);
-
-
 
     }
 

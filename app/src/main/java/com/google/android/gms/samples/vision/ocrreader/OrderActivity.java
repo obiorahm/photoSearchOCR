@@ -75,7 +75,7 @@ public class OrderActivity extends UseRecyclerActivity {
         WordNetHypernyms wordNetHypernyms = new WordNetHypernyms();
 
         String[] hypernyms = {"drink", "liquid"};
-        wordNetHypernyms.getHypernym(hypernyms,"chicken lamb seafood ");
+        wordNetHypernyms.getHypernym(hypernyms,"chicken lamb seafood turkey bacon ham stake beef wings sausage");
 
     }
 

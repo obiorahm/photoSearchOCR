@@ -370,6 +370,8 @@ private void testData(){
 
 
 
+
+
         }catch (NullPointerException e){
             Log.e(LOG_TAG, e + " null pointer");
 
@@ -397,8 +399,17 @@ private void testData(){
 
     @Override
     public void addLongLatToAdapter(HashMap<String, String[]> lngLatPack){
+
+
+
+        String url = "";
+        FetchWebPage fetchWebPage = new FetchWebPage(this);
+        fetchWebPage.execute(url, "don't encode");
+
+
         adapter.addLngLat(lngLatPack);
         //recyclerView.setAdapter(adapter);
+
     }
 
     @Override
@@ -496,6 +507,7 @@ private void testData(){
         //initialize firebase
         FirebaseApp.initializeApp(this);
         if (initStatus == TextToSpeech.SUCCESS) {
+            myTTS = new TextToSpeech(this, this);
             myTTS.setLanguage(Locale.US);
             myTTS.setSpeechRate(0.6f);
         }

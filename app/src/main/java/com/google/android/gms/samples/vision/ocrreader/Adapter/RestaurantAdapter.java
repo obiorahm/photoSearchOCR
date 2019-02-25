@@ -1,5 +1,6 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 
 import android.speech.tts.TextToSpeech;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.StreetViewPanoramaView;
 
+import com.google.android.gms.samples.vision.ocrreader.FetchWebPage;
 import com.google.android.gms.samples.vision.ocrreader.GeographyActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
@@ -85,9 +87,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             //mData.put(item[POS_RESTAURANT_NAME], item);
             //check for duplicate restaurant name before adding items
             String restaurantName = item[TITLE_POS];
+            String restaurantUrl = item[ADDRESS_POS];
+
             if (!mDataCheck.containsKey(restaurantName)){
                 mDataCheck.put(restaurantName, item);
                 mData.add(item);
+
                 notifyDataSetChanged();
             }
 

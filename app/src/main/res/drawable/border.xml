@@ -13,8 +13,30 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
-  <solid android:color="#00000000" />
-  <stroke android:width="1dip" android:color="#cccccc" />
-  <corners android:radius="5dp" />
-</shape>
+<layer-list>
+  <!--item>
+    <shape android:shape="rectangle"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+      <gradient
+          android:startColor="@color/black"
+          android:endColor="@color/black"
+          android:angle="90">
+      </gradient>
+
+      <corners android:radius="5dip" />
+
+      <stroke
+          android:width="1px"
+          android:color="#00000000" />
+    </shape>
+  </item-->
+  <item>
+    <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+      <solid android:color="#00000000" />
+      <stroke android:width="3dip" android:color="#cccccc" />
+      <corners android:radius="5dp" />
+    </shape>
+  </item>
+</layer-list>
+
+

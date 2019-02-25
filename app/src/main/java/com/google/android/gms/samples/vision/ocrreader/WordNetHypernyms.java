@@ -49,6 +49,15 @@ public class WordNetHypernyms {
             "coffee"
     };
 
+    public static final String[] MEAT_HYPERNYMS = {
+      "poultry",
+            "cut_of_pork",
+            "meat",
+            "cattle"
+
+
+    };
+
     public  boolean isHypernym(String [] hypernyms, String sentence) {
 
         boolean booleanHypernym = false;
@@ -178,6 +187,8 @@ public class WordNetHypernyms {
 
                     // look up first sense of the word item
                     IIndexWord idxWord = dict.getIndexWord(stem_item, POS.NOUN);
+                    if (idxWord == null)
+                            Log.d("null idxWord", stem_item);
 
                     if (idxWord != null) {
                         IWordID wordID = idxWord.getWordIDs().get(0);
