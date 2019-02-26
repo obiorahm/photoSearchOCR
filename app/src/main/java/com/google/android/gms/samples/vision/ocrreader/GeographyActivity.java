@@ -146,8 +146,8 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
 
-        if (myTTS == null)
-            myTTS = new TextToSpeech(this, this);
+        /*if (myTTS == null)
+            myTTS = new TextToSpeech(this, this);*/
 
         recyclerView = findViewById(R.id.detected_location_list_view);
         adapter = new RestaurantAdapter(this, R.layout.horizontal_text);
@@ -346,6 +346,7 @@ private void testData(){
     public void processWebResults(Document document){
 
         ArrayList<String> addresses = new ArrayList<>();
+        ArrayList<String[]> urls = new ArrayList<>();
 
         try {
             Elements testElement = document.select(".restaurant-list-item" );
@@ -362,8 +363,10 @@ private void testData(){
                 String placeId = "";
                 String longitude = "";
                 String latitude = "";
-                String item[] = {restaurant_url, restaurant_name, restaurant_address, placeId, longitude, latitude};
+                String logoID = "";
+                String item[] = {restaurant_url, restaurant_name, restaurant_address, placeId, longitude, latitude, logoID};
                 addresses.add(restaurant_address);
+                urls.add(item);
                 adapter.addItem(item);
                 Log.d(LOG_TAG, "restaurant name " +restaurant_name + " restaurant_url " + restaurant_url + " restaurant_address " + restaurant_address);
             }
@@ -376,13 +379,13 @@ private void testData(){
             Log.e(LOG_TAG, e + " null pointer");
 
         }
-        getLocationFromAddress(addresses);
+        getLocationFromAddress(urls);
         recyclerView.setAdapter(adapter);
 
 
     }
 
-    private void getLocationFromAddress(ArrayList<String> addresses){
+    private void getLocationFromAddress(ArrayList<String[]> addresses){
         /*FetchRestaurantPlaceID fetchRestaurantPlaceID = new FetchRestaurantPlaceID(this);
         fetchRestaurantPlaceID.execute(addresses);*/
 
@@ -390,6 +393,15 @@ private void testData(){
         fetchRestaurantLongLat.execute(addresses);
 
     }
+
+
+    /*private void getLocationFromAddress(ArrayList<String> addresses){
+
+
+        FetchRestaurantLongLat fetchRestaurantLongLat = new FetchRestaurantLongLat(this);
+        fetchRestaurantLongLat.execute(addresses);
+
+    }*/
 
     @Override
     public void addPlaceIdToAdapter(HashMap<String, String[]> placesId){
@@ -400,16 +412,21 @@ private void testData(){
     @Override
     public void addLongLatToAdapter(HashMap<String, String[]> lngLatPack){
 
-
-
-        String url = "";
-        FetchWebPage fetchWebPage = new FetchWebPage(this);
-        fetchWebPage.execute(url, "don't encode");
-
-
         adapter.addLngLat(lngLatPack);
         //recyclerView.setAdapter(adapter);
 
+    }
+
+    @Override
+    public void addImageUrlToAdapter(HashMap<String, String> imageUrl){
+        adapter.addImageUrl(imageUrl);
+    }
+
+
+    @Override
+    public void beginFetchRestaurantLogos(HashMap<String, String[]> restaurantInfo){
+        FetchRestaurantLogo fetchRestaurantLogo = new FetchRestaurantLogo(this);
+        fetchRestaurantLogo.execute(restaurantInfo);
     }
 
     @Override
@@ -506,11 +523,11 @@ private void testData(){
     public void onInit(int initStatus){
         //initialize firebase
         FirebaseApp.initializeApp(this);
-        if (initStatus == TextToSpeech.SUCCESS) {
+        /*if (initStatus == TextToSpeech.SUCCESS) {
             myTTS = new TextToSpeech(this, this);
             myTTS.setLanguage(Locale.US);
             myTTS.setSpeechRate(0.6f);
-        }
+        }*/
 
     }
 

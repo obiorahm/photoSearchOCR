@@ -38,6 +38,8 @@ public class UseRecyclerActivity extends Activity  {
 
     public void processWebResults(Document document){}
 
+    public void beginFetchRestaurantLogos(HashMap<String, String[]> restaurantInfo){}
+
     public void getRestaurantPhoto(String placeId, ImageView imageView){}
 
     /**
@@ -54,6 +56,15 @@ public class UseRecyclerActivity extends Activity  {
      * @param lngLatPack contains JSONdata for location in string
      */
     public void addLongLatToAdapter(HashMap<String, String[]> lngLatPack){
+
+    }
+
+    /**
+     *
+     * @param imageUrlPack
+     */
+
+    public void addImageUrlToAdapter(HashMap<String, String> imageUrlPack){
 
     }
 

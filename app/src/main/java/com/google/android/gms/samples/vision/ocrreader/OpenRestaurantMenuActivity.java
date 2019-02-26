@@ -201,7 +201,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
             if (internetAddress != null || ! (internetAddress.equals(""))){
                 int start = internetAddress.indexOf("//");
                 int start1 = internetAddress.indexOf(".");
-                String newAddress = internetAddress.substring(start + 2);
+                String newAddress = (internetAddress.length() > start + 2) ? internetAddress.substring(start + 2): internetAddress;
                 int end = newAddress.indexOf("/");
                 Log.d(LOG_TAG, "internet address " + start + " " + end);
 

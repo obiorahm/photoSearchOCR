@@ -15,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 
 import com.google.android.gms.samples.vision.ocrreader.FetchWebPage;
@@ -46,6 +50,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     private final int PLACE_ID_POS = 3;
     private final int LONGITUDE = 4;
     private final int LATITUDE = 5;
+    private final int IMAGE_URL = 6;
 
     private double DEFAULT_LONG = 151.20689;
 
@@ -118,6 +123,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         public void onBindViewHolder(final RestaurantAdapter.ViewHolder holder, final int position){
             final String[] restaurantData =  mData.get(position);
             final String word = restaurantData[TITLE_POS];
+            final  String url = restaurantData[IMAGE_URL];
 
             holder.mImageView.setVisibility(View.VISIBLE);
             /*try{
@@ -176,6 +182,21 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             });
 
 
+            Glide.with(context).load(buildImageUrl(url))
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    })
+                    .into(holder.mImageView);
+            Log.d(LOG_TAG, "internet " + url);
+
 
 
             //Log.d(LOG_TAG, "place id " +restaurantData[ADDRESS_POS]+  " Longitude " + restaurantData[LONGITUDE] + " Latitude" + restaurantData[LATITUDE]);
@@ -190,6 +211,29 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
         }
+
+
+    private String buildImageUrl(String internetAddress){
+
+            String logo = "";
+
+        if (internetAddress != null || ! (internetAddress.equals(""))){
+            int start = internetAddress.indexOf("//");
+            int start1 = internetAddress.indexOf(".");
+            String newAddress = (internetAddress.length() > start + 2) ? internetAddress.substring(start + 2): internetAddress;
+            int end = newAddress.indexOf("/");
+            Log.d(LOG_TAG, "internet address " + start + " " + end);
+
+            String extractAddress = (end > start) ? newAddress.substring(0, end) : internetAddress.substring(start1 + 1);
+
+            Log.d(LOG_TAG, "internet address " + extractAddress);
+
+            logo = "https://logo.clearbit.com/" + extractAddress;
+        }
+
+        return logo;
+
+    }
 
     private void control_select(RestaurantAdapter.ViewHolder holder, String[] restaurantData){
             String restaurantUrl = restaurantData[0];
@@ -266,7 +310,27 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 item[LONGITUDE] = lngLatPack[LNG] ;
                 item[LATITUDE] = lngLatPack[LAT];
                 //notifyDataSetChanged();
+            }else{
+
             }
         }
     }
+
+
+    public void addImageUrl(HashMap<String, String> imageUrl){
+
+        for (String[] item: mData){
+            String address = item[ADDRESS_POS];
+            String imageUrlPack = imageUrl.get(address);
+            if(imageUrl == null || imageUrlPack == null){
+                item[IMAGE_URL] = "";
+            }else{
+                item[IMAGE_URL] = imageUrlPack ;
+
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+
 }

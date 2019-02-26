@@ -25,12 +25,15 @@ import java.util.Iterator;
  * Created by mgo983 on 12/13/18.
  */
 
-public class FetchRestaurantLongLat extends AsyncTask<ArrayList<String>, Void, HashMap<String, String[]>> {
+public class FetchRestaurantLongLat extends AsyncTask<ArrayList<String[]>, Void, HashMap<String, String[]>> {
 
     String LOG_TAG = FetchRestaurantLongLat.class.getSimpleName();
 
     HashMap<String, String[]> LongLatData = new HashMap<>();
     Context context;
+
+    int RESTAURANT_ADDRESS = 2;
+    int RESTAURANT_URL = 0;
 
     public FetchRestaurantLongLat(Context context){
         this.context = context;
@@ -39,13 +42,14 @@ public class FetchRestaurantLongLat extends AsyncTask<ArrayList<String>, Void, H
 
 
     @Override
-    protected HashMap<String, String[]> doInBackground(ArrayList<String> ... params){
+    protected HashMap<String, String[]> doInBackground(ArrayList<String[]> ... params){
 
         for (int i = 0; i < params[0].size(); i++){
-            String searchString = params[0].get(i);
+            String[] info = params[0].get(i);
+            String searchString = info[RESTAURANT_ADDRESS];
             Uri uri = buildLongLatUri(searchString.trim());
             String json = getJSON(uri);
-            String jsonAndLongLatHolder[] = {json, ""};
+            String jsonAndLongLatHolder[] = {json, "", info[RESTAURANT_URL]};
             LongLatData.put(searchString, jsonAndLongLatHolder);
         }
 
@@ -118,8 +122,8 @@ public class FetchRestaurantLongLat extends AsyncTask<ArrayList<String>, Void, H
         HashMap<String, String []> longLat = getLongLat(result);
 
 
-        /*FetchRestaurantIcon fetchRestaurantLongLat = new FetchRestaurantIcon(this);
-        fetchRestaurantIcon.execute(longLat);*/
+
+        ((UseRecyclerActivity) context).beginFetchRestaurantLogos(result);
 
         ((UseRecyclerActivity) context).addLongLatToAdapter(longLat);
 
@@ -156,19 +160,28 @@ public class FetchRestaurantLongLat extends AsyncTask<ArrayList<String>, Void, H
             HashMap.Entry item = (HashMap.Entry) resultIterator.next();
             try{
                 String[] value = (String[]) item.getValue();
-                JSONObject placeData = new JSONObject(value[0]);
-                JSONArray candidate = placeData.getJSONArray("results");
-                JSONObject firstObject = candidate.getJSONObject(0);
-                JSONObject geometry = firstObject.getJSONObject("geometry");
-                JSONObject location = geometry.getJSONObject("location");
-                String lng = location.getString("lng");
-                String lat = location.getString("lat");
+                if (value != null || value.length != 0){
 
-                String [] lnglat = {lng, lat};
-                stringResult.put( (String) item.getKey(), lnglat);
+                    JSONObject placeData = new JSONObject(value[0]);
+                    JSONArray candidate = placeData.getJSONArray("results");
+
+                    if (candidate != null || candidate.length() > 0){
+                        JSONObject firstObject = candidate.getJSONObject(0);
+                        JSONObject geometry = firstObject.getJSONObject("geometry");
+                        JSONObject location = geometry.getJSONObject("location");
+                        String lng = location.getString("lng");
+                        String lat = location.getString("lat");
+
+                        String [] lnglat = {lng, lat};
+                        stringResult.put( (String) item.getKey(), lnglat);
 
 
-                Log.d(LOG_TAG, "location " + location.toString());
+                        Log.d(LOG_TAG, "location " + location.toString());
+                    }
+
+
+                }
+
 
             }catch (JSONException e){
                 Log.e(LOG_TAG, e + "");

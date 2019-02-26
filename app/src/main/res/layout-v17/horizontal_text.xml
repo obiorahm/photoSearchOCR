@@ -13,11 +13,10 @@
         android:padding="5dp"
         android:layout_margin="10dp">
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:id="@+id/descriptive_image"
             android:layout_alignParentLeft="true"
-            android:visibility="gone"
             android:layout_margin="10dp"/>
         <!--com.google.android.gms.samples.vision.ocrreader.ui.project.ProjectRecyclerView
             android:layout_width="wrap_content"
