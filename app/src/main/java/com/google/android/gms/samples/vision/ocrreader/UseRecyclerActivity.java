@@ -64,7 +64,7 @@ public class UseRecyclerActivity extends Activity  {
      * @param imageUrlPack
      */
 
-    public void addImageUrlToAdapter(HashMap<String, String> imageUrlPack){
+    public void addImageUrlToAdapter(HashMap<String, String[]> imageUrlPack){
 
     }
 

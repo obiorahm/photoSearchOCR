@@ -2,13 +2,16 @@ package com.google.android.gms.samples.vision.ocrreader;
 
 import android.*;
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,20 +27,27 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.places.GeoDataClient;
+//import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceDetectionClient;
-import com.google.android.gms.location.places.PlaceLikelihood;
+//`import com.google.android.gms.location.places.PlaceLikelihood;
 import com.google.android.gms.location.places.PlaceLikelihoodBufferResponse;
 import com.google.android.gms.location.places.PlacePhotoMetadata;
 import com.google.android.gms.location.places.PlacePhotoMetadataBuffer;
 import com.google.android.gms.location.places.PlacePhotoMetadataResponse;
 import com.google.android.gms.location.places.PlacePhotoResponse;
-import com.google.android.gms.location.places.Places;
+//import com.google.android.gms.location.places.Places;
+
+// Add an import statement for the client library.
+import com.google.android.libraries.places.api.Places;
+
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.StreetViewPanoramaView;
@@ -47,6 +57,10 @@ import com.google.android.gms.maps.model.StreetViewSource;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.firebase.FirebaseApp;
 
 import org.jsoup.nodes.Document;
@@ -55,14 +69,16 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 /**
  * Created by mgo983 on 10/5/18.
  */
 
-public class GeographyActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener, GoogleApiClient.OnConnectionFailedListener, OnStreetViewPanoramaReadyCallback, Runnable{
+public class GeographyActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener, GoogleApiClient.OnConnectionFailedListener, OnStreetViewPanoramaReadyCallback, Runnable, LocationListener{
 
     TextView globalTextView;
     //Text to speech variables
@@ -103,6 +119,10 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     public boolean test = false;
 
+    protected LocationManager locationManager;
+
+    PlacesClient placesClient;
+
 
 
     @Override
@@ -113,7 +133,7 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         mSavedInstance = savedInstance;
 
             // construct a GeoDataClient
-            mGeoDataClient = Places.getGeoDataClient(this);
+            /*mGeoDataClient = Places.getGeoDataClient(this);
 
             // construct a PlaceDetectionClient.
             mPlaceDetectionClient = Places.getPlaceDetectionClient(this);
@@ -124,7 +144,11 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
                     .addOnConnectionFailedListener(this)
                     .build();
 
-        //getPhotos();
+        //getPhotos();*/
+        String apiKey = "AIzaSyC-W1DgpWK4sfOPngXLGDA6j62aGxWMMaU";
+        Places.initialize(getApplicationContext(), apiKey);
+        // Create a new Places client instance.
+        placesClient = Places.createClient(this);
 
         AssetManager assetManager = getAssets();
         try{
@@ -170,6 +194,10 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
                 testData();
             }else{
 
+                /*locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0, this);*/
+
+
                 getCurrentLocation();
             }
 
@@ -198,6 +226,34 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
 
     }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        globalTextView = findViewById(R.id.current_location);
+        //txtLat = (TextView) findViewById(R.id.textview1);
+        globalTextView.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+        Log.d(LOG_TAG, "Latitude " + location.getLatitude() + " " + location.getLongitude() );
+        FetchAddress fetchAddress = new FetchAddress();
+
+        String y []= { Double.toString(location.getLatitude()),Double.toString(location.getLongitude()) };
+        fetchAddress.execute(y);
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Log.d("Latitude",provider);
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Log.d("Latitude",provider);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.d("Latitude",status + "");
+    }
+
 
     @Override
     public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView){
@@ -395,13 +451,6 @@ private void testData(){
     }
 
 
-    /*private void getLocationFromAddress(ArrayList<String> addresses){
-
-
-        FetchRestaurantLongLat fetchRestaurantLongLat = new FetchRestaurantLongLat(this);
-        fetchRestaurantLongLat.execute(addresses);
-
-    }*/
 
     @Override
     public void addPlaceIdToAdapter(HashMap<String, String[]> placesId){
@@ -413,12 +462,11 @@ private void testData(){
     public void addLongLatToAdapter(HashMap<String, String[]> lngLatPack){
 
         adapter.addLngLat(lngLatPack);
-        //recyclerView.setAdapter(adapter);
 
     }
 
     @Override
-    public void addImageUrlToAdapter(HashMap<String, String> imageUrl){
+    public void addImageUrlToAdapter(HashMap<String, String[]> imageUrl){
         adapter.addImageUrl(imageUrl);
     }
 
@@ -469,8 +517,59 @@ private void testData(){
         });
     }
 
+
+    /*private void getCurrentLocation() {
+        FusedLocationProviderClient f = new FusedLocationProviderClient(this);
+        f.getLastLocation().addOnSuccessListener(this, location -> {
+            if (location != null) {
+                Double wayLatitude = location.getLatitude();
+                Double wayLongitude = location.getLongitude();
+                globalTextView.setText(String.format(Locale.US, "%s -- %s", wayLatitude, wayLongitude));
+            }
+        });
+    }*/
+
     private void getCurrentLocation(){
+
+
+        // Use fields to define the data types to return.
+        List<Place.Field > placeFields = Arrays.asList(Place.Field.LAT_LNG, Place.Field.ADDRESS, Place.Field.TYPES);
+
+        // Use the builder to create a FindCurrentPlaceRequest.
+        FindCurrentPlaceRequest request = FindCurrentPlaceRequest.builder(placeFields).build();
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            placesClient.findCurrentPlace(request).addOnSuccessListener(((response) -> {
+
+                for (com.google.android.libraries.places.api.model.PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
+                    Log.i(LOG_TAG, String.format("Place '%s' has likelihood: %f" + placeLikelihood.getPlace().getTypes(),
+                            placeLikelihood.getPlace().getAddress(),
+                            placeLikelihood.getLikelihood()));
+                }
+
+                //get first place
+                PlaceLikelihood currentPlace = response.getPlaceLikelihoods().get(0);
+                displayCurrentLocation(currentPlace.getPlace().getAddress(), currentPlace.getPlace().getId());
+
+
+
+
+            })).addOnFailureListener((exception) -> {
+                if (exception instanceof ApiException) {
+                    ApiException apiException = (ApiException) exception;
+                    Log.e(LOG_TAG, "Place not found: " + apiException.getStatusCode());
+                }
+            });
+        } else {
+            // A local method to request required permissions;
+            // See https://developer.android.com/training/permissions/requesting
+            checkPermission();
+        }
+    }
+   /* private void getCurrentLocation(){
         try{
+
+
             Task<PlaceLikelihoodBufferResponse> placeResult = mPlaceDetectionClient.getCurrentPlace(null);
             placeResult.addOnCompleteListener(new OnCompleteListener<PlaceLikelihoodBufferResponse>() {
                 @Override
@@ -494,15 +593,17 @@ private void testData(){
         }catch (SecurityException e){
             Log.e(LOG_TAG, e + " ");
         }
-    }
+    }*/
 
     private void displayCurrentLocation(String address, String placeId){
         globalTextView.setText(address);
         ImageView locationImageView = GeographyActivity.this.findViewById(R.id.location_image);
-        getRestaurantPhoto(placeId, locationImageView );
+        //getRestaurantPhoto(placeId, locationImageView );
         //getPhotos(placeId);
-        FetchWebPage fetchWebPage = new FetchWebPage(GeographyActivity.this);
-        fetchWebPage.execute(address, "encode");
+        if (address != null){
+            FetchWebPage fetchWebPage = new FetchWebPage(GeographyActivity.this);
+            fetchWebPage.execute(address, "encode");
+        }
     }
 
 
@@ -521,6 +622,9 @@ private void testData(){
     }
     @Override
     public void onInit(int initStatus){
+        String apiKey = "AIzaSyC-W1DgpWK4sfOPngXLGDA6j62aGxWMMaU";
+        Places.initialize(getApplicationContext(), apiKey);
+
         //initialize firebase
         FirebaseApp.initializeApp(this);
         /*if (initStatus == TextToSpeech.SUCCESS) {

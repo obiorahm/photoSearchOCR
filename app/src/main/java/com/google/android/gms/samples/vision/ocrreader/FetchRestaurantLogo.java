@@ -21,7 +21,7 @@ import java.util.Iterator;
  * Created by mgo983 on 2/25/19.
  */
 
-public class FetchRestaurantLogo extends AsyncTask<HashMap<String, String[]> , Void, HashMap<String, String>> {
+public class FetchRestaurantLogo extends AsyncTask<HashMap<String, String[]> , Void, HashMap<String, String[]>> {
 
     Context context;
 
@@ -30,25 +30,28 @@ public class FetchRestaurantLogo extends AsyncTask<HashMap<String, String[]> , V
     String prefix_url = "https://www.allmenus.com";
 
     int RESTAURANT_URL = 2;
+    int RESTAURANT_NAME = 1;
 
     public FetchRestaurantLogo(Context context){
         this.context = context;
     }
 
     @Override
-    protected  HashMap<String, String> doInBackground(HashMap<String, String[]> ... params){
-        HashMap<String, String> restaurantLogoUrls = new HashMap<>();
+    protected  HashMap<String, String[]> doInBackground(HashMap<String, String[]> ... params){
+        HashMap<String, String[]> restaurantLogoUrls = new HashMap<>();
 
         Iterator resultIterator = params[0].entrySet().iterator();
         while (resultIterator.hasNext()) {
 
             HashMap.Entry entry = (HashMap.Entry) resultIterator.next();
-            String item = ((String []) entry.getValue())[RESTAURANT_URL];
+            String[] entryInfo = ((String []) entry.getValue());
+            String item = entryInfo[RESTAURANT_URL];
             String newItem = item.substring(1); // right after the first slash
             Document document = getDocument(item);
             String logo = getLogoAddress(document);
+            String [] allInfo = {logo, entryInfo[RESTAURANT_NAME]};
 
-            restaurantLogoUrls.put((String) entry.getKey(), logo);
+            restaurantLogoUrls.put((String) entry.getKey(), allInfo);
 
         }
 
@@ -65,10 +68,6 @@ public class FetchRestaurantLogo extends AsyncTask<HashMap<String, String[]> , V
             Log.d(LOG_TAG, "internet address " + logo);
 
         }
-
-
-
-
         return logo;
     }
 
@@ -95,7 +94,7 @@ public class FetchRestaurantLogo extends AsyncTask<HashMap<String, String[]> , V
 
 
     @Override
-    protected void onPostExecute(HashMap<String, String> result){
+    protected void onPostExecute(HashMap<String, String[]> result){
 
         ((UseRecyclerActivity) context).addImageUrlToAdapter(result);
     }

@@ -16,7 +16,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.maps.StreetViewPanoramaView;
@@ -183,17 +182,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
             Glide.with(context).load(buildImageUrl(url))
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            return false;
-                        }
-                    })
                     .into(holder.mImageView);
             Log.d(LOG_TAG, "internet " + url);
 
@@ -317,17 +305,28 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     }
 
 
-    public void addImageUrl(HashMap<String, String> imageUrl){
+    public void addImageUrl(HashMap<String, String[]> imageUrl){
+
+        int LOGO_POS = 0;
+        int NAME_POS = 1;
 
         for (String[] item: mData){
             String address = item[ADDRESS_POS];
-            String imageUrlPack = imageUrl.get(address);
-            if(imageUrl == null || imageUrlPack == null){
+            String[] imageUrlPack = imageUrl.get(address);
+            String logo = imageUrlPack[LOGO_POS];
+            String name = imageUrlPack[NAME_POS];
+
+            // name equals test for restaurants that have the same address.
+            if(imageUrl == null || imageUrlPack == null || !(name.equals(item[TITLE_POS]))){
                 item[IMAGE_URL] = "";
-            }else{
-                item[IMAGE_URL] = imageUrlPack ;
+            }else if(name.equals("Burger King")){
+                item[IMAGE_URL] = "https://www.bk.com/";
+            }
+            else{
+                item[IMAGE_URL] = logo ;
 
             }
+            Log.d(LOG_TAG , " keys " + logo + " " + imageUrl.containsKey(address) +" " + address  + " "+ name);
         }
         notifyDataSetChanged();
     }

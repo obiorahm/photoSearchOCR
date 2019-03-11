@@ -1,25 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v13/values-v13.xml",
-            "map": [
-                {
-                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/values-v13/values-v13.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "58",
-                        "endOffsets": "109"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v13/values-v13.xml",
             "map": [
                 {
-                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.0.aar/98b08101822298e0604c01d71a2502fb/res/values-v13/values-v13.xml",
+                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/f4736623a9b4573a1d8a3b1407bcbfec/res/values-v13/values-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

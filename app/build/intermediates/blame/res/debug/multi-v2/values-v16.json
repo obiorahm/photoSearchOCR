@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/mgo983/Desktop/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
+            "outputFile": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f90ebb0786da93a9ce9a905f01ba2642/res/values-v16/values-v16.xml",
+                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/2a64184fa1e7f0a4223b61c1810cc06e/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -12,20 +12,24 @@
                         "endColumns": "65",
                         "endOffsets": "116"
                     }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
-            "map": [
+                },
                 {
-                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f90ebb0786da93a9ce9a905f01ba2642/res/values-v16/values-v16.xml",
+                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/f4736623a9b4573a1d8a3b1407bcbfec/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
                     }
                 }
             ]

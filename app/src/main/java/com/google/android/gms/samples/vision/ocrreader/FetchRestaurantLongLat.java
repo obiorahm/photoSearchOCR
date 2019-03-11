@@ -34,6 +34,7 @@ public class FetchRestaurantLongLat extends AsyncTask<ArrayList<String[]>, Void,
 
     int RESTAURANT_ADDRESS = 2;
     int RESTAURANT_URL = 0;
+    int RESTAURANT_NAME = 1;
 
     public FetchRestaurantLongLat(Context context){
         this.context = context;
@@ -49,7 +50,7 @@ public class FetchRestaurantLongLat extends AsyncTask<ArrayList<String[]>, Void,
             String searchString = info[RESTAURANT_ADDRESS];
             Uri uri = buildLongLatUri(searchString.trim());
             String json = getJSON(uri);
-            String jsonAndLongLatHolder[] = {json, "", info[RESTAURANT_URL]};
+            String jsonAndLongLatHolder[] = {json, info[RESTAURANT_NAME], info[RESTAURANT_URL]};
             LongLatData.put(searchString, jsonAndLongLatHolder);
         }
 
@@ -160,7 +161,7 @@ public class FetchRestaurantLongLat extends AsyncTask<ArrayList<String[]>, Void,
             HashMap.Entry item = (HashMap.Entry) resultIterator.next();
             try{
                 String[] value = (String[]) item.getValue();
-                if (value != null || value.length != 0){
+                if (value != null || value.length > 0){
 
                     JSONObject placeData = new JSONObject(value[0]);
                     JSONArray candidate = placeData.getJSONArray("results");
@@ -180,6 +181,9 @@ public class FetchRestaurantLongLat extends AsyncTask<ArrayList<String[]>, Void,
                     }
 
 
+                }else{
+                    String [] lnglat = {"", ""};
+                    stringResult.put((String) item.getKey(), lnglat);
                 }
 
 
@@ -190,22 +194,6 @@ public class FetchRestaurantLongLat extends AsyncTask<ArrayList<String[]>, Void,
 
             }
         }
-
-        /*for (int i = 0; i < result.size(); i++){
-            try{
-                JSONObject placeData = new JSONObject(result.get(i));
-                JSONArray candidate = placeData.getJSONArray("candidates");
-                JSONObject placeIdObject = candidate.getJSONObject(0);
-                String placeId = placeIdObject.getString("place_id");
-                stringResult[i] = placeId;
-                Log.d(LOG_TAG, " placeId" + placeId);
-
-
-            }catch (JSONException e){
-                Log.e(LOG_TAG, e + "");
-            }
-
-        }*/
 
         return stringResult;
 
