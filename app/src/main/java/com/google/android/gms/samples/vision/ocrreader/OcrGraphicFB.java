@@ -3,6 +3,7 @@ package com.google.android.gms.samples.vision.ocrreader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
@@ -25,6 +26,14 @@ public class OcrGraphicFB extends GraphicOverlayFB.Graphic {
 
     private FirebaseVisionText.Line mLine = null;
 
+    private Path mPath = null;
+
+    private float minX;
+    private float minY;
+
+    private float maxX;
+    private float maxY;
+
     OcrGraphicFB(GraphicOverlayFB overlay, FirebaseVisionText.TextBlock text) {
         super(overlay);
 
@@ -45,6 +54,41 @@ public class OcrGraphicFB extends GraphicOverlayFB.Graphic {
         }
         // Redraw the overlay, as this graphic has been added.
         postInvalidate();
+    }
+
+    OcrGraphicFB(GraphicOverlayFB overlay, Path mPath) {
+        super(overlay);
+
+        this.mPath = mPath;
+
+        if (sRectPaint == null) {
+            sRectPaint = new Paint();
+            sRectPaint.setColor(TEXT_COLOR);
+            sRectPaint.setStyle(Paint.Style.STROKE);
+            sRectPaint.setStrokeWidth(4.0f);
+        }
+
+        if (sTextPaint == null) {
+            sTextPaint = new Paint();
+            sTextPaint.setColor(TEXT_COLOR);
+            sTextPaint.setTextSize(35.0f);
+
+        }
+        // Redraw the overlay, as this graphic has been added.
+        postInvalidate();
+    }
+
+
+    public void updatePath(Path path, float x, float y){
+        this.mPath = path;
+
+        minX = x < minX ? x : minX;
+        minY = y < minY ? y : minY;
+
+
+        maxX = x > maxX ? x : maxX;
+        maxY = y > maxY ? y : maxY;
+
     }
 
     public void  setsRectPaint(int color){
@@ -101,6 +145,7 @@ public class OcrGraphicFB extends GraphicOverlayFB.Graphic {
     public void draw(Canvas canvas) {
         FirebaseVisionText.TextBlock text = mText;
         FirebaseVisionText.Line line = mLine;
+
         /**if (text == null) {
             return;
         }*/
@@ -125,6 +170,7 @@ public class OcrGraphicFB extends GraphicOverlayFB.Graphic {
 
             }
 
+
         }else if (line != null){
 
             RectF rect = new RectF(line.getBoundingBox());
@@ -138,6 +184,8 @@ public class OcrGraphicFB extends GraphicOverlayFB.Graphic {
             float left = translateX(line.getBoundingBox().left);
             float bottom = translateY(line.getBoundingBox().bottom);
             canvas.drawText(line.getText(), left, bottom, sTextPaint);
+        }else if(mPath != null){
+            canvas.drawPath(mPath, sRectPaint);
         }
 
 

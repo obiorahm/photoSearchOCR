@@ -8,6 +8,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Camera;
 import android.graphics.Color;
+import android.graphics.Path;
+import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,6 +61,7 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
     private GraphicOverlayFB<OcrGraphicFB> mGraphicOverlayFB;
 
+
     private ImageViewPreview imageViewPreview;
     //Text to speech variables
     private int MY_DATA_CHECK_CODE = 0;
@@ -89,10 +93,13 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
      * */
 
     private OcrGraphicFB selectedGraphic;
+
     private FirebaseVisionText.TextBlock newTextBlock;
     private String currentLineSelection = null;
 
     private ArrayList<OcrGraphicFB> graphics = new ArrayList<>();
+
+    private ArrayList<OcrGraphicFB> graphicDraws = new ArrayList<>();
 
 
 @Override
@@ -126,8 +133,8 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
     /*Uri uri = Uri.parse(fileName);*/
 
-    if (myTTS == null)
-        myTTS = new TextToSpeech(this, this);
+    /*if (myTTS == null)
+        myTTS = new TextToSpeech(this, this);*/
 
     //initialize adapter
     recognizedTextAdapter = new RecognizedTextAdapter(this, R.layout.horizontal_text);
@@ -211,6 +218,7 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
             // remove blocks and lines
             remove_all_lines();
             remove_all_blocks();
+            removePath();
 
             // reset public variables
             newTextBlock = null;
@@ -546,6 +554,14 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
     }
 
 
+    private void removePath(){
+
+        for (OcrGraphicFB graphicFB : graphicDraws){
+            mGraphicOverlayFB.remove(graphicFB);
+        }
+        mPath = null;
+        //graphicDraw.updatePath(mPath);
+    }
 
 
     /***
@@ -761,16 +777,82 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
         boolean c = gestureDetector.onTouchEvent(e);
 
+        switch (e.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                c = touchStart(e.getRawX(),e.getRawY());
+                break;
+
+            case MotionEvent.ACTION_UP:
+                graphicDraw.postInvalidate();
+                c = touchUp();
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                graphicDraw.postInvalidate();
+                c = touchMove(e.getRawX(), e.getRawY());
+                break;
+
+        }
+
         return c || super.onTouchEvent(e);
     }
 
 
     private class CaptureGestureListener extends GestureDetector.SimpleOnGestureListener {
-
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
             return onTap(e.getRawX(), e.getRawY()) || super.onSingleTapConfirmed(e);
         }
+
+
+    }
+
+
+
+    Path mPath = null;
+    float mX;
+    float mY;
+    double TOUCH_TOLERANCE = 4.0;
+    OcrGraphicFB graphicDraw = null;
+
+    private boolean touchStart(float rawX, float rawY){
+        graphicDraw = new OcrGraphicFB(mGraphicOverlayFB, mPath);
+        graphicDraw.setsRectPaint(Color.GREEN);
+        graphicDraw.setRecPaintStrokeWidth(10.0f);
+        mGraphicOverlayFB.add(graphicDraw);
+
+
+        mPath = new Path();
+        graphicDraws.add(graphicDraw);
+
+        mPath.reset();
+        mPath.moveTo(rawX,rawY);
+        mX = rawX;
+        mY = rawY;
+
+        graphicDraw.updatePath(mPath, mX,mY);
+        return true;
+
+    }
+
+    private boolean touchMove(float rawX, float rawY){
+        float dx = Math.abs(rawX - mX);
+        float dy = Math.abs(rawY - mY);
+
+        if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE){
+            mPath.quadTo(mX, mY, (rawX + mX)/2, (rawY + mY) /2);
+            mX = rawX;
+            mY = rawY;
+        }
+
+        graphicDraw.updatePath(mPath, mX, mY);
+        return true;
+    }
+
+    private boolean touchUp(){
+        mPath.lineTo(mX, mY);
+        graphicDraw.updatePath(mPath, mX, mY);
+        return true;
     }
 
     /**
