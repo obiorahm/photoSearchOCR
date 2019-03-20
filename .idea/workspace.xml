@@ -1425,9 +1425,9 @@
       <window_info anchor="bottom" id="Gradle Console" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Android Profiler" order="8" weight="0.3287841" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5150905" side_tool="true" weight="0.27915633" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="10" sideWeight="0.48490945" visible="true" weight="0.21933086" />
+      <window_info anchor="bottom" id="Logcat" order="10" sideWeight="0.48490945" weight="0.21933086" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.16728625" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.17224288" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.17224288" />
       <window_info anchor="bottom" id="Messages" order="13" sideWeight="0.48993963" weight="0.2517581" />
       <window_info anchor="bottom" id="Build" order="14" weight="0.24287485" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
