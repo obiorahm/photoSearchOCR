@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.Log;
 
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlayFB;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
@@ -186,6 +187,15 @@ public class OcrGraphicFB extends GraphicOverlayFB.Graphic {
             canvas.drawText(line.getText(), left, bottom, sTextPaint);
         }else if(mPath != null){
             canvas.drawPath(mPath, sRectPaint);
+        }else{
+            Log.d("draw rectangle ", "I'm drawing a rectangle ");
+            RectF rect = new RectF();
+            rect.left = translateX(minX);
+            rect.top = translateY(maxY);
+            rect.right = translateX(maxX);
+            rect.bottom = translateY(minY);
+            canvas.drawRect(rect, sRectPaint);
+
         }
 
 

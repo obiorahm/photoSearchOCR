@@ -182,6 +182,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
             for (String option : allAssets){
 
+
                 int firstPos = 0;
                 int lastPos = option.lastIndexOf('.');
                 String clean_option =  option.substring(firstPos, lastPos).replace("_", " ");

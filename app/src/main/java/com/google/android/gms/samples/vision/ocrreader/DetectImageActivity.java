@@ -309,6 +309,14 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
         }
     });
 
+    ImageButton imageButtonMakeSquare = findViewById(R.id.make_order);
+    imageButtonMakeSquare.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            graphicDraw.updatePath(null, mX,mY);
+            graphicDraw.postInvalidate();
+        }
+    });
 
 
     recyclerView.setAdapter(recognizedTextAdapter);

@@ -235,6 +235,7 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
 
         holder.mTextView.setText(label);
         String url = "file:///android_asset/" + mTopLevel.get(pos) + "/" + image_file_name;
+        Log.d(LOG_TAG, url);
         Glide.with(context).load(url).into(holder.mImageView);
         myTTS.speak(label,TextToSpeech.QUEUE_FLUSH,null);
 

@@ -6,6 +6,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,8 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
     private int normal = R.drawable.smaller_layer_drawable;
     private int select = R.drawable.smaller_layer_selected;
+
+    private String LOG_TAG = FoodItemOrderOptionAdapter.class.getSimpleName();
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -94,6 +97,8 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
         holder.mTextView.setText(label);
 
         Glide.with(context).load(url).into(holder.mImageView);
+
+        Log.d(LOG_TAG, url);
 
         holder.mImageView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1184,6 +1184,11 @@ drawable baseline_autorenew_black_18dp
 drawable baseline_autorenew_black_24dp
 drawable baseline_autorenew_white_18dp
 drawable baseline_clear_white_48dp
+drawable baseline_crop_square_24
+drawable baseline_crop_square_white_18
+drawable baseline_crop_square_white_24
+drawable baseline_crop_square_white_36
+drawable baseline_crop_square_white_48
 drawable baseline_format_list_bulleted_white_48dp
 drawable baseline_group_work_24
 drawable baseline_group_work_white_18
@@ -1487,6 +1492,7 @@ id main_title
 id main_view
 id make_order
 id make_order_text
+id make_square
 id meal_edit
 id meal_name
 id meal_text
