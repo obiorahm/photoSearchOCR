@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/single_food_item"
-            android:textColor="@color/white"
+            android:textColor="@color/quantum_black_secondary_text"
             android:padding="15sp"
             android:textSize="20sp"
             />
@@ -25,14 +25,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="12dp"
-            android:src="@drawable/baseline_photo_white_48"
+            android:src="@drawable/baseline_insert_photo_black_48"
             android:layout_toLeftOf="@id/speak_whole_text"
             android:backgroundTint="@color/transparent"
             android:id="@+id/show_food_item_image"/>
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_volume_up_white_48dp"
+            android:src="@drawable/ic_volume_up_black_48dp"
             android:layout_alignParentRight="true"
             android:backgroundTint="@color/transparent"
             android:id="@+id/speak_whole_text" />

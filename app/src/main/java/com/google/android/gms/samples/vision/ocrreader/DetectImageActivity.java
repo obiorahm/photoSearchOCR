@@ -309,7 +309,7 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
         }
     });
 
-    ImageButton imageButtonMakeSquare = findViewById(R.id.make_order);
+    ImageButton imageButtonMakeSquare = findViewById(R.id.make_square);
     imageButtonMakeSquare.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -785,7 +785,7 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
         boolean c = gestureDetector.onTouchEvent(e);
 
-        switch (e.getAction()){
+        /*switch (e.getAction()){
             case MotionEvent.ACTION_DOWN:
                 c = touchStart(e.getRawX(),e.getRawY());
                 break;
@@ -800,7 +800,7 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
                 c = touchMove(e.getRawX(), e.getRawY());
                 break;
 
-        }
+        }*/
 
         return c || super.onTouchEvent(e);
     }

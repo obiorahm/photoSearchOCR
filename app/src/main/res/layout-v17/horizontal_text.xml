@@ -9,9 +9,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/internal_relative_layout"
-        android:background="@drawable/selector_row"
+        android:clipToPadding="false"
+        android:elevation="10dp"
         android:padding="5dp"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:background="@drawable/selector_row"
+        >
+
+        <!--android:background="@drawable/selector_row"-->
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -39,7 +44,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_volume_up_white_48dp"
+            android:src="@drawable/ic_volume_up_black_48dp"
             android:layout_alignParentRight="true"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
