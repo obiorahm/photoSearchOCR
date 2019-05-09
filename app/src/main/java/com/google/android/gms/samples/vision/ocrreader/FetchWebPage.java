@@ -137,7 +137,19 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
                 addresses.add(restaurant_address);
                 urls.add(item);
 
-                adapter.addItem(item);
+                // return to the UI thread to update the view when the result becomes available
+
+                ((Activity) context).runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        // Stuff that updates the UI
+                        adapter.addItem(item);
+
+                    }
+                });
+
+
                 Log.d(LOG_TAG, "restaurant name " +restaurant_name + " restaurant_url " + restaurant_url + " restaurant_address " + restaurant_address);
             }
 
@@ -154,6 +166,8 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
 
 
     }
+
+
 
 
     private String[] getPanoramaData(String restaurantAddress){

@@ -97,7 +97,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 mDataCheck.put(restaurantName, item);
                 mData.add(item);
 
-                //notifyDataSetChanged();
+                notifyDataSetChanged();
             }
 
         }
@@ -288,21 +288,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     }
 
 
-    public void addLngLat(HashMap<String, String[]> lngLat){
-        final int LNG = 0;
-        final int LAT = 1;
-        for (String[] item: mData){
-            String address = item[ADDRESS_POS];
-            String[] lngLatPack = lngLat.get(address);
-            if (lngLat != null && item != null && lngLatPack != null){
-                item[LONGITUDE] = lngLatPack[LNG] ;
-                item[LATITUDE] = lngLatPack[LAT];
-                //notifyDataSetChanged();
-            }else{
-
-            }
-        }
-    }
 
 
     public void addImageUrl(HashMap<String, String[]> imageUrl){

@@ -397,61 +397,11 @@ private void testData(){
 }
 
     @Override
-    public void processWebResults(Document document){
-
-        /*ArrayList<String> addresses = new ArrayList<>();
-        ArrayList<String[]> urls = new ArrayList<>();
-
-        try {
-            Elements testElement = document.select(".restaurant-list-item" );
-            for (Element element : testElement){
-                //get name
-                Elements name_element = element.select(".name a");
-                String restaurant_name = name_element.text();
-                String restaurant_url = name_element.attr("href");
-                String restaurant_address = "";
-                Elements addressElements = element.select(".address");
-                for (Element address : addressElements){
-                    restaurant_address += address.text() + " ";
-                }
-                String placeId = "";
-                String longitude = "";
-                String latitude = "";
-                String logoID = "";
-                String item[] = {restaurant_url, restaurant_name, restaurant_address, placeId, longitude, latitude, logoID};
-                addresses.add(restaurant_address);
-                urls.add(item);
-                adapter.addItem(item);
-                Log.d(LOG_TAG, "restaurant name " +restaurant_name + " restaurant_url " + restaurant_url + " restaurant_address " + restaurant_address);
-            }
-
-
-
-
-
-        }catch (NullPointerException e){
-            Log.e(LOG_TAG, e + " null pointer");
-
-        }
-        getLocationFromAddress(urls);*/
-        recyclerView.setAdapter(adapter);
-
-
-    }
-
-    @Override
     public void setAdapter(){
         recyclerView.setAdapter(adapter);
     }
 
-    private void getLocationFromAddress(ArrayList<String[]> addresses){
-        /*FetchRestaurantPlaceID fetchRestaurantPlaceID = new FetchRestaurantPlaceID(this);
-        fetchRestaurantPlaceID.execute(addresses);*/
 
-        //FetchRestaurantLongLat fetchRestaurantLongLat = new FetchRestaurantLongLat(this);
-        //fetchRestaurantLongLat.execute(addresses);
-
-    }
 
 
 
@@ -461,12 +411,7 @@ private void testData(){
         recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public void addLongLatToAdapter(HashMap<String, String[]> lngLatPack){
 
-        adapter.addLngLat(lngLatPack);
-
-    }
 
     @Override
     public void addImageUrlToAdapter(HashMap<String, String[]> imageUrl){
@@ -474,11 +419,7 @@ private void testData(){
     }
 
 
-    @Override
-    public void beginFetchRestaurantLogos(HashMap<String, String[]> restaurantInfo){
-        FetchRestaurantLogo fetchRestaurantLogo = new FetchRestaurantLogo(this);
-        fetchRestaurantLogo.execute(restaurantInfo);
-    }
+
 
     @Override
     public void getRestaurantPhoto(String placesId, final ImageView imageView){
