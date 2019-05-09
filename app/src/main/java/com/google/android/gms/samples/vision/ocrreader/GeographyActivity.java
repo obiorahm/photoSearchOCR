@@ -443,8 +443,8 @@ private void testData(){
         /*FetchRestaurantPlaceID fetchRestaurantPlaceID = new FetchRestaurantPlaceID(this);
         fetchRestaurantPlaceID.execute(addresses);*/
 
-        FetchRestaurantLongLat fetchRestaurantLongLat = new FetchRestaurantLongLat(this);
-        fetchRestaurantLongLat.execute(addresses);
+        //FetchRestaurantLongLat fetchRestaurantLongLat = new FetchRestaurantLongLat(this);
+        //fetchRestaurantLongLat.execute(addresses);
 
     }
 
@@ -599,7 +599,7 @@ private void testData(){
         //getRestaurantPhoto(placeId, locationImageView );
         //getPhotos(placeId);
         if (address != null){
-            FetchWebPage fetchWebPage = new FetchWebPage(GeographyActivity.this);
+            FetchWebPage fetchWebPage = new FetchWebPage(GeographyActivity.this, adapter);
             fetchWebPage.execute(address, "encode");
         }
     }

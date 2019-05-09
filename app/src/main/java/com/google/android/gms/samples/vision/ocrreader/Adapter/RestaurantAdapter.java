@@ -97,7 +97,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 mDataCheck.put(restaurantName, item);
                 mData.add(item);
 
-                notifyDataSetChanged();
+                //notifyDataSetChanged();
             }
 
         }
