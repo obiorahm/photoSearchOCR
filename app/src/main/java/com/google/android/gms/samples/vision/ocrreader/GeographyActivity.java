@@ -399,7 +399,7 @@ private void testData(){
     @Override
     public void processWebResults(Document document){
 
-        ArrayList<String> addresses = new ArrayList<>();
+        /*ArrayList<String> addresses = new ArrayList<>();
         ArrayList<String[]> urls = new ArrayList<>();
 
         try {
@@ -433,10 +433,15 @@ private void testData(){
             Log.e(LOG_TAG, e + " null pointer");
 
         }
-        getLocationFromAddress(urls);
+        getLocationFromAddress(urls);*/
         recyclerView.setAdapter(adapter);
 
 
+    }
+
+    @Override
+    public void setAdapter(){
+        recyclerView.setAdapter(adapter);
     }
 
     private void getLocationFromAddress(ArrayList<String[]> addresses){

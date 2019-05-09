@@ -86,4 +86,11 @@ public class UseRecyclerActivity extends Activity  {
     public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView, String longitude, String Latitude ){
 
     }
+
+    /**
+     *
+     */
+    public void setAdapter(){
+
+    }
 }
