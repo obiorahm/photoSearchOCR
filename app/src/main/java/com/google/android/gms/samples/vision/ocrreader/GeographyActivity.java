@@ -101,9 +101,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     protected GeoDataClient mGeoDataClient;
 
-    protected PlaceDetectionClient mPlaceDetectionClient;
-
-    private GoogleApiClient mGoogleApiClient;
 
     private Bundle mSavedInstance;
 
@@ -130,19 +127,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
         mSavedInstance = savedInstance;
 
-            // construct a GeoDataClient
-            /*mGeoDataClient = Places.getGeoDataClient(this);
-
-            // construct a PlaceDetectionClient.
-            mPlaceDetectionClient = Places.getPlaceDetectionClient(this);
-
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addApi(Places.GEO_DATA_API)
-                    .addApi(Places.PLACE_DETECTION_API)
-                    .addOnConnectionFailedListener(this)
-                    .build();
-
-        //getPhotos();*/
         String apiKey = "AIzaSyC-W1DgpWK4sfOPngXLGDA6j62aGxWMMaU";
         Places.initialize(getApplicationContext(), apiKey);
         // Create a new Places client instance.
@@ -168,8 +152,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
 
-        /*if (myTTS == null)
-            myTTS = new TextToSpeech(this, this);*/
 
         recyclerView = findViewById(R.id.detected_location_list_view);
         adapter = new RestaurantAdapter(this, R.layout.horizontal_text);
@@ -191,10 +173,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
             if (test){
                 testData();
             }else{
-
-                /*locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0, this);*/
-
 
                 getCurrentLocation();
             }
@@ -259,8 +237,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         streetViewPanoramaView.getStreetViewPanoramaAsync(this);
 
     }
-
-
 
     @Override
     public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView, String longitude, String latitude){
@@ -396,26 +372,17 @@ private void testData(){
     }
 }
 
+
     @Override
     public void setAdapter(){
         recyclerView.setAdapter(adapter);
     }
 
 
-
-
-
     @Override
     public void addPlaceIdToAdapter(HashMap<String, String[]> placesId){
         adapter.addPlaceIds(placesId);
         recyclerView.setAdapter(adapter);
-    }
-
-
-
-    @Override
-    public void addImageUrlToAdapter(HashMap<String, String[]> imageUrl){
-        adapter.addImageUrl(imageUrl);
     }
 
 
@@ -462,16 +429,6 @@ private void testData(){
     }
 
 
-    /*private void getCurrentLocation() {
-        FusedLocationProviderClient f = new FusedLocationProviderClient(this);
-        f.getLastLocation().addOnSuccessListener(this, location -> {
-            if (location != null) {
-                Double wayLatitude = location.getLatitude();
-                Double wayLongitude = location.getLongitude();
-                globalTextView.setText(String.format(Locale.US, "%s -- %s", wayLatitude, wayLongitude));
-            }
-        });
-    }*/
 
     private void getCurrentLocation(){
 
@@ -510,40 +467,11 @@ private void testData(){
             checkPermission();
         }
     }
-   /* private void getCurrentLocation(){
-        try{
 
-
-            Task<PlaceLikelihoodBufferResponse> placeResult = mPlaceDetectionClient.getCurrentPlace(null);
-            placeResult.addOnCompleteListener(new OnCompleteListener<PlaceLikelihoodBufferResponse>() {
-                @Override
-                public void onComplete(@NonNull Task<PlaceLikelihoodBufferResponse> task) {
-                    if (task.isSuccessful() && task.getResult() != null){
-                        PlaceLikelihoodBufferResponse likelyPlaces = task.getResult();
-
-                        PlaceLikelihood firstplace = likelyPlaces.get(0);
-
-                        String address = (String) firstplace.getPlace().getAddress();
-                        String placeId = firstplace.getPlace().getId();
-
-                        displayCurrentLocation(address, placeId);
-
-                        Log.d(LOG_TAG, "address " + address + " placeId " + placeId);
-                        likelyPlaces.release();
-                    }
-                }
-            });
-
-        }catch (SecurityException e){
-            Log.e(LOG_TAG, e + " ");
-        }
-    }*/
 
     private void displayCurrentLocation(String address, String placeId){
         globalTextView.setText(address);
         ImageView locationImageView = GeographyActivity.this.findViewById(R.id.location_image);
-        //getRestaurantPhoto(placeId, locationImageView );
-        //getPhotos(placeId);
         if (address != null){
             FetchWebPage fetchWebPage = new FetchWebPage(GeographyActivity.this, adapter);
             fetchWebPage.execute(address, "encode");
@@ -571,11 +499,6 @@ private void testData(){
 
         //initialize firebase
         FirebaseApp.initializeApp(this);
-        /*if (initStatus == TextToSpeech.SUCCESS) {
-            myTTS = new TextToSpeech(this, this);
-            myTTS.setLanguage(Locale.US);
-            myTTS.setSpeechRate(0.6f);
-        }*/
 
     }
 

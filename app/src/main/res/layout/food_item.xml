@@ -50,6 +50,7 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:backgroundTint="@color/transparent"
+            android:tint="@color/grey"
             android:id="@+id/speak_whole_text"/>
 
 

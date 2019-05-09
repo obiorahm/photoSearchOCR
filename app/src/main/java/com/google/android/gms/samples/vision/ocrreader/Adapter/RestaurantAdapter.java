@@ -290,6 +290,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
 
+
     public void addImageUrl(HashMap<String, String[]> imageUrl){
 
         int LOGO_POS = 0;

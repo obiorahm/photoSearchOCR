@@ -82,7 +82,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         recyclerView.setAdapter(adapter);
 
 
-        FetchWebPage fetchWebPage = new FetchWebPage(this);
+        FetchFoodItemWebPage fetchWebPage = new FetchFoodItemWebPage(this);
         fetchWebPage.execute(url, "don't encode");
 
 
@@ -162,6 +162,8 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
 
     }
+
+
 
     public void getFoodItems(Document document){
         try{

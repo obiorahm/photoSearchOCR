@@ -232,6 +232,8 @@ public class WordNetHypernyms {
 
         } catch (IOException e) {
             Log.e(LOG_TAG, e + "");
+        } catch (NullPointerException e){
+            Log.e(LOG_TAG, e + "");
         }
         return containsHypernym;
 
