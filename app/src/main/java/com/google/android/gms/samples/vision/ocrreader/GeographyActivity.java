@@ -231,12 +231,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
     }
 
 
-    @Override
-    public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView){
-        streetViewPanoramaView.onCreate(mSavedInstance);
-        streetViewPanoramaView.getStreetViewPanoramaAsync(this);
-
-    }
 
     @Override
     public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView, String longitude, String latitude){

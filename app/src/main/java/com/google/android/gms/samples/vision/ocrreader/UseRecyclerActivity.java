@@ -68,13 +68,6 @@ public class UseRecyclerActivity extends Activity  {
 
     }
 
-    /***
-     * @param streetViewPanoramaView
-     */
-
-    public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView){
-
-    }
 
     /**
      *

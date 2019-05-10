@@ -26,9 +26,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+
 
 /**
  * Created by mgo983 on 10/16/18.
@@ -38,24 +36,18 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
 
     String LOG_TAG = FetchWebPage.class.getSimpleName();
 
-    Context context;
+    private Context context;
 
-    String prefix_url;
+    private String prefix_url;
 
-    RestaurantAdapter adapter;
+    private RestaurantAdapter adapter;
 
     public FetchWebPage(Activity activity, RestaurantAdapter adapter){
         this.adapter = adapter;
-        context = (Context) activity;
+        context =  activity;
         prefix_url = "https://www.allmenus.com/custom-results/-/";
     }
 
-
-    public FetchWebPage(OpenRestaurantMenuActivity activity){
-        context = (Context) activity;
-        prefix_url = "https://www.allmenus.com";
-
-    }
 
     @Override
     protected void onPreExecute(){
@@ -64,10 +56,9 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
 
     @Override
     protected Document[] doInBackground(String...params){
-        String encodedString = "";
+        String encodedString;
         String UTF_8 = "UTF-8";
 
-        String restaurant_url = "";
 
 
         Document [] document = new Document[2];
@@ -100,10 +91,7 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
 
     }
 
-    public void processWebResults(Document document){
-
-        ArrayList<String> addresses = new ArrayList<>();
-        ArrayList<String[]> urls = new ArrayList<>();
+    private void processWebResults(Document document){
 
         try {
             Elements testElement = document.select(".restaurant-list-item" );
@@ -119,23 +107,18 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
                 }
 
                 String placeId = "";
-                String longitude = "";
-                String latitude = "";
-                String logoID = "";
 
                 //set up logo
                 Document logoDocument = getLogoDocument(restaurant_url);
-                logoID = getLogoAddress(logoDocument);
+                String logoID = getLogoAddress(logoDocument);
 
 
                 //get placeId, longitude and latitude
                 String[] lngLat = getPanoramaData(restaurant_address);
-                longitude = lngLat[0];
-                latitude = lngLat[1];
+                String longitude = lngLat[0];
+                String latitude = lngLat[1];
 
                 String item[] = {restaurant_url, restaurant_name, restaurant_address, placeId, longitude, latitude, logoID};
-                addresses.add(restaurant_address);
-                urls.add(item);
 
                 // return to the UI thread to update the view when the result becomes available
 
@@ -171,16 +154,11 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
 
 
     private String[] getPanoramaData(String restaurantAddress){
-        String[] panoramaData = new String[2];
-        int LONGITUDE = 0;
-        int LATITUDE = 1;
 
-        String searchString = restaurantAddress;
-        Uri uri = buildLongLatUri(searchString.trim());
+        Uri uri = buildLongLatUri(restaurantAddress.trim());
         String json = getJSON(uri);
 
-        panoramaData = getLongLat(json);
-        return panoramaData;
+        return getLongLat(json);
     }
 
     private Uri buildLongLatUri(String address){
@@ -201,7 +179,7 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
 
 
     //get long lat JSON
-    public String getJSON(Uri uri){
+    private String getJSON(Uri uri){
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -234,9 +212,8 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
 
             //Log.d(LOG_TAG, buffer.toString());
 
-            String result = buffer.toString();
 
-            return result;
+            return buffer.toString();
 
         } catch (FileNotFoundException e ){
             Log.e(LOG_TAG, " " + e );
@@ -261,9 +238,7 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
 
 
     private String[] getLongLat(String json){
-        //String stringResult [] = new String[result.size()];
-
-        /**
+        /*
          * key is address
          * value is {lng, lat}
          */
@@ -277,7 +252,7 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
                     JSONObject placeData = new JSONObject(json);
                     JSONArray candidate = placeData.getJSONArray("results");
 
-                    if (candidate != null || candidate.length() > 0){
+                    if (candidate != null && candidate.length() > 0){
                         JSONObject firstObject = candidate.getJSONObject(0);
                         JSONObject geometry = firstObject.getJSONObject("geometry");
                         JSONObject location = geometry.getJSONObject("location");
@@ -292,7 +267,8 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
 
 
                 }else{
-                    String [] lnglat = {"", ""};
+                    lngLat[0] ="";
+                    lngLat[1] = "";
                 }
 
 
@@ -311,7 +287,7 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
 
     private Document getLogoDocument(String item){
         String prefix_url = "https://www.allmenus.com";
-        String encodedString = "";
+        String encodedString;
         String UTF_8 = "UTF-8";
         Document document = null;
         try{

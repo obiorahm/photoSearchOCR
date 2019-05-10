@@ -211,7 +211,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
                 Log.d(LOG_TAG, "internet address " + extractAddress);
 
-                Glide.with(this).load("https://logo.clearbit.com/" + extractAddress).into(imageView);
+                Glide.with(getApplicationContext()).load("https://logo.clearbit.com/" + extractAddress).into(imageView);
                 imageView.setVisibility(View.VISIBLE);
 
             }

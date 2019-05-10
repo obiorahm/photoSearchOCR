@@ -152,9 +152,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mRecyclerView.setAdapter(adapter);
 
 
-            //holder.mRecyclerView.setSelected(false);
-            //((DetectImageActivity) context).fetchSuggestionsFor("theer aer a coupel of mistaeks in this senence");
-
 
             holder.mBackground.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -191,7 +188,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             if (!restaurantData[PLACE_ID_POS].equals("")){
                 ((UseRecyclerActivity) context).getRestaurantPhoto(restaurantData[PLACE_ID_POS], holder.mImageView);
             }
-
 
             //hide progressBar
             ProgressBar progressBar = ((GeographyActivity) context).findViewById(R.id.menu_progress);
@@ -250,10 +246,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             String longitude = restaurantData[LONGITUDE];
             String latitude = restaurantData[LATITUDE];
 
-
-            Double currLongitude = longitude.equals("")? DEFAULT_LONG : Double.valueOf(longitude);
-            Double currLatitude = latitude.equals("") ? DEFAULT_LAT: Double.valueOf(latitude);
-            //holder.mStreetViewPanoramaView = new StreetViewPanoramaView(context, new StreetViewPanoramaOptions().position(new LatLng(currLatitude, currLongitude)));
 
             ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
 

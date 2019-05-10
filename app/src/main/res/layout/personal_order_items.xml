@@ -27,7 +27,6 @@
             android:layout_toRightOf="@id/order_option"
             android:textAlignment="center"
             android:id="@+id/order_option_text"
-            android:textColor="@color/white"
             android:textSize="23dp"
             android:layout_margin="10dp"/>
 
@@ -45,8 +44,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/remove_order"
-            android:background="@drawable/baseline_clear_white_48dp"
-            android:textColor="@color/white"
+            android:background="@drawable/ic_clear_black_24dp"
             android:textSize="23dp"
             android:layout_margin="10dp"
             />
