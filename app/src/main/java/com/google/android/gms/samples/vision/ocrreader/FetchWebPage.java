@@ -143,13 +143,9 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
             Log.e(LOG_TAG, e + " null pointer");
 
         }
-        /*getLocationFromAddress(urls);
-        recyclerView.setAdapter(adapter);*/
 
 
     }
-
-
 
 
     private String[] getPanoramaData(String restaurantAddress){

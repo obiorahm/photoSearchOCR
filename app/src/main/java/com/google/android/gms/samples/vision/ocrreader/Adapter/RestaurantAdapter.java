@@ -22,7 +22,6 @@ import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by mgo983 on 10/17/18.
@@ -168,7 +167,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     private void enlargeImage(ImageView view){
         view.setVisibility(View.VISIBLE);
-        //Glide.with(context).load(imageUrl).into(view);
     }
 
 
@@ -219,9 +217,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             GeographyActivity.selected_url = restaurantUrl;
             holder.mStreetViewPanoramaView.setVisibility(View.VISIBLE);
 
-            /*String longitude = restaurantData[LONGITUDE];
-            String latitude = restaurantData[LATITUDE];*/
-
 
             ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
 
@@ -239,18 +234,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         return mData.size();
     }
 
-    public void addPlaceIds(HashMap<String, String[]> placeId){
-        final int PLACE_ID_PACK_POS = 1;
-        for (String[] item : mData){
-
-            String address = item[ADDRESS_POS];
-            String[] placeIdPack = placeId.get(address);
-            item[PLACE_ID_POS] = placeIdPack[PLACE_ID_PACK_POS];
-            notifyDataSetChanged();
-
-        }
-
-    }
 
 
 }
