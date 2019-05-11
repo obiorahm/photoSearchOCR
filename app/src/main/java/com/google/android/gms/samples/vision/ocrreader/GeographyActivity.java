@@ -9,7 +9,6 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,7 +47,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
 import com.google.android.gms.maps.model.StreetViewSource;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
@@ -128,8 +126,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
             if (allAssets != null){
                 String locationIcon = allAssets[0];
-                //String restaurantIcon = allAssets[1];
-                //InputStream ims = getAssets().open("location.png");
                 ImageView locationImageView = findViewById(R.id.location_image);
                 Glide.with(this).load(Uri.parse("file:///android_asset/general/" + locationIcon)).into(locationImageView);
 
@@ -163,8 +159,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         recyclerView.setAdapter(adapter);
 
 
-
-        //final TextView textView = findViewById(R.id.current_location);
         globalTextView = findViewById(R.id.current_location);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
@@ -200,8 +194,8 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
     @Override
     public void onLocationChanged(Location location) {
         globalTextView = findViewById(R.id.current_location);
-        //txtLat = (TextView) findViewById(R.id.textview1);
-        globalTextView.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+        String lngLat = "Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude();
+        globalTextView.setText(lngLat);
         Log.d(LOG_TAG, "Latitude " + location.getLatitude() + " " + location.getLongitude() );
         FetchAddress fetchAddress = new FetchAddress();
 
@@ -265,7 +259,7 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
     }
 
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
+    public void onConnectionFailed(@NonNull  ConnectionResult connectionResult) {
 
     }
 
@@ -286,15 +280,12 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
                 new AlertDialog.Builder(this)
                         .setTitle("title")
                         .setMessage("title")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(GeographyActivity.this,
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        MY_PERMISSIONS_REQUEST_LOCATION);
-                            }
-                        })
+                        .setPositiveButton(R.string.ok, (DialogInterface dialogInterface, int i) -> {
+                    //Prompt the user once explanation has been shown
+                    ActivityCompat.requestPermissions(GeographyActivity.this,
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                            MY_PERMISSIONS_REQUEST_LOCATION);
+                })
                         .create()
                         .show();
 
@@ -312,7 +303,7 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
@@ -347,7 +338,9 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
 private void testData(){
 
-    globalTextView.setText("860 Hinman Ave, Evanston, IL, 60202");
+        String address = "860 Hinman Ave, Evanston, IL, 60202";
+
+    globalTextView.setText(address);
 
 
     String items [][] ={{ "/il/evanston/272976-brothers-k-coffeehouse/menu/" ,"Brothers K Coffeehouse", "500 Main St Evanston, IL, 60202","","",""},
@@ -380,39 +373,37 @@ private void testData(){
     public void getRestaurantPhoto(String placesId, final ImageView imageView){
 //        final Task<PlacePhotoMetadataResponse> photoMetadataResponse = mGeoDataClient.getPlacePhotos("ChIJ4Yie9T_QD4gRt9XlU-4KZTI");
         final Task<PlacePhotoMetadataResponse> photoMetadataResponse = mGeoDataClient.getPlacePhotos(placesId);
-        photoMetadataResponse.addOnCompleteListener(new OnCompleteListener<PlacePhotoMetadataResponse>() {
-            @Override
-            public void onComplete(@NonNull Task<PlacePhotoMetadataResponse> task) {
-                // Get the list of photos.
-                PlacePhotoMetadataResponse photos = task.getResult();
-                // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
-                PlacePhotoMetadataBuffer photoMetadataBuffer = photos.getPhotoMetadata();
+        photoMetadataResponse.addOnCompleteListener((@NonNull Task<PlacePhotoMetadataResponse> task) -> {
+            // Get the list of photos.
+            PlacePhotoMetadataResponse photos = task.getResult();
+            // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
+            PlacePhotoMetadataBuffer photoMetadataBuffer = photos.getPhotoMetadata();
 
-                Log.d(LOG_TAG, photoMetadataBuffer.getCount() + "count");
+            if (photoMetadataBuffer == null)
+                return;
 
-                if (photoMetadataBuffer.getCount() == 0)
-                    return;
-                // Get the first photo in the list.
-                PlacePhotoMetadata photoMetadata = photoMetadataBuffer.get(0);
-                // Get the attribution text.
-                //CharSequence attribution = photoMetadata.getAttributions();
-                // Get a full-size bitmap for the photo.
-                Task<PlacePhotoResponse> photoResponse = mGeoDataClient.getPhoto(photoMetadata);
-                photoResponse.addOnCompleteListener(new OnCompleteListener<PlacePhotoResponse>() {
-                    @Override
-                    public void onComplete(@NonNull Task<PlacePhotoResponse> task) {
-                        PlacePhotoResponse photo = task.getResult();
-                        Bitmap bitmap = photo.getBitmap();
+            Log.d(LOG_TAG, photoMetadataBuffer.getCount() + "count");
 
-                        imageView.setImageBitmap(bitmap);
 
-                        //Glide.with(getApplicationContext()).load(bitmap).into(locationImageView);
+            if (photoMetadataBuffer.getCount() == 0)
+                return;
+            // Get the first photo in the list.
+            PlacePhotoMetadata photoMetadata = photoMetadataBuffer.get(0);
 
-                    }
-                });
+            // Get a full-size bitmap for the photo.
+            Task<PlacePhotoResponse> photoResponse = mGeoDataClient.getPhoto(photoMetadata);
+            photoResponse.addOnCompleteListener((@NonNull Task<PlacePhotoResponse> task1) ->{
+                PlacePhotoResponse photo = task1.getResult();
+                Bitmap bitmap = photo.getBitmap();
 
-                photoMetadataBuffer.release();
-            }
+                if (bitmap != null)
+                    imageView.setImageBitmap(bitmap);
+
+
+
+            });
+
+            photoMetadataBuffer.release();
         });
     }
 
@@ -459,7 +450,6 @@ private void testData(){
 
     private void displayCurrentLocation(String address){
         globalTextView.setText(address);
-        //ImageView locationImageView = GeographyActivity.this.findViewById(R.id.location_image);
         if (address != null){
             FetchWebPage fetchWebPage = new FetchWebPage(GeographyActivity.this, adapter);
             fetchWebPage.execute(address, "encode");
@@ -504,25 +494,13 @@ private void testData(){
     @Override
     protected void onResume() {
         super.onResume();
-        /*if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            //getCurrentLocation();
 
-            //locationManager.requestLocationUpdates(provider, 400, 1, this);
-        }*/
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        /*if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            //getCurrentLocation();
 
-            //locationManager.removeUpdates(this);
-        }*/
     }
 
 }
