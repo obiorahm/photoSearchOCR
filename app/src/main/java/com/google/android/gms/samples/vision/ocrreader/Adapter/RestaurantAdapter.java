@@ -1,6 +1,5 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 
 import android.speech.tts.TextToSpeech;
@@ -16,11 +15,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 
-import com.google.android.gms.samples.vision.ocrreader.FetchWebPage;
 import com.google.android.gms.samples.vision.ocrreader.GeographyActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
@@ -37,7 +33,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     LayoutInflater inflater;
     Context context;
     TextToSpeech myTTS;
-    HashMap<String, String[]> mDataCheck = new HashMap<>();
     ArrayList<String[]> mData = new ArrayList<>();
     private RecyclerView last_selected = null;
     private RelativeLayout last_selected_rl = null;
@@ -51,9 +46,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     private final int LATITUDE = 5;
     private final int IMAGE_URL = 6;
 
-    private double DEFAULT_LONG = 151.20689;
-
-    private double DEFAULT_LAT = -33.87365;
 
 
 
@@ -87,18 +79,15 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         }
 
         public void addItem(String[] item){
-            //final int POS_RESTAURANT_NAME = 1;
-            //mData.put(item[POS_RESTAURANT_NAME], item);
-            //check for duplicate restaurant name before adding items
-            String restaurantName = item[TITLE_POS];
-            String restaurantUrl = item[ADDRESS_POS];
 
-            if (!mDataCheck.containsKey(restaurantName)){
-                mDataCheck.put(restaurantName, item);
-                mData.add(item);
 
-                notifyDataSetChanged();
-            }
+            mData.add(item);
+
+            //I'm using notifyItemChanged because notifyDataSetChanged redraws each all views and causes panorama flicker
+            notifyItemChanged(mData.size() - 1);
+
+            //notifyDataSetChanged();
+
 
         }
 
