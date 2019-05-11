@@ -147,20 +147,16 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
 
             String imageUrl = buildImageUrl(url);
-            Glide.with(context).load(imageUrl).into(holder.mImageView);
-            Glide.with(context).load(imageUrl).into(holder.mEnlargedImageView);
+            if(!(url.equals("") || (url == null))){
+                Glide.with(context).load(imageUrl).into(holder.mImageView);
+                Glide.with(context).load(imageUrl).into(holder.mEnlargedImageView);
+            }
 
             holder.mImageView.setOnClickListener(view ->
                 enlargeImage(holder.mEnlargedImageView));
 
             Log.d(LOG_TAG, "internet " + url);
 
-
-
-            //Log.d(LOG_TAG, "place id " +restaurantData[ADDRESS_POS]+  " Longitude " + restaurantData[LONGITUDE] + " Latitude" + restaurantData[LATITUDE]);
-            if (!restaurantData[PLACE_ID_POS].equals("")){
-                ((UseRecyclerActivity) context).getRestaurantPhoto(restaurantData[PLACE_ID_POS], holder.mImageView);
-            }
 
             //hide progressBar
             ProgressBar progressBar = ((GeographyActivity) context).findViewById(R.id.menu_progress);

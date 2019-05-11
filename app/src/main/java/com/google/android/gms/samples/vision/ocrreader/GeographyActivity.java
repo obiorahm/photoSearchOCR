@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
 import android.net.Uri;
@@ -30,12 +29,6 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.places.GeoDataClient;
-
-import com.google.android.gms.location.places.PlacePhotoMetadata;
-import com.google.android.gms.location.places.PlacePhotoMetadataBuffer;
-import com.google.android.gms.location.places.PlacePhotoMetadataResponse;
-import com.google.android.gms.location.places.PlacePhotoResponse;
 
 // Add an import statement for the client library.
 import com.google.android.libraries.places.api.Places;
@@ -47,7 +40,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
 import com.google.android.gms.maps.model.StreetViewSource;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
-import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
@@ -57,7 +49,6 @@ import com.google.firebase.FirebaseApp;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -87,9 +78,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     private String LOG_TAG = GeographyActivity.class.getSimpleName();
 
-    protected GeoDataClient mGeoDataClient;
-
-
     private Bundle mSavedInstance;
 
     double LONGITUDE = 151.20689;
@@ -102,7 +90,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     public boolean test = false;
 
-    //protected LocationManager locationManager;
 
     PlacesClient placesClient;
 
@@ -155,8 +142,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         // apparently the recycler view does not work without setting up a layout manager
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-
-        recyclerView.setAdapter(adapter);
 
 
         globalTextView = findViewById(R.id.current_location);
@@ -354,60 +339,6 @@ private void testData(){
 }
 
 
-    @Override
-    public void setAdapter(){
-        recyclerView.setAdapter(adapter);
-    }
-
-
-    @Override
-    public void addPlaceIdToAdapter(HashMap<String, String[]> placesId){
-        adapter.addPlaceIds(placesId);
-        recyclerView.setAdapter(adapter);
-    }
-
-
-
-
-    @Override
-    public void getRestaurantPhoto(String placesId, final ImageView imageView){
-//        final Task<PlacePhotoMetadataResponse> photoMetadataResponse = mGeoDataClient.getPlacePhotos("ChIJ4Yie9T_QD4gRt9XlU-4KZTI");
-        final Task<PlacePhotoMetadataResponse> photoMetadataResponse = mGeoDataClient.getPlacePhotos(placesId);
-        photoMetadataResponse.addOnCompleteListener((@NonNull Task<PlacePhotoMetadataResponse> task) -> {
-            // Get the list of photos.
-            PlacePhotoMetadataResponse photos = task.getResult();
-            // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
-            PlacePhotoMetadataBuffer photoMetadataBuffer = photos.getPhotoMetadata();
-
-            if (photoMetadataBuffer == null)
-                return;
-
-            Log.d(LOG_TAG, photoMetadataBuffer.getCount() + "count");
-
-
-            if (photoMetadataBuffer.getCount() == 0)
-                return;
-            // Get the first photo in the list.
-            PlacePhotoMetadata photoMetadata = photoMetadataBuffer.get(0);
-
-            // Get a full-size bitmap for the photo.
-            Task<PlacePhotoResponse> photoResponse = mGeoDataClient.getPhoto(photoMetadata);
-            photoResponse.addOnCompleteListener((@NonNull Task<PlacePhotoResponse> task1) ->{
-                PlacePhotoResponse photo = task1.getResult();
-                Bitmap bitmap = photo.getBitmap();
-
-                if (bitmap != null)
-                    imageView.setImageBitmap(bitmap);
-
-
-
-            });
-
-            photoMetadataBuffer.release();
-        });
-    }
-
-
 
     private void getCurrentLocation(){
 
@@ -432,8 +363,6 @@ private void testData(){
                 displayCurrentLocation(currentPlace.getPlace().getAddress());
 
 
-
-
             })).addOnFailureListener((exception) -> {
                 if (exception instanceof ApiException) {
                     ApiException apiException = (ApiException) exception;
@@ -454,6 +383,7 @@ private void testData(){
             FetchWebPage fetchWebPage = new FetchWebPage(GeographyActivity.this, adapter);
             fetchWebPage.execute(address, "encode");
         }
+        recyclerView.setAdapter(adapter);
     }
 
 

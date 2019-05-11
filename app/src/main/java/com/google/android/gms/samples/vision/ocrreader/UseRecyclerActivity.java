@@ -40,16 +40,6 @@ public class UseRecyclerActivity extends Activity  {
 
     public void beginFetchRestaurantLogos(HashMap<String, String[]> restaurantInfo){}
 
-    public void getRestaurantPhoto(String placeId, ImageView imageView){}
-
-    /**
-     *     Run in the activity and available to FetchRestaurantPlaceID. this function updates the adapter after the place ids have been
-     *     have been retrieved from the Internet.
-     */
-
-    public void addPlaceIdToAdapter(HashMap<String, String[]> PlaceIdPack){
-
-    }
 
     /**
      *
@@ -80,10 +70,4 @@ public class UseRecyclerActivity extends Activity  {
 
     }
 
-    /**
-     *
-     */
-    public void setAdapter(){
-
-    }
 }
