@@ -146,10 +146,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
 
             String imageUrl = buildImageUrl(url);
-            if(!(url.equals("") || (url == null))){
                 Glide.with(context).load(imageUrl).into(holder.mImageView);
                 Glide.with(context).load(imageUrl).into(holder.mEnlargedImageView);
-            }
+
 
             holder.mImageView.setOnClickListener(view ->
                 enlargeImage(holder.mEnlargedImageView));
