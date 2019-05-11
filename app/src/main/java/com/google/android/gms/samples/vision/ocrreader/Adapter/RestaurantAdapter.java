@@ -1,5 +1,6 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 
 import android.speech.tts.TextToSpeech;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -56,6 +58,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         private RelativeLayout mRelativeLayout;
         private ImageButton mImageButton;
         private ImageView mImageView;
+        private ImageView mEnlargedImageView;
         private StreetViewPanoramaView mStreetViewPanoramaView;
         //private Fragment mFragemnt;
 
@@ -67,6 +70,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             mRelativeLayout = convertView.findViewById(R.id.internal_relative_layout);
             mImageButton = convertView.findViewById(R.id.speak_whole_text);
             mImageView = convertView.findViewById(R.id.descriptive_image);
+            mEnlargedImageView = convertView.findViewById(R.id.enlarged_image);
             mStreetViewPanoramaView = convertView.findViewById(R.id.streetviewpanorama);
             //RecyclerView parentRecyclerView = (RecyclerView) convertView.getParent();
 
@@ -166,9 +170,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 }
             });
 
+            String imageUrl = buildImageUrl(url);
+            Glide.with(context).load(imageUrl).into(holder.mImageView);
+            Glide.with(context).load(imageUrl).into(holder.mEnlargedImageView);
 
-            Glide.with(context).load(buildImageUrl(url))
-                    .into(holder.mImageView);
+            holder.mImageView.setOnClickListener((View view)->{
+                enlargeImage(holder.mEnlargedImageView, imageUrl);
+            });
+
             Log.d(LOG_TAG, "internet " + url);
 
 
@@ -184,6 +193,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
         }
+
+
+    private void enlargeImage(ImageView view, String imageUrl){
+        view.setVisibility(View.VISIBLE);
+        //Glide.with(context).load(imageUrl).into(view);
+    }
 
 
     private String buildImageUrl(String internetAddress){
@@ -218,6 +233,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             if (lastViewHolder.mRelativeLayout != null){
                 lastViewHolder.mRelativeLayout.setSelected(false);
                 lastViewHolder.mStreetViewPanoramaView.setVisibility(View.GONE);
+                lastViewHolder.mEnlargedImageView.setVisibility(View.GONE);
 
             }
 

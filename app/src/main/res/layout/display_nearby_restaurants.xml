@@ -9,6 +9,8 @@
         android:background="@drawable/solid_border"
         android:layout_alignParentTop="true"
         />
+
+
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -111,5 +113,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"
         android:id = "@+id/next_btn_dr"/>
+
 
 </RelativeLayout>

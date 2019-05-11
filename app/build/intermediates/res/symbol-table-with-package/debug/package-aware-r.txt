@@ -1450,6 +1450,7 @@ id edit_text
 id enclosing_layout
 id end
 id end_padder
+id enlarged_image
 id enterAlways
 id enterAlwaysCollapsed
 id exitUntilCollapsed

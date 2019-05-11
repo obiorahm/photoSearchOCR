@@ -100,11 +100,14 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
                 Elements name_element = element.select(".name a");
                 String restaurant_name = name_element.text();
                 String restaurant_url = name_element.attr("href");
-                String restaurant_address = "";
                 Elements addressElements = element.select(".address");
+                StringBuilder restaurant_name_sb = new StringBuilder();
                 for (Element address : addressElements){
-                    restaurant_address += address.text() + " ";
+                    restaurant_name_sb.append(address.text());
+                    restaurant_name_sb.append(" ");
                 }
+                String restaurant_address = restaurant_name_sb.toString();
+
 
                 String placeId = "";
 
@@ -122,14 +125,10 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
 
                 // return to the UI thread to update the view when the result becomes available
 
-                ((Activity) context).runOnUiThread(new Runnable() {
+                ((Activity) context).runOnUiThread(()-> {
+                    // Stuff that updates the UI
+                    adapter.addItem(item);
 
-                    @Override
-                    public void run() {
-                        // Stuff that updates the UI
-                        adapter.addItem(item);
-
-                    }
                 });
 
 
@@ -194,7 +193,7 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
             urlConnection.connect();
 
             InputStream inputStream = urlConnection.getInputStream();
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             if(inputStream == null){
                 return null;
             }
@@ -203,7 +202,8 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
 
             String line;
             while ((line = reader.readLine()) != null){
-                buffer.append(line + "\n");
+                buffer.append(line);
+                buffer.append("\n");
             }
 
             if (buffer.length() == 0){
