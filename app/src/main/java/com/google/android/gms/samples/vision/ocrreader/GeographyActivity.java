@@ -1,6 +1,5 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
-import android.*;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -33,15 +32,11 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.GeoDataClient;
-//import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.PlaceDetectionClient;
-//`import com.google.android.gms.location.places.PlaceLikelihood;
-import com.google.android.gms.location.places.PlaceLikelihoodBufferResponse;
+
 import com.google.android.gms.location.places.PlacePhotoMetadata;
 import com.google.android.gms.location.places.PlacePhotoMetadataBuffer;
 import com.google.android.gms.location.places.PlacePhotoMetadataResponse;
 import com.google.android.gms.location.places.PlacePhotoResponse;
-//import com.google.android.gms.location.places.Places;
 
 // Add an import statement for the client library.
 import com.google.android.libraries.places.api.Places;
@@ -61,16 +56,11 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.firebase.FirebaseApp;
 
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by mgo983 on 10/5/18.
@@ -83,9 +73,9 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
     private int MY_DATA_CHECK_CODE = 0;
 
 
-    public static String selected_restaurant = "";
+    //public static String selected_restaurant = "";
 
-    public static RecyclerView last_parent_di;
+    //public static RecyclerView last_parent_di;
 
     public static String RESTAURANT_NAME = "com.google.android.gms.samples.vision.ocrreader.RESTAURANT_NAME";
 
@@ -114,7 +104,7 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     public boolean test = false;
 
-    protected LocationManager locationManager;
+    //protected LocationManager locationManager;
 
     PlacesClient placesClient;
 
@@ -136,15 +126,23 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         try{
             final String allAssets[] = assetManager.list("general");
 
-            String locationIcon = allAssets[0];
-            String restaurantIcon = allAssets[1];
-            //InputStream ims = getAssets().open("location.png");
-            ImageView locationImageView = findViewById(R.id.location_image);
-            Glide.with(this).load(Uri.parse("file:///android_asset/general/" + locationIcon)).into(locationImageView);
+            if (allAssets != null){
+                String locationIcon = allAssets[0];
+                //String restaurantIcon = allAssets[1];
+                //InputStream ims = getAssets().open("location.png");
+                ImageView locationImageView = findViewById(R.id.location_image);
+                Glide.with(this).load(Uri.parse("file:///android_asset/general/" + locationIcon)).into(locationImageView);
+
+            }
+
+
 
 
         }catch (IOException e){
             Log.e(LOG_TAG, e +" ");
+        }catch (NullPointerException e){
+            Log.e(LOG_TAG, e +" ");
+
         }
 
         //start text to speech
@@ -152,6 +150,8 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
 
+        if (myTTS == null)
+            myTTS = new TextToSpeech(this, this);
 
         recyclerView = findViewById(R.id.detected_location_list_view);
         adapter = new RestaurantAdapter(this, R.layout.horizontal_text);
@@ -181,23 +181,17 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
 
         ImageButton nxt_btn = findViewById(R.id.next_btn_dr);
-        nxt_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent openRestaurantIntent = new Intent(getApplicationContext(), OpenRestaurantMenuActivity.class);
-                openRestaurantIntent.putExtra(RESTAURANT_NAME, UseRecyclerActivity.selected_item);
-                openRestaurantIntent.putExtra(RESTAURANT_URL, selected_url);
-                startActivity(openRestaurantIntent);
-            }
+        nxt_btn.setOnClickListener((View v) ->{
+            Intent openRestaurantIntent = new Intent(getApplicationContext(), OpenRestaurantMenuActivity.class);
+            openRestaurantIntent.putExtra(RESTAURANT_NAME, UseRecyclerActivity.selected_item);
+            openRestaurantIntent.putExtra(RESTAURANT_URL, selected_url);
+            startActivity(openRestaurantIntent);
         });
 
         ImageButton back_btn = findViewById(R.id.back_btn_dr);
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(mainActivityIntent);
-            }
+        back_btn.setOnClickListener((View view) ->{
+            Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(mainActivityIntent);
         });
 
 
@@ -401,7 +395,7 @@ private void testData(){
                 // Get the first photo in the list.
                 PlacePhotoMetadata photoMetadata = photoMetadataBuffer.get(0);
                 // Get the attribution text.
-                CharSequence attribution = photoMetadata.getAttributions();
+                //CharSequence attribution = photoMetadata.getAttributions();
                 // Get a full-size bitmap for the photo.
                 Task<PlacePhotoResponse> photoResponse = mGeoDataClient.getPhoto(photoMetadata);
                 photoResponse.addOnCompleteListener(new OnCompleteListener<PlacePhotoResponse>() {
@@ -444,7 +438,7 @@ private void testData(){
 
                 //get first place
                 PlaceLikelihood currentPlace = response.getPlaceLikelihoods().get(0);
-                displayCurrentLocation(currentPlace.getPlace().getAddress(), currentPlace.getPlace().getId());
+                displayCurrentLocation(currentPlace.getPlace().getAddress());
 
 
 
@@ -463,9 +457,9 @@ private void testData(){
     }
 
 
-    private void displayCurrentLocation(String address, String placeId){
+    private void displayCurrentLocation(String address){
         globalTextView.setText(address);
-        ImageView locationImageView = GeographyActivity.this.findViewById(R.id.location_image);
+        //ImageView locationImageView = GeographyActivity.this.findViewById(R.id.location_image);
         if (address != null){
             FetchWebPage fetchWebPage = new FetchWebPage(GeographyActivity.this, adapter);
             fetchWebPage.execute(address, "encode");
@@ -510,25 +504,25 @@ private void testData(){
     @Override
     protected void onResume() {
         super.onResume();
-        if (ContextCompat.checkSelfPermission(this,
+        /*if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             //getCurrentLocation();
 
             //locationManager.requestLocationUpdates(provider, 400, 1, this);
-        }
+        }*/
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (ContextCompat.checkSelfPermission(this,
+        /*if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             //getCurrentLocation();
 
             //locationManager.removeUpdates(this);
-        }
+        }*/
     }
 
 }
