@@ -150,7 +150,7 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
             myTTS = new TextToSpeech(this, this);
 
         recyclerView = findViewById(R.id.detected_location_list_view);
-        adapter = new RestaurantAdapter(this, R.layout.horizontal_text);
+        adapter = new RestaurantAdapter(this);
 
         // apparently the recycler view does not work without setting up a layout manager
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);

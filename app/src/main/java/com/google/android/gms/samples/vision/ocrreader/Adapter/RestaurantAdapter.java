@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -36,7 +35,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     Context context;
     TextToSpeech myTTS;
     ArrayList<String[]> mData = new ArrayList<>();
-    private RecyclerView last_selected = null;
+    //private RecyclerView last_selected = null;
     private RelativeLayout last_selected_rl = null;
     private static String LOG_TAG = RestaurantAdapter.class.getSimpleName();
 
@@ -78,9 +77,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         }
     }
 
-        public RestaurantAdapter(){
-
-        }
 
         public void addItem(String[] item){
 
@@ -95,7 +91,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         }
 
-        public RestaurantAdapter(Context context, int resource){
+        public RestaurantAdapter(Context context){
             super();
             inflater = LayoutInflater.from(context);
             this.context = context;
@@ -105,10 +101,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         @Override
         public RestaurantAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
             View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.horizontal_text, null);
-            RestaurantAdapter.ViewHolder viewHolder = new RestaurantAdapter.ViewHolder(convertView);
+            //RestaurantAdapter.ViewHolder viewHolder = new RestaurantAdapter.ViewHolder(convertView);
 
 
-            return viewHolder;
+            return new RestaurantAdapter.ViewHolder(convertView);
         }
 
         @Override
@@ -146,37 +142,17 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
 
-            holder.mBackground.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    control_select(holder, restaurantData);
+            holder.mBackground.setOnClickListener(view -> control_select(holder, restaurantData));
 
-                }
-            });
 
-            holder.mRecyclerView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //control_select(holder, restaurantData);
-
-                }
-            });
-
-            holder.mImageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
-                    //control_select(holder, restaurantData);
-                }
-            });
+            holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
 
             String imageUrl = buildImageUrl(url);
             Glide.with(context).load(imageUrl).into(holder.mImageView);
             Glide.with(context).load(imageUrl).into(holder.mEnlargedImageView);
 
-            holder.mImageView.setOnClickListener((View view)->{
-                enlargeImage(holder.mEnlargedImageView, imageUrl);
-            });
+            holder.mImageView.setOnClickListener(view ->
+                enlargeImage(holder.mEnlargedImageView));
 
             Log.d(LOG_TAG, "internet " + url);
 
@@ -195,7 +171,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         }
 
 
-    private void enlargeImage(ImageView view, String imageUrl){
+    private void enlargeImage(ImageView view){
         view.setVisibility(View.VISIBLE);
         //Glide.with(context).load(imageUrl).into(view);
     }
@@ -205,7 +181,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
             String logo = "";
 
-        if (internetAddress != null || ! (internetAddress.equals(""))){
+        if (internetAddress != null && ! (internetAddress.equals(""))){
             int start = internetAddress.indexOf("//");
             int start1 = internetAddress.indexOf(".");
             String newAddress = (internetAddress.length() > start + 2) ? internetAddress.substring(start + 2): internetAddress;
@@ -224,8 +200,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     }
 
     private void control_select(RestaurantAdapter.ViewHolder holder, String[] restaurantData){
-            String restaurantUrl = restaurantData[0];
-            String restaurantName = restaurantData[1];
+            String restaurantUrl = restaurantData[URL_POS];
+            String restaurantName = restaurantData[TITLE_POS];
         last_selected_rl = GeographyActivity.last_rl_parent;
         Log.d(LOG_TAG, "last_selected_rl " + last_selected_rl );
         if (last_selected_rl != null && last_selected_rl != holder.mRelativeLayout){
@@ -248,8 +224,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             GeographyActivity.selected_url = restaurantUrl;
             holder.mStreetViewPanoramaView.setVisibility(View.VISIBLE);
 
-            String longitude = restaurantData[LONGITUDE];
-            String latitude = restaurantData[LATITUDE];
+            /*String longitude = restaurantData[LONGITUDE];
+            String latitude = restaurantData[LATITUDE];*/
 
 
             ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
@@ -272,46 +248,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         final int PLACE_ID_PACK_POS = 1;
         for (String[] item : mData){
 
-            //Log.d(LOG_TAG, "length" + item.length + " ");
-
             String address = item[ADDRESS_POS];
             String[] placeIdPack = placeId.get(address);
-            if (placeId != null){
-                item[PLACE_ID_POS] = placeIdPack[PLACE_ID_PACK_POS];
-                notifyDataSetChanged();
-            }
+            item[PLACE_ID_POS] = placeIdPack[PLACE_ID_PACK_POS];
+            notifyDataSetChanged();
+
         }
 
-    }
-
-
-
-
-
-    public void addImageUrl(HashMap<String, String[]> imageUrl){
-
-        int LOGO_POS = 0;
-        int NAME_POS = 1;
-
-        for (String[] item: mData){
-            String address = item[ADDRESS_POS];
-            String[] imageUrlPack = imageUrl.get(address);
-            String logo = imageUrlPack[LOGO_POS];
-            String name = imageUrlPack[NAME_POS];
-
-            // name equals test for restaurants that have the same address.
-            if(imageUrl == null || imageUrlPack == null || !(name.equals(item[TITLE_POS]))){
-                item[IMAGE_URL] = "";
-            }else if(name.equals("Burger King")){
-                item[IMAGE_URL] = "https://www.bk.com/";
-            }
-            else{
-                item[IMAGE_URL] = logo ;
-
-            }
-            Log.d(LOG_TAG , " keys " + logo + " " + imageUrl.containsKey(address) +" " + address  + " "+ name);
-        }
-        notifyDataSetChanged();
     }
 
 
