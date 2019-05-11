@@ -1,6 +1,5 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -74,7 +73,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
             myTTS = new TextToSpeech(this, this);
 
         recyclerView = findViewById(R.id.detected_location_list_view);
-        adapter = new RestaurantMenuAdapter(this, R.layout.horizontal_text);
+        adapter = new RestaurantMenuAdapter(this);
 
         // apparently the recycler view does not work without setting up a layout manager
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
@@ -88,29 +87,14 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
         //do back button
         ImageButton back_btn = findViewById(R.id.back_btn_dr);
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        back_btn.setOnClickListener(view -> finish());
 
 
         ImageButton imageButtonClearOnSiteRecycler = findViewById(R.id.cancel_gridview_edit_meal);
-        imageButtonClearOnSiteRecycler.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                takeDownRecyclerView();
-            }
-        });
+        imageButtonClearOnSiteRecycler.setOnClickListener( view -> takeDownRecyclerView());
 
         ImageButton imageButtonNext = findViewById(R.id.next_btn_dr);
-        imageButtonNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getOrder();
-            }
-        });
+        imageButtonNext.setOnClickListener(view -> getOrder());
 
 
     }

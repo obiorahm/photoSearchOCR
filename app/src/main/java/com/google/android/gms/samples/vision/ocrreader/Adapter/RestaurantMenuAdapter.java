@@ -13,10 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.samples.vision.ocrreader.GeographyActivity;
 import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
-import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
 import java.util.ArrayList;
 
@@ -31,14 +29,14 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
     Context context;
     TextToSpeech myTTS;
     ArrayList<String[]> mData = new ArrayList<>();
-    ArrayList<ArrayList<String>> mfoodItems = new ArrayList<>();
-    private RecyclerView last_selected = null;
+    private ArrayList<ArrayList<String>> mfoodItems = new ArrayList<>();
+    //private RecyclerView last_selected = null;
 
     public RelativeLayout last_selected_rl = null;
 
     private String LOG_TAG = RestaurantMenuAdapter.class.getSimpleName();
 
-    public static int counter = 0;
+    //public static int counter = 0;
 
 
 
@@ -46,23 +44,18 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
         private RecyclerView mRecyclerView;
         private RecyclerView mFoodItemRecyclerView;
-        //private View mBackground;
-        private RelativeLayout mBackground;
         private RelativeLayout mRelativeLayout;
         private ImageButton mImageButton;
-        private TextView mTextView;
+        //private TextView mTextView;
         private ImageButton mInfoImageButton;
         private TextView mInfoTextView;
 
 
         public ViewHolder(View convertView) {
             super(convertView);
-            mBackground = (RelativeLayout) convertView;
             mRecyclerView = convertView.findViewById(R.id.text_by_text);
             mFoodItemRecyclerView = convertView.findViewById(R.id.food_item);
-            //mRelativeLayout = convertView.findViewById(R.id.relative_layout);
             mRelativeLayout = convertView.findViewById(R.id.enclosing_layout);
-            //mRelativeLayout = convertView.findViewById(R.id.internal_relative_layout);
             mImageButton = convertView.findViewById(R.id.speak_whole_text);
             mInfoTextView = convertView.findViewById(R.id.info_text);
             mInfoImageButton = convertView.findViewById(R.id.more_info);
@@ -70,9 +63,9 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
         }
     }
 
-    public RestaurantMenuAdapter(){
+    /*public RestaurantMenuAdapter(){
 
-    }
+    }*/
 
     public void addItem(String[] category, ArrayList<String> category_items){
         mData.add(category);
@@ -81,7 +74,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
         notifyDataSetChanged();
     }
 
-    public RestaurantMenuAdapter(Context context, int resource){
+    public RestaurantMenuAdapter(Context context){
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
@@ -91,10 +84,10 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
     @Override
     public RestaurantMenuAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item, null);
-        RestaurantMenuAdapter.ViewHolder viewHolder = new RestaurantMenuAdapter.ViewHolder(convertView);
+        //RestaurantMenuAdapter.ViewHolder viewHolder = new RestaurantMenuAdapter.ViewHolder(convertView);
 
 
-        return viewHolder;
+        return new RestaurantMenuAdapter.ViewHolder(convertView);
     }
 
     @Override
@@ -140,40 +133,23 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
             }
         });*/
 
-        holder.mImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
-                //control_select(holder, restaurantData);
-            }
-        });
+        holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
 
-        holder.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                control_select(holder, restaurantData);
-                ((OpenRestaurantMenuActivity) context).hideOptionResults();
-            }
+        holder.mRelativeLayout.setOnClickListener((View view) -> {
+            control_select(holder, restaurantData);
+            ((OpenRestaurantMenuActivity) context).hideOptionResults();
         });
 
         holder.mInfoTextView.setText(description);
 
-        holder.mInfoTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myTTS.speak(description, TextToSpeech.QUEUE_FLUSH,null);
-            }
-        });
+        holder.mInfoTextView.setOnClickListener(view -> myTTS.speak(description, TextToSpeech.QUEUE_FLUSH,null));
 
 
-        holder.mInfoImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.mInfoTextView.getVisibility() == View.VISIBLE){
-                    holder.mInfoTextView.setVisibility(View.GONE);
-                }else{
-                    holder.mInfoTextView.setVisibility(View.VISIBLE);
-                }
+        holder.mInfoImageButton.setOnClickListener((View view) -> {
+            if (holder.mInfoTextView.getVisibility() == View.VISIBLE){
+                holder.mInfoTextView.setVisibility(View.GONE);
+            }else{
+                holder.mInfoTextView.setVisibility(View.VISIBLE);
             }
         });
 
@@ -200,8 +176,8 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
 
     private void control_select(RestaurantMenuAdapter.ViewHolder holder, String[] MenuData){
-        counter++;
-        Log.d(LOG_TAG, counter + "");
+        /*counter++;
+        Log.d(LOG_TAG, counter + "");*/
         String mealCategory = MenuData[0];
         last_selected_rl = OpenRestaurantMenuActivity.last_rl_parent;
         if (last_selected_rl != null && last_selected_rl != holder.mRelativeLayout){
