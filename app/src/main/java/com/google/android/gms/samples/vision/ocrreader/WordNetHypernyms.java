@@ -93,6 +93,8 @@ public class WordNetHypernyms {
 
 
             boolean dictIsOpen = dict.open();
+            if (!(dictIsOpen))
+                return false;
             Log.d(LOG_TAG, " " + dictIsOpen);
 
             String finalWords = "";

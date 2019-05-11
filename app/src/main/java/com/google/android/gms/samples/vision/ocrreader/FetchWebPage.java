@@ -87,7 +87,7 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
     @Override
     protected void onPostExecute(Document[] document){
 
-        ((UseRecyclerActivity) context).setAdapter();
+        //((UseRecyclerActivity) context).setAdapter();
 
     }
 
