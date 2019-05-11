@@ -1,6 +1,5 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 
 import android.speech.tts.TextToSpeech;
