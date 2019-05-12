@@ -104,6 +104,11 @@ public class GraphicOverlayFB <T extends GraphicOverlayFB.Graphic> extends View 
         this.context = context;
     }
 
+
+    public void getGraphicsPosition(){
+
+    }
+
     /**
      * Removes all graphics from the overlay.
      */

@@ -30,6 +30,8 @@ public class UseRecyclerActivity extends Activity  {
 
     public static RelativeLayout last_rl_parent;
 
+    public static Object [] last_selected_object;
+
     public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView, ArrayList<String[]> edamanInfo){}
 
     public void setView(RecyclerWordAdapter adapter, ArrayList<String[]> edamanInfo){}

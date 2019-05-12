@@ -35,6 +35,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     ArrayList<String[]> mData = new ArrayList<>();
     //private RecyclerView last_selected = null;
     private RelativeLayout last_selected_rl = null;
+
+    private Object[] last_selected_property = null;
     private static String LOG_TAG = RestaurantAdapter.class.getSimpleName();
 
     private final int URL_POS = 0;
@@ -45,6 +47,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     private final int LATITUDE = 5;
     private final int IMAGE_URL = 6;
 
+    private final int IS_PANORAMA_VISIBLE = 0;
+    private final int IS_LOGO_ENLARGED = 1;
+    private final int IS_RELATIVE_LAYOUT_SELECTED = 2;
+
+    private ArrayList<Object[]> mDataProperties = new ArrayList<>();
 
 
 
@@ -81,6 +88,15 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
             mData.add(item);
 
+            //remember properties of adapter
+            Object[] properties = new Object[3];
+            properties[IS_PANORAMA_VISIBLE] = View.GONE;
+            properties[IS_LOGO_ENLARGED] = View.GONE;
+            properties[IS_RELATIVE_LAYOUT_SELECTED] = false;
+
+            mDataProperties.add(properties);
+
+
             //I'm using notifyItemChanged because notifyDataSetChanged redraws each all views and causes panorama flicker
             notifyItemChanged(mData.size() - 1);
 
@@ -111,18 +127,25 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             final String word = restaurantData[TITLE_POS];
             final  String url = restaurantData[IMAGE_URL];
 
+            final Object[] properties = mDataProperties.get(position);
+
             holder.mImageView.setVisibility(View.VISIBLE);
-            /*try{
-                final String allAssets[] = ((Activity) context).getAssets().list("general");
 
-                String restaurantIcon = allAssets[1];
-                //InputStream ims = getAssets().open("location.png");
+            //set properties of each holder
 
-                Glide.with(context).load(Uri.parse("file:///android_asset/general/" + restaurantIcon)).into(holder.mImageView);
 
-            }catch (IOException e){
-                Log.e(LOG_TAG, e +" ");
-            }*/
+            holder.mEnlargedImageView.setVisibility((int) properties[IS_LOGO_ENLARGED]);
+
+            holder.mRelativeLayout.setSelected((boolean) properties[IS_RELATIVE_LAYOUT_SELECTED]);
+
+            //set up panorama if properties[IS_PANORORAMA_VISIBLE] is visible
+            int isPanoramaVisible =  (int) properties[IS_PANORAMA_VISIBLE];
+            if (isPanoramaVisible == View.VISIBLE){
+                ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
+            }
+
+            holder.mStreetViewPanoramaView.setVisibility(isPanoramaVisible);
+
 
             // setup horizontal text by text adapter
             TextByTextAdapter adapter = new TextByTextAdapter(context, R.layout.recognized_text_item);
@@ -140,7 +163,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
 
-            holder.mBackground.setOnClickListener(view -> control_select(holder, restaurantData));
+            holder.mBackground.setOnClickListener(view -> control_select(holder, restaurantData, position));
 
 
             holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
@@ -191,9 +214,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     }
 
-    private void control_select(RestaurantAdapter.ViewHolder holder, String[] restaurantData){
+    /*private void control_select(RestaurantAdapter.ViewHolder holder, String[] restaurantData, int position){
             String restaurantUrl = restaurantData[URL_POS];
             String restaurantName = restaurantData[TITLE_POS];
+            Object[] currentProperties =  mDataProperties.get(position);
+
         last_selected_rl = GeographyActivity.last_rl_parent;
         Log.d(LOG_TAG, "last_selected_rl " + last_selected_rl );
         if (last_selected_rl != null && last_selected_rl != holder.mRelativeLayout){
@@ -203,12 +228,23 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 lastViewHolder.mStreetViewPanoramaView.setVisibility(View.GONE);
                 lastViewHolder.mEnlargedImageView.setVisibility(View.GONE);
 
+                //update properties
+                //Object[] currentProperties =  mDataProperties.get(position);
+                currentProperties[IS_PANORAMA_VISIBLE] = View.GONE;
+                currentProperties[IS_LOGO_ENLARGED] = View.GONE;
+                currentProperties[IS_RELATIVE_LAYOUT_SELECTED] = false;
+
             }
 
         }
-        if(holder.mRelativeLayout.isSelected()){
+        if( (boolean) currentProperties[IS_RELATIVE_LAYOUT_SELECTED]/*holder.mRelativeLayout.isSelected()){
             holder.mRelativeLayout.setSelected(false);
             holder.mStreetViewPanoramaView.setVisibility(View.GONE);
+
+            //update properties
+            currentProperties[IS_PANORAMA_VISIBLE] = View.GONE;
+            currentProperties[IS_LOGO_ENLARGED] = View.GONE;
+            currentProperties[IS_RELATIVE_LAYOUT_SELECTED] = false;
 
         }else{
             holder.mRelativeLayout.setSelected(true);
@@ -216,11 +252,67 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             GeographyActivity.selected_url = restaurantUrl;
             holder.mStreetViewPanoramaView.setVisibility(View.VISIBLE);
 
+            //update properties
+            //Object[] currentProperties =  mDataProperties.get(position);
+            currentProperties[IS_PANORAMA_VISIBLE] = View.VISIBLE;
+            currentProperties[IS_RELATIVE_LAYOUT_SELECTED] = true;
+
 
             ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
 
         }
         GeographyActivity.last_rl_parent = holder.mRelativeLayout;
+
+
+        //set up panorama
+
+
+    }*/
+
+
+    private void control_select(RestaurantAdapter.ViewHolder holder, String[] restaurantData, int position){
+        String restaurantUrl = restaurantData[URL_POS];
+        String restaurantName = restaurantData[TITLE_POS];
+        Object[] currentProperties =  mDataProperties.get(position);
+
+        last_selected_rl = GeographyActivity.last_rl_parent;
+        Log.d(LOG_TAG, "last_selected_rl " + last_selected_rl );
+        if ( last_selected_property != null && last_selected_property != currentProperties){
+
+                //update properties
+            last_selected_property[IS_PANORAMA_VISIBLE] = View.GONE;
+            last_selected_property[IS_LOGO_ENLARGED] = View.GONE;
+            last_selected_property[IS_RELATIVE_LAYOUT_SELECTED] = false;
+
+            //to enable redraw of view with new properties
+            notifyDataSetChanged();
+
+
+        }
+        if( (boolean) currentProperties[IS_RELATIVE_LAYOUT_SELECTED]){
+            holder.mRelativeLayout.setSelected(false);
+            holder.mStreetViewPanoramaView.setVisibility(View.GONE);
+
+            //update properties
+            currentProperties[IS_PANORAMA_VISIBLE] = View.GONE;
+            currentProperties[IS_LOGO_ENLARGED] = View.GONE;
+            currentProperties[IS_RELATIVE_LAYOUT_SELECTED] = false;
+
+        }else{
+            holder.mRelativeLayout.setSelected(true);
+            GeographyActivity.selected_item = restaurantName;
+            GeographyActivity.selected_url = restaurantUrl;
+            holder.mStreetViewPanoramaView.setVisibility(View.VISIBLE);
+
+            //update properties
+            currentProperties[IS_PANORAMA_VISIBLE] = View.VISIBLE;
+            currentProperties[IS_RELATIVE_LAYOUT_SELECTED] = true;
+
+
+            ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
+
+        }
+        last_selected_property = currentProperties;
 
 
         //set up panorama

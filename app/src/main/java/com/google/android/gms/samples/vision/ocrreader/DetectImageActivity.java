@@ -1,18 +1,12 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
-import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Camera;
 import android.graphics.Color;
 import android.graphics.Path;
-import android.graphics.Point;
-import android.graphics.PointF;
 import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
@@ -33,8 +27,6 @@ import com.google.android.gms.samples.vision.ocrreader.Adapter.RecognizedTextAda
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlayFB;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.ImageViewPreview;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
@@ -106,7 +98,7 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
     public void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
 
-    RecyclerView last_parent_di = new RecyclerView(this);
+    //RecyclerView last_parent_di = new RecyclerView(this);
 
     setContentView(R.layout.activity_image_detection);
 
@@ -180,142 +172,105 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
 
     final CompoundButton togglelistImageOn =  findViewById(R.id.switch_view);
-    togglelistImageOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            if (b){
-                    imageMode(imageView, recyclerView);
-            }else{
-                    listMode(imageView, recyclerView);
-            }
+    togglelistImageOn.setOnCheckedChangeListener((CompoundButton compoundButton, boolean b) ->{
+        if (b){
+            imageMode(imageView, recyclerView);
+        }else{
+            listMode(imageView, recyclerView);
         }
     });
 
     ImageView imageViewList = findViewById(R.id.list_mode);
-    imageViewList.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            listMode(imageView, recyclerView);
-            togglelistImageOn.setChecked(false);
-        }
+    imageViewList.setOnClickListener((View view) ->{
+        listMode(imageView, recyclerView);
+        togglelistImageOn.setChecked(false);
     });
 
     ImageView imageViewImage = findViewById(R.id.image_mode);
-    imageViewImage.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            imageMode(imageView, recyclerView);
-            togglelistImageOn.setChecked(true);
-        }
+    imageViewImage.setOnClickListener((View view) ->{
+        imageMode(imageView, recyclerView);
+        togglelistImageOn.setChecked(true);
     });
 
     ImageView imageViewClear = findViewById(R.id.clear_overlay);
-    imageViewClear.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Log.d(LOG_TAG,"length of graphic " + graphics.size());
-            // remove red items and blue items
-            // remove blocks and lines
-            remove_all_lines();
-            remove_all_blocks();
-            removePath();
+    imageViewClear.setOnClickListener((View view) ->{
+        Log.d(LOG_TAG,"length of graphic " + graphics.size());
+        // remove red items and blue items
+        // remove blocks and lines
+        remove_all_lines();
+        remove_all_blocks();
+        removePath();
 
-            // reset public variables
-            newTextBlock = null;
-            selectedGraphic = null;
-            currentLineSelection = null;
-            takeDownRecyclerView();
+        // reset public variables
+        newTextBlock = null;
+        selectedGraphic = null;
+        currentLineSelection = null;
+        takeDownRecyclerView();
 
-        }
     });
 
     //back button
 
     ImageButton back_btn =  findViewById(R.id.back_btn_di);
-    back_btn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (togglelistImageOn.isChecked()){
-                finish();
-            }else{
-                imageMode(imageView, recyclerView);
-                togglelistImageOn.setChecked(true);
-            }
+    back_btn.setOnClickListener((View view) ->{
+        if (togglelistImageOn.isChecked()){
+            finish();
+        }else{
+            imageMode(imageView, recyclerView);
+            togglelistImageOn.setChecked(true);
         }
     });
 
     ImageButton next_btn =  findViewById(R.id.next_btn_di);
-    next_btn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
+    next_btn.setOnClickListener((View view) ->{
 
-            if (togglelistImageOn.isChecked()){
-
-                /*listMode(imageView, recyclerView);
-                togglelistImageOn.setChecked(false);*/
-            }else{
-
-                Intent mealMenuActivity = new Intent(getApplicationContext(), MealMenuActivity.class);
-                mealMenuActivity.putExtra(MEAL_TO_GET, currentLineSelection);
-                startActivity(mealMenuActivity);
-            }
+        if(!(togglelistImageOn.isChecked())){
+            Intent mealMenuActivity = new Intent(getApplicationContext(), MealMenuActivity.class);
+            mealMenuActivity.putExtra(MEAL_TO_GET, currentLineSelection);
+            startActivity(mealMenuActivity);
         }
+
     });
 
     ImageButton imageButtonClearOnSiteRecycler = findViewById(R.id.cancel_gridview_edit_meal);
-    imageButtonClearOnSiteRecycler.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            takeDownRecyclerView();
-            speak("clear");
-        }
+    imageButtonClearOnSiteRecycler.setOnClickListener((View view) ->{
+        takeDownRecyclerView();
+        speak("clear");
     });
 
 
     ImageButton imageButtonGroupLines = findViewById(R.id.group_lines);
-    imageButtonGroupLines.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            group_selected_lines();
-            takeDownRecyclerView();
-            speak("group");
-        }
+    imageButtonGroupLines.setOnClickListener((View view) ->{
+        group_selected_lines();
+        takeDownRecyclerView();
+        speak("group");
     });
 
 
     ImageButton imageButtonSeeSelection = findViewById(R.id.see_selection);
-    imageButtonSeeSelection.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (currentLineSelection != null){
-                //setUpRecyclerView(currentLineSelection, getBlockOrText());
-                setUpRecyclerView(ocrGraphicGetText(), getBlockOrText());
-                speak("see photo");
+    imageButtonSeeSelection.setOnClickListener((View view) ->{
+        if (currentLineSelection != null){
+            //setUpRecyclerView(currentLineSelection, getBlockOrText());
+            setUpRecyclerView(ocrGraphicGetText(), getBlockOrText());
+            speak("see photo");
 
-            }
         }
     });
 
 
     ImageButton imageButtonMakeOrder = findViewById(R.id.make_order);
-    imageButtonMakeOrder.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            ProgressBar progressBar = findViewById(R.id.dialog_progress);
-            progressBar.setVisibility(View.VISIBLE);
-            makeOrder();
-            speak("order");
+    imageButtonMakeOrder.setOnClickListener((View view) ->{
+        ProgressBar progressBar = findViewById(R.id.dialog_progress);
+        progressBar.setVisibility(View.VISIBLE);
+        makeOrder();
+        speak("order");
 
-        }
     });
 
     ImageButton imageButtonMakeSquare = findViewById(R.id.make_square);
-    imageButtonMakeSquare.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            graphicDraw.updatePath(null, mX,mY);
-            graphicDraw.postInvalidate();
-        }
+    imageButtonMakeSquare.setOnClickListener((View view) ->{
+        graphicDraw.updatePath(null, mX,mY);
+        graphicDraw.postInvalidate();
     });
 
 
@@ -452,6 +407,7 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
                 selectedGraphic.setsRectPaint(Color.GREEN);
                 selectedGraphic.setRecPaintStrokeWidth(SELECTED_STROKE_WIDTH);
                 mGraphicOverlayFB.add(selectedGraphic);
+                //mGraphicOverlayFB.addXPosition(selectedGraphic.)
                 //imageViewPreview.setmGraphicOverlay(mGraphicOverlayFB);
 
 
@@ -582,13 +538,17 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
     private String combineText(ArrayList<Integer> rect_top_values, HashMap<Integer, String> string_values){
         Collections.sort(rect_top_values);
-        String finalString = string_values.get(rect_top_values.get(0)) + ", ";
+
+        StringBuilder finalString_sb = new StringBuilder();
+        finalString_sb.append(string_values.get(rect_top_values.get(0)));
+        finalString_sb.append(", ");
+
         for (int i = 1; i < rect_top_values.size(); i++){
-            finalString += string_values.get(rect_top_values.get(i)) + " ";
+            finalString_sb.append(string_values.get(rect_top_values.get(i)));
+            finalString_sb.append(" ");
         }
 
-        //return string_values.get(rect_top_values.get(0));
-        return finalString;
+        return finalString_sb.toString();
 
     }
     private void imageMode(ImageView imageView, RecyclerView recyclerView){
@@ -672,35 +632,28 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
                     .getOnDeviceTextRecognizer();
 
             textRecognizer.processImage(image)
-                    .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
-                        @Override
-                        public void onSuccess(FirebaseVisionText result) {
-                            // Task completed successfully
-                            // ...
-                            //String resultText = result.getText();
-                            for (FirebaseVisionText.TextBlock block: result.getTextBlocks()) {
+                    .addOnSuccessListener((FirebaseVisionText result) -> {
+                // Task completed successfully
+                // ...
+                //String resultText = result.getText();
+                for (FirebaseVisionText.TextBlock block: result.getTextBlocks()) {
 
-                                //test block
-                                //OcrGraphicFB graphicFB = new OcrGraphicFB(mGraphicOverlayFB, block);
-                                //mGraphicOverlayFB.add(graphicFB);
+                    //test block
+                    //OcrGraphicFB graphicFB = new OcrGraphicFB(mGraphicOverlayFB, block);
+                    //mGraphicOverlayFB.add(graphicFB);
 
-                                for (FirebaseVisionText.Line line: block.getLines()) {
+                    for (FirebaseVisionText.Line line: block.getLines()) {
 
-                                    OcrGraphicFB graphic = new OcrGraphicFB(mGraphicOverlayFB, line);
-                                    mGraphicOverlayFB.add(graphic);
+                        OcrGraphicFB graphic = new OcrGraphicFB(mGraphicOverlayFB, line);
+                        mGraphicOverlayFB.add(graphic);
 
-                                }
-                            }
-                        }
-                    })
-                    .addOnFailureListener(
-                            new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    // Task failed with an exception
-                                    // ...
-                                }
-                            });
+                    }
+                }
+            })
+                    .addOnFailureListener((@NonNull Exception e) ->{
+                // Task failed with an exception
+                // ...
+            });
         } catch (NullPointerException e){
             /*catch (IOException e) {
             e.printStackTrace();
@@ -875,15 +828,13 @@ public class DetectImageActivity extends UseRecyclerActivity implements TextToSp
 
         final OcrGraphicFB graphic = mGraphicOverlayFB.getGraphicAtLocation(rawX, rawY);
         FirebaseVisionText.Line line = null;
-        FirebaseVisionText.TextBlock block = null;
+        FirebaseVisionText.TextBlock block;
         if (graphic != null) {
             line = graphic.getLine();
             block = graphic.getTextBlock();
-            //final FirebaseVisionText.Line final_text = line;
             if (line != null && line.getText()!= null) {
                 String text_line_content;
                 text_line_content = line.getText();
-                //selectedTextBlock = line;
 
                 if (graphic.getsRectPaint() == Color.WHITE){
                     graphic.setsRectPaint(Color.GREEN);
