@@ -19,12 +19,16 @@
 
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:paddingLeft="10dp"
 
 
         android:background="@drawable/selector_row"
         >
 
         <!--android:background="@drawable/selector_row"-->
+
+
+
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -32,14 +36,18 @@
             android:layout_alignParentLeft="true"
             android:layout_margin="10dp"/>
 
+
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/enlarged_image"
-            android:layout_alignParentLeft="true"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="10dp"
+            android:layout_alignLeft="@id/descriptive_image"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
             android:visibility="gone" />
+
+
+
         <!--com.google.android.gms.samples.vision.ocrreader.ui.project.ProjectRecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,6 +89,8 @@
 
 
     </RelativeLayout>
+
+
 
 
 </RelativeLayout>

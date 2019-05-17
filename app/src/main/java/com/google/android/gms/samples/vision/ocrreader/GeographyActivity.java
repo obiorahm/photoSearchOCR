@@ -1,6 +1,7 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
 import android.Manifest;
+import android.animation.Animator;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -89,6 +90,10 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
     public Handler handler = new Handler();
 
     public boolean test = false;
+
+    public Animator currentAnimator;
+
+    public int shortAnimationDuration;
 
 
     PlacesClient placesClient;

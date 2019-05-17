@@ -91,10 +91,10 @@ public class WordNetHypernyms {
             // construct the dictionary object and open it
             IDictionary dict = new Dictionary(url);
 
-
-            boolean dictIsOpen = dict.open();
-            if (!(dictIsOpen))
+            if (dict == null)
                 return false;
+            boolean dictIsOpen = dict.open();
+
             Log.d(LOG_TAG, " " + dictIsOpen);
 
             String finalWords = "";

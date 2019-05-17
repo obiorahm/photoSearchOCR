@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
+import com.google.android.gms.samples.vision.ocrreader.OcrGraphicFB;
 import com.google.android.gms.vision.*;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,6 +30,8 @@ public class GraphicOverlayFB <T extends GraphicOverlayFB.Graphic> extends View 
     private Set<T> mGraphics = new HashSet<>();
     private Context context;
 
+
+    private HashMap<Integer, T> mData = new HashMap<>();
     /**
      * Base class for a custom graphics object to be rendered within the graphic overlay.  Subclass
      * this and implement the {@link GraphicOverlay.Graphic#draw(Canvas)} method to define the
@@ -125,6 +129,16 @@ public class GraphicOverlayFB <T extends GraphicOverlayFB.Graphic> extends View 
     public void add(T graphic) {
         synchronized (mLock) {
             mGraphics.add(graphic);
+
+            //mData.put(graphic.)
+
+            OcrGraphicFB currGraphics = ((OcrGraphicFB) graphic);
+            int top = currGraphics.getLine().getBoundingBox().top;
+            int left = currGraphics.getLine().getBoundingBox().left;
+
+            mData.put(top, graphic);
+
+            Log.d("the top ", top + " " + " the left " + left);
         }
         postInvalidate();
     }

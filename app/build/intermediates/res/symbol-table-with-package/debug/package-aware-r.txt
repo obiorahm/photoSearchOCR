@@ -18,6 +18,9 @@ anim design_snackbar_in
 anim design_snackbar_out
 anim tooltip_enter
 anim tooltip_exit
+animator path_morph
+animator rotation
+animator scale
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -1178,6 +1181,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable animvectordrawable
 drawable baseline_add_circle_outline_white_18dp
 drawable baseline_add_circle_outline_white_48dp
 drawable baseline_autorenew_black_18dp
@@ -1364,6 +1368,7 @@ drawable text_border
 drawable tile
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable vectordrawable
 id ALT
 id CTRL
 id FUNCTION
@@ -1444,7 +1449,6 @@ id detected_location_list_view
 id detected_text_list_view
 id dialog_progress
 id disableHome
-id edit_meal_text
 id edit_query
 id edit_text
 id enclosing_layout
