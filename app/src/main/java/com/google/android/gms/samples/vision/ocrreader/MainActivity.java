@@ -23,7 +23,8 @@ public class MainActivity extends Activity {
         location_menu_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), GeographyActivity.class);
+                //Intent intent = new Intent(getApplicationContext(), GeographyActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PlacesActivity.class);
                 startActivity(intent);
             }
         });

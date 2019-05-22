@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +23,6 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.PossiblePlacesAdapter;
-import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
@@ -40,8 +40,6 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
 
     private String LOG_TAG = PlacesActivity.class.getSimpleName();
 
-    protected GeoDataClient mGeoDataClient;
-
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     PlacesClient placesClient;
@@ -51,6 +49,8 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
     private RecyclerView recyclerView;
 
     TextView globalTextView;
+
+    public static String selectedAddress = null;
 
 
 
@@ -92,6 +92,9 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
         checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
 
+        if (myTTS == null)
+            myTTS = new TextToSpeech(this, this);
+
 
         recyclerView = findViewById(R.id.detected_location_list_view);
         adapter = new PossiblePlacesAdapter(this, R.layout.horizontal_text);
@@ -112,6 +115,7 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
 
 
         }
+
 
     }
 
@@ -161,7 +165,7 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
 
 
         // Use fields to define the data types to return.
-        List<Place.Field > placeFields = Arrays.asList(Place.Field.LAT_LNG, Place.Field.ADDRESS, Place.Field.TYPES);
+        List<Place.Field > placeFields = Arrays.asList(Place.Field.LAT_LNG, Place.Field.ADDRESS, Place.Field.TYPES, Place.Field.PHOTO_METADATAS);
 
         // Use the builder to create a FindCurrentPlaceRequest.
         FindCurrentPlaceRequest request = FindCurrentPlaceRequest.builder(placeFields).build();
@@ -173,18 +177,20 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
                     Log.i(LOG_TAG, String.format("Place '%s' has likelihood: %f" + placeLikelihood.getPlace().getTypes(),
                             placeLikelihood.getPlace().getAddress(),
                             placeLikelihood.getLikelihood()));
+                    adapter.addItem(placeLikelihood.getPlace().getAddress());
+                    placeLikelihood.getPlace().getPhotoMetadatas();
                 }
 
 
                 //get first place
                 PlaceLikelihood firstPlace = response.getPlaceLikelihoods().get(0);
-                displayCurrentLocation(firstPlace.getPlace().getAddress(), firstPlace.getPlace().getId());
+                displayCurrentLocation(firstPlace.getPlace().getAddress());
 
                 //get next 10 places
-                for (int i = 0; i < 10; i++){
+                /*for (int i = 0; i < 10; i++){
                     PlaceLikelihood currentPlace = response.getPlaceLikelihoods().get(i);
                     adapter.addItem(currentPlace.getPlace().getAddress());
-                }
+                }*/
 
 
 
@@ -202,9 +208,8 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
     }
 
 
-    private void displayCurrentLocation(String address, String placeId){
+    private void displayCurrentLocation(String address){
         globalTextView.setText(address);
-        ImageView locationImageView = PlacesActivity.this.findViewById(R.id.location_image);
 
     }
 
