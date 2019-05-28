@@ -199,15 +199,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     private void enlargeImage(ImageView view, ImageView enlargedView, RestaurantAdapter.ViewHolder holder, int position){
         zoomImageFromTHumb(view, enlargedView, holder, position);
-
-        /*if (view.getVisibility() == View.GONE){
-            view.setVisibility(View.VISIBLE);
-            view.animate();
-        }
-        else{
-            view.setVisibility(View.GONE);
-            view.animate();
-        }*/
     }
 
 

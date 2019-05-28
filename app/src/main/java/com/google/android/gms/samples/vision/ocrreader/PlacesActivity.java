@@ -6,9 +6,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -21,11 +23,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
+import com.google.android.gms.maps.StreetViewPanorama;
+import com.google.android.gms.maps.StreetViewPanoramaView;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
+import com.google.android.gms.maps.model.StreetViewSource;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.PossiblePlacesAdapter;
 import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.PhotoMetadata;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import com.google.android.libraries.places.api.net.FetchPhotoRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.firebase.FirebaseApp;
@@ -34,7 +43,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener {
+public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener, OnStreetViewPanoramaReadyCallback, Runnable {
 
     private PossiblePlacesAdapter adapter;
 
@@ -51,6 +60,16 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
     TextView globalTextView;
 
     public static String selectedAddress = null;
+
+    public static String RESTAURANT_ADDRESS = "com.google.android.gms.samples.vision.ocrreader.RESTAURANT_ADDRESS";
+
+    private Bundle mSavedInstance;
+
+    double LONGITUDE = 151.20689;
+
+    double LATITUDE = -33.87365;
+
+    public Handler handler = new Handler();
 
 
 
@@ -116,6 +135,13 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
 
         }
 
+        ImageButton nxtImageButton = findViewById(R.id.next_btn_dr);
+        nxtImageButton.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), GeographyActivity.class);
+            intent.putExtra(RESTAURANT_ADDRESS, selectedAddress);
+            startActivity(intent);
+        });
+
 
     }
 
@@ -177,8 +203,40 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
                     Log.i(LOG_TAG, String.format("Place '%s' has likelihood: %f" + placeLikelihood.getPlace().getTypes(),
                             placeLikelihood.getPlace().getAddress(),
                             placeLikelihood.getLikelihood()));
-                    adapter.addItem(placeLikelihood.getPlace().getAddress());
-                    placeLikelihood.getPlace().getPhotoMetadatas();
+
+                    Place place = placeLikelihood.getPlace();
+                    Object [] data =  new Object[7];
+
+                    // Get the photo metadata.
+                    if (place.getPhotoMetadatas() != null){
+                        PhotoMetadata photoMetadata = place.getPhotoMetadatas().get(0);
+
+                        // Get the attribution text.
+                        String attributions = photoMetadata.getAttributions();
+
+                        // Create a FetchPhotoRequest.
+                        FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
+                                .setMaxWidth(500) // Optional.
+                                .setMaxHeight(300) // Optional.
+                                .build();
+                        placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
+                            Bitmap bitmap = fetchPhotoResponse.getBitmap();
+
+                            data[PossiblePlacesAdapter.BITMAP] = bitmap;
+                            adapter.notifyDataSetChanged();
+                        });
+
+                    }
+                        LatLng latLng = placeLikelihood.getPlace().getLatLng();
+
+
+                        data[PossiblePlacesAdapter.RESTAURANT_ADDRESS] = placeLikelihood.getPlace().getAddress();
+                        data[PossiblePlacesAdapter.LATITUDE] = latLng.latitude;
+                        data[PossiblePlacesAdapter.LONGITUDE] = latLng.longitude;
+
+                        adapter.addItem(data);
+                        placeLikelihood.getPlace().getPhotoMetadatas();
+
                 }
 
 
@@ -212,6 +270,47 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
         globalTextView.setText(address);
 
     }
+
+
+
+    @Override
+    public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView, String longitude, String latitude){
+        LONGITUDE = longitude.equals("")? LONGITUDE : Double.valueOf(longitude);
+        LATITUDE = latitude.equals("") ? LATITUDE : Double.valueOf(latitude);
+
+        streetViewPanoramaView.onCreate(mSavedInstance);
+        streetViewPanoramaView.getStreetViewPanoramaAsync(this);
+    }
+
+    @Override
+    public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
+        panorama.setPosition(new LatLng(LATITUDE, LONGITUDE), 50, StreetViewSource.OUTDOOR);
+        curr_panorama = panorama;
+        handler.postDelayed(this, 1000);
+
+
+    }
+
+    StreetViewPanorama curr_panorama;
+    private void panScreen(){
+// Keeping the zoom and tilt. Animate bearing by 60 degrees in 1000 milliseconds.
+        long duration = 2000;
+        StreetViewPanoramaCamera camera =
+                new StreetViewPanoramaCamera.Builder()
+                        .zoom(curr_panorama.getPanoramaCamera().zoom)
+                        .tilt(curr_panorama.getPanoramaCamera().tilt)
+                        .bearing(curr_panorama.getPanoramaCamera().bearing - 60)
+                        .build();
+        curr_panorama.animateTo(camera, duration);
+        handler.postDelayed(this, duration);
+    }
+
+
+    @Override
+    public void run(){
+        panScreen();
+    }
+
 
 
     //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.

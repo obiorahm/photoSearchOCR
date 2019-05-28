@@ -1,20 +1,16 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +23,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 // Add an import statement for the client library.
@@ -40,16 +35,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
 import com.google.android.gms.maps.model.StreetViewSource;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.model.PlaceLikelihood;
-import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.firebase.FirebaseApp;
 
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by mgo983 on 10/5/18.
@@ -60,11 +50,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
     TextView globalTextView;
     //Text to speech variables
     private int MY_DATA_CHECK_CODE = 0;
-
-
-    //public static String selected_restaurant = "";
-
-    //public static RecyclerView last_parent_di;
 
     public static String RESTAURANT_NAME = "com.google.android.gms.samples.vision.ocrreader.RESTAURANT_NAME";
 
@@ -94,6 +79,8 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
     PlacesClient placesClient;
 
+    String address;
+
 
 
     @Override
@@ -107,6 +94,12 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
         Places.initialize(getApplicationContext(), apiKey);
         // Create a new Places client instance.
         placesClient = Places.createClient(this);
+
+
+        // retrieve address
+        Intent intent = getIntent();
+        address = intent.getStringExtra(PlacesActivity.RESTAURANT_ADDRESS);
+
 
         AssetManager assetManager = getAssets();
         try{
@@ -147,16 +140,12 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
         globalTextView = findViewById(R.id.current_location);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
-            checkPermission();
+        if (test){
+            testData();
+        }else{
 
-            if (test){
-                testData();
-            }else{
-
-                getCurrentLocation();
-            }
-
+            if (address != null)
+                getCurrentLocation(address);
         }
 
 
@@ -250,42 +239,6 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
     }
 
 
-    public void checkPermission(){
-
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-                new AlertDialog.Builder(this)
-                        .setTitle("title")
-                        .setMessage("title")
-                        .setPositiveButton(R.string.ok, (DialogInterface dialogInterface, int i) -> {
-                    //Prompt the user once explanation has been shown
-                    ActivityCompat.requestPermissions(GeographyActivity.this,
-                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                            MY_PERMISSIONS_REQUEST_LOCATION);
-                })
-                        .create()
-                        .show();
-
-
-            } else {
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-            }
-            //return false;
-        }
-
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -301,9 +254,7 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
-                        getCurrentLocation();
-                        //Request location updates:
-                        //locationManager.requestLocationUpdates(provider, 400, 1, this);
+                        getCurrentLocation(address);
                     }
 
                 } /*else {
@@ -341,40 +292,10 @@ private void testData(){
 
 
 
-    private void getCurrentLocation(){
+    private void getCurrentLocation(String address){
 
+        displayCurrentLocation(address);
 
-        // Use fields to define the data types to return.
-        List<Place.Field > placeFields = Arrays.asList(Place.Field.LAT_LNG, Place.Field.ADDRESS, Place.Field.TYPES);
-
-        // Use the builder to create a FindCurrentPlaceRequest.
-        FindCurrentPlaceRequest request = FindCurrentPlaceRequest.builder(placeFields).build();
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            placesClient.findCurrentPlace(request).addOnSuccessListener(((response) -> {
-
-                for (com.google.android.libraries.places.api.model.PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
-                    Log.i(LOG_TAG, String.format("Place '%s' has likelihood: %f" + placeLikelihood.getPlace().getTypes(),
-                            placeLikelihood.getPlace().getAddress(),
-                            placeLikelihood.getLikelihood()));
-                }
-
-                //get first place
-                PlaceLikelihood currentPlace = response.getPlaceLikelihoods().get(0);
-                displayCurrentLocation(currentPlace.getPlace().getAddress());
-
-
-            })).addOnFailureListener((exception) -> {
-                if (exception instanceof ApiException) {
-                    ApiException apiException = (ApiException) exception;
-                    Log.e(LOG_TAG, "Place not found: " + apiException.getStatusCode());
-                }
-            });
-        } else {
-            // A local method to request required permissions;
-            // See https://developer.android.com/training/permissions/requesting
-            checkPermission();
-        }
     }
 
 
