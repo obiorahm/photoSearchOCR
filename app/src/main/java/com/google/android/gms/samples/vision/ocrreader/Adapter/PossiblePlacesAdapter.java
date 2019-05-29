@@ -8,11 +8,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +23,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.maps.StreetViewPanoramaView;
-import com.google.android.gms.samples.vision.ocrreader.GeographyActivity;
 import com.google.android.gms.samples.vision.ocrreader.PlacesActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
@@ -134,15 +132,18 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
 
         Bitmap bitmap = (Bitmap) data[BITMAP];
 
+        Drawable d = new BitmapDrawable(bitmap);
+
         if (bitmap != null){
 
-            Glide.with(context).load(bitmap).into(holder.mImageView);
-//            Glide.with(context).load(bitmap).into(holder.mEnlargedImageView);
+            Glide.with(context).load(d).into(holder.mImageView);
+            Glide.with(context).load(d).into(holder.mEnlargedImageView);
+
 
         }
 
         holder.mImageView.setOnClickListener(view ->
-                zoomImageFromTHumb((ImageView)  view, holder.mEnlargedImageView, holder, position));
+                zoomImageFromTHumb((ImageView)  view, holder.mEnlargedImageView, holder, position, bitmap));
 
         //hide progressBar
         ProgressBar progressBar = ((PlacesActivity) context).findViewById(R.id.menu_progress);
@@ -220,7 +221,7 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
     Animator currentAnimator;
     int shortAnimationDuration = 2000;
 
-    private void zoomImageFromTHumb(ImageView normalView, View expandedImageView, PossiblePlacesAdapter.ViewHolder holder, int position){
+    private void zoomImageFromTHumb(ImageView normalView, View expandedImageView, PossiblePlacesAdapter.ViewHolder holder, int position, Bitmap bitmap){
 
         // if there's an animation in progress, cancel it
         // immediately and priceed with this one.
@@ -284,6 +285,7 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
 
         normalView.setAlpha(0f);
         mData.get(position)[IS_LOGO_ENLARGED] = View.VISIBLE;
+
         expandedImageView.setVisibility(View.VISIBLE);
 
         // Set the pivot point for SCALE_X and SCALE_Y transformations

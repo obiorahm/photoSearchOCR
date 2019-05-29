@@ -242,7 +242,7 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
 
                 //get first place
                 PlaceLikelihood firstPlace = response.getPlaceLikelihoods().get(0);
-                displayCurrentLocation(firstPlace.getPlace().getAddress());
+                //displayCurrentLocation(firstPlace.getPlace().getAddress());
 
                 //get next 10 places
                 /*for (int i = 0; i < 10; i++){

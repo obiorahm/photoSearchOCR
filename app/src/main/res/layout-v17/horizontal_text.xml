@@ -38,13 +38,13 @@
 
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:id="@+id/enlarged_image"
             android:layout_alignLeft="@id/descriptive_image"
             android:layout_centerVertical="true"
-            android:paddingLeft="10dp"
-            android:visibility="gone" />
+            android:paddingRight="10dp"
+            android:visibility="gone"/>
 
 
 
