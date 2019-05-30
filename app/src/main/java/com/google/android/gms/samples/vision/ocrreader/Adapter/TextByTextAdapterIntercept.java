@@ -1,5 +1,6 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.RecyclerView;
@@ -76,6 +77,7 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
         final String word = mData.get(position);
         holder.mTextView.setText(word);
 
+        ((UseRecyclerActivity) context).loadImage(word, holder.mImageView);
         holder.mTextView.setOnClickListener((View view) ->{
 
             if (holder.mImageView.getVisibility() == View.VISIBLE){
