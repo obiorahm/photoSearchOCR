@@ -1428,6 +1428,7 @@ id clear_overlay_text
 id clip_horizontal
 id clip_vertical
 id collapseActionView
+id container_relative_layout
 id containing_relative_layout
 id contentPanel
 id conversation_image
@@ -1544,6 +1545,7 @@ id order_option_items
 id order_option_text
 id order_text_view
 id order_title
+id outer_layout
 id parallax
 id parentPanel
 id pin

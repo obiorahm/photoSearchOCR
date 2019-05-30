@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
@@ -34,12 +35,14 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
     public static class ViewHolder extends  RecyclerView.ViewHolder{
         public TextView mTextView;
         public RecyclerView mRecyclerView;
+        public ImageView mImageView;
         public View mConvertView;
 
 
         public ViewHolder(View convertView, View parent){
             super(convertView);
             mTextView = convertView.findViewById(R.id.recognized_text);
+            mImageView = convertView.findViewById(R.id.descriptive_image);
             mRecyclerView = (RecyclerView) parent;
             mConvertView = convertView;
 
@@ -73,9 +76,13 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
         final String word = mData.get(position);
         holder.mTextView.setText(word);
 
-        holder.mTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        holder.mTextView.setOnClickListener((View view) ->{
+
+            if (holder.mImageView.getVisibility() == View.VISIBLE){
+                holder.mImageView.setVisibility(View.GONE);
+            }else{
+                holder.mImageView.setVisibility(View.VISIBLE);
+            }
                 /*myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
                 //lastParent = DetectImageActivity.last_parent_di;
                 lastParent = UseRecyclerActivity.last_parent_di;
@@ -90,7 +97,6 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
                     holder.mRecyclerView.setSelected(true);
                 }
                 DetectImageActivity.last_parent_di = holder.mRecyclerView;*/
-            }
         });
     }
 

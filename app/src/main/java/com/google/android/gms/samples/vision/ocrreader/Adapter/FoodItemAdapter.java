@@ -40,7 +40,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     LayoutInflater inflater;
     ArrayList<String> mData;
-    ArrayList<Integer> state = new ArrayList<>();
+    private ArrayList<Integer> state = new ArrayList<>();
     //public static HashMap<String, Order> order = new HashMap<>();
     public static HashMap<String, Object[]> order = new HashMap<>();
 
@@ -63,23 +63,29 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     private int current_selection = R.drawable.select_border;
 
     private int[] STATES = { normal, select, current_selection};
-    private String mealCategory = "";
+    private String mealCategory;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView mTextView;
         private ImageButton mImageButton;
         private ImageButton mImageButtonShowFoodItem;
+        private RecyclerView mTextByTextRecyclerView;
         private RecyclerView mRecyclerView;
         private RelativeLayout mContainingRelativeLayout;
+        private RelativeLayout mParent;
 
         public ViewHolder(View parent){
             super(parent);
-            mTextView = parent.findViewById(R.id.single_food_item);
+            //mTextView = parent.findViewById(R.id.single_food_item);
+
+            mTextByTextRecyclerView = parent.findViewById(R.id.single_food_item);
+
             mImageButton = parent.findViewById(R.id.speak_whole_text);
             mImageButtonShowFoodItem = parent.findViewById(R.id.show_food_item_image);
             mRecyclerView = parent.findViewById(R.id.food_item_options);
             mContainingRelativeLayout = parent.findViewById(R.id.containing_relative_layout);
+            mParent = (RelativeLayout) parent;
         }
 
     }
@@ -97,16 +103,30 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     @Override
     public FoodItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View convertView = inflater.inflate(R.layout.single_food_item, null);
-        FoodItemAdapter.ViewHolder viewHolder = new FoodItemAdapter.ViewHolder(convertView);
+        //FoodItemAdapter.ViewHolder viewHolder = new FoodItemAdapter.ViewHolder(convertView);
 
-        return viewHolder;
+        return new FoodItemAdapter.ViewHolder(convertView);
     }
 
     @Override
-    public void onBindViewHolder(final FoodItemAdapter.ViewHolder holder, final int position){
+    public void onBindViewHolder(final FoodItemAdapter.ViewHolder holder, int position){
 
         final String word = mData.get(position);
-        holder.mTextView.setText(word);
+        //holder.mTextView.setText(word);
+
+        // setup horizontal text by text adapter
+        TextByTextAdapterIntercept adapter = new TextByTextAdapterIntercept(context, R.layout.recognized_text_item);
+
+        String tokenizedString [] = word.split(" ");
+
+        for (String child : tokenizedString){
+            adapter.addItem(child);
+        }
+
+        LinearLayoutManager layoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
+        holder.mTextByTextRecyclerView.setLayoutManager(layoutManager);
+
+        holder.mTextByTextRecyclerView.setAdapter(adapter);
 
         /*// the text view is parent wide
         holder.mTextView.setSelected(false);
@@ -123,13 +143,13 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
         holder.mContainingRelativeLayout.setSelected(false);
 
-        holder.mContainingRelativeLayout.setOnClickListener(new View.OnClickListener() {
+        /*holder.mContainingRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeState(word, holder, position);
                 ((OpenRestaurantMenuActivity) context).hideOptionResults();
             }
-        });
+        });*/
 
         holder.mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +176,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
         holder.mRecyclerView.setAdapter(foodItemOrderOptionAdapter);
 
-        holder.mRecyclerView.setOnClickListener(new View.OnClickListener() {
+//        holder.mRecyclerView.setOnClickListener(new View.OnClickListener() {
+        holder.mParent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeState(word,holder,position);

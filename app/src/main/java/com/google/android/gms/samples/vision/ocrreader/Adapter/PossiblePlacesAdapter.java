@@ -23,7 +23,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.samples.vision.ocrreader.PlacesActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
@@ -48,7 +47,7 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
     public static int LONGITUDE = 5;
     public static int BITMAP = 6;
 
-    public PossiblePlacesAdapter(Context context, int resource){
+    public PossiblePlacesAdapter(Context context){
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
@@ -132,7 +131,7 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
 
         Bitmap bitmap = (Bitmap) data[BITMAP];
 
-        Drawable d = new BitmapDrawable(bitmap);
+        Drawable d = new BitmapDrawable(context.getResources(),bitmap);
 
         if (bitmap != null){
 

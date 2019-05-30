@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
     public static class ViewHolder extends  RecyclerView.ViewHolder{
         public TextView mTextView;
         public RecyclerView mRecyclerView;
+        public ImageView mImageView;
         public View mConvertView;
 
 
@@ -43,7 +45,8 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
             super(convertView);
             mTextView = convertView.findViewById(R.id.recognized_text);
             mRecyclerView = (RecyclerView) parent;
-            mConvertView = convertView;
+            mImageView = convertView.findViewById(R.id.descriptive_image);
+            mConvertView = convertView.findViewById(R.id.container_relative_layout);
 
         }
 
@@ -75,26 +78,43 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
         final String word = mData.get(position);
         holder.mTextView.setText(word);
 
-        holder.mTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
-                //lastParent = DetectImageActivity.last_parent_di;
-                lastParent = UseRecyclerActivity.last_parent_di;
-                if (lastParent != null && lastParent != holder.mRecyclerView){
-                    lastParent.setSelected(false);
-                }
-                if(holder.mRecyclerView.isSelected()){
-                    holder.mRecyclerView.setSelected(false);
-                }else{
-                    UseRecyclerActivity.selected_item = getSelectedString();
-                    //DetectImageActivity.selected_meal = getSelectedString();
-                    holder.mRecyclerView.setSelected(true);
-                }
-                DetectImageActivity.last_parent_di = holder.mRecyclerView;
+        holder.mTextView.setOnClickListener((View view) -> {
+            myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
+            //lastParent = DetectImageActivity.last_parent_di;
+            lastParent = UseRecyclerActivity.last_parent_di;
+            if (lastParent != null && lastParent != holder.mRecyclerView){
+                lastParent.setSelected(false);
+            }
+            if(holder.mRecyclerView.isSelected()){
+                holder.mRecyclerView.setSelected(false);
+                holder.mImageView.setVisibility(View.VISIBLE);
+            }else{
+                UseRecyclerActivity.selected_item = getSelectedString();
+                //DetectImageActivity.selected_meal = getSelectedString();
+                holder.mRecyclerView.setSelected(true);
+                holder.mImageView.setVisibility(View.VISIBLE);
+
+            }
+            DetectImageActivity.last_parent_di = holder.mRecyclerView;
+        });
+
+        holder.mConvertView.setOnClickListener((View view)->{
+            if (holder.mImageView.getVisibility() == View.VISIBLE){
+                holder.mImageView.setVisibility(View.GONE);
+            }else{
+                holder.mImageView.setVisibility(View.VISIBLE);
             }
         });
     }
+
+
+
+
+
+
+
+
+
 
     public String getSelectedString(){
         String appendMData = "";

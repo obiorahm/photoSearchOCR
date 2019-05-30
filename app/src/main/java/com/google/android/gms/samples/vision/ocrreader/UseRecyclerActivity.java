@@ -72,4 +72,12 @@ public class UseRecyclerActivity extends Activity  {
 
     }
 
+    /**
+     *
+     * @param imageView comes from the TextByTextAdapter
+     */
+    public void displayTextByTextImage(ImageView imageView){
+
+    }
+
 }

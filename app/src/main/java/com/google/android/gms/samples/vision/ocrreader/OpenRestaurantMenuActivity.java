@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -25,6 +26,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import afu.org.checkerframework.checker.oigj.qual.O;
+
 /**
  * Created by mgo983 on 10/18/18.
  */
@@ -39,6 +42,9 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
     private int MY_DATA_CHECK_CODE = 0;
 
     ImageView imageView;
+
+    public static RelativeLayout last_parent_rl = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstance){
@@ -257,6 +263,12 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
         //RecyclerView recyclerView = (RecyclerView) findViewById(R.id.gridview_edit_meal);
         recyclerView.setVisibility(View.VISIBLE);
+
+    }
+
+
+    @Override
+    public void displayTextByTextImage(ImageView imageView){
 
     }
 

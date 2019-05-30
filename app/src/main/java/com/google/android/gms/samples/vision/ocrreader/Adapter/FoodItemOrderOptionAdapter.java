@@ -1,22 +1,18 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.speech.tts.TextToSpeech;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
-import com.google.android.gms.samples.vision.ocrreader.Order;
 import com.google.android.gms.samples.vision.ocrreader.R;
 
 import java.util.ArrayList;
@@ -45,8 +41,8 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
     private static int STATE_NORMAL = 0;
 
-    private int normal = R.drawable.smaller_layer_drawable;
-    private int select = R.drawable.smaller_layer_selected;
+    /*private int normal = R.drawable.smaller_layer_drawable;
+    private int select = R.drawable.smaller_layer_selected;*/
 
     private String LOG_TAG = FoodItemOrderOptionAdapter.class.getSimpleName();
 
@@ -71,21 +67,21 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
         this.current_order = current_order;
     }
 
-    private int[] STATES = { normal, select};
+    //private int[] STATES = { normal, select};
 
 
     @Override
     public FoodItemOrderOptionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View convertView = inflater.inflate(R.layout.option_item, null);
-        FoodItemOrderOptionAdapter.ViewHolder viewHolder = new FoodItemOrderOptionAdapter.ViewHolder(convertView);
+        //FoodItemOrderOptionAdapter.ViewHolder viewHolder = new FoodItemOrderOptionAdapter.ViewHolder(convertView);
 
-        return viewHolder;
+        return new FoodItemOrderOptionAdapter.ViewHolder(convertView);
     }
 
     @Override
     public void onBindViewHolder(final FoodItemOrderOptionAdapter.ViewHolder holder, int position){
 
-        final int pos = position;
+        //final int pos = position;
 
         String url = mData.get(position);
 
@@ -100,18 +96,15 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
         Log.d(LOG_TAG, url);
 
-        holder.mImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        holder.mImageView.setOnClickListener((View view) -> {
                 /*int nextstate = next_state(state.get(pos));
 
                 holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[nextstate]));
 
                 state.set(pos, nextstate);*/
-                handleOnClickListener(holder, label);
-                next_state(holder);
+            handleOnClickListener(holder, label);
+            next_state(holder);
 
-            }
         });
 
 
@@ -163,19 +156,7 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
     }
 
 
-    public void addItem(ArrayList<String> foodItems){
-        //mData = foodItems;
-    }
 
-
-    private int next_state(int state_id){
-        int new_state = state_id + 1;
-        if (new_state >= STATES.length)
-            return STATE_NORMAL;
-        else
-            return new_state;
-
-    }
 
     private void next_state(FoodItemOrderOptionAdapter.ViewHolder holder){
         if (holder.mImageView.isSelected()){

@@ -33,8 +33,9 @@ public class InterceptRecyclerView extends RecyclerView {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return super.onInterceptTouchEvent(ev);
 
-        switch (ev.getActionMasked()) {
+        /*switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_DOWN: {
                 startClickTime = Calendar.getInstance().getTimeInMillis();
                 Log.d("InterceptRecycler down", " "+ startClickTime + " ");
@@ -43,7 +44,7 @@ public class InterceptRecyclerView extends RecyclerView {
             }
 
         }
-        return false;
+        return false;*/
 
     }
 

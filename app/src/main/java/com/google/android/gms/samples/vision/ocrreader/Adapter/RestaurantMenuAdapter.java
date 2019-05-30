@@ -55,7 +55,8 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
             super(convertView);
             mRecyclerView = convertView.findViewById(R.id.text_by_text);
             mFoodItemRecyclerView = convertView.findViewById(R.id.food_item);
-            mRelativeLayout = convertView.findViewById(R.id.enclosing_layout);
+            mRelativeLayout = convertView.findViewById(R.id.outer_layout);
+            //mRelativeLayout = convertView.findViewById(R.id.enclosing_layout);
             mImageButton = convertView.findViewById(R.id.speak_whole_text);
             mInfoTextView = convertView.findViewById(R.id.info_text);
             mInfoImageButton = convertView.findViewById(R.id.more_info);
@@ -84,7 +85,6 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
     @Override
     public RestaurantMenuAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item, null);
-        //RestaurantMenuAdapter.ViewHolder viewHolder = new RestaurantMenuAdapter.ViewHolder(convertView);
 
 
         return new RestaurantMenuAdapter.ViewHolder(convertView);

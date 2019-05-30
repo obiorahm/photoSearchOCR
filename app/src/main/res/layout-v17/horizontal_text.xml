@@ -30,8 +30,8 @@
 
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/descriptive_image"
             android:layout_alignParentLeft="true"
             android:layout_margin="10dp"/>
@@ -43,7 +43,7 @@
             android:id="@+id/enlarged_image"
             android:layout_alignLeft="@id/descriptive_image"
             android:layout_centerVertical="true"
-            android:paddingRight="10dp"
+            android:padding="10dp"
             android:visibility="gone"/>
 
 
@@ -81,10 +81,10 @@
             android:name="com.google.android.gms.maps.StreetViewPanoramaView"
             android:layout_width="wrap_content"
             android:layout_height="500dp"
-            android:layout_below="@id/speak_whole_text"
+            android:layout_below="@id/descriptive_image"
             android:id="@+id/streetviewpanorama"
             android:visibility="gone"
-            android:layout_margin="10dp">
+            android:padding="10dp">
         </com.google.android.gms.maps.StreetViewPanoramaView>
 
 
