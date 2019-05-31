@@ -4411,9 +4411,11 @@ public final class R {
     public static final int read_text=0x7f0c0059;
     public static final int restaurants_nearby=0x7f0c005a;
     public static final int search_menu_title=0x7f0c005b;
-    public static final int status_bar_notification_info_overflow=0x7f0c005c;
-    public static final int title_activity_main=0x7f0c005d;
-    public static final int use_flash=0x7f0c005e;
+    public static final int speak_whole_text=0x7f0c005c;
+    public static final int status_bar_notification_info_overflow=0x7f0c005d;
+    public static final int title_activity_main=0x7f0c005e;
+    public static final int use_flash=0x7f0c005f;
+    public static final int whole_meal_description=0x7f0c0060;
   }
   public static final class style {
     public static final int AlertDialog_AppCompat=0x7f0d0000;

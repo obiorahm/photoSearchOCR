@@ -1866,9 +1866,11 @@ string project_id
 string read_text
 string restaurants_nearby
 string search_menu_title
+string speak_whole_text
 string status_bar_notification_info_overflow
 string title_activity_main
 string use_flash
+string whole_meal_description
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

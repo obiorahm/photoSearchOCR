@@ -23,4 +23,6 @@
     <string name="paper_menu">CAPTURE MENU</string>
     <string name="restaurants_nearby">Restaurants Nearby</string>
     <string name="my_order">My Order</string>
+    <string name="whole_meal_description">An image of the meal</string>
+    <string name="speak_whole_text">Click to speak the whole text</string>
 </resources>

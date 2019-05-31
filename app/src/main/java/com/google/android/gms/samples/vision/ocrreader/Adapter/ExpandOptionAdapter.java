@@ -247,4 +247,6 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
         Integer order_items [] = current_order_items.getOrderValues();
         order_items[option] = value;
     }
+
+
 }

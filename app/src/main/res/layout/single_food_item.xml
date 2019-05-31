@@ -75,7 +75,8 @@
 
                 android:backgroundTint="@color/transparent"
                 android:id="@+id/show_food_item_image"
-                android:tint="@color/grey"/>
+                android:tint="@color/grey"
+                android:contentDescription="@string/whole_meal_description"/>
 
             <ImageButton
                 android:layout_width="0dp"
@@ -84,7 +85,8 @@
                 android:src="@drawable/ic_volume_up_black_48dp"
                 android:backgroundTint="@color/transparent"
                 android:id="@+id/speak_whole_text"
-                android:tint="@color/grey"/>
+                android:tint="@color/grey"
+                android:contentDescription="@string/speak_whole_text"/>
 
 
 

@@ -1865,9 +1865,11 @@ int string project_id 0x7f0c0058
 int string read_text 0x7f0c0059
 int string restaurants_nearby 0x7f0c005a
 int string search_menu_title 0x7f0c005b
-int string status_bar_notification_info_overflow 0x7f0c005c
-int string title_activity_main 0x7f0c005d
-int string use_flash 0x7f0c005e
+int string speak_whole_text 0x7f0c005c
+int string status_bar_notification_info_overflow 0x7f0c005d
+int string title_activity_main 0x7f0c005e
+int string use_flash 0x7f0c005f
+int string whole_meal_description 0x7f0c0060
 int style AlertDialog_AppCompat 0x7f0d0000
 int style AlertDialog_AppCompat_Light 0x7f0d0001
 int style Animation_AppCompat_Dialog 0x7f0d0002
