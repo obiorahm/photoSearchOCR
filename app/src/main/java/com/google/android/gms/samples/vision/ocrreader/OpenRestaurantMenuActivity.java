@@ -215,7 +215,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
     }
 
     public void hideOptionResults(){
-        hideSelectedOptionRecycler();
+//        hideSelectedOptionRecycler();
 
         hide_food_image_recycler();
 

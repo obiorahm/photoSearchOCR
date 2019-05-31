@@ -71,7 +71,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         private ImageView mImageView;
         private ImageView mEnlargedImageView;
         private StreetViewPanoramaView mStreetViewPanoramaView;
-        private RelativeLayout mRelativeLayoutExternal;
         //private Fragment mFragemnt;
 
 
@@ -79,7 +78,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             super(convertView);
             mBackground = convertView;
             mRecyclerView = convertView.findViewById(R.id.text_by_text);
-            mRelativeLayoutExternal = convertView.findViewById(R.id.relative_layout);
             mRelativeLayout = convertView.findViewById(R.id.internal_relative_layout);
             mImageButton = convertView.findViewById(R.id.speak_whole_text);
             mImageView = convertView.findViewById(R.id.descriptive_image);
@@ -157,7 +155,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
             // setup horizontal text by text adapter
-            TextByTextAdapter adapter = new TextByTextAdapter(context, R.layout.recognized_text_item);
+            TextByTextAdapter adapter = new TextByTextAdapter(context, false);
 
             String tokenizedString [] = word.split(" ");
 

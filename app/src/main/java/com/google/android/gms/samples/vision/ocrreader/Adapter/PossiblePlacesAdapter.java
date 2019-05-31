@@ -99,7 +99,7 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
 
         final String word = (String) data[RESTAURANT_ADDRESS];
         // setup horizontal text by text adapter
-        TextByTextAdapter adapter = new TextByTextAdapter(context, R.layout.recognized_text_item);
+        TextByTextAdapter adapter = new TextByTextAdapter(context, true);
 
         String tokenizedString [] = word.split(" ");
 

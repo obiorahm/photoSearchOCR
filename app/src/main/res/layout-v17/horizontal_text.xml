@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/relative_layout"
     android:clipToPadding="false"
     android:padding="5dp"
-
-
     android:layout_margin="15dp">
 
 
@@ -65,7 +63,9 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:layout_toRightOf="@id/descriptive_image"
+
             />
+        <!--android:layout_toLeftOf="@+id/speak_whole_text"-->
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

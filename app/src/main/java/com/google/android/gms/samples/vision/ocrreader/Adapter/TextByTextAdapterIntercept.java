@@ -32,6 +32,8 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
 
     private static RecyclerView lastParent = null;
 
+    private boolean notFoodItem = true;
+
 
     public static class ViewHolder extends  RecyclerView.ViewHolder{
         public TextView mTextView;
@@ -52,12 +54,13 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
     }
 
 
-    public TextByTextAdapterIntercept(Context context, int resource){
+    public TextByTextAdapterIntercept(Context context, int resource, boolean notFoodItem){
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
         //myTTS = ((DetectImageActivity) context).myTTS;
         myTTS = ((UseRecyclerActivity) context).myTTS;
+        this.notFoodItem = notFoodItem;
 
     }
 
@@ -77,7 +80,7 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
         final String word = mData.get(position);
         holder.mTextView.setText(word);
 
-        ((UseRecyclerActivity) context).loadImage(word, holder.mImageView);
+        ((UseRecyclerActivity) context).loadImage(word, holder.mImageView, notFoodItem);
         holder.mTextView.setOnClickListener((View view) ->{
 
             if (holder.mImageView.getVisibility() == View.VISIBLE){

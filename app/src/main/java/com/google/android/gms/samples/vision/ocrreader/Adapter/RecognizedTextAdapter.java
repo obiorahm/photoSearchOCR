@@ -86,7 +86,7 @@ public class RecognizedTextAdapter extends RecyclerView.Adapter<RecognizedTextAd
         final String word = mData.get(position);
 
         // setup horizontal text by text adapter
-        TextByTextAdapter adapter = new TextByTextAdapter(context, R.layout.recognized_text_item);
+        TextByTextAdapter adapter = new TextByTextAdapter(context, true);
 
         String tokenizedString [] = word.split(" ");
 

@@ -32,6 +32,7 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
     Context context;
     HashMap<String, Object[] > order = new HashMap<String, Object[]>();
     String current_order;
+    RecyclerView expandOptionRecyclerView;
 
 
     public final static String SAUCES = "sauces";
@@ -60,11 +61,13 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
     }
 
-    public FoodItemOrderOptionAdapter(Context context, HashMap<String, Object[]> order, String current_order){
+    public FoodItemOrderOptionAdapter(Context context, HashMap<String, Object[]> order, String current_order, RecyclerView recyclerView){
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.order = order;
         this.current_order = current_order;
+        this.expandOptionRecyclerView = new RecyclerView(context);
+        this.expandOptionRecyclerView = recyclerView;
     }
 
     //private int[] STATES = { normal, select};
@@ -120,7 +123,8 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
         openRestaurantMenuActivity.hide_food_image_recycler();
 
-        RecyclerView recyclerView = openRestaurantMenuActivity.findViewById(R.id.order_option_items);
+        //RecyclerView recyclerView = openRestaurantMenuActivity.findViewById(R.id.order_option_items);
+        RecyclerView recyclerView = expandOptionRecyclerView;
 
         switch (label){
             case SAUCES:
@@ -136,10 +140,10 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
                 expandOptionAdapter.addItem(MEATS);
         }
         LinearLayoutManager foodItemLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(foodItemLayoutManager);
+        expandOptionRecyclerView.setLayoutManager(foodItemLayoutManager);
 
-        recyclerView.setAdapter(expandOptionAdapter);
-        recyclerView.setVisibility(View.VISIBLE);
+        expandOptionRecyclerView.setAdapter(expandOptionAdapter);
+        expandOptionRecyclerView.setVisibility(View.VISIBLE);
     }
 
 

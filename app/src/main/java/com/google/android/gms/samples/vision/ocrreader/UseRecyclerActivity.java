@@ -28,6 +28,9 @@ import org.jsoup.nodes.Document;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import opennlp.tools.stemmer.PorterStemmer;
+import opennlp.tools.stemmer.Stemmer;
+
 /**
  * Created by mgo983 on 9/6/18.
  */
@@ -102,13 +105,73 @@ public class UseRecyclerActivity extends Activity  {
     }
 
 
-    public void loadImage(final String  token,  ImageView imageView){
+    public void loadImage(final String  token,  ImageView imageView, boolean notFoodItem){
 
         if (token == null)
             return;
 
         String searchString = token.toLowerCase().trim();
         Log.d(LOG_TAG, " token " + searchString );
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD);
+
+        databaseReference.orderByKey().startAt(searchString).endAt(searchString+"\uf8ff").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d(LOG_TAG, "got here");
+                if (!dataSnapshot.exists()){
+                    searchWithStemmer(searchString, imageView, notFoodItem);
+                    return;
+                }else {
+                    for (DataSnapshot child : dataSnapshot.getChildren()){
+
+                        for(DataSnapshot grandChild : child.getChildren()){
+
+                            final String grandChildValue [] = grandChild.getValue().toString().split("/");
+
+                            if (DynamicOptions.foodCategories.contains(grandChildValue[0]) || notFoodItem){
+                                //now that we have the file name retrieve image from firebase storage
+                                StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
+
+                                firebaseStorage.child( WORD_IMAGE_REFERENCE + "/" + grandChildValue[0] + "/" + grandChildValue[2])
+                                        .getDownloadUrl()
+                                        .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+
+                                                Glide.with(getApplicationContext()).load(uri).into(imageView);
+
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d(LOG_TAG, "could not load image");
+                                    }
+                                });
+                                Log.d(LOG_TAG, " grandChild " + grandChild.getValue().toString());
+
+                                return;
+                            }
+                        }
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+
+    private void searchWithStemmer(final String  token,  ImageView imageView, boolean notFoodItem){
+
+        PorterStemmer porterStemmer = new PorterStemmer();
+        String searchString = porterStemmer.stem(token);
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD);
 
         databaseReference.orderByKey().startAt(searchString).endAt(searchString+"\uf8ff").addValueEventListener(new ValueEventListener() {
@@ -124,7 +187,7 @@ public class UseRecyclerActivity extends Activity  {
 
                             final String grandChildValue [] = grandChild.getValue().toString().split("/");
 
-                            if (DynamicOptions.foodCategories.contains(grandChildValue[0])){
+                            if (DynamicOptions.foodCategories.contains(grandChildValue[0]) || notFoodItem){
                                 //now that we have the file name retrieve image from firebase storage
                                 StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
 
@@ -135,7 +198,6 @@ public class UseRecyclerActivity extends Activity  {
                                             public void onSuccess(Uri uri) {
 
                                                 Glide.with(getApplicationContext()).load(uri).into(imageView);
-                                                return;
 
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {

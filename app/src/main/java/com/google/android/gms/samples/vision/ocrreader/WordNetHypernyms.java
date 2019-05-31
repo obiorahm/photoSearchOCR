@@ -35,6 +35,7 @@ public class WordNetHypernyms {
     static final String WNDICT = "dict";
     static final String DOCUMENT = "document";
     static final File DocumentDir = new File(Environment.getExternalStoragePublicDirectory(DOCUMENT), WNDICT);
+    static final String path = DocumentDir.getAbsolutePath();
     static final String LOG_TAG = WordNetHypernyms.class.getSimpleName();
 
 
@@ -84,7 +85,7 @@ public class WordNetHypernyms {
             Log.d(LOG_TAG, "measurement tokens " + x);
 
             //get wordNet dictionary
-            String path = DocumentDir.getAbsolutePath();
+            //String path = DocumentDir.getAbsolutePath();
 
             URL url = new URL("file", null, path);
 
@@ -159,7 +160,7 @@ public class WordNetHypernyms {
             Log.d(LOG_TAG, "measurement tokens " + x);
 
             //get wordNet dictionary
-            String path = DocumentDir.getAbsolutePath();
+            //String path = DocumentDir.getAbsolutePath();
 
             URL url = new URL("file", null, path);
 
@@ -225,6 +226,8 @@ public class WordNetHypernyms {
 
 
             }
+
+            dict.close();
 
             return containsHypernym;
 

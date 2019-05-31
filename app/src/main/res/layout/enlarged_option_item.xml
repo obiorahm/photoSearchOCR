@@ -11,12 +11,12 @@
         android:layout_marginRight="2dp"
         />
     <TextView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/order_option"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:id="@+id/order_option_text"
-        android:textColor="@color/white"/>
+        android:layout_margin="5dp"/>
 
 </RelativeLayout>

@@ -32,6 +32,7 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
     private TextToSpeech myTTS;
 
     private static RecyclerView lastParent = null;
+    private boolean notFoodItem;
 
 
     public static class ViewHolder extends  RecyclerView.ViewHolder{
@@ -53,12 +54,13 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
     }
 
 
-    public TextByTextAdapter(Context context, int resource){
+    public TextByTextAdapter(Context context, boolean notFoodItem){
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
         //myTTS = ((DetectImageActivity) context).myTTS;
         myTTS = ((UseRecyclerActivity) context).myTTS;
+        notFoodItem = notFoodItem;
 
     }
 
@@ -78,7 +80,9 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
         final String word = mData.get(position);
         holder.mTextView.setText(word);
 
-        holder.mTextView.setOnClickListener((View view) -> {
+        ((UseRecyclerActivity) context).loadImage(word, holder.mImageView, true);
+
+        /*holder.mTextView.setOnClickListener((View view) -> {
             myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
             //lastParent = DetectImageActivity.last_parent_di;
             lastParent = UseRecyclerActivity.last_parent_di;
@@ -87,7 +91,7 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
             }
             if(holder.mRecyclerView.isSelected()){
                 holder.mRecyclerView.setSelected(false);
-                holder.mImageView.setVisibility(View.VISIBLE);
+                holder.mImageView.setVisibility(View.GONE);
             }else{
                 UseRecyclerActivity.selected_item = getSelectedString();
                 //DetectImageActivity.selected_meal = getSelectedString();
@@ -96,9 +100,9 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
 
             }
             DetectImageActivity.last_parent_di = holder.mRecyclerView;
-        });
+        });*/
 
-        holder.mConvertView.setOnClickListener((View view)->{
+        holder.mTextView.setOnClickListener((View view)->{
             if (holder.mImageView.getVisibility() == View.VISIBLE){
                 holder.mImageView.setVisibility(View.GONE);
             }else{

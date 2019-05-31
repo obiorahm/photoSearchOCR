@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/container_relative_layout">
     <TextView
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/recognized_text"
     android:textColor="@color/quantum_black_secondary_text"
@@ -20,7 +20,8 @@
         android:layout_margin="10dp"
         android:visibility="gone"
         android:src="@drawable/ic_collections_black_48dp"
-        android:id="@+id/descriptive_image"/>
+        android:id="@+id/descriptive_image"
+        />
 
 </RelativeLayout>
 

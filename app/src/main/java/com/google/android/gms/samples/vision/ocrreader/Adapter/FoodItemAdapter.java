@@ -67,11 +67,11 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView mTextView;
         private ImageButton mImageButton;
         private ImageButton mImageButtonShowFoodItem;
         private RecyclerView mTextByTextRecyclerView;
         private RecyclerView mRecyclerView;
+        private RecyclerView mExpandOptionRecyclerView;
         private RelativeLayout mContainingRelativeLayout;
         private RelativeLayout mParent;
 
@@ -84,6 +84,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             mImageButton = parent.findViewById(R.id.speak_whole_text);
             mImageButtonShowFoodItem = parent.findViewById(R.id.show_food_item_image);
             mRecyclerView = parent.findViewById(R.id.food_item_options);
+            mExpandOptionRecyclerView = parent.findViewById(R.id.order_option_items);
             mContainingRelativeLayout = parent.findViewById(R.id.containing_relative_layout);
             mParent = (RelativeLayout) parent;
         }
@@ -115,7 +116,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         //holder.mTextView.setText(word);
 
         // setup horizontal text by text adapter
-        TextByTextAdapterIntercept adapter = new TextByTextAdapterIntercept(context, R.layout.recognized_text_item);
+        TextByTextAdapterIntercept adapter = new TextByTextAdapterIntercept(context, R.layout.recognized_text_item, false);
 
         String tokenizedString [] = word.split(" ");
 
@@ -168,7 +169,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
 
         //set up food item adapter
-        FoodItemOrderOptionAdapter foodItemOrderOptionAdapter = new FoodItemOrderOptionAdapter(context,order, word);
+        FoodItemOrderOptionAdapter foodItemOrderOptionAdapter = new FoodItemOrderOptionAdapter(context,order, word, holder.mExpandOptionRecyclerView);
 
         addAllItems(foodItemOrderOptionAdapter, word);
         LinearLayoutManager foodItemLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
@@ -288,7 +289,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     private void changeState(String word, FoodItemAdapter.ViewHolder holder, int position, boolean image){
         myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
-        ((OpenRestaurantMenuActivity) context).hideSelectedOptionRecycler();
+        //((OpenRestaurantMenuActivity) context).hideSelectedOptionRecycler();
+        holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
 
         int current_state = state.get(position);
         //int next_state = current_state + 1;
@@ -315,7 +317,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
                 last_selected_recycler = holder.mRecyclerView;
 
                 setUpRecyclerView(word, false);
-                ((OpenRestaurantMenuActivity) context).hideSelectedOptionRecycler();
+                //((OpenRestaurantMenuActivity) context).hideSelectedOptionRecycler();
+                holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
 
                 holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_CURRENT_SELECT]));
                 holder.mRecyclerView.setVisibility(View.VISIBLE);

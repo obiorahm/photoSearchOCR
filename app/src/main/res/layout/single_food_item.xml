@@ -13,14 +13,7 @@
         android:id="@+id/containing_relative_layout"
 
         >
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/single_food_item"
-            android:textColor="@color/quantum_black_secondary_text"
-            android:padding="15sp"
-            android:textSize="20sp"
-            />
+
         <!--TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,12 +22,23 @@
             android:padding="15sp"
             android:textSize="20sp"
             /-->
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/single_food_item"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="12dp"
             android:src="@drawable/baseline_insert_photo_black_48"
-            android:layout_toLeftOf="@id/speak_whole_text"
+            android:layout_toStartOf="@id/speak_whole_text"
             android:backgroundTint="@color/transparent"
             android:id="@+id/show_food_item_image"
             android:tint="@color/grey"/>
@@ -43,23 +47,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_volume_up_black_48dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:backgroundTint="@color/transparent"
             android:id="@+id/speak_whole_text"
             android:tint="@color/grey"/>
-        <!--android.support.v7.widget.RecyclerView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/speak_whole_text"
-            android:layout_toStartOf="@id/speak_whole_text"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:visibility="invisible"
-            android:id="@+id/food_item_options" /-->
+
 
         <com.google.android.gms.samples.vision.ocrreader.ui.project.InterceptRecyclerView
             android:layout_width="wrap_content"
@@ -70,6 +62,19 @@
             android:id="@+id/food_item_options"
             android:paddingLeft="15dp"
             android:paddingTop="15dp" />
+
+        <!--
+show options-->
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_below="@id/food_item_options"
+            android:layout_toLeftOf="@id/show_food_item_image"
+            android:layout_toStartOf="@id/show_food_item_image"
+            android:id="@+id/order_option_items"
+            />
 
     </RelativeLayout>
 

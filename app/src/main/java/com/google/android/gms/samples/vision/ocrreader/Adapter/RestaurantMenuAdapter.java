@@ -99,7 +99,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
         final String description = restaurantData[CATEGORY_DESCRIPTION];
 
         // setup horizontal text by text adapter
-        TextByTextAdapterIntercept adapter = new TextByTextAdapterIntercept(context, R.layout.recognized_text_item);
+        TextByTextAdapterIntercept adapter = new TextByTextAdapterIntercept(context, R.layout.recognized_text_item, true);
 
         String tokenizedString [] = word.split(" ");
 
