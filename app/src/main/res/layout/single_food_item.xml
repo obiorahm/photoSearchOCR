@@ -39,6 +39,16 @@
                 android:layout_marginBottom="10dp"
                 />
 
+            <!--dividers-->
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/silver"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"></LinearLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -65,6 +75,16 @@
                     />
 
             </RelativeLayout>
+
+            <!--divider-->
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/silver"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"></LinearLayout>
 
             <ImageButton
                 android:layout_width="0dp"

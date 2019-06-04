@@ -23,6 +23,8 @@ import java.util.ArrayList;
 public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextAdapterIntercept.ViewHolder> {
 
     private ArrayList<String> mData = new ArrayList<>();
+    private ArrayList<Integer> mImageData = new ArrayList<>();
+
     private LayoutInflater inflater;
     private Context context;
 
@@ -80,28 +82,21 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
         final String word = mData.get(position);
         holder.mTextView.setText(word);
 
+        holder.mImageView.setVisibility(mImageData.get(position));
+
         ((UseRecyclerActivity) context).loadImage(word, holder.mImageView, notFoodItem);
         holder.mTextView.setOnClickListener((View view) ->{
 
+            myTTS.speak(word,TextToSpeech.QUEUE_FLUSH, null);
+
             if (holder.mImageView.getVisibility() == View.VISIBLE){
+                mImageData.set(position, View.GONE);
                 holder.mImageView.setVisibility(View.GONE);
             }else{
+                mImageData.set(position, View.VISIBLE);
                 holder.mImageView.setVisibility(View.VISIBLE);
             }
-                /*myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
-                //lastParent = DetectImageActivity.last_parent_di;
-                lastParent = UseRecyclerActivity.last_parent_di;
-                if (lastParent != null && lastParent != holder.mRecyclerView){
-                    lastParent.setSelected(false);
-                }
-                if(holder.mRecyclerView.isSelected()){
-                    holder.mRecyclerView.setSelected(false);
-                }else{
-                    UseRecyclerActivity.selected_item = getSelectedString();
-                    //DetectImageActivity.selected_meal = getSelectedString();
-                    holder.mRecyclerView.setSelected(true);
-                }
-                DetectImageActivity.last_parent_di = holder.mRecyclerView;*/
+
         });
     }
 
@@ -120,7 +115,19 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
 
     public void addItem(String text){
         mData.add(text);
+        mImageData.add(View.GONE);
         notifyDataSetChanged();
     }
+
+
+    public void hideImage(){
+        for (int i = 0; i < mImageData.size(); i++){
+            mImageData.set(i, View.GONE);
+        }
+        notifyDataSetChanged();
+    }
+
+
+
 
 }
