@@ -141,6 +141,10 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
         holder.mRadioButton.setOnClickListener((View view)->{ control_select(holder, position);
         });
 
+        holder.mBackground.setOnClickListener((View view)->{
+            holder.mRadioButton.setChecked(true);
+            control_select(holder, position);});
+
 
         holder.mImageButtonExpandMore.setOnClickListener((View view) ->{
             expandPanorama(holder,position);
