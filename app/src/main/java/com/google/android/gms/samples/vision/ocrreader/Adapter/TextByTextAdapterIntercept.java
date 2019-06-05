@@ -100,6 +100,32 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
         });
     }
 
+
+    private void displayDescriptiveImage(TextByTextAdapterIntercept.ViewHolder holder, String word, int position){
+        if (holder.mImageView.getVisibility() == View.VISIBLE){
+            mImageData.set(position, View.GONE);
+            holder.mImageView.setVisibility(View.GONE);
+        }else{
+            mImageData.set(position, View.VISIBLE);
+            holder.mImageView.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    public void displayAllDescriptiveImages(){
+        for (int i = 0; i < mImageData.size(); i++){
+            mImageData.set(i,View.VISIBLE);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void hideAllDescriptiveImages(){
+        for (int i = 0; i < mImageData.size(); i++){
+            mImageData.set(i,View.GONE);
+        }
+        notifyDataSetChanged();
+    }
+
     public String getSelectedString(){
         String appendMData = "";
         for (String child : mData){

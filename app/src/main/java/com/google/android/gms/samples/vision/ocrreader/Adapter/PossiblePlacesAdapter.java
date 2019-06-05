@@ -20,6 +20,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
@@ -62,7 +63,10 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
         private ImageButton mImageButton;
         private ImageView mImageView;
         private ImageView mEnlargedImageView;
+        private RadioButton mRadioButton;
         private StreetViewPanoramaView mStreetViewPanoramaView;
+        private ImageButton mImageButtonExpandMore;
+        private ImageButton mImageButtonExpandLess;
         //private Fragment mFragemnt;
 
         public ViewHolder(View convertView) {
@@ -72,8 +76,12 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
             mRelativeLayout = convertView.findViewById(R.id.internal_relative_layout);
             mImageButton = convertView.findViewById(R.id.speak_whole_text);
             mImageView = convertView.findViewById(R.id.descriptive_image);
+            mRadioButton = convertView.findViewById(R.id.select_option);
             mStreetViewPanoramaView = convertView.findViewById(R.id.streetviewpanorama);
             mEnlargedImageView = convertView.findViewById(R.id.enlarged_image);
+            mImageButtonExpandMore = convertView.findViewById(R.id.expand_more);
+            mImageButtonExpandLess = convertView.findViewById(R.id.expand_less);
+
             //RecyclerView parentRecyclerView = (RecyclerView) convertView.getParent();
 
 
@@ -109,11 +117,18 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
 
 
         holder.mRelativeLayout.setSelected((boolean) data[IS_SELECTED]);
+        holder.mRadioButton.setChecked((boolean) data[IS_SELECTED]);
+
 
         //set up panorama if properties[IS_PANORORAMA_VISIBLE] is visible
         int isPanoramaVisible =  (int) data[IS_PANORAMA_VISIBLE];
         if (isPanoramaVisible == View.VISIBLE){
+            holder.mImageButtonExpandLess.setVisibility(View.VISIBLE);
+            holder.mImageButtonExpandMore.setVisibility(View.GONE);
             ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, Double.toString((Double) data[LONGITUDE]) , Double.toString((Double)data[LATITUDE]));
+        }else{
+            holder.mImageButtonExpandLess.setVisibility(View.GONE);
+            holder.mImageButtonExpandMore.setVisibility(View.VISIBLE);
         }
 
         holder.mStreetViewPanoramaView.setVisibility(isPanoramaVisible);
@@ -121,7 +136,20 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
 
         holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
 
-        holder.mBackground.setOnClickListener(view -> control_select(holder, position));
+        //holder.mBackground.setOnClickListener(view -> control_select(holder, position));
+
+        holder.mRadioButton.setOnClickListener((View view)->{ control_select(holder, position);
+        });
+
+
+        holder.mImageButtonExpandMore.setOnClickListener((View view) ->{
+            expandPanorama(holder,position);
+        });
+
+
+        holder.mImageButtonExpandLess.setOnClickListener((View view) ->{
+            hidePanorama(holder,position);
+        });
 
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
@@ -151,6 +179,23 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
 
     }
 
+
+    private void expandPanorama(PossiblePlacesAdapter.ViewHolder holder, int position){
+
+        Object [] data = mData.get(position);
+        data[IS_PANORAMA_VISIBLE] = View.VISIBLE;
+        notifyItemChanged(position);
+
+    }
+
+
+    private void hidePanorama(PossiblePlacesAdapter.ViewHolder holder, int position){
+
+        Object [] data = mData.get(position);
+        data[IS_PANORAMA_VISIBLE] = View.GONE;
+        notifyItemChanged(position);
+
+    }
 
 
     @Override
@@ -188,22 +233,16 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
             last_selected_property[IS_LOGO_ENLARGED] = View.GONE;
             //to enable redraw of view with new properties
         }
-        if( (boolean) currentProperties[IS_SELECTED]){
-            holder.mRelativeLayout.setSelected(false);
 
-            //update properties
-            currentProperties[IS_SELECTED] = false;
-            currentProperties[IS_PANORAMA_VISIBLE] = View.GONE;
-            currentProperties[IS_LOGO_ENLARGED] = View.GONE;
 
-        }else{
+        if( holder.mRadioButton.isChecked()){
 
             PlacesActivity.selectedAddress = (String) currentProperties[RESTAURANT_ADDRESS];
             holder.mRelativeLayout.setSelected(true);
 
             //update properties
             currentProperties[IS_SELECTED] = true;
-            currentProperties[IS_PANORAMA_VISIBLE] = View.VISIBLE;
+            //currentProperties[IS_PANORAMA_VISIBLE] = View.VISIBLE;
 
 
         }

@@ -199,6 +199,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
             holder.mFoodItemRecyclerView.setVisibility(View.VISIBLE);
 
         }
+
         OpenRestaurantMenuActivity.last_rl_parent = holder.mRelativeLayout;
 
     }

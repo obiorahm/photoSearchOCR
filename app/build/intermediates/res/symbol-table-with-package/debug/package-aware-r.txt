@@ -1193,6 +1193,11 @@ drawable baseline_crop_square_white_18
 drawable baseline_crop_square_white_24
 drawable baseline_crop_square_white_36
 drawable baseline_crop_square_white_48
+drawable baseline_expand_less_24
+drawable baseline_expand_less_black_18
+drawable baseline_expand_less_black_24
+drawable baseline_expand_less_black_36
+drawable baseline_expand_less_black_48
 drawable baseline_expand_more_24
 drawable baseline_expand_more_black_18
 drawable baseline_expand_more_black_24
@@ -1467,6 +1472,8 @@ id enterAlways
 id enterAlwaysCollapsed
 id exitUntilCollapsed
 id expand_activities_button
+id expand_less
+id expand_more
 id expanded_menu
 id fill
 id fill_horizontal
@@ -1507,6 +1514,7 @@ id internal_relative_layout
 id italic
 id item_touch_helper_previous_elevation
 id left
+id less_selection_details
 id light
 id line1
 id line3
@@ -1620,6 +1628,7 @@ id see_selection
 id see_selection_text
 id select_dialog_listview
 id select_food_item
+id select_option
 id selected_option
 id shopping_cart_recycler
 id shortcut

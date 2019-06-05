@@ -78,6 +78,9 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         private LinearLayout mStartSeparator;
         private CheckBox mCheckBox;
 
+        private ImageButton mImageButtonMore;
+        private ImageButton mImageButtonLess;
+
         public ViewHolder(View parent){
             super(parent);
             //mTextView = parent.findViewById(R.id.single_food_item);
@@ -94,6 +97,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             mEndSeparator = parent.findViewById(R.id.end_separator);
             mCheckBox = parent.findViewById(R.id.select_food_item);
 
+            mImageButtonMore = parent.findViewById(R.id.more_selection_details);
+            mImageButtonLess = parent.findViewById(R.id.less_selection_details);
             mParent = (RelativeLayout) parent;
         }
 
@@ -138,6 +143,16 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         holder.mTextByTextRecyclerView.setAdapter(adapter);
 
 
+        //set up food item adapter
+        FoodItemOrderOptionAdapter foodItemOrderOptionAdapter = new FoodItemOrderOptionAdapter(context,order, word, holder.mExpandOptionRecyclerView);
+
+        addAllItems(foodItemOrderOptionAdapter, word);
+        LinearLayoutManager foodItemLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
+        holder.mRecyclerView.setLayoutManager(foodItemLayoutManager);
+
+        holder.mRecyclerView.setAdapter(foodItemOrderOptionAdapter);
+
+
         //select with relative layout instead
 
         holder.mContainingRelativeLayout.setSelected(false);
@@ -157,14 +172,51 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         });
 
 
-        //set up food item adapter
-        FoodItemOrderOptionAdapter foodItemOrderOptionAdapter = new FoodItemOrderOptionAdapter(context,order, word, holder.mExpandOptionRecyclerView);
+        holder.mImageButtonMore.setOnClickListener((View view) ->{
+            expandMore(holder, adapter);
+        });
 
-        addAllItems(foodItemOrderOptionAdapter, word);
-        LinearLayoutManager foodItemLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
-        holder.mRecyclerView.setLayoutManager(foodItemLayoutManager);
+        holder.mImageButtonLess.setOnClickListener((View view) ->{
+            expandLess(holder, adapter);
+        });
 
-        holder.mRecyclerView.setAdapter(foodItemOrderOptionAdapter);
+
+
+
+
+
+
+    }
+
+
+    private void expandMore(FoodItemAdapter.ViewHolder holder,
+                            TextByTextAdapterIntercept adapterIntercept){
+        holder.mImageButtonLess.setVisibility(View.VISIBLE);
+        holder.mRecyclerView.setVisibility(View.VISIBLE);
+        holder.mEndSeparator.setVisibility(View.VISIBLE);
+        holder.mStartSeparator.setVisibility(View.VISIBLE);
+
+        holder.mImageButtonMore.setVisibility(View.GONE);
+
+        //shoe adapters
+        adapterIntercept.displayAllDescriptiveImages();
+
+    }
+
+
+    private void expandLess(FoodItemAdapter.ViewHolder holder, TextByTextAdapterIntercept adapterIntercept){
+        holder.mImageButtonLess.setVisibility(View.GONE);
+        holder.mRecyclerView.setVisibility(View.GONE);
+        holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
+        holder.mEndSeparator.setVisibility(View.GONE);
+        holder.mStartSeparator.setVisibility(View.GONE);
+
+        holder.mImageButtonMore.setVisibility(View.VISIBLE);
+
+        //
+        adapterIntercept.hideAllDescriptiveImages();
+
+
 
     }
 
@@ -229,109 +281,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     }
 
 
-
-
-    /*private void changeState(String word, FoodItemAdapter.ViewHolder holder, int position, TextByTextAdapterIntercept adapterIntercept){
-        myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
-        int current_state = state.get(position);
-        //int next_state = current_state + 1;
-
-        switch (current_state){
-            case STATE_CURRENT_SELECT:
-            case STATE_SELECT:
-                holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
-
-                goneViews(holder, adapterIntercept);
-
-                state.set(position,STATE_NORMAL);
-
-                removeOrder(word);
-
-                break;
-            case STATE_NORMAL:
-                if (last_selected_relative_layout != null){
-                    last_selected_relative_layout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_SELECT]));
-                }
-                last_selected_relative_layout = holder.mContainingRelativeLayout;
-                if (last_selected_recycler != null){
-                    last_selected_recycler.setVisibility(View.GONE);
-                    last_selected_expand_option.setVisibility(View.GONE);
-                    last_end_separator.setVisibility(View.GONE);
-                    last_start_separator.setVisibility(View.GONE);
-                    last_tbt_adapter.hideImage();
-                }
-                last_selected_recycler = holder.mRecyclerView;
-                last_selected_expand_option = holder.mExpandOptionRecyclerView;
-                last_tbt_adapter = adapterIntercept;
-                last_start_separator = holder.mStartSeparator;
-                last_end_separator = holder.mEndSeparator;
-
-
-                holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_CURRENT_SELECT]));
-                visibleViews(holder, adapterIntercept);
-
-                state.set(position,STATE_CURRENT_SELECT);
-
-                addOrder(word, position, holder);
-
-                break;
-        }
-
-
-    }*/
-
-    /*private void changeState(String word, FoodItemAdapter.ViewHolder holder, int position, TextByTextAdapterIntercept adapter,boolean image){
-        myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
-        //((OpenRestaurantMenuActivity) context).hideSelectedOptionRecycler();
-        holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
-
-        int current_state = state.get(position);
-        //int next_state = current_state + 1;
-
-        switch (current_state){
-            case STATE_CURRENT_SELECT:
-            case STATE_SELECT:
-                holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
-                goneViews(holder, adapter);
-                state.set(position,STATE_NORMAL);
-                ((OpenRestaurantMenuActivity) context).hide_food_image_recycler();
-
-                removeOrder(word);
-
-                break;
-            case STATE_NORMAL:
-                if (last_selected_relative_layout != null){
-                    last_selected_relative_layout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_SELECT]));
-                }
-                last_selected_relative_layout = holder.mContainingRelativeLayout;
-                if (last_selected_recycler != null){
-                    last_selected_recycler.setVisibility(View.GONE);
-                    last_selected_expand_option.setVisibility(View.GONE);
-                    last_end_separator.setVisibility(View.GONE);
-                    last_start_separator.setVisibility(View.GONE);
-                    last_tbt_adapter.hideImage();
-                }
-                last_selected_recycler = holder.mRecyclerView;
-                last_selected_expand_option = holder.mExpandOptionRecyclerView;
-                last_start_separator = holder.mStartSeparator;
-                last_end_separator = holder.mEndSeparator;
-                last_tbt_adapter = adapter;
-
-                setUpRecyclerView(word, false);
-
-                holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_CURRENT_SELECT]));
-
-                goneViews(holder, adapter);
-
-                state.set(position,STATE_CURRENT_SELECT);
-
-                addOrder(word, position, holder);
-
-                break;
-        }
-
-
-    }*/
 
     private void changeState(String word, FoodItemAdapter.ViewHolder holder, int position, TextByTextAdapterIntercept adapter){
 
