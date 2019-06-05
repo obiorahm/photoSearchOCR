@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -53,6 +55,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     private static RecyclerView last_selected_recycler;
     private static RecyclerView last_selected_expand_option;
     private static TextByTextAdapterIntercept last_tbt_adapter;
+    private static LinearLayout last_start_separator;
+    private static LinearLayout last_end_separator;
 
     private int normal = R.drawable.border;
     private int select = R.drawable.text_border;
@@ -70,6 +74,9 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         private RecyclerView mExpandOptionRecyclerView;
         private RelativeLayout mContainingRelativeLayout;
         private RelativeLayout mParent;
+        private LinearLayout mEndSeparator;
+        private LinearLayout mStartSeparator;
+        private CheckBox mCheckBox;
 
         public ViewHolder(View parent){
             super(parent);
@@ -82,6 +89,11 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             mRecyclerView = parent.findViewById(R.id.food_item_options);
             mExpandOptionRecyclerView = parent.findViewById(R.id.order_option_items);
             mContainingRelativeLayout = parent.findViewById(R.id.containing_relative_layout);
+
+            mStartSeparator = parent.findViewById(R.id.start_separator);
+            mEndSeparator = parent.findViewById(R.id.end_separator);
+            mCheckBox = parent.findViewById(R.id.select_food_item);
+
             mParent = (RelativeLayout) parent;
         }
 
@@ -125,42 +137,23 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
         holder.mTextByTextRecyclerView.setAdapter(adapter);
 
-        /*// the text view is parent wide
-        holder.mTextView.setSelected(false);
-
-
-        holder.mTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                select_view(word, holder);
-            }
-        });*/
 
         //select with relative layout instead
 
         holder.mContainingRelativeLayout.setSelected(false);
 
-        /*holder.mContainingRelativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeState(word, holder, position);
-                ((OpenRestaurantMenuActivity) context).hideOptionResults();
-            }
-        });*/
 
-        holder.mImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeState(word, holder, position, adapter);
+        holder.mImageButton.setOnClickListener((View view) ->{
+            myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
 
-            }
         });
 
-        holder.mImageButtonShowFoodItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeState(word,holder, position, adapter,true);
-            }
+        holder.mImageButtonShowFoodItem.setOnClickListener((View view) ->{
+            setUpRecyclerView(word, false);
+        });
+
+        holder.mCheckBox.setOnClickListener((View view) ->{
+            changeState(word, holder, position, adapter);
         });
 
 
@@ -173,13 +166,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
         holder.mRecyclerView.setAdapter(foodItemOrderOptionAdapter);
 
-//        holder.mRecyclerView.setOnClickListener(new View.OnClickListener() {
-        holder.mParent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeState(word,holder,position, adapter);
-            }
-        });
     }
 
 
@@ -245,7 +231,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
 
 
-    private void changeState(String word, FoodItemAdapter.ViewHolder holder, int position, TextByTextAdapterIntercept adapterIntercept){
+    /*private void changeState(String word, FoodItemAdapter.ViewHolder holder, int position, TextByTextAdapterIntercept adapterIntercept){
         myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
         int current_state = state.get(position);
         //int next_state = current_state + 1;
@@ -256,8 +242,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
                 holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
 
                 goneViews(holder, adapterIntercept);
-                /*holder.mRecyclerView.setVisibility(View.GONE);
-                holder.mExpandOptionRecyclerView.setVisibility(View.GONE);*/
 
                 state.set(position,STATE_NORMAL);
 
@@ -272,17 +256,20 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
                 if (last_selected_recycler != null){
                     last_selected_recycler.setVisibility(View.GONE);
                     last_selected_expand_option.setVisibility(View.GONE);
+                    last_end_separator.setVisibility(View.GONE);
+                    last_start_separator.setVisibility(View.GONE);
                     last_tbt_adapter.hideImage();
                 }
                 last_selected_recycler = holder.mRecyclerView;
                 last_selected_expand_option = holder.mExpandOptionRecyclerView;
                 last_tbt_adapter = adapterIntercept;
+                last_start_separator = holder.mStartSeparator;
+                last_end_separator = holder.mEndSeparator;
 
 
                 holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_CURRENT_SELECT]));
                 visibleViews(holder, adapterIntercept);
-                /*holder.mRecyclerView.setVisibility(View.VISIBLE);
-                holder.mExpandOptionRecyclerView.setVisibility(View.VISIBLE);*/
+
                 state.set(position,STATE_CURRENT_SELECT);
 
                 addOrder(word, position, holder);
@@ -291,9 +278,9 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         }
 
 
-    }
+    }*/
 
-    private void changeState(String word, FoodItemAdapter.ViewHolder holder, int position, TextByTextAdapterIntercept adapter,boolean image){
+    /*private void changeState(String word, FoodItemAdapter.ViewHolder holder, int position, TextByTextAdapterIntercept adapter,boolean image){
         myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
         //((OpenRestaurantMenuActivity) context).hideSelectedOptionRecycler();
         holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
@@ -306,8 +293,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             case STATE_SELECT:
                 holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
                 goneViews(holder, adapter);
-                /*holder.mRecyclerView.setVisibility(View.GONE);
-                holder.mExpandOptionRecyclerView.setVisibility(View.GONE);*/
                 state.set(position,STATE_NORMAL);
                 ((OpenRestaurantMenuActivity) context).hide_food_image_recycler();
 
@@ -322,10 +307,14 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
                 if (last_selected_recycler != null){
                     last_selected_recycler.setVisibility(View.GONE);
                     last_selected_expand_option.setVisibility(View.GONE);
+                    last_end_separator.setVisibility(View.GONE);
+                    last_start_separator.setVisibility(View.GONE);
                     last_tbt_adapter.hideImage();
                 }
                 last_selected_recycler = holder.mRecyclerView;
                 last_selected_expand_option = holder.mExpandOptionRecyclerView;
+                last_start_separator = holder.mStartSeparator;
+                last_end_separator = holder.mEndSeparator;
                 last_tbt_adapter = adapter;
 
                 setUpRecyclerView(word, false);
@@ -333,13 +322,66 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
                 holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_CURRENT_SELECT]));
 
                 goneViews(holder, adapter);
-                /*holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
-                holder.mRecyclerView.setVisibility(View.VISIBLE);*/
+
                 state.set(position,STATE_CURRENT_SELECT);
 
                 addOrder(word, position, holder);
 
                 break;
+        }
+
+
+    }*/
+
+    private void changeState(String word, FoodItemAdapter.ViewHolder holder, int position, TextByTextAdapterIntercept adapter){
+
+        myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
+        int current_state = state.get(position);
+        //int next_state = current_state + 1;
+
+        if (holder.mCheckBox.isChecked() == true){
+
+            if (last_selected_relative_layout != null){
+                last_selected_relative_layout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_SELECT]));
+            }
+            last_selected_relative_layout = holder.mContainingRelativeLayout;
+            if (last_selected_recycler != null){
+                last_selected_recycler.setVisibility(View.GONE);
+                last_selected_expand_option.setVisibility(View.GONE);
+                last_end_separator.setVisibility(View.GONE);
+                last_start_separator.setVisibility(View.GONE);
+                last_tbt_adapter.hideImage();
+            }
+            last_selected_recycler = holder.mRecyclerView;
+            last_selected_expand_option = holder.mExpandOptionRecyclerView;
+            last_tbt_adapter = adapter;
+            last_start_separator = holder.mStartSeparator;
+            last_end_separator = holder.mEndSeparator;
+
+
+            holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_CURRENT_SELECT]));
+            visibleViews(holder, adapter);
+            state.set(position,STATE_CURRENT_SELECT);
+
+            addOrder(word, position, holder);
+
+
+        }else{
+
+
+            holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
+
+            goneViews(holder, adapter);
+
+            if (last_selected_relative_layout == holder.mContainingRelativeLayout)
+                last_selected_relative_layout = null;
+
+            ((OpenRestaurantMenuActivity) context).hide_food_image_recycler();
+
+            state.set(position,STATE_NORMAL);
+
+            removeOrder(word);
+
         }
 
 
@@ -387,6 +429,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
         holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
         holder.mRecyclerView.setVisibility(View.GONE);
+        holder.mEndSeparator.setVisibility(View.GONE);
+        holder.mStartSeparator.setVisibility(View.GONE);
         tbtAdapter.hideImage();
 
     }
@@ -395,6 +439,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
         //holder.mExpandOptionRecyclerView.setVisibility(View.VISIBLE);
         holder.mRecyclerView.setVisibility(View.VISIBLE);
+        holder.mStartSeparator.setVisibility(View.VISIBLE);
+        holder.mEndSeparator.setVisibility(View.VISIBLE);
         //tbtAdapter.hideImage();
 
     }

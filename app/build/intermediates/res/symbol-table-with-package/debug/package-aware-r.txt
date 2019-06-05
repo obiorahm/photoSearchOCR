@@ -1193,6 +1193,11 @@ drawable baseline_crop_square_white_18
 drawable baseline_crop_square_white_24
 drawable baseline_crop_square_white_36
 drawable baseline_crop_square_white_48
+drawable baseline_expand_more_24
+drawable baseline_expand_more_black_18
+drawable baseline_expand_more_black_24
+drawable baseline_expand_more_black_36
+drawable baseline_expand_more_black_48
 drawable baseline_format_list_bulleted_white_48dp
 drawable baseline_group_work_24
 drawable baseline_group_work_white_18
@@ -1456,6 +1461,7 @@ id edit_text
 id enclosing_layout
 id end
 id end_padder
+id end_separator
 id enlarged_image
 id enterAlways
 id enterAlwaysCollapsed
@@ -1524,6 +1530,7 @@ id middle
 id mini
 id more_info
 id more_item
+id more_selection_details
 id multiply
 id navigation_header_container
 id near_me
@@ -1612,6 +1619,7 @@ id second_graphic_overlay
 id see_selection
 id see_selection_text
 id select_dialog_listview
+id select_food_item
 id selected_option
 id shopping_cart_recycler
 id shortcut
@@ -1633,6 +1641,7 @@ id src_in
 id src_over
 id standard
 id start
+id start_separator
 id status_bar_latest_event_content
 id status_message
 id streetviewpanorama
