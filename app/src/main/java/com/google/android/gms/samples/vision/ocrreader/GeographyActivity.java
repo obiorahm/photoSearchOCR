@@ -159,8 +159,8 @@ public class GeographyActivity extends UseRecyclerActivity implements TextToSpee
 
         ImageButton back_btn = findViewById(R.id.back_btn_dr);
         back_btn.setOnClickListener((View view) ->{
-            Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(mainActivityIntent);
+            Intent possiblePlacesActivity = new Intent(getApplicationContext(), PlacesActivity.class);
+            startActivity(possiblePlacesActivity);
         });
 
 
