@@ -58,6 +58,8 @@ public class FetchMealDetails extends AsyncTask<String, Void, HashMap<String, St
 
     private FoodItemAdapter.ViewHolder foodItemAdapterHolder;
 
+    private TenItemRecycler tenItemRecycler;
+
 
 
     /*public FetchMealDetails(WordAdapter wordAdapter, Context context){
@@ -217,12 +219,6 @@ public class FetchMealDetails extends AsyncTask<String, Void, HashMap<String, St
 
             }
 
-            /*if (adapter != null){
-                setRecycler(edmanInfo);
-            }else{
-                setDialog(edmanInfo);
-            }*/
-
 
         }catch (NullPointerException e){
             Log.e(LOG_TAG, e + "");
@@ -231,19 +227,7 @@ public class FetchMealDetails extends AsyncTask<String, Void, HashMap<String, St
 
 
     private void setRecycler(ArrayList<String[]> edmanInfo){
-        // make progress bar invisible
-        /*ProgressBar searchingEdmame = ((Activity) context).findViewById(R.id.searching_edmame);
-        searchingEdmame.setVisibility(View.GONE);
 
-        // no results returned
-        if (edmanInfo.size() == 0){
-            TextView textViewNoResult = ((Activity) context).findViewById(R.id.no_result);
-            textViewNoResult.setVisibility(View.VISIBLE);
-        }else{
-            for (String[] recipeInformation : edmanInfo){
-                adapter.addItem(recipeInformation);
-            }
-        }*/
         useRecyclerActivity.setView(adapter, edmanInfo);
     }
 

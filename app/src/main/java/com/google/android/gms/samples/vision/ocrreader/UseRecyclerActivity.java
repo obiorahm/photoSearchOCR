@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.StreetViewPanoramaView;
+import com.google.android.gms.samples.vision.ocrreader.Adapter.FoodItemAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,6 +48,8 @@ public class UseRecyclerActivity extends Activity  {
     public static RelativeLayout last_rl_parent;
 
     public static Object [] last_selected_object;
+
+    public void setView(RecyclerWordAdapter adapter, FoodItemAdapter.ViewHolder holder, ArrayList<String []> edmamInfo){}
 
     public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView, ArrayList<String[]> edamanInfo){}
 

@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.FoodItemAdapter;
-import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantMenuAdapter;
 import com.google.firebase.FirebaseApp;
 
@@ -238,7 +237,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
     }
 
-    @Override
+    /*@Override
     public void setView(RecyclerWordAdapter adapter, ArrayList<String []> edmanInfo){
         // make progress bar invisible
         ProgressBar searchingEdmame = findViewById(R.id.searching_edmame);
@@ -264,13 +263,35 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         //RecyclerView recyclerView = (RecyclerView) findViewById(R.id.gridview_edit_meal);
         recyclerView.setVisibility(View.VISIBLE);
 
-    }
+    }*/
 
 
-    @Override
-    public void displayTextByTextImage(ImageView imageView){
+    /*@Override
+    public void setView(RecyclerWordAdapter adapter, FoodItemAdapter.ViewHolder holder, ArrayList<String []> edmamInfo){
+        holder.mProgressBarSearchingEdamam.setVisibility(View.GONE);
 
-    }
+        int FIRST_ITEM = 0;
+
+        // no results returned
+        if (edmamInfo.size() == 0 || edmamInfo.get(FIRST_ITEM)[EdmanJasonReader.URL].equals(EdmanJasonReader.EMPTY)){
+
+            holder.mTextViewNoResult.setVisibility(View.VISIBLE);
+        }else{
+            for (String[] recipeInformation : edmamInfo){
+                adapter.addItem(recipeInformation);
+            }
+        }
+
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
+        holder.mRecyclerViewWholeMealView.setLayoutManager(layoutManager);
+        holder.mRecyclerViewWholeMealView.setAdapter(adapter);
+
+        //RecyclerView recyclerView = (RecyclerView) findViewById(R.id.gridview_edit_meal);
+        holder.mRecyclerViewWholeMealView.setVisibility(View.VISIBLE);
+    }*/
+
+
+
 
 
     //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.
