@@ -1084,6 +1084,10 @@
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xxxhdpi/baseline_my_location_black_18.png"
     },
     {
+        "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable_text_border_internal.xml.flat",
+        "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable/text_border_internal.xml"
+    },
+    {
         "merged": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/res/merged/debug/drawable-xhdpi_baseline_near_me_white_24.png.flat",
         "source": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/src/main/res/drawable-xhdpi/baseline_near_me_white_24.png"
     },

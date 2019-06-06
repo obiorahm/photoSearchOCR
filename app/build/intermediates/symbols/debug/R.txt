@@ -1374,10 +1374,11 @@ int drawable smaller_layer_drawable 0x7f070111
 int drawable smaller_layer_selected 0x7f070112
 int drawable solid_border 0x7f070113
 int drawable text_border 0x7f070114
-int drawable tile 0x7f070115
-int drawable tooltip_frame_dark 0x7f070116
-int drawable tooltip_frame_light 0x7f070117
-int drawable vectordrawable 0x7f070118
+int drawable text_border_internal 0x7f070115
+int drawable tile 0x7f070116
+int drawable tooltip_frame_dark 0x7f070117
+int drawable tooltip_frame_light 0x7f070118
+int drawable vectordrawable 0x7f070119
 int id ALT 0x7f080000
 int id CTRL 0x7f080001
 int id FUNCTION 0x7f080002

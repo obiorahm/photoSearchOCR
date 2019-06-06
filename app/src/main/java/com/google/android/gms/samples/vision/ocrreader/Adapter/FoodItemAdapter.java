@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 import com.google.android.gms.samples.vision.ocrreader.FetchMealDetails;
@@ -81,6 +82,11 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         private ImageButton mImageButtonMore;
         private ImageButton mImageButtonLess;
 
+        public RecyclerView mRecyclerViewWholeMealView;
+        public ImageButton mImageButtonCancelEdamamSearch;
+        public ProgressBar mProgressBarSearchingEdamam;
+        public TextView mTextViewNoResult;
+
         public ViewHolder(View parent){
             super(parent);
             //mTextView = parent.findViewById(R.id.single_food_item);
@@ -99,6 +105,14 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
             mImageButtonMore = parent.findViewById(R.id.more_selection_details);
             mImageButtonLess = parent.findViewById(R.id.less_selection_details);
+
+            mRecyclerViewWholeMealView = parent.findViewById(R.id.gridview_edit_meal);
+            mImageButtonCancelEdamamSearch = parent.findViewById(R.id.cancel_gridview_edit_meal);
+            mProgressBarSearchingEdamam = parent.findViewById(R.id.searching_edmame);
+            mTextViewNoResult = parent.findViewById(R.id.no_result);
+
+
+
             mParent = (RelativeLayout) parent;
         }
 
@@ -164,7 +178,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         });
 
         holder.mImageButtonShowFoodItem.setOnClickListener((View view) ->{
-            setUpRecyclerView(word, false);
+            setUpRecyclerView(word, holder);
         });
 
         holder.mCheckBox.setOnClickListener((View view) ->{
@@ -187,12 +201,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         holder.mImageButtonLess.setOnClickListener((View view) ->{
             expandLess(holder, adapter);
         });
-
-
-
-
-
-
 
     }
 
@@ -374,7 +382,10 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         ViewHolder holder = (ViewHolder) current_order_item[HOLDER];
         holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
         holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
+        holder.mCheckBox.setChecked(false);
         holder.mRecyclerView.setVisibility(View.GONE);
+        holder.mStartSeparator.setVisibility(View.GONE);
+        holder.mEndSeparator.setVisibility(View.GONE);
 
         Integer position = (Integer) current_order_item[POSITION];
         state.set(position,STATE_NORMAL);
@@ -404,29 +415,23 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
 
 
+    public void setUpRecyclerView(String wholeMealText, FoodItemAdapter.ViewHolder holder){
 
+        boolean blockOrText = false;
 
-
-    public void setUpRecyclerView(String wholeMealText, Boolean blockOrText){
-
-
-        OpenRestaurantMenuActivity openRestaurantMenuActivity = (OpenRestaurantMenuActivity) context;
-
-        RecyclerView recyclerView = openRestaurantMenuActivity.findViewById(R.id.gridview_edit_meal);
+        RecyclerView recyclerView = holder.mRecyclerViewWholeMealView;
 
         RecyclerWordAdapter recyclerWordAdapter = new RecyclerWordAdapter(context, R.layout.gridview_item, myTTS, wholeMealText, blockOrText);
 
 
-        ProgressBar progressBar = openRestaurantMenuActivity.findViewById(R.id.searching_edmame);
-        progressBar.setVisibility(View.VISIBLE);
+        holder.mProgressBarSearchingEdamam.setVisibility(View.GONE);
 
-        FetchMealDetails fetchMealDetails = new FetchMealDetails(recyclerWordAdapter, context);
+        FetchMealDetails fetchMealDetails = new FetchMealDetails(recyclerWordAdapter, context, FetchMealDetails.FOR_TENTATIVE_ORDER, holder);
         fetchMealDetails.execute(wholeMealText);
 
         recyclerView.setAdapter(recyclerWordAdapter);
 
-        ImageButton imageButtonclearRecycler = openRestaurantMenuActivity.findViewById(R.id.cancel_gridview_edit_meal);
-        imageButtonclearRecycler.setVisibility(View.VISIBLE);
+        holder.mImageButtonCancelEdamamSearch.setVisibility(View.VISIBLE);
 
     }
 

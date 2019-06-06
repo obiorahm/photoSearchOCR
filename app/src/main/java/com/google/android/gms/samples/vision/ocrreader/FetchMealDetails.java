@@ -6,12 +6,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
+import com.google.android.gms.samples.vision.ocrreader.Adapter.FoodItemAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
 
 import java.io.BufferedReader;
@@ -48,7 +52,11 @@ public class FetchMealDetails extends AsyncTask<String, Void, HashMap<String, St
     public static final int FOR_DIALOG = 0;
     public static final int FOR_TEN_RECYCLER = 1;
     public static final int FOR_ORDER = 2;
+    public static final int FOR_TENTATIVE_ORDER = 3;
     private int display;
+
+
+    private FoodItemAdapter.ViewHolder foodItemAdapterHolder;
 
 
 
@@ -62,6 +70,14 @@ public class FetchMealDetails extends AsyncTask<String, Void, HashMap<String, St
         this.context = context;
         useRecyclerActivity = ((UseRecyclerActivity) context);
         this.display = FOR_TEN_RECYCLER;
+    }
+
+    public FetchMealDetails(RecyclerWordAdapter recyclerWordAdapter, Context context, int purpose, FoodItemAdapter.ViewHolder holder){
+        adapter = recyclerWordAdapter;
+        this.context = context;
+        useRecyclerActivity = ((UseRecyclerActivity) context);
+        this.display = purpose;
+        foodItemAdapterHolder = holder;
     }
 
     public FetchMealDetails(Context context, String wholeOrder){
@@ -195,6 +211,9 @@ public class FetchMealDetails extends AsyncTask<String, Void, HashMap<String, St
                 case FOR_ORDER:
                     setRecycler(edmanInfo);
                     break;
+                case FOR_TENTATIVE_ORDER:
+                    setRecycler(edmanInfo, true);
+                    break;
 
             }
 
@@ -226,6 +245,31 @@ public class FetchMealDetails extends AsyncTask<String, Void, HashMap<String, St
             }
         }*/
         useRecyclerActivity.setView(adapter, edmanInfo);
+    }
+
+
+    private void setRecycler(ArrayList<String[]> edmanInfo, boolean x){
+        // make progress bar invisible
+        foodItemAdapterHolder.mProgressBarSearchingEdamam.setVisibility(View.GONE);
+
+        int FIRST_ITEM = 0;
+
+        // no results returned
+        if (edmanInfo.size() == 0 || edmanInfo.get(FIRST_ITEM)[EdmanJasonReader.URL].equals(EdmanJasonReader.EMPTY)){
+
+            foodItemAdapterHolder.mTextViewNoResult.setVisibility(View.VISIBLE);
+        }else{
+            for (String[] recipeInformation : edmanInfo){
+                adapter.addItem(recipeInformation);
+            }
+        }
+
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL, false);
+        foodItemAdapterHolder.mRecyclerViewWholeMealView.setLayoutManager(layoutManager);
+        foodItemAdapterHolder.mRecyclerViewWholeMealView.setAdapter(adapter);
+
+        //RecyclerView recyclerView = (RecyclerView) findViewById(R.id.gridview_edit_meal);
+        foodItemAdapterHolder.mRecyclerViewWholeMealView.setVisibility(View.VISIBLE);
     }
 
     private void setDialog(ArrayList<String[]> edmanInfo){

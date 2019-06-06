@@ -3910,10 +3910,11 @@ public final class R {
     public static final int smaller_layer_selected=0x7f070112;
     public static final int solid_border=0x7f070113;
     public static final int text_border=0x7f070114;
-    public static final int tile=0x7f070115;
-    public static final int tooltip_frame_dark=0x7f070116;
-    public static final int tooltip_frame_light=0x7f070117;
-    public static final int vectordrawable=0x7f070118;
+    public static final int text_border_internal=0x7f070115;
+    public static final int tile=0x7f070116;
+    public static final int tooltip_frame_dark=0x7f070117;
+    public static final int tooltip_frame_light=0x7f070118;
+    public static final int vectordrawable=0x7f070119;
   }
   public static final class id {
     public static final int ALT=0x7f080000;

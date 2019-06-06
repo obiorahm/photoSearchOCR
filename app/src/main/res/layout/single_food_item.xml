@@ -142,7 +142,57 @@
                 android:visibility="gone"/>
 
         </LinearLayout>
+        <!--SHow image of full food item -->
 
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gridview_edit_meal"
+            android:layout_below="@id/container_text_option_recycler"
+            android:layout_alignParentLeft="true"
+
+            android:background="@drawable/text_border_internal"
+            android:visibility="gone"
+            android:layout_margin="10dp"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/searching_edmame"
+            android:visibility="gone"
+            android:layout_margin="20dp"
+            android:backgroundTint="@color/darkTeal"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="20dp"
+            android:textSize="25dp"
+            android:text="@string/no_result"
+            android:visibility="gone"
+            android:id="@+id/no_result"
+            android:drawableLeft="@drawable/baseline_not_interested_white_48dp"
+            android:drawableStart="@drawable/baseline_not_interested_white_48dp"
+            android:drawablePadding="10dp"
+            android:textColor="@color/black"
+            android:background="@drawable/no_result_border"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cancel_gridview_edit_meal"
+            android:layout_alignTop="@id/gridview_edit_meal"
+            android:layout_alignRight="@id/gridview_edit_meal"
+            android:src="@drawable/baseline_clear_white_48dp"
+            android:visibility="gone"
+            android:backgroundTint="@color/grey"/>
 
 
 

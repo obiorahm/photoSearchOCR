@@ -1375,6 +1375,7 @@ drawable smaller_layer_drawable
 drawable smaller_layer_selected
 drawable solid_border
 drawable text_border
+drawable text_border_internal
 drawable tile
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
