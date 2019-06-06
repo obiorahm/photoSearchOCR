@@ -135,7 +135,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
-        //myTTS = ((DetectImageActivity) context).myTTS;
         myTTS = ((UseRecyclerActivity) context).myTTS;
         this.mealCategory = mealCategory;
 
