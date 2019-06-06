@@ -19,6 +19,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
@@ -70,7 +71,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         private ImageButton mImageButton;
         private ImageView mImageView;
         private ImageView mEnlargedImageView;
+        private RadioButton mRadioButton;
         private StreetViewPanoramaView mStreetViewPanoramaView;
+        private ImageButton mImageButtonExpandMore;
+        private ImageButton mImageButtonExpandLess;
         //private Fragment mFragemnt;
 
 
@@ -83,6 +87,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             mImageView = convertView.findViewById(R.id.descriptive_image);
             mEnlargedImageView = convertView.findViewById(R.id.enlarged_image);
             mStreetViewPanoramaView = convertView.findViewById(R.id.streetviewpanorama);
+
+            mRadioButton = convertView.findViewById(R.id.select_option);
+
+            mImageButtonExpandMore = convertView.findViewById(R.id.expand_more);
+            mImageButtonExpandLess = convertView.findViewById(R.id.expand_less);
             //RecyclerView parentRecyclerView = (RecyclerView) convertView.getParent();
 
 
@@ -144,11 +153,18 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mEnlargedImageView.setVisibility((int) properties[IS_LOGO_ENLARGED]);
 
             holder.mRelativeLayout.setSelected((boolean) properties[IS_RELATIVE_LAYOUT_SELECTED]);
+            holder.mRadioButton.setChecked((boolean) properties[IS_RELATIVE_LAYOUT_SELECTED]);
 
             //set up panorama if properties[IS_PANORORAMA_VISIBLE] is visible
             int isPanoramaVisible =  (int) properties[IS_PANORAMA_VISIBLE];
             if (isPanoramaVisible == View.VISIBLE){
+                holder.mImageButtonExpandLess.setVisibility(View.VISIBLE);
+                holder.mImageButtonExpandMore.setVisibility(View.GONE);
                 ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
+            }else{
+                holder.mImageButtonExpandLess.setVisibility(View.GONE);
+                holder.mImageButtonExpandMore.setVisibility(View.VISIBLE);
+
             }
 
             holder.mStreetViewPanoramaView.setVisibility(isPanoramaVisible);
@@ -170,7 +186,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
 
-            holder.mBackground.setOnClickListener(view -> control_select(holder, restaurantData, position));
+            holder.mBackground.setOnClickListener((View view) -> {
+                holder.mRadioButton.setChecked(true);
+                control_select(holder, position);});
 
 
             holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
@@ -186,12 +204,43 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             Log.d(LOG_TAG, "internet " + url);
 
 
+            holder.mRadioButton.setOnClickListener((view)-> control_select(holder, position)
+            );
+
+
+            holder.mImageButtonExpandMore.setOnClickListener((view) ->
+                expandPanorama(position)
+            );
+
+
+            holder.mImageButtonExpandLess.setOnClickListener((view) ->
+                hidePanorama(position)
+            );
+
             //hide progressBar
             ProgressBar progressBar = ((GeographyActivity) context).findViewById(R.id.menu_progress);
             progressBar.setVisibility(View.GONE);
 
 
         }
+
+
+    private void expandPanorama(int position){
+
+        Object [] data = mDataProperties.get(position);
+        data[IS_PANORAMA_VISIBLE] = View.VISIBLE;
+        notifyItemChanged(position);
+
+    }
+
+
+    private void hidePanorama(int position){
+
+        Object [] data = mDataProperties.get(position);
+        data[IS_PANORAMA_VISIBLE] = View.GONE;
+        notifyItemChanged(position);
+
+    }
 
 
     private void enlargeImage(ImageView view, ImageView enlargedView, RestaurantAdapter.ViewHolder holder, int position){
@@ -224,7 +273,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
 
-    private void control_select(RestaurantAdapter.ViewHolder holder, String[] restaurantData, int position){
+/*    private void control_select(RestaurantAdapter.ViewHolder holder, String[] restaurantData, int position){
         String restaurantUrl = restaurantData[URL_POS];
         String restaurantName = restaurantData[TITLE_POS];
         Object[] currentProperties =  mDataProperties.get(position);
@@ -275,9 +324,50 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         //set up panorama
 
 
+    }*/
+
+
+    private void control_select(RestaurantAdapter.ViewHolder holder, int position){
+        String [] restaurantData = mData.get(position);
+        String restaurantUrl = restaurantData[URL_POS];
+        String restaurantName = restaurantData[TITLE_POS];
+        Object[] currentProperties =  mDataProperties.get(position);
+
+        last_selected_rl = GeographyActivity.last_rl_parent;
+        Log.d(LOG_TAG, "last_selected_rl " + last_selected_rl );
+        if ( last_selected_property != null && last_selected_property != currentProperties){
+
+            //update properties
+            last_selected_property[IS_PANORAMA_VISIBLE] = View.GONE;
+            last_selected_property[IS_LOGO_ENLARGED] = View.GONE;
+            last_selected_property[IS_RELATIVE_LAYOUT_SELECTED] = false;
+
+
+            //to enable redraw of view with new properties
+
+
+
+        }
+
+        if (holder.mRadioButton.isChecked()){
+
+            holder.mRelativeLayout.setSelected(true);
+            GeographyActivity.selected_item = restaurantName;
+            GeographyActivity.selected_url = restaurantUrl;
+
+            //update properties
+            //currentProperties[IS_PANORAMA_VISIBLE] = View.VISIBLE;
+            currentProperties[IS_RELATIVE_LAYOUT_SELECTED] = true;
+
+
+        }
+
+        last_selected_property = currentProperties;
+
+        notifyDataSetChanged();
+
+
     }
-
-
 
     @Override
     public int getItemCount(){

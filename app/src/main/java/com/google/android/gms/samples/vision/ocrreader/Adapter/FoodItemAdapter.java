@@ -171,6 +171,14 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             changeState(word, holder, position, adapter);
         });
 
+        holder.mContainingRelativeLayout.setOnClickListener((View view)->{
+            if(holder.mCheckBox.isChecked())
+                holder.mCheckBox.setChecked(false);
+            else
+                holder.mCheckBox.setChecked(true);
+            changeState(word,holder, position, adapter);
+        });
+
 
         holder.mImageButtonMore.setOnClickListener((View view) ->{
             expandMore(holder, adapter);

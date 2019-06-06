@@ -146,14 +146,12 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
             control_select(holder, position);});
 
 
-        holder.mImageButtonExpandMore.setOnClickListener((View view) ->{
-            expandPanorama(holder,position);
-        });
+        holder.mImageButtonExpandMore.setOnClickListener((view) ->
+            expandPanorama(position));
 
 
-        holder.mImageButtonExpandLess.setOnClickListener((View view) ->{
-            hidePanorama(holder,position);
-        });
+        holder.mImageButtonExpandLess.setOnClickListener((view) ->
+            hidePanorama(position));
 
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
@@ -184,7 +182,7 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
     }
 
 
-    private void expandPanorama(PossiblePlacesAdapter.ViewHolder holder, int position){
+    private void expandPanorama(int position){
 
         Object [] data = mData.get(position);
         data[IS_PANORAMA_VISIBLE] = View.VISIBLE;
@@ -193,7 +191,7 @@ public class PossiblePlacesAdapter extends RecyclerView.Adapter<PossiblePlacesAd
     }
 
 
-    private void hidePanorama(PossiblePlacesAdapter.ViewHolder holder, int position){
+    private void hidePanorama( int position){
 
         Object [] data = mData.get(position);
         data[IS_PANORAMA_VISIBLE] = View.GONE;
