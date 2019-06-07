@@ -2,6 +2,7 @@ package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -41,9 +42,15 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
     public final static String MEATS = "meats";
 
     private static int STATE_NORMAL = 0;
+    private static int STATE_SELECT = 0;
 
-    /*private int normal = R.drawable.smaller_layer_drawable;
-    private int select = R.drawable.smaller_layer_selected;*/
+    private int normal = R.drawable.border;
+    private int select = R.drawable.text_border;
+
+
+    private int[] STATES = { normal, select};
+
+    private ImageView lastImageView;
 
     private String LOG_TAG = FoodItemOrderOptionAdapter.class.getSimpleName();
 
@@ -99,6 +106,10 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
         Log.d(LOG_TAG, url);
 
+        int current_state = state.get(position);
+
+        holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[current_state]));
+
         holder.mImageView.setOnClickListener((View view) -> {
                 /*int nextstate = next_state(state.get(pos));
 
@@ -106,7 +117,7 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
                 state.set(pos, nextstate);*/
             handleOnClickListener(holder, label);
-            next_state(holder);
+            next_state(holder, position);
 
         });
 
@@ -162,11 +173,22 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
 
 
-    private void next_state(FoodItemOrderOptionAdapter.ViewHolder holder){
+    private void next_state(FoodItemOrderOptionAdapter.ViewHolder holder, int position){
+        if (lastImageView != null){
+            lastImageView.setSelected(false);
+            lastImageView.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
+        }
+        lastImageView = holder.mImageView;
         if (holder.mImageView.isSelected()){
             holder.mImageView.setSelected(true);
+            holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[STATE_SELECT]));
+            state.set(position, STATE_SELECT);
+
+
         }else{
             holder.mImageView.setSelected(false);
+            holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
+            state.set(position, STATE_NORMAL);
         }
     }
 

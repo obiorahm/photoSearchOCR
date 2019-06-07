@@ -5,12 +5,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/order_title"
-        android:text="@string/order"/>
+        android:text="@string/order"
+        android:textSize="25dp"
+        android:layout_margin="10dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/order_text_view"
-        android:layout_below="@id/order_title"/>
+        android:layout_below="@id/order_title"
+        android:layout_margin="10dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"
