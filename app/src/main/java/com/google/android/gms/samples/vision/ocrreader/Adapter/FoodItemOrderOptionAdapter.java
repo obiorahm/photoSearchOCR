@@ -42,15 +42,16 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
     public final static String MEATS = "meats";
 
     private static int STATE_NORMAL = 0;
-    private static int STATE_SELECT = 0;
+    private static int STATE_SELECT = 1;
 
-    private int normal = R.drawable.border;
-    private int select = R.drawable.text_border;
+    private int normal = R.drawable.smaller_layer_drawable;
+    private int select = R.drawable.smaller_layer_selected;
 
 
     private int[] STATES = { normal, select};
 
     private ImageView lastImageView;
+    private Integer lastState;
 
     private String LOG_TAG = FoodItemOrderOptionAdapter.class.getSimpleName();
 
@@ -83,7 +84,6 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
     @Override
     public FoodItemOrderOptionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View convertView = inflater.inflate(R.layout.option_item, null);
-        //FoodItemOrderOptionAdapter.ViewHolder viewHolder = new FoodItemOrderOptionAdapter.ViewHolder(convertView);
 
         return new FoodItemOrderOptionAdapter.ViewHolder(convertView);
     }
@@ -111,13 +111,9 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
         holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[current_state]));
 
         holder.mImageView.setOnClickListener((View view) -> {
-                /*int nextstate = next_state(state.get(pos));
-
-                holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[nextstate]));
-
-                state.set(pos, nextstate);*/
-            handleOnClickListener(holder, label);
             next_state(holder, position);
+            handleOnClickListener(holder, label);
+
 
         });
 
@@ -130,12 +126,10 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
     public void handleOnClickListener(FoodItemOrderOptionAdapter.ViewHolder holder, String label){
 
         ExpandOptionAdapter expandOptionAdapter = new ExpandOptionAdapter(context, order, current_order);
-        OpenRestaurantMenuActivity openRestaurantMenuActivity = (OpenRestaurantMenuActivity) context;
+        //OpenRestaurantMenuActivity openRestaurantMenuActivity = (OpenRestaurantMenuActivity) context;
 
-        openRestaurantMenuActivity.hide_food_image_recycler();
+        //openRestaurantMenuActivity.hide_food_image_recycler();
 
-        //RecyclerView recyclerView = openRestaurantMenuActivity.findViewById(R.id.order_option_items);
-        RecyclerView recyclerView = expandOptionRecyclerView;
 
         switch (label){
             case SAUCES:
@@ -177,19 +171,24 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
         if (lastImageView != null){
             lastImageView.setSelected(false);
             lastImageView.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
+            lastState = STATE_NORMAL;
         }
         lastImageView = holder.mImageView;
+        lastState = state.get(position);
+
         if (holder.mImageView.isSelected()){
+
+            holder.mImageView.setSelected(false);
+            holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
+            state.set(position, STATE_NORMAL);
+
+        }else{
             holder.mImageView.setSelected(true);
             holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[STATE_SELECT]));
             state.set(position, STATE_SELECT);
 
-
-        }else{
-            holder.mImageView.setSelected(false);
-            holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
-            state.set(position, STATE_NORMAL);
         }
+        //notifyDataSetChanged();
     }
 
 }
