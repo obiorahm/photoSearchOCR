@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,7 +24,6 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import afu.org.checkerframework.checker.oigj.qual.O;
 
 /**
  * Created by mgo983 on 10/18/18.
@@ -130,21 +128,6 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
     @Override
     public void processWebResults(Document document){
 
-        /*try {
-            Elements testElement = document.select(".category-name" );
-            for (Element element : testElement){
-                String[] item = {element.text()};
-                adapter.addItem(item);
-
-                String[] foodItems = getFoodItems(element);
-                Log.d(LOG_TAG, element.attr("category-name") +" " + element.text());
-            }
-
-        }catch (NullPointerException e){
-            Log.e(LOG_TAG, e + " null pointer");
-
-        }*/
-
         getFoodItems(document);
 
         recyclerView.setAdapter(adapter);
@@ -165,17 +148,9 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
             Elements testElement = document.select(".menu-category");
             for(Element element : testElement){
 
-                /*Elements ElementCategoryName  = element.select(".category-name");
-                Elements ElementCategoryDescription = element.select(".category-description");
-                String categoryName = "";
-                String categoryDescription = "";*/
-
                 String categoryName = element.select(".category-name").text();
                 String categoryDescription = element.select(".category-description").text();
 
-                /*for(Element category_element : ElementCategoryName){
-                    categoryName = category_element.text();
-                }*/
                 Log.d(LOG_TAG, categoryName);
 
                 ArrayList categoryItems = new ArrayList();
@@ -236,62 +211,6 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         remove_food_image_imageButton.setVisibility(View.GONE);
 
     }
-
-    /*@Override
-    public void setView(RecyclerWordAdapter adapter, ArrayList<String []> edmanInfo){
-        // make progress bar invisible
-        ProgressBar searchingEdmame = findViewById(R.id.searching_edmame);
-        searchingEdmame.setVisibility(View.GONE);
-
-        int FIRST_ITEM = 0;
-
-        // no results returned
-        if (edmanInfo.size() == 0 || edmanInfo.get(FIRST_ITEM)[EdmanJasonReader.URL].equals(EdmanJasonReader.EMPTY)){
-            TextView textViewNoResult = findViewById(R.id.no_result);
-            textViewNoResult.setVisibility(View.VISIBLE);
-        }else{
-            for (String[] recipeInformation : edmanInfo){
-                adapter.addItem(recipeInformation);
-            }
-        }
-
-        RecyclerView recyclerView = findViewById(R.id.gridview_edit_meal);
-        LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-
-        //RecyclerView recyclerView = (RecyclerView) findViewById(R.id.gridview_edit_meal);
-        recyclerView.setVisibility(View.VISIBLE);
-
-    }*/
-
-
-    /*@Override
-    public void setView(RecyclerWordAdapter adapter, FoodItemAdapter.ViewHolder holder, ArrayList<String []> edmamInfo){
-        holder.mProgressBarSearchingEdamam.setVisibility(View.GONE);
-
-        int FIRST_ITEM = 0;
-
-        // no results returned
-        if (edmamInfo.size() == 0 || edmamInfo.get(FIRST_ITEM)[EdmanJasonReader.URL].equals(EdmanJasonReader.EMPTY)){
-
-            holder.mTextViewNoResult.setVisibility(View.VISIBLE);
-        }else{
-            for (String[] recipeInformation : edmamInfo){
-                adapter.addItem(recipeInformation);
-            }
-        }
-
-        LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-        holder.mRecyclerViewWholeMealView.setLayoutManager(layoutManager);
-        holder.mRecyclerViewWholeMealView.setAdapter(adapter);
-
-        //RecyclerView recyclerView = (RecyclerView) findViewById(R.id.gridview_edit_meal);
-        holder.mRecyclerViewWholeMealView.setVisibility(View.VISIBLE);
-    }*/
-
-
-
 
 
     //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.

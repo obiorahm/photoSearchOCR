@@ -116,10 +116,7 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
 
 
 
-    private final static String SAUCES = "sauces";
-    private final static String DRINKS = "drinks";
-    private final static String NUTRITION = "nutrition";
-    private final static String MEATS = "meats";
+
 
 
     private final static int NORMAL = 0;
@@ -145,22 +142,22 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
 
 
             switch (top_level_option){
-                case SAUCES:
+                case Order.SAUCES:
                     type[0] = MORE_CHOICES;
                     mTopLevelInteger.add(Order.ORDER_SAUCE);
 
                     break;
-                case DRINKS:
+                case Order.DRINKS:
                     type[0] = ZERO_SUM;
                     mTopLevelInteger.add(Order.ORDER_DRINK);
 
                     break;
-                case NUTRITION:
+                case Order.NUTRITION:
                     type[0] = ZERO_SUM;
                     mTopLevelInteger.add(Order.ORDER_NUTRITION);
 
                     break;
-                case MEATS:
+                case Order.MEATS:
                     second_level_option_array = meats_second_level_array;
                     type = meat_option_types;
                     mTopLevelInteger.add(Order.ORDER_COOKED);
@@ -204,8 +201,8 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
 
     /**
      * switch_state
-     * @param pos
-     * @param holder
+     * @param pos position in the adapter
+     * @param holder Expand option adapter
      */
     private void switch_state (int pos, ExpandOptionAdapter.ViewHolder holder){
         int new_state = mState.get(pos) + 1;
@@ -218,8 +215,8 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
 
     /**
      * rotate choice rotates states through as many images are available for a group choice
-     * @param pos
-     * @param holder
+     * @param pos pos position in the adapter
+     * @param holder expand option adapter
      */
     private void rotate_choices(int pos, ExpandOptionAdapter.ViewHolder holder ){
         int new_choice = mState.get(pos) + 1;
@@ -243,9 +240,13 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
 
     private void putOrder(int option, int value ){
         Object[] current_order_info =  order.get(current_order_name);
-        Order current_order_items = (Order) current_order_info[FoodItemAdapter.ORDER];
-        Integer order_items [] = current_order_items.getOrderValues();
-        order_items[option] = value;
+
+        if (current_order_info != null){
+            Order current_order_items = (Order) current_order_info[FoodItemAdapter.ORDER];
+            Integer order_items [] = current_order_items.getOrderValues();
+            order_items[option] = value;
+
+        }
     }
 
 

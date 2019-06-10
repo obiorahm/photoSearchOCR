@@ -1,6 +1,7 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.content.Context;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.samples.vision.ocrreader.OrderActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
+import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
 import java.util.ArrayList;
 
@@ -58,8 +61,10 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
     public void onBindViewHolder(final LanguageAdapter.ViewHolder holder, int position){
 
         String[] current_conversation_line = mData.get(position);
-        holder.mTextView.setText(current_conversation_line[SENTENCE]);
-        Glide.with(context).load(current_conversation_line[IMAGE_URL]);
+        String orderOption = current_conversation_line[SENTENCE];
+        holder.mTextView.setText(orderOption);
+        holder.mTextView.setOnClickListener((View view)->{((UseRecyclerActivity) context).myTTS.speak(orderOption, TextToSpeech.QUEUE_FLUSH, null, null);});
+        Glide.with(context).load(current_conversation_line[IMAGE_URL]).into(holder.mImageView);
 
     }
 

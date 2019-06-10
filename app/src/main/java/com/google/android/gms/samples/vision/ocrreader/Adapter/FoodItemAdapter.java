@@ -203,7 +203,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
 
         holder.mImageButtonMore.setOnClickListener((View view) ->
-            expandMore(holder, adapter)
+            expandMore(holder, adapter, word)
         );
 
         holder.mImageButtonLess.setOnClickListener((View view) ->
@@ -213,7 +213,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
 
     private void expandMore(FoodItemAdapter.ViewHolder holder,
-                            TextByTextAdapterIntercept adapterIntercept){
+                            TextByTextAdapterIntercept adapterIntercept, String word){
         holder.mImageButtonLess.setVisibility(View.VISIBLE);
         holder.mRecyclerView.setVisibility(View.VISIBLE);
         holder.mEndSeparator.setVisibility(View.VISIBLE);
@@ -222,6 +222,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
 
         holder.mImageButtonMore.setVisibility(View.GONE);
+
+        setUpRecyclerView(word, holder);
 
         //shoe adapters
         adapterIntercept.displayAllDescriptiveImages();
@@ -379,9 +381,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     }
 
     public static final int ORDER = 0;
-/*    public static final int POSITION = 1;
-    public static final int HOLDER = 2;
-    public static final int FOOD_ITEM_ADAPTER = 3;*/
     private static final int POSITION = 1;
     private static final int HOLDER = 2;
     public static final int FOOD_ITEM_ADAPTER = 3;
@@ -422,7 +421,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
         Integer position = (Integer) current_order_item[POSITION];
         state.set(position,STATE_NORMAL);
-        //((OpenRestaurantMenuActivity) context).hide_food_image_recycler();
+
     }
 
 
@@ -444,11 +443,9 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     private void visibleViews(ViewHolder holder){
 
-        //holder.mExpandOptionRecyclerView.setVisibility(View.VISIBLE);
         holder.mRecyclerView.setVisibility(View.VISIBLE);
         holder.mStartSeparator.setVisibility(View.VISIBLE);
         holder.mEndSeparator.setVisibility(View.VISIBLE);
-        //tbtAdapter.hideImage();
 
     }
 

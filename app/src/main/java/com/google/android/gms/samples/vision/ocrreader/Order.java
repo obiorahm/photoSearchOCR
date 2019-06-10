@@ -18,6 +18,14 @@ public class Order {
     public static final int ORDER_DRINK = 5;
 
 
+    // used by ExpandOption adapter
+    // used by shoppingCartAdapter
+    public final static String SAUCES = "sauces";
+    public final static String DRINKS = "drinks";
+    public final static String NUTRITION = "nutrition";
+    public final static String MEATS = "meats";
+
+
     public static String CONSOLIDATED_OPTION [][]= {
             //ice
             {"", "Ice please!", "No ice please." },

@@ -1,6 +1,8 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,22 +11,27 @@ import android.widget.TextView;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.FoodItemAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.ShoppingCartAdapter;
+import com.google.firebase.FirebaseApp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 
 /**
  * Created by mgo983 on 1/10/19.
  */
 
-public class OrderActivity extends UseRecyclerActivity {
+public class OrderActivity extends UseRecyclerActivity implements TextToSpeech.OnInitListener{
 
     private static  final int NUMBER_OF_IMAGES = 1;
 
     ShoppingCartAdapter shoppingCartAdapter;
 
     private static final String LOG_TAG = OrderActivity.class.getSimpleName();
+
+    //Text to speech variables
+    private int MY_DATA_CHECK_CODE = 0;
 
 
 
@@ -34,6 +41,14 @@ public class OrderActivity extends UseRecyclerActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.geography_order);
+
+        //start text to speech
+        Intent checkTTSIntent = new Intent();
+        checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
+
+        if (myTTS == null)
+            myTTS = new TextToSpeech(this, this);
 
         shoppingCartAdapter = new ShoppingCartAdapter(this);
 
@@ -79,10 +94,6 @@ public class OrderActivity extends UseRecyclerActivity {
 
     }
 
-    public void fetchMealUrl(String[] meal_name){
-        //fetchMealDetails.execute(meal_name);
-    }
-
 
     @Override
     public void setView(RecyclerWordAdapter adapter, ArrayList<String[]> edamanInfo){
@@ -120,5 +131,46 @@ public class OrderActivity extends UseRecyclerActivity {
  * Possible hypernyms
  * beverage drink drinkable brew beverage liquid espresso coffee
  */
+
+//checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.
+@Override
+public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == MY_DATA_CHECK_CODE) {
+        if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+            myTTS = new TextToSpeech(this, this);
+        } else {
+            Intent installTTSIntent = new Intent();
+            installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+            startActivity(installTTSIntent);
+        }
+    }
+}
+    @Override
+    public void onInit(int initStatus){
+        //initialize firebase
+        FirebaseApp.initializeApp(this);
+        if (initStatus == TextToSpeech.SUCCESS) {
+            myTTS.setLanguage(Locale.US);
+            myTTS.setSpeechRate(0.6f);
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        // Don't forget to shutdown tts!
+        if (myTTS != null) {
+            myTTS.stop();
+            myTTS.shutdown();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+    }
+
 
 }
