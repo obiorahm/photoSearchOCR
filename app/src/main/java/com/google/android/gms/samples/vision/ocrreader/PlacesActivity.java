@@ -31,9 +31,9 @@ import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
 import com.google.android.gms.maps.model.StreetViewSource;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.PossiblePlacesAdapter;
 import com.google.android.libraries.places.api.Places;
+
 import com.google.android.libraries.places.api.model.PhotoMetadata;
 import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.model.PlaceLikelihood;
 import com.google.android.libraries.places.api.net.FetchPhotoRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -55,7 +55,7 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
 
     private int MY_DATA_CHECK_CODE = 0;
 
-    private RecyclerView recyclerView;
+
 
     TextView globalTextView;
 
@@ -90,7 +90,7 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
 
 
             String locationIcon = "";
-            if (allAssets[0] != null)
+            if (allAssets != null && allAssets[0] != null)
                     locationIcon = allAssets[0];
             //InputStream ims = getAssets().open("location.png");
             ImageView locationImageView = findViewById(R.id.location_image);
@@ -115,7 +115,7 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
             myTTS = new TextToSpeech(this, this);
 
 
-        recyclerView = findViewById(R.id.detected_location_list_view);
+        RecyclerView recyclerView = findViewById(R.id.detected_location_list_view);
         adapter = new PossiblePlacesAdapter(this);
 
         // apparently the recycler view does not work without setting up a layout manager
@@ -162,15 +162,12 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
                 new AlertDialog.Builder(this)
                         .setTitle("title")
                         .setMessage("title")
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(PlacesActivity.this,
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        MY_PERMISSIONS_REQUEST_LOCATION);
-                            }
-                        })
+                        .setPositiveButton(R.string.ok, (DialogInterface dialogInterface, int i) ->{
+                    //Prompt the user once explanation has been shown
+                    ActivityCompat.requestPermissions(PlacesActivity.this,
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                            MY_PERMISSIONS_REQUEST_LOCATION);
+                })
                         .create()
                         .show();
 
@@ -191,7 +188,7 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
 
 
         // Use fields to define the data types to return.
-        List<Place.Field > placeFields = Arrays.asList(Place.Field.LAT_LNG, Place.Field.ADDRESS, Place.Field.TYPES, Place.Field.PHOTO_METADATAS);
+        List<Place.Field > placeFields = Arrays.asList(Place.Field.LAT_LNG, Place.Field.ADDRESS, Place.Field.TYPES, Place.Field.PHOTO_METADATAS, Place.Field.ID);
 
         // Use the builder to create a FindCurrentPlaceRequest.
         FindCurrentPlaceRequest request = FindCurrentPlaceRequest.builder(placeFields).build();
@@ -200,19 +197,22 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
             placesClient.findCurrentPlace(request).addOnSuccessListener(((response) -> {
 
                 for (com.google.android.libraries.places.api.model.PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
-                    Log.i(LOG_TAG, String.format("Place '%s' has likelihood: %f" + placeLikelihood.getPlace().getTypes(),
+                    Log.i(LOG_TAG, String.format("Place '%s' has likelihood: %f" + placeLikelihood.getPlace().getTypes() /*+ placeLikelihood.getPlace().getLatLng().toString()*/,
                             placeLikelihood.getPlace().getAddress(),
                             placeLikelihood.getLikelihood()));
 
+
+                    //getGeocode(placeLikelihood.getPlace().getLatLng().latitude, placeLikelihood.getPlace().getLatLng().longitude);
                     Place place = placeLikelihood.getPlace();
                     Object [] data =  new Object[7];
+
 
                     // Get the photo metadata.
                     if (place.getPhotoMetadatas() != null){
                         PhotoMetadata photoMetadata = place.getPhotoMetadatas().get(0);
 
                         // Get the attribution text.
-                        String attributions = photoMetadata.getAttributions();
+                        //String attributions = photoMetadata.getAttributions();
 
                         // Create a FetchPhotoRequest.
                         FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
@@ -231,8 +231,12 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
 
 
                         data[PossiblePlacesAdapter.RESTAURANT_ADDRESS] = placeLikelihood.getPlace().getAddress();
-                        data[PossiblePlacesAdapter.LATITUDE] = latLng.latitude;
-                        data[PossiblePlacesAdapter.LONGITUDE] = latLng.longitude;
+
+                        if (latLng != null){
+                            data[PossiblePlacesAdapter.LATITUDE] = latLng.latitude;
+                            data[PossiblePlacesAdapter.LONGITUDE] = latLng.longitude;
+
+                        }
 
                         adapter.addItem(data);
                         placeLikelihood.getPlace().getPhotoMetadatas();
@@ -241,14 +245,7 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
 
 
                 //get first place
-                PlaceLikelihood firstPlace = response.getPlaceLikelihoods().get(0);
-                //displayCurrentLocation(firstPlace.getPlace().getAddress());
-
-                //get next 10 places
-                /*for (int i = 0; i < 10; i++){
-                    PlaceLikelihood currentPlace = response.getPlaceLikelihoods().get(i);
-                    adapter.addItem(currentPlace.getPlace().getAddress());
-                }*/
+                //PlaceLikelihood firstPlace = response.getPlaceLikelihoods().get(0);
 
 
 
@@ -266,10 +263,39 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
     }
 
 
-    private void displayCurrentLocation(String address){
+/*    private void getGeocode(Double latitude, Double longitude ){
+
+
+        try{
+            Geocoder geocoder;
+            List<Address> addresses;
+            geocoder = new Geocoder(this, Locale.getDefault());
+
+            addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+            String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+            String city = addresses.get(0).getLocality();
+            String state = addresses.get(0).getAdminArea();
+            String country = addresses.get(0).getCountryName();
+            String postalCode = addresses.get(0).getPostalCode();
+            String knownName = addresses.get(0).getFeatureName();
+
+
+            String newAddress = address + city + state + country + postalCode + knownName;
+            Log.d(LOG_TAG, "New Adress " + newAddress);
+        }catch (IOException e){
+            Log.e(LOG_TAG, e + "");
+        }
+
+
+
+    }*/
+
+
+    /*private void displayCurrentLocation(String address){
         globalTextView.setText(address);
 
-    }
+    }*/
 
 
 
@@ -353,6 +379,7 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
+            Log.d(LOG_TAG, "permission granted");
         }
     }
 
@@ -362,6 +389,8 @@ public class PlacesActivity extends UseRecyclerActivity implements TextToSpeech.
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
+
+            Log.d(LOG_TAG, "permission granted");
 
         }
     }

@@ -180,10 +180,14 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
         try{
             allAssets = assetManager.list(url );
+            int position = 0;
+            if (pos > 0 && pos < allAssets.length)
+                position = pos;
+            else if (pos > 0 && pos >= allAssets.length)
+                position = pos - 1;
 
-            int position = pos - 1;
             if (position >= 0)
-                url =  "file:///android_asset/" + url + "/" +allAssets[pos - 1];
+                url =  "file:///android_asset/" + url + "/" +allAssets[position];
 
             Log.d(LOG_TAG, "alternative " + url);
 

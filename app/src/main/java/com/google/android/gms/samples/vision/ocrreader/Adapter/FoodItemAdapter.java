@@ -328,7 +328,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             }
             last_selected_relative_layout = holder.mContainingRelativeLayout;
             if (last_selected_recycler != null){
-                last_selected_recycler.setVisibility(View.GONE);
+                /*last_selected_recycler.setVisibility(View.GONE);
                 last_selected_expand_option.setVisibility(View.GONE);
                 last_end_separator.setVisibility(View.GONE);
                 last_start_separator.setVisibility(View.GONE);
@@ -337,7 +337,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
                 last_selected_mImageButtonCancelEdamamSearch.setVisibility(View.GONE);
                 last_selected_mProgressBarSearchingEdamam.setVisibility(View.GONE);
                 last_selected_mRecyclerViewWholeMealView.setVisibility(View.GONE);
-                last_selected_mTextViewNoResult.setVisibility(View.GONE);
+                last_selected_mTextViewNoResult.setVisibility(View.GONE);*/
 
             }
             last_selected_recycler = holder.mRecyclerView;

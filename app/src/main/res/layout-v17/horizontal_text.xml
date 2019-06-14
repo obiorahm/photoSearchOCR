@@ -37,16 +37,17 @@
             android:layout_height="100dp"
             android:id="@+id/descriptive_image"
             android:layout_toRightOf="@id/select_option"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"/>
 
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:scaleType="centerCrop"
             android:id="@+id/enlarged_image"
-            android:layout_alignLeft="@id/descriptive_image"
+            android:layout_toRightOf="@id/select_option"
             android:layout_centerVertical="true"
-            android:padding="10dp"
             android:visibility="gone"/>
 
 
