@@ -24,7 +24,8 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //Intent intent = new Intent(getApplicationContext(), GeographyActivity.class);
-                Intent intent = new Intent(getApplicationContext(), PlacesActivity.class);
+                //Intent intent = new Intent(getApplicationContext(), PlacesActivity.class);
+                Intent intent = new Intent(getApplicationContext(),CurrentPlaceMap.class);
                 startActivity(intent);
             }
         });

@@ -1534,6 +1534,7 @@ id main_view
 id make_order
 id make_order_text
 id make_square
+id map_id
 id meal_edit
 id meal_name
 id meal_text
@@ -1756,6 +1757,7 @@ layout ingredient_image
 layout ingredient_image_item
 layout list_view_icon_item
 layout list_view_items
+layout map_activity
 layout newmain
 layout notification_action
 layout notification_action_tombstone
