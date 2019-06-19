@@ -25,7 +25,8 @@ public class FetchAddressIntentService extends IntentService {
     protected ResultReceiver mReceiver;
 
     public FetchAddressIntentService(){
-        super("geographyActivity");
+        super("currentPlaceMap");
+
     }
 
     private void deliverResultToReceiver(int resultCode, String message) {

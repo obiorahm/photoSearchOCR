@@ -41,6 +41,7 @@ MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] /Users/
 MERGED from [com.google.android.gms:play-services-basement:16.2.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.2.0.aar/927e230d3236d0a66211ef7660a6e6f5/AndroidManifest.xml:17:1-28:12
 MERGED from [com.android.support:support-v4:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/3a3bfb8343235d9666e67396e459c1cd/AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:multidex:1.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/multidex-1.0.1.aar/1e903ac38dad7fa92c417492d0b7f562/AndroidManifest.xml:16:1-19:12
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/6836aa1a7e6ae4ce2a6fe46d24ec2241/AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/c524db87d85fabce1afd541511383963/AndroidManifest.xml:17:1-28:12
 MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/1d7c33f183c178202a6181796898efe3/AndroidManifest.xml:17:1-28:12
 MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/3187642365a260eebc2e1dd865078adb/AndroidManifest.xml:17:1-28:12
@@ -182,6 +183,8 @@ MERGED from [com.google.android.gms:play-services-basement:16.2.0] /Users/mgo983
 MERGED from [com.google.android.gms:play-services-basement:16.2.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.2.0.aar/927e230d3236d0a66211ef7660a6e6f5/AndroidManifest.xml:22:5-26:19
 MERGED from [com.android.support:support-v4:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/3a3bfb8343235d9666e67396e459c1cd/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-v4:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/3a3bfb8343235d9666e67396e459c1cd/AndroidManifest.xml:25:5-29:19
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/6836aa1a7e6ae4ce2a6fe46d24ec2241/AndroidManifest.xml:7:5-11:19
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/6836aa1a7e6ae4ce2a6fe46d24ec2241/AndroidManifest.xml:7:5-11:19
 MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/c524db87d85fabce1afd541511383963/AndroidManifest.xml:22:5-26:19
 MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/c524db87d85fabce1afd541511383963/AndroidManifest.xml:22:5-26:19
 MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/1d7c33f183c178202a6181796898efe3/AndroidManifest.xml:22:5-26:19
@@ -410,6 +413,8 @@ MERGED from [com.android.support:support-v4:26.1.0] /Users/mgo983/.gradle/caches
 MERGED from [com.android.support:support-v4:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/3a3bfb8343235d9666e67396e459c1cd/AndroidManifest.xml:21:5-23:54
 MERGED from [com.android.support:multidex:1.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/multidex-1.0.1.aar/1e903ac38dad7fa92c417492d0b7f562/AndroidManifest.xml:18:5-42
 MERGED from [com.android.support:multidex:1.0.1] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/multidex-1.0.1.aar/1e903ac38dad7fa92c417492d0b7f562/AndroidManifest.xml:18:5-42
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/6836aa1a7e6ae4ce2a6fe46d24ec2241/AndroidManifest.xml:5:5-43
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/6836aa1a7e6ae4ce2a6fe46d24ec2241/AndroidManifest.xml:5:5-43
 MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/c524db87d85fabce1afd541511383963/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/c524db87d85fabce1afd541511383963/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/1d7c33f183c178202a6181796898efe3/AndroidManifest.xml:20:5-44
@@ -666,6 +671,8 @@ ADDED from [com.google.android.gms:play-services-base:16.1.0] /Users/mgo983/.gra
 		ADDED from [com.google.android.gms:play-services-base:16.1.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/0175498a3d88a8129e21be86533a8eb6/AndroidManifest.xml:24:13-79
 meta-data#com.google.android.gms.version
 ADDED from [com.google.android.gms:play-services-basement:16.2.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.2.0.aar/927e230d3236d0a66211ef7660a6e6f5/AndroidManifest.xml:23:9-25:69
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/6836aa1a7e6ae4ce2a6fe46d24ec2241/AndroidManifest.xml:8:9-10:69
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/6836aa1a7e6ae4ce2a6fe46d24ec2241/AndroidManifest.xml:8:9-10:69
 	android:value
 		ADDED from [com.google.android.gms:play-services-basement:16.2.0] /Users/mgo983/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.2.0.aar/927e230d3236d0a66211ef7660a6e6f5/AndroidManifest.xml:25:13-66
 	android:name

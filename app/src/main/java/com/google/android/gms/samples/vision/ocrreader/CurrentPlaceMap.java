@@ -7,25 +7,36 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.PossiblePlacesAdapter;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.PhotoMetadata;
 import com.google.android.libraries.places.api.model.Place;
@@ -34,17 +45,12 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
-public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallback {
+
+public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private GoogleMap mMap;
 
     Bundle mSavedInstance;
@@ -55,6 +61,11 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
 
     String LOG_TAG = CurrentPlaceMap.class.getSimpleName();
 
+    private FusedLocationProviderClient fusedLocationProviderClient;
+
+    private AddressResultReceiver resultReceiver;
+
+    public static String RESTAURANT_ADDRESS = "com.google.android.gms.samples.vision.ocrreader.RESTAURANT_ADDRESS";
 
 
 
@@ -75,6 +86,8 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
         // Create a new Places client instance.
         placesClient = Places.createClient(this);
 
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
 
 
 
@@ -94,6 +107,7 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
             placesClient.findCurrentPlace(request).addOnSuccessListener(((response) -> {
 
                 LatLng firstPlace = new LatLng(-34, 151);
+                List<LatLng> latLngList = new ArrayList<>();
 
                 for (com.google.android.libraries.places.api.model.PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
                     Log.i(LOG_TAG, String.format("Place '%s' has likelihood: %f" + placeLikelihood.getPlace().getTypes() /*+ placeLikelihood.getPlace().getLatLng().toString()*/,
@@ -135,7 +149,8 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
                         data[PossiblePlacesAdapter.LATITUDE] = latLng.latitude;
                         data[PossiblePlacesAdapter.LONGITUDE] = latLng.longitude;
 
-                        googleMap.addMarker(new MarkerOptions().position(latLng).title((String) data[PossiblePlacesAdapter.RESTAURANT_ADDRESS]));
+                        latLngList.add(latLng);
+                        //googleMap.addMarker(new MarkerOptions().position(latLng).title((String) data[PossiblePlacesAdapter.RESTAURANT_ADDRESS]));
 
                         //zoom = true;
 
@@ -146,8 +161,42 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
 
                 }
 
-
+                addHeatMap(latLngList, googleMap);
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(firstPlace, 18));
+
+                fusedLocationProviderClient.getLastLocation()
+                        .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                            @Override
+                            public void onSuccess(Location location) {
+                                if (location != null){
+                                    LatLng newLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                                    googleMap.addMarker(new MarkerOptions().position(newLatLng).title("leave it!"));
+                                    googleMap.addCircle(new CircleOptions().center(newLatLng)
+                                            .fillColor(Color.LTGRAY)
+                                            .radius(10.0)
+                                    .strokeColor(Color.RED)
+                                    );
+
+                                    CircleOptions circleOptions = new CircleOptions();
+                                    circleOptions.clickable(true);
+
+                                    googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                                        @Override
+                                        public boolean onMarkerClick(Marker marker) {
+                                            startIntentService(location);
+                                            return false;
+                                        }
+                                    });
+
+
+
+
+
+
+                                }
+
+                            }
+                        });
 
 
 
@@ -170,6 +219,12 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
     }
 
 
+    protected void startIntentService(Location location){
+        Intent intent = new Intent(this, FetchAddressIntentService.class);
+        intent.putExtra(Constants.RECEIVER, new AddressResultReceiver(new Handler()));
+        intent.putExtra(Constants.LOCATION_DATA_EXTRA, location);
+        startService(intent);
+    }
     @Override
     public void onMapReady(GoogleMap googleMap){
 
@@ -183,55 +238,21 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
 
         }
 
-        /*mMap = googleMap;
-
-        // Add a marker in Sydney, Australia, and more the camera.
-        LatLng sydney = new LatLng(-34, 151);
-        CircleOptions circleOptions = new CircleOptions();
-        circleOptions.center(sydney);
-        circleOptions.radius(100000.0);
-        circleOptions.fillColor(Color.RED);
-        circleOptions.strokeColor(Color.BLUE);
-        mMap.addCircle(circleOptions);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.setOnMarkerClickListener((Marker marker) -> {
-            return false;
-        });*/
 
     }
 
 
-    private void addHeatMap() {
-        List<LatLng> list = null;
+    private void addHeatMap(List<LatLng> list, GoogleMap mMap) {
 
-        // Get the data: latitude/longitude positions of police stations.
-        try {
-            list = readItems(R.raw.police_stations);
-        } catch (JSONException e) {
-            Toast.makeText(this, "Problem reading list of locations.", Toast.LENGTH_LONG).show();
-        }
 
         // Create a heat map tile provider, passing it the latlngs of the police stations.
-        mProvider = new HeatmapTileProvider.Builder()
+        HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder()
                 .data(list)
                 .build();
         // Add a tile overlay to the map, using the heat map tile provider.
-        mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+        TileOverlay mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
     }
 
-    private ArrayList<LatLng> readItems(int resource) throws JSONException {
-        ArrayList<LatLng> list = new ArrayList<LatLng>();
-        InputStream inputStream = getResources().openRawResource(resource);
-        String json = new Scanner(inputStream).useDelimiter("\\A").next();
-        JSONArray array = new JSONArray(json);
-        for (int i = 0; i < array.length(); i++) {
-            JSONObject object = array.getJSONObject(i);
-            double lat = object.getDouble("lat");
-            double lng = object.getDouble("lng");
-            list.add(new LatLng(lat, lng));
-        }
-        return list;
-    }
 
 
     public void checkPermission(){
@@ -270,4 +291,58 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
         }
 
     }
+
+
+    class AddressResultReceiver extends ResultReceiver{
+        public AddressResultReceiver(Handler handler){
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData){
+            if(resultData == null){
+                return;
+            }
+
+            // Display the address string
+            // or an error message sent from the intent service.
+            String addressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
+            if (addressOutput == null) {
+                addressOutput = "";
+            }
+            displayAddressOutput(addressOutput);
+
+            // Show a toast message if an address was found.
+            if (resultCode == Constants.SUCCESS_RESULT) {
+
+                //Toast.makeText(getString(R.string.address_found));
+            }
+
+        }
+    }
+
+    private void displayAddressOutput(String addressOutput){
+        Log.d(LOG_TAG + " output address", addressOutput);
+
+        Intent intent = new Intent(getApplicationContext(), GeographyActivity.class);
+        intent.putExtra(RESTAURANT_ADDRESS, addressOutput);
+        startActivity(intent);
+    }
+
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint){
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int cause){
+
+    }
+
 }
