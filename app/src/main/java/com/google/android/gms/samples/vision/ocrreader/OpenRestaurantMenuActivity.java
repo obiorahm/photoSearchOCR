@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.FoodItemAdapter;
+import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantMenuAdapter;
 import com.google.firebase.FirebaseApp;
 
@@ -54,8 +55,8 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         last_rl_parent = null;
 
         Intent intent = getIntent();
-        String url = intent.getStringExtra(GeographyActivity.RESTAURANT_URL);
-        String name = intent.getStringExtra(GeographyActivity.RESTAURANT_NAME);
+        String url = intent.getStringExtra(RestaurantAdapter.RESTAURANT_URL);
+        String name = intent.getStringExtra(RestaurantAdapter.RESTAURANT_NAME);
         Log.d(LOG_TAG, "my url " + url);
 
         //hide unnecessary views
@@ -85,6 +86,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
 
         FetchFoodItemWebPage fetchWebPage = new FetchFoodItemWebPage(this);
+        Log.d(LOG_TAG , "current_url " + url);
         fetchWebPage.execute(url, "don't encode");
 
 

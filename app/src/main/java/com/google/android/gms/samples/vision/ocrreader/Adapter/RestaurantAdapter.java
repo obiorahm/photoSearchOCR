@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.speech.tts.TextToSpeech;
@@ -27,6 +28,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 
 import com.google.android.gms.samples.vision.ocrreader.GeographyActivity;
+import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
@@ -62,6 +64,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     private final int IS_RELATIVE_LAYOUT_SELECTED = 2;
 
     private ArrayList<Object[]> mDataProperties = new ArrayList<>();
+
+    public static String RESTAURANT_NAME = "com.google.android.gms.samples.vision.ocrreader.RESTAURANT_NAME";
+
+    public static String RESTAURANT_URL = "com.google.android.gms.samples.vision.ocrreader.RESTAURANT_URL";
+
 
 
 
@@ -208,9 +215,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             Log.d(LOG_TAG, "internet " + url);
 
 
-            holder.mRadioButton.setOnClickListener((view)-> control_select(holder, position)
-            );
+            holder.mRadioButton.setOnClickListener((view)-> control_select(holder, position));
 
+            //holder.mRadioButton.setOnClickListener((view)-> goToMenu(position));
 
             holder.mImageButtonExpandMore.setOnClickListener((view) ->
                 expandPanorama(position)
@@ -227,6 +234,22 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
         }
+
+
+
+        private void goToMenu(int position){
+
+            final String[] restaurantData =  mData.get(position);
+            final String word = restaurantData[TITLE_POS];
+            final  String url = restaurantData[IMAGE_URL];
+
+            Intent openRestaurantIntent = new Intent(context, OpenRestaurantMenuActivity.class);
+            openRestaurantIntent.putExtra(RESTAURANT_NAME, word);
+            openRestaurantIntent.putExtra(RESTAURANT_URL, url);
+            ((Activity) context).startActivity(openRestaurantIntent);
+
+        }
+
 
 
     private void expandPanorama(int position){
@@ -369,6 +392,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         last_selected_property = currentProperties;
 
         notifyDataSetChanged();
+        goToMenu(position);
 
 
     }

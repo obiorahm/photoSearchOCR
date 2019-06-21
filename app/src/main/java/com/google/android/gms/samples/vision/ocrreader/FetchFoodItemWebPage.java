@@ -36,7 +36,7 @@ import java.util.Iterator;
 
 public class FetchFoodItemWebPage extends AsyncTask<String, Void, Document> {
 
-    String LOG_TAG = FetchWebPage.class.getSimpleName();
+    String LOG_TAG = FetchFoodItemWebPage.class.getSimpleName();
 
     Context context;
 
