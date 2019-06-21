@@ -237,11 +237,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
 
-        private void goToMenu(int position){
+        private void goToMenu(String word, String url){
 
-            final String[] restaurantData =  mData.get(position);
-            final String word = restaurantData[TITLE_POS];
-            final  String url = restaurantData[IMAGE_URL];
+
 
             Intent openRestaurantIntent = new Intent(context, OpenRestaurantMenuActivity.class);
             openRestaurantIntent.putExtra(RESTAURANT_NAME, word);
@@ -379,6 +377,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         if (holder.mRadioButton.isChecked()){
 
             holder.mRelativeLayout.setSelected(true);
+            Log.d(LOG_TAG, "restaurantUrl " + restaurantUrl);
             GeographyActivity.selected_item = restaurantName;
             GeographyActivity.selected_url = restaurantUrl;
 
@@ -392,7 +391,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         last_selected_property = currentProperties;
 
         notifyDataSetChanged();
-        goToMenu(position);
+        goToMenu(restaurantName, restaurantUrl);
 
 
     }
