@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 
 import android.graphics.Point;
@@ -39,6 +40,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     LayoutInflater inflater;
     Context context;
+    int resource;
     TextToSpeech myTTS;
     ArrayList<String[]> mData = new ArrayList<>();
     //private RecyclerView last_selected = null;
@@ -121,16 +123,18 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         }
 
-        public RestaurantAdapter(Context context){
+
+        public RestaurantAdapter(Context context, int resource, TextToSpeech myTTS){
             super();
             inflater = LayoutInflater.from(context);
             this.context = context;
-            myTTS = ((GeographyActivity) context).myTTS;
+            this.resource = resource;
+            this.myTTS = myTTS;
         }
 
         @Override
         public RestaurantAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-            View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.horizontal_text, null);
+            View convertView = LayoutInflater.from(parent.getContext()).inflate(resource, null);
             //RestaurantAdapter.ViewHolder viewHolder = new RestaurantAdapter.ViewHolder(convertView);
 
 
@@ -171,7 +175,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
             // setup horizontal text by text adapter
-            TextByTextAdapter adapter = new TextByTextAdapter(context, false);
+            TextByTextAdapter adapter = new TextByTextAdapter(context, false, myTTS);
 
             String tokenizedString [] = word.split(" ");
 
@@ -218,7 +222,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             );
 
             //hide progressBar
-            ProgressBar progressBar = ((GeographyActivity) context).findViewById(R.id.menu_progress);
+            ProgressBar progressBar = ((Activity) context).findViewById(R.id.menu_progress);
             progressBar.setVisibility(View.GONE);
 
 

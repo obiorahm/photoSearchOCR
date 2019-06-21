@@ -5,19 +5,20 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
@@ -28,30 +29,16 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.TileOverlay;
-import com.google.android.gms.maps.model.TileOverlayOptions;
-import com.google.android.gms.samples.vision.ocrreader.Adapter.PossiblePlacesAdapter;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
 import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.PhotoMetadata;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.FetchPhotoRequest;
-import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.maps.android.heatmaps.HeatmapTileProvider;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
-public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-    private GoogleMap mMap;
+public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, TextToSpeech.OnInitListener {
 
     Bundle mSavedInstance;
 
@@ -63,9 +50,15 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
 
     private FusedLocationProviderClient fusedLocationProviderClient;
 
-    private AddressResultReceiver resultReceiver;
-
     public static String RESTAURANT_ADDRESS = "com.google.android.gms.samples.vision.ocrreader.RESTAURANT_ADDRESS";
+
+    RestaurantAdapter adapter;
+
+    RecyclerView recyclerView;
+
+    private int MY_DATA_CHECK_CODE = 0;
+
+
 
 
 
@@ -89,123 +82,65 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 
+        //start text to speech
+        Intent checkTTSIntent = new Intent();
+        checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
+
+        if (myTTS == null)
+            myTTS = new TextToSpeech(this, this);
+
+
 
 
     }
-    float zoom = 256;
+
+
+    //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_DATA_CHECK_CODE) {
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                if (myTTS == null)
+                    myTTS = new TextToSpeech(this, this);
+            } else {
+                Intent installTTSIntent = new Intent();
+                installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installTTSIntent);
+            }
+        }
+    }
 
     private void getCurrentLocation(GoogleMap googleMap){
 
-
-        // Use fields to define the data types to return.
-        List<Place.Field > placeFields = Arrays.asList(Place.Field.LAT_LNG, Place.Field.ADDRESS, Place.Field.TYPES, Place.Field.PHOTO_METADATAS, Place.Field.ID);
-
-        // Use the builder to create a FindCurrentPlaceRequest.
-        FindCurrentPlaceRequest request = FindCurrentPlaceRequest.builder(placeFields).build();
-
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            placesClient.findCurrentPlace(request).addOnSuccessListener(((response) -> {
+            //addHeatMap(latLngList, googleMap);
 
-                LatLng firstPlace = new LatLng(-34, 151);
-                List<LatLng> latLngList = new ArrayList<>();
+            fusedLocationProviderClient.getLastLocation()
+                    .addOnSuccessListener((Location location)-> {
+                if (location != null){
+                    LatLng newLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    googleMap.addMarker(new MarkerOptions().position(newLatLng).title("leave it!"));
+                    googleMap.addCircle(new CircleOptions().center(newLatLng)
+                            .fillColor(Color.LTGRAY)
+                            .radius(10.0)
+                            .strokeColor(Color.RED)
+                    );
 
-                for (com.google.android.libraries.places.api.model.PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
-                    Log.i(LOG_TAG, String.format("Place '%s' has likelihood: %f" + placeLikelihood.getPlace().getTypes() /*+ placeLikelihood.getPlace().getLatLng().toString()*/,
-                            placeLikelihood.getPlace().getAddress(),
-                            placeLikelihood.getLikelihood()));
+                    CircleOptions circleOptions = new CircleOptions();
+                    circleOptions.clickable(true);
 
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLatLng, 17));
+                    startIntentService(location);
 
-                    //getGeocode(placeLikelihood.getPlace().getLatLng().latitude, placeLikelihood.getPlace().getLatLng().longitude);
-                    Place place = placeLikelihood.getPlace();
-                    Object [] data =  new Object[7];
-
-
-                    // Get the photo metadata.
-                    if (place.getPhotoMetadatas() != null){
-                        PhotoMetadata photoMetadata = place.getPhotoMetadatas().get(0);
-
-                        // Get the attribution text.
-                        //String attributions = photoMetadata.getAttributions();
-
-                        // Create a FetchPhotoRequest.
-                        FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                                .setMaxWidth(500) // Optional.
-                                .setMaxHeight(300) // Optional.
-                                .build();
-                        placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
-                            Bitmap bitmap = fetchPhotoResponse.getBitmap();
-
-                            data[PossiblePlacesAdapter.BITMAP] = bitmap;
-                            //adapter.notifyDataSetChanged();
-                        });
-
-                    }
-                    LatLng latLng = firstPlace = placeLikelihood.getPlace().getLatLng();
-
-
-                    data[PossiblePlacesAdapter.RESTAURANT_ADDRESS] = placeLikelihood.getPlace().getAddress();
-
-                    if (latLng != null){
-                        data[PossiblePlacesAdapter.LATITUDE] = latLng.latitude;
-                        data[PossiblePlacesAdapter.LONGITUDE] = latLng.longitude;
-
-                        latLngList.add(latLng);
-                        //googleMap.addMarker(new MarkerOptions().position(latLng).title((String) data[PossiblePlacesAdapter.RESTAURANT_ADDRESS]));
-
-                        //zoom = true;
-
-                    }
-
-                    //adapter.addItem(data);
-                    placeLikelihood.getPlace().getPhotoMetadatas();
+                    googleMap.setOnMarkerClickListener((Marker marker)-> {
+                        //startIntentService(location);
+                        return false;
+                    });
 
                 }
 
-                addHeatMap(latLngList, googleMap);
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(firstPlace, 18));
-
-                fusedLocationProviderClient.getLastLocation()
-                        .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                            @Override
-                            public void onSuccess(Location location) {
-                                if (location != null){
-                                    LatLng newLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                                    googleMap.addMarker(new MarkerOptions().position(newLatLng).title("leave it!"));
-                                    googleMap.addCircle(new CircleOptions().center(newLatLng)
-                                            .fillColor(Color.LTGRAY)
-                                            .radius(10.0)
-                                    .strokeColor(Color.RED)
-                                    );
-
-                                    CircleOptions circleOptions = new CircleOptions();
-                                    circleOptions.clickable(true);
-
-                                    googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                                        @Override
-                                        public boolean onMarkerClick(Marker marker) {
-                                            startIntentService(location);
-                                            return false;
-                                        }
-                                    });
-
-
-
-
-
-
-                                }
-
-                            }
-                        });
-
-
-
-                //get first place
-                //PlaceLikelihood firstPlace = response.getPlaceLikelihoods().get(0);
-
-
-
-            })).addOnFailureListener((exception) -> {
+            }).addOnFailureListener((exception) -> {
                 if (exception instanceof ApiException) {
                     ApiException apiException = (ApiException) exception;
                     Log.e(LOG_TAG, "Place not found: " + apiException.getStatusCode());
@@ -241,17 +176,6 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
 
     }
 
-
-    private void addHeatMap(List<LatLng> list, GoogleMap mMap) {
-
-
-        // Create a heat map tile provider, passing it the latlngs of the police stations.
-        HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder()
-                .data(list)
-                .build();
-        // Add a tile overlay to the map, using the heat map tile provider.
-        TileOverlay mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
-    }
 
 
 
@@ -294,7 +218,7 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
 
 
     class AddressResultReceiver extends ResultReceiver{
-        public AddressResultReceiver(Handler handler){
+        private AddressResultReceiver(Handler handler){
             super(handler);
         }
 
@@ -310,11 +234,10 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
             if (addressOutput == null) {
                 addressOutput = "";
             }
-            displayAddressOutput(addressOutput);
 
             // Show a toast message if an address was found.
             if (resultCode == Constants.SUCCESS_RESULT) {
-
+                displayAddressOutput(addressOutput);
                 //Toast.makeText(getString(R.string.address_found));
             }
 
@@ -324,9 +247,44 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
     private void displayAddressOutput(String addressOutput){
         Log.d(LOG_TAG + " output address", addressOutput);
 
-        Intent intent = new Intent(getApplicationContext(), GeographyActivity.class);
+        /*Intent intent = new Intent(getApplicationContext(), GeographyActivity.class);
         intent.putExtra(RESTAURANT_ADDRESS, addressOutput);
-        startActivity(intent);
+        startActivity(intent);*/
+
+        setUpRecycler(addressOutput);
+    }
+
+
+
+    private void setUpRecycler(String address){
+        recyclerView = findViewById(R.id.on_map_recycler);
+        if (myTTS == null)
+                myTTS = new TextToSpeech(this,this);
+        adapter = new RestaurantAdapter( this, R.layout.restaurant_adapter, myTTS);
+
+        // apparently the recycler view does not work without setting up a layout manager
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        if (address != null){
+            getNearbyPlaces(address);
+        }
+    }
+
+
+    private void getNearbyPlaces(String address){
+
+        displayCurrentLocation(address);
+
+    }
+
+
+    private void displayCurrentLocation(String address){
+        if (address != null){
+            FetchWebPage fetchWebPage = new FetchWebPage(this, adapter);
+            fetchWebPage.execute(address, "encode");
+        }
+        recyclerView.setAdapter(adapter);
     }
 
 
@@ -343,6 +301,22 @@ public class CurrentPlaceMap extends FragmentActivity implements OnMapReadyCallb
     @Override
     public void onConnectionSuspended(int cause){
 
+    }
+
+    @Override
+    public void onInit(int initStatus){
+
+    }
+
+
+    @Override
+    public void onDestroy() {
+        // Don't forget to shutdown tts!
+        if (myTTS != null) {
+            myTTS.stop();
+            myTTS.shutdown();
+        }
+        super.onDestroy();
     }
 
 }

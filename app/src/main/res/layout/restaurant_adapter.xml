@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/relative_layout"
+    android:clipToPadding="false"
+    android:padding="5dp"
+    android:layout_margin="15dp">
+
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/internal_relative_layout"
+
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:paddingLeft="10dp"
+
+
+        android:background="@drawable/selector_row"
+        >
+
+        <!--android:background="@drawable/selector_row"-->
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/select_option"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="5dp"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/descriptive_image"
+            android:layout_below="@id/speak_whole_text"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"/>
+
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/enlarged_image"
+            android:layout_below="@id/speak_whole_text"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
+
+
+
+        <!--com.google.android.gms.samples.vision.ocrreader.ui.project.ProjectRecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_by_text"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_toRightOf="@id/descriptive_image">
+
+        </com.google.android.gms.samples.vision.ocrreader.ui.project.ProjectRecyclerView-->
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_by_text"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_below="@id/descriptive_image"
+
+
+            />
+        <!--android:layout_toLeftOf="@+id/speak_whole_text"-->
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_volume_up_black_48dp"
+            android:layout_alignParentRight="true"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:backgroundTint="@color/transparent"
+            android:tint="@color/grey"
+            android:id="@+id/speak_whole_text"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_expand_more_black_48"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/speak_whole_text"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:backgroundTint="@color/transparent"
+            android:tint="@color/grey"
+            android:id="@+id/expand_more"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_expand_less_black_48"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/speak_whole_text"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:backgroundTint="@color/transparent"
+            android:tint="@color/grey"
+            android:id="@+id/expand_less"
+            android:visibility="gone"/>
+
+        <com.google.android.gms.maps.StreetViewPanoramaView
+            android:name="com.google.android.gms.maps.StreetViewPanoramaView"
+            android:layout_width="wrap_content"
+            android:layout_height="500dp"
+            android:layout_below="@id/descriptive_image"
+            android:id="@+id/streetviewpanorama"
+            android:visibility="gone"
+            android:padding="10dp">
+        </com.google.android.gms.maps.StreetViewPanoramaView>
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

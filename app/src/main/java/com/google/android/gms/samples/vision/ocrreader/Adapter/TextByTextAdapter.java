@@ -64,6 +64,15 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
 
     }
 
+    public TextByTextAdapter(Context context, boolean notFoodItem, TextToSpeech myTTS){
+        super();
+        inflater = LayoutInflater.from(context);
+        this.context = context;
+        myTTS = myTTS;
+        notFoodItem = notFoodItem;
+
+    }
+
 
     @Override
     public TextByTextAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){

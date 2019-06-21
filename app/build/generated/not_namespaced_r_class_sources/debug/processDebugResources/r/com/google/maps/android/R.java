@@ -88,12 +88,12 @@ public final class R {
         public static final int light = 0x7f080089;
         public static final int none = 0x7f0800ab;
         public static final int normal = 0x7f0800ac;
-        public static final int satellite = 0x7f0800e4;
-        public static final int standard = 0x7f08010f;
-        public static final int terrain = 0x7f080119;
-        public static final int webview = 0x7f080130;
-        public static final int wide = 0x7f080131;
-        public static final int window = 0x7f080132;
+        public static final int satellite = 0x7f0800e5;
+        public static final int standard = 0x7f080110;
+        public static final int terrain = 0x7f08011a;
+        public static final int webview = 0x7f080131;
+        public static final int wide = 0x7f080132;
+        public static final int window = 0x7f080133;
     }
     public static final class integer {
         private integer() {}

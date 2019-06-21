@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ImageView;
@@ -36,7 +37,7 @@ import opennlp.tools.stemmer.Stemmer;
  * Created by mgo983 on 9/6/18.
  */
 
-public class UseRecyclerActivity extends Activity  {
+public class UseRecyclerActivity extends FragmentActivity  {
 
     public static TextToSpeech myTTS;
 

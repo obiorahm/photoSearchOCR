@@ -1563,6 +1563,7 @@ id normal
 id notification_background
 id notification_main_column
 id notification_main_column_container
+id on_map_recycler
 id option_icons
 id option_item
 id order_meal_text
@@ -1801,6 +1802,7 @@ layout places_autocomplete_search_bar
 layout recipe_item_list
 layout recipe_list
 layout recognized_text_item
+layout restaurant_adapter
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
