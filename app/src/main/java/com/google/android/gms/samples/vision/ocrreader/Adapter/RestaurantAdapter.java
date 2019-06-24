@@ -81,7 +81,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         private ImageView mImageView;
         private ImageView mEnlargedImageView;
         private RadioButton mRadioButton;
-        private StreetViewPanoramaView mStreetViewPanoramaView;
+        //private StreetViewPanoramaView mStreetViewPanoramaView;
         private ImageButton mImageButtonExpandMore;
         private ImageButton mImageButtonExpandLess;
         //private Fragment mFragemnt;
@@ -95,7 +95,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             mImageButton = convertView.findViewById(R.id.speak_whole_text);
             mImageView = convertView.findViewById(R.id.descriptive_image);
             mEnlargedImageView = convertView.findViewById(R.id.enlarged_image);
-            mStreetViewPanoramaView = convertView.findViewById(R.id.streetviewpanorama);
+            //mStreetViewPanoramaView = convertView.findViewById(R.id.streetviewpanorama);
 
             mRadioButton = convertView.findViewById(R.id.select_option);
 
@@ -171,14 +171,17 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             if (isPanoramaVisible == View.VISIBLE){
                 holder.mImageButtonExpandLess.setVisibility(View.VISIBLE);
                 holder.mImageButtonExpandMore.setVisibility(View.GONE);
-                ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
+                StreetViewPanoramaView streetViewPanoramaView = ((Activity) context).findViewById(R.id.streetviewpanorama);
+                //((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
+                ((UseRecyclerActivity) context).setUpPanorama(streetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
             }else{
                 holder.mImageButtonExpandLess.setVisibility(View.GONE);
                 holder.mImageButtonExpandMore.setVisibility(View.VISIBLE);
 
             }
 
-            holder.mStreetViewPanoramaView.setVisibility(isPanoramaVisible);
+            //holder.mStreetViewPanoramaView.setVisibility(isPanoramaVisible);
+            ((Activity) context).findViewById(R.id.streetviewpanorama).setVisibility(isPanoramaVisible);
 
 
             // setup horizontal text by text adapter

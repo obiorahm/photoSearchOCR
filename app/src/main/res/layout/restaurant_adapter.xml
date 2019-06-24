@@ -35,7 +35,6 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/descriptive_image"
-            android:layout_below="@id/speak_whole_text"
             android:layout_margin="10dp"
             android:scaleType="centerCrop"/>
 
@@ -45,7 +44,6 @@
             android:layout_height="150dp"
             android:scaleType="centerCrop"
             android:id="@+id/enlarged_image"
-            android:layout_below="@id/speak_whole_text"
             android:layout_centerVertical="true"
             android:visibility="gone"/>
 
@@ -65,8 +63,6 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:id="@+id/text_by_text"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
             android:layout_below="@id/descriptive_image"
 
 
@@ -107,16 +103,6 @@
             android:tint="@color/grey"
             android:id="@+id/expand_less"
             android:visibility="gone"/>
-
-        <com.google.android.gms.maps.StreetViewPanoramaView
-            android:name="com.google.android.gms.maps.StreetViewPanoramaView"
-            android:layout_width="wrap_content"
-            android:layout_height="500dp"
-            android:layout_below="@id/descriptive_image"
-            android:id="@+id/streetviewpanorama"
-            android:visibility="gone"
-            android:padding="10dp">
-        </com.google.android.gms.maps.StreetViewPanoramaView>
 
 
     </RelativeLayout>

@@ -1276,6 +1276,7 @@ drawable baseline_reorder_white_48
 drawable baseline_toggle_off_white_48dp
 drawable baseline_toggle_on_white_48dp
 drawable baseline_volume_up_black_18dp
+drawable black_border
 drawable border
 drawable circular_button
 drawable colorchart

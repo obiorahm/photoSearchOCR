@@ -16,14 +16,15 @@
     </fragment>
 
     <android.support.v7.widget.RecyclerView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/on_map_recycler"
-        android:layout_alignParentBottom="true"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/on_map_recycler"
+        android:layout_above="@id/streetviewpanorama"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         />
 
     <ProgressBar
@@ -33,4 +34,15 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/menu_progress"
         />
+
+    <com.google.android.gms.maps.StreetViewPanoramaView
+        android:name="com.google.android.gms.maps.StreetViewPanoramaView"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/streetviewpanorama"
+        android:visibility="gone"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+    </com.google.android.gms.maps.StreetViewPanoramaView>
 </RelativeLayout>

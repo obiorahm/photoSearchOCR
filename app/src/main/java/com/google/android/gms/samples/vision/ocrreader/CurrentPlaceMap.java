@@ -28,17 +28,23 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
+import com.google.android.gms.maps.StreetViewPanorama;
+import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
+import com.google.android.gms.maps.model.StreetViewSource;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
 
-public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, TextToSpeech.OnInitListener {
+
+public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, TextToSpeech.OnInitListener, OnStreetViewPanoramaReadyCallback, Runnable {
 
     Bundle mSavedInstance;
 
@@ -57,6 +63,12 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
     RecyclerView recyclerView;
 
     private int MY_DATA_CHECK_CODE = 0;
+
+    double LONGITUDE = 151.20689;
+
+    double LATITUDE = -33.87365;
+
+    public Handler handler = new Handler();
 
 
 
@@ -287,6 +299,48 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
         recyclerView.setAdapter(adapter);
     }
 
+
+
+    @Override
+    public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView, String longitude, String latitude){
+        LONGITUDE = longitude.equals("")? LONGITUDE : Double.valueOf(longitude);
+        LATITUDE = latitude.equals("") ? LATITUDE : Double.valueOf(latitude);
+
+        streetViewPanoramaView.onCreate(mSavedInstance);
+        streetViewPanoramaView.getStreetViewPanoramaAsync(this);
+    }
+
+    StreetViewPanorama curr_panorama;
+
+    @Override
+    public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
+        panorama.setPosition(new LatLng(LATITUDE, LONGITUDE), 50, StreetViewSource.OUTDOOR);
+        curr_panorama = panorama;
+        handler.postDelayed(this, 1000);
+
+
+    }
+
+
+
+    private void panScreen(){
+// Keeping the zoom and tilt. Animate bearing by 60 degrees in 1000 milliseconds.
+        long duration = 2000;
+        StreetViewPanoramaCamera camera =
+                new StreetViewPanoramaCamera.Builder()
+                        .zoom(curr_panorama.getPanoramaCamera().zoom)
+                        .tilt(curr_panorama.getPanoramaCamera().tilt)
+                        .bearing(curr_panorama.getPanoramaCamera().bearing - 60)
+                        .build();
+        curr_panorama.animateTo(camera, duration);
+        handler.postDelayed(this, duration);
+    }
+
+
+    @Override
+    public void run(){
+        panScreen();
+    }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
