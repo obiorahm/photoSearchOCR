@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
@@ -29,6 +29,8 @@
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter$ViewHolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter$ViewHolder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/CurrentPlaceMap$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/CurrentPlaceMap$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/CurrentPlaceMap$AddressResultReceiver.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/CurrentPlaceMap$AddressResultReceiver.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/CurrentPlaceMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/google/android/gms/samples/vision/ocrreader/CurrentPlaceMap.class" afterDir="false" />
@@ -48,6 +50,8 @@
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter$2.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter$ViewHolder.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter$ViewHolder.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/CurrentPlaceMap$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/CurrentPlaceMap$1.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/CurrentPlaceMap$AddressResultReceiver.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/CurrentPlaceMap$AddressResultReceiver.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/CurrentPlaceMap.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/104/com/google/android/gms/samples/vision/ocrreader/CurrentPlaceMap.dex" afterDir="false" />
@@ -117,7 +121,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="141" />
-          <entry key="java" value="22797" />
+          <entry key="java" value="22803" />
           <entry key="txt" value="6" />
           <entry key="xml" value="3862" />
         </counts>
@@ -125,7 +129,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="141" />
-          <entry key="JAVA" value="22797" />
+          <entry key="JAVA" value="22803" />
           <entry key="PLAIN_TEXT" value="6" />
           <entry key="XML" value="3862" />
         </counts>
@@ -178,11 +182,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="347">
-              <caret line="96" column="62" lean-forward="true" selection-start-line="96" selection-start-column="62" selection-end-line="96" selection-end-column="62" />
+              <caret line="96" column="62" selection-start-line="96" selection-start-column="62" selection-end-line="96" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -190,8 +194,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="119" column="13" lean-forward="true" selection-start-line="119" selection-start-column="13" selection-end-line="119" selection-end-column="13" />
+            <state relative-caret-position="264">
+              <caret line="68" column="45" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -256,11 +260,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/map_activity.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="49" selection-start-line="49" selection-end-line="49" />
+            <state relative-caret-position="383">
+              <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
@@ -1064,11 +1068,11 @@
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/selector_row.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/CurrentPlaceMap.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/restaurant_adapter.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/map_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/RestaurantAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/UseRecyclerActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/map_activity.xml" />
       </list>
     </option>
   </component>
@@ -1521,7 +1525,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="830" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49411765" visible="true" weight="0.23962805" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49411765" visible="true" weight="0.23962805" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Build Variants" order="3" side_tool="true" />
@@ -1539,9 +1543,9 @@
       <window_info anchor="bottom" id="Gradle Console" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Android Profiler" order="8" weight="0.32819074" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5164521" side_tool="true" weight="0.23420075" />
-      <window_info anchor="bottom" id="Logcat" order="10" sideWeight="0.48354793" visible="true" weight="0.20979021" />
+      <window_info anchor="bottom" id="Logcat" order="10" sideWeight="0.48354793" weight="0.20979021" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49928468" weight="0.16503496" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4985694" weight="0.18321678" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.4985694" visible="true" weight="0.18321678" />
       <window_info anchor="bottom" id="Messages" order="13" sideWeight="0.48993963" weight="0.2517581" />
       <window_info anchor="bottom" id="Build" order="14" sideWeight="0.49213162" weight="0.23754789" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -1950,14 +1954,6 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/map_activity.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/GeographyActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1101">
@@ -2009,19 +2005,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="119" column="13" lean-forward="true" selection-start-line="119" selection-start-column="13" selection-end-line="119" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapterIntercept.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347">
-          <caret line="96" column="62" lean-forward="true" selection-start-line="96" selection-start-column="62" selection-end-line="96" selection-end-column="62" />
+          <caret line="96" column="62" selection-start-line="96" selection-start-column="62" selection-end-line="96" selection-end-column="62" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/android/gms/samples/vision/ocrreader/Adapter/TextByTextAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="68" column="45" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/map_activity.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
   </component>
   <component name="masterDetails">
