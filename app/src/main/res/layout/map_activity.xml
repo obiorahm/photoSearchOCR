@@ -15,51 +15,62 @@
 
     </fragment>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/on_map_recycler"
-        android:layout_above="@id/expand_more"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        />
-    <ImageButton
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/expand_more"
-        android:src="@drawable/baseline_expand_more_black_48"
-        android:background="@drawable/circular_button"/>
+        android:background="@color/white">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/expand_less"
-        android:src="@drawable/baseline_expand_less_black_48"
-        android:background="@drawable/circular_button"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/on_map_recycler"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/menu_progress"
-        />
 
-    <com.google.android.gms.maps.StreetViewPanoramaView
-        android:name="com.google.android.gms.maps.StreetViewPanoramaView"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/streetviewpanorama"
-        android:visibility="gone"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp">
-    </com.google.android.gms.maps.StreetViewPanoramaView>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/menu_progress"
+            />
+
+        <com.google.android.gms.maps.StreetViewPanoramaView
+            android:name="com.google.android.gms.maps.StreetViewPanoramaView"
+            android:layout_width="wrap_content"
+            android:layout_height="500dp"
+            android:layout_below="@id/on_map_recycler"
+            android:id="@+id/streetviewpanorama"
+            android:visibility="gone">
+        </com.google.android.gms.maps.StreetViewPanoramaView>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/streetviewpanorama"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/expand_more"
+            android:src="@drawable/baseline_expand_more_black_48"
+            android:background="@drawable/circular_button"
+            android:tint="@color/silver"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/streetviewpanorama"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/expand_less"
+            android:src="@drawable/baseline_expand_less_black_48"
+            android:background="@drawable/circular_button"
+            android:tint="@color/silver"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+
 </RelativeLayout>

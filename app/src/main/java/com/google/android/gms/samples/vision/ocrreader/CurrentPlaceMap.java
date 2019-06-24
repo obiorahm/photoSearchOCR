@@ -19,6 +19,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
@@ -64,9 +66,9 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
 
     private int MY_DATA_CHECK_CODE = 0;
 
-    double LONGITUDE = 151.20689;
+    public static double LONGITUDE = 151.20689;
 
-    double LATITUDE = -33.87365;
+    public static double LATITUDE = -33.87365;
 
     public Handler handler = new Handler();
 
@@ -103,8 +105,28 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
             myTTS = new TextToSpeech(this, this);
 
 
+        ImageButton expandmore = findViewById(R.id.expand_more);
+        ImageButton expandless = findViewById(R.id.expand_less);
+        StreetViewPanoramaView streetViewPanoramaView = findViewById(R.id.streetviewpanorama);
+
+        expandmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                expandmore.setVisibility(View.GONE);
+                expandless.setVisibility(View.VISIBLE);
+                streetViewPanoramaView.setVisibility(View.VISIBLE);
+            }
+        });
 
 
+        expandless.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                expandmore.setVisibility(View.VISIBLE);
+                expandless.setVisibility(View.GONE);
+                streetViewPanoramaView.setVisibility(View.GONE);
+            }
+        });
     }
 
 
@@ -302,9 +324,11 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
 
 
     @Override
-    public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView, String longitude, String latitude){
-        LONGITUDE = longitude.equals("")? LONGITUDE : Double.valueOf(longitude);
-        LATITUDE = latitude.equals("") ? LATITUDE : Double.valueOf(latitude);
+    public void setUpPanorama(){
+        //LONGITUDE = longitude.equals("")? LONGITUDE : Double.valueOf(longitude);
+        //LATITUDE = latitude.equals("") ? LATITUDE : Double.valueOf(latitude);
+
+        StreetViewPanoramaView streetViewPanoramaView = findViewById(R.id.streetviewpanorama);
 
         streetViewPanoramaView.onCreate(mSavedInstance);
         streetViewPanoramaView.getStreetViewPanoramaAsync(this);

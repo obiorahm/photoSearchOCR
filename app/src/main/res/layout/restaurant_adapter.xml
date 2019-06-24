@@ -13,7 +13,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/internal_relative_layout"
-
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:paddingLeft="10dp"
@@ -24,16 +23,17 @@
 
         <!--android:background="@drawable/selector_row"-->
 
-        <!--android.support.v7.widget.AppCompatRadioButton
+        <android.support.v7.widget.AppCompatRadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/select_option"
             android:layout_alignParentLeft="true"
-            android:layout_margin="5dp"/-->
+            android:layout_margin="5dp"/>
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_toRightOf="@id/select_option"
             android:id="@+id/descriptive_image"
             android:layout_margin="10dp"
             android:scaleType="centerCrop"/>
@@ -45,6 +45,7 @@
             android:scaleType="centerCrop"
             android:id="@+id/enlarged_image"
             android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/select_option"
             android:visibility="gone"/>
 
 

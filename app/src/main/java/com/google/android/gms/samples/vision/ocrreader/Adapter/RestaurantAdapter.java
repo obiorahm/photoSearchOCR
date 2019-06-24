@@ -27,6 +27,7 @@ import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 
+import com.google.android.gms.samples.vision.ocrreader.CurrentPlaceMap;
 import com.google.android.gms.samples.vision.ocrreader.GeographyActivity;
 import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
@@ -164,10 +165,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mEnlargedImageView.setVisibility((int) properties[IS_LOGO_ENLARGED]);
 
             holder.mRelativeLayout.setSelected((boolean) properties[IS_RELATIVE_LAYOUT_SELECTED]);
-            //holder.mRadioButton.setChecked((boolean) properties[IS_RELATIVE_LAYOUT_SELECTED]);
+            holder.mRadioButton.setChecked((boolean) properties[IS_RELATIVE_LAYOUT_SELECTED]);
 
-            ImageButton expand_more = ((UseRecyclerActivity) context).findViewById(R.id.expand_more);
-            ImageButton expand_less = ((UseRecyclerActivity) context).findViewById(R.id.expand_less);
 
             //set up panorama if properties[IS_PANORORAMA_VISIBLE] is visible
             int isPanoramaVisible =  (int) properties[IS_PANORAMA_VISIBLE];
@@ -175,23 +174,18 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 //holder.mImageButtonExpandLess.setVisibility(View.VISIBLE);
                 //holder.mImageButtonExpandMore.setVisibility(View.GONE);
 
-                expand_more.setVisibility(View.GONE);
-                expand_less.setVisibility(View.VISIBLE);
-
-                StreetViewPanoramaView streetViewPanoramaView = ((Activity) context).findViewById(R.id.streetviewpanorama);
+                //StreetViewPanoramaView streetViewPanoramaView = ((Activity) context).findViewById(R.id.streetviewpanorama);
                 //((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
-                ((UseRecyclerActivity) context).setUpPanorama(streetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
+                //((UseRecyclerActivity) context).setUpPanorama(streetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
             }else{
                 //holder.mImageButtonExpandLess.setVisibility(View.GONE);
                 //holder.mImageButtonExpandMore.setVisibility(View.VISIBLE);
 
-                expand_less.setVisibility(View.GONE);
-                expand_more.setVisibility(View.VISIBLE);
 
             }
 
             //holder.mStreetViewPanoramaView.setVisibility(isPanoramaVisible);
-            ((Activity) context).findViewById(R.id.streetviewpanorama).setVisibility(isPanoramaVisible);
+            //((Activity) context).findViewById(R.id.streetviewpanorama).setVisibility(isPanoramaVisible);
 
 
             // setup horizontal text by text adapter
@@ -224,14 +218,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 Glide.with(context).load(imageUrl).into(holder.mEnlargedImageView);
 
 
-            holder.mImageView.setOnClickListener(view ->
-                    control_select(holder, position));
+            holder.mImageView.setOnClickListener(view ->goToMenu(word,url));
+                    //control_select(holder, position));
                 //enlargeImage((ImageView) view,holder.mEnlargedImageView, holder, position));
 
             Log.d(LOG_TAG, "internet " + url);
 
 
-            //holder.mRadioButton.setOnClickListener((view)-> control_select(holder, position));
+            holder.mRadioButton.setOnClickListener((view)-> control_select(holder, position));
 
 
             /*holder.mImageButtonExpandMore.setOnClickListener((view) ->
@@ -257,8 +251,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
             Intent openRestaurantIntent = new Intent(context, OpenRestaurantMenuActivity.class);
-            openRestaurantIntent.putExtra(RESTAURANT_NAME, word);
-            openRestaurantIntent.putExtra(RESTAURANT_URL, url);
+            openRestaurantIntent.putExtra(RESTAURANT_NAME, CurrentPlaceMap.selected_item);
+            openRestaurantIntent.putExtra(RESTAURANT_URL, CurrentPlaceMap.selected_url);
             ((Activity) context).startActivity(openRestaurantIntent);
 
         }
@@ -316,6 +310,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         String restaurantUrl = restaurantData[URL_POS];
         String restaurantName = restaurantData[TITLE_POS];
         Object[] currentProperties =  mDataProperties.get(position);
+        String longitude = restaurantData[LONGITUDE];
+        String latitude = restaurantData[LATITUDE];
 
         last_selected_rl = GeographyActivity.last_rl_parent;
         Log.d(LOG_TAG, "last_selected_rl " + last_selected_rl );
@@ -337,12 +333,17 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
             holder.mRelativeLayout.setSelected(true);
             Log.d(LOG_TAG, "restaurantUrl " + restaurantUrl);
-            GeographyActivity.selected_item = restaurantName;
-            GeographyActivity.selected_url = restaurantUrl;
+            CurrentPlaceMap.selected_item = restaurantName;
+            CurrentPlaceMap.selected_url = restaurantUrl;
 
             //update properties
             //currentProperties[IS_PANORAMA_VISIBLE] = View.VISIBLE;
             currentProperties[IS_RELATIVE_LAYOUT_SELECTED] = true;
+
+            //updated selected longitude and latitude
+            CurrentPlaceMap.LONGITUDE = longitude.equals("")? LONGITUDE : Double.valueOf(longitude);
+            CurrentPlaceMap.LATITUDE = latitude.equals("") ? LATITUDE : Double.valueOf(latitude);
+            ((UseRecyclerActivity) context).setUpPanorama();
 
 
         }
@@ -350,7 +351,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         last_selected_property = currentProperties;
 
         notifyDataSetChanged();
-        goToMenu(restaurantName, restaurantUrl);
+        //goToMenu(restaurantName, restaurantUrl);
 
 
     }

@@ -44,6 +44,8 @@ public class UseRecyclerActivity extends FragmentActivity  {
     //selected meal, restaurant
     public static String selected_item = "";
 
+    public static String selected_url = "";
+
     public static RecyclerView last_parent_di;
 
     public static RelativeLayout last_rl_parent;
@@ -97,6 +99,11 @@ public class UseRecyclerActivity extends FragmentActivity  {
      */
 
     public void setUpPanorama(StreetViewPanoramaView streetViewPanoramaView, String longitude, String Latitude ){
+
+    }
+
+
+    public void setUpPanorama( ){
 
     }
 

@@ -68,7 +68,7 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
-        myTTS = myTTS;
+        this.myTTS = myTTS;
         notFoodItem = notFoodItem;
 
     }
@@ -112,6 +112,7 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
         });*/
 
         holder.mTextView.setOnClickListener((View view)->{
+            myTTS.speak(word,TextToSpeech.QUEUE_FLUSH, null,null);
             if (holder.mImageView.getVisibility() == View.VISIBLE){
                 holder.mImageView.setVisibility(View.GONE);
             }else{
