@@ -164,19 +164,29 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mEnlargedImageView.setVisibility((int) properties[IS_LOGO_ENLARGED]);
 
             holder.mRelativeLayout.setSelected((boolean) properties[IS_RELATIVE_LAYOUT_SELECTED]);
-            holder.mRadioButton.setChecked((boolean) properties[IS_RELATIVE_LAYOUT_SELECTED]);
+            //holder.mRadioButton.setChecked((boolean) properties[IS_RELATIVE_LAYOUT_SELECTED]);
+
+            ImageButton expand_more = ((UseRecyclerActivity) context).findViewById(R.id.expand_more);
+            ImageButton expand_less = ((UseRecyclerActivity) context).findViewById(R.id.expand_less);
 
             //set up panorama if properties[IS_PANORORAMA_VISIBLE] is visible
             int isPanoramaVisible =  (int) properties[IS_PANORAMA_VISIBLE];
             if (isPanoramaVisible == View.VISIBLE){
-                holder.mImageButtonExpandLess.setVisibility(View.VISIBLE);
-                holder.mImageButtonExpandMore.setVisibility(View.GONE);
+                //holder.mImageButtonExpandLess.setVisibility(View.VISIBLE);
+                //holder.mImageButtonExpandMore.setVisibility(View.GONE);
+
+                expand_more.setVisibility(View.GONE);
+                expand_less.setVisibility(View.VISIBLE);
+
                 StreetViewPanoramaView streetViewPanoramaView = ((Activity) context).findViewById(R.id.streetviewpanorama);
                 //((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
                 ((UseRecyclerActivity) context).setUpPanorama(streetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
             }else{
-                holder.mImageButtonExpandLess.setVisibility(View.GONE);
-                holder.mImageButtonExpandMore.setVisibility(View.VISIBLE);
+                //holder.mImageButtonExpandLess.setVisibility(View.GONE);
+                //holder.mImageButtonExpandMore.setVisibility(View.VISIBLE);
+
+                expand_less.setVisibility(View.GONE);
+                expand_more.setVisibility(View.VISIBLE);
 
             }
 
@@ -198,14 +208,16 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
             holder.mRecyclerView.setAdapter(adapter);
 
+            holder.mRecyclerView.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
+
 
 
             holder.mBackground.setOnClickListener((View view) -> {
-                holder.mRadioButton.setChecked(true);
+                //holder.mRadioButton.setChecked(true);
                 control_select(holder, position);});
 
 
-            holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
+            //holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
 
             String imageUrl = buildImageUrl(url);
                 Glide.with(context).load(imageUrl).into(holder.mImageView);
@@ -213,23 +225,23 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
             holder.mImageView.setOnClickListener(view ->
-                enlargeImage((ImageView) view,holder.mEnlargedImageView, holder, position));
+                    control_select(holder, position));
+                //enlargeImage((ImageView) view,holder.mEnlargedImageView, holder, position));
 
             Log.d(LOG_TAG, "internet " + url);
 
 
-            holder.mRadioButton.setOnClickListener((view)-> control_select(holder, position));
+            //holder.mRadioButton.setOnClickListener((view)-> control_select(holder, position));
 
-            //holder.mRadioButton.setOnClickListener((view)-> goToMenu(position));
 
-            holder.mImageButtonExpandMore.setOnClickListener((view) ->
+            /*holder.mImageButtonExpandMore.setOnClickListener((view) ->
                 expandPanorama(position)
             );
 
 
             holder.mImageButtonExpandLess.setOnClickListener((view) ->
                 hidePanorama(position)
-            );
+            );*/
 
             //hide progressBar
             ProgressBar progressBar = ((Activity) context).findViewById(R.id.menu_progress);
@@ -297,62 +309,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         return logo;
 
     }
-
-
-
-
-/*    private void control_select(RestaurantAdapter.ViewHolder holder, String[] restaurantData, int position){
-        String restaurantUrl = restaurantData[URL_POS];
-        String restaurantName = restaurantData[TITLE_POS];
-        Object[] currentProperties =  mDataProperties.get(position);
-
-        last_selected_rl = GeographyActivity.last_rl_parent;
-        Log.d(LOG_TAG, "last_selected_rl " + last_selected_rl );
-        if ( last_selected_property != null && last_selected_property != currentProperties){
-
-                //update properties
-            last_selected_property[IS_PANORAMA_VISIBLE] = View.GONE;
-            last_selected_property[IS_LOGO_ENLARGED] = View.GONE;
-            last_selected_property[IS_RELATIVE_LAYOUT_SELECTED] = false;
-
-
-            //to enable redraw of view with new properties
-            notifyDataSetChanged();
-
-
-        }
-        if( (boolean) currentProperties[IS_RELATIVE_LAYOUT_SELECTED]){
-            holder.mRelativeLayout.setSelected(false);
-            holder.mStreetViewPanoramaView.setVisibility(View.GONE);
-
-            //update properties
-            currentProperties[IS_PANORAMA_VISIBLE] = View.GONE;
-            //currentProperties[IS_LOGO_ENLARGED] = View.GONE;
-            //zoomImageFromTHumb(holder.mImageView, holder.mEnlargedImageView, holder, position);
-
-            currentProperties[IS_RELATIVE_LAYOUT_SELECTED] = false;
-
-        }else{
-            holder.mRelativeLayout.setSelected(true);
-            GeographyActivity.selected_item = restaurantName;
-            GeographyActivity.selected_url = restaurantUrl;
-            holder.mStreetViewPanoramaView.setVisibility(View.VISIBLE);
-
-            //update properties
-            currentProperties[IS_PANORAMA_VISIBLE] = View.VISIBLE;
-            currentProperties[IS_RELATIVE_LAYOUT_SELECTED] = true;
-
-
-            ((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
-
-        }
-        last_selected_property = currentProperties;
-
-
-        //set up panorama
-
-
-    }*/
 
 
     private void control_select(RestaurantAdapter.ViewHolder holder, int position){
