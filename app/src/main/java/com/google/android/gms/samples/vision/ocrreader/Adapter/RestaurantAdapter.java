@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.speech.tts.TextToSpeech;
@@ -25,6 +26,7 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 
 import com.google.android.gms.samples.vision.ocrreader.CurrentPlaceMap;
@@ -32,8 +34,16 @@ import com.google.android.gms.samples.vision.ocrreader.GeographyActivity;
 import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.PhotoMetadata;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.FetchPhotoRequest;
+import com.google.android.libraries.places.api.net.FetchPlaceRequest;
+import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by mgo983 on 10/17/18.
@@ -154,6 +164,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             final String[] restaurantData =  mData.get(position);
             final String word = restaurantData[TITLE_POS];
             final  String url = restaurantData[IMAGE_URL];
+            final String placeId = restaurantData[PLACE_ID_POS];
 
             final Object[] properties = mDataProperties.get(position);
 
@@ -214,8 +225,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             //holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
 
             String imageUrl = buildImageUrl(url);
+            if (imageUrl.equals("")){
                 Glide.with(context).load(imageUrl).into(holder.mImageView);
                 Glide.with(context).load(imageUrl).into(holder.mEnlargedImageView);
+            }else {
+                buildImageFromPlaces(placeId, holder);
+            }
 
 
             holder.mImageView.setOnClickListener(view ->goToMenu(word,url));
@@ -305,6 +320,46 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     }
 
 
+    private void buildImageFromPlaces(String placeId, ViewHolder holder){
+
+        PlacesClient placesClient = Places.createClient(context);
+
+
+        // Specify fields. Requests for photos must always have the PHOTO_METADATAS field.
+        List<Place.Field> fields = Arrays.asList(Place.Field.PHOTO_METADATAS);
+
+        // Get a Place object (this example uses fetchPlace(), but you can also use findCurrentPlace())
+        FetchPlaceRequest placeRequest = FetchPlaceRequest.builder(placeId, fields).build();
+
+        placesClient.fetchPlace(placeRequest).addOnSuccessListener((response) -> {
+            Place place = response.getPlace();
+
+            // Get the photo metadata.
+            PhotoMetadata photoMetadata = place.getPhotoMetadatas().get(0);
+
+            // Get the attribution text.
+            String attributions = photoMetadata.getAttributions();
+
+            // Create a FetchPhotoRequest.
+            FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
+                    .setMaxWidth(500) // Optional.
+                    .setMaxHeight(300) // Optional.
+                    .build();
+            placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
+                Bitmap bitmap = fetchPhotoResponse.getBitmap();
+                Glide.with(context).load(bitmap).into(holder.mImageView);
+            }).addOnFailureListener((exception) -> {
+                if (exception instanceof ApiException) {
+                    ApiException apiException = (ApiException) exception;
+                    int statusCode = apiException.getStatusCode();
+                    // Handle error with given status code.
+                    Log.e(LOG_TAG, "Place not found: " + exception.getMessage());
+                }
+            });
+        });
+    }
+
+
     private void control_select(RestaurantAdapter.ViewHolder holder, int position){
         String [] restaurantData = mData.get(position);
         String restaurantUrl = restaurantData[URL_POS];
@@ -355,6 +410,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
     }
+
 
     @Override
     public int getItemCount(){

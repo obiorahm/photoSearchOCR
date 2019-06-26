@@ -12,6 +12,7 @@ import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -109,7 +110,6 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
                 String restaurant_address = restaurant_name_sb.toString();
 
 
-                String placeId = "";
 
                 //set up logo
                 Document logoDocument = getLogoDocument(restaurant_url);
@@ -120,6 +120,7 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
                 String[] lngLat = getPanoramaData(restaurant_address);
                 String longitude = lngLat[0];
                 String latitude = lngLat[1];
+                String placeId = lngLat[2];
 
                 String item[] = {restaurant_url, restaurant_name, restaurant_address, placeId, longitude, latitude, logoID};
 
@@ -240,7 +241,7 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
          */
 
 
-            String[] lngLat = new String[2];
+            String[] lngLat = new String[3];
 
             try{
                 if (json != null ){
@@ -258,7 +259,11 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
                         lngLat[0] = lng;
                         lngLat[1] = lat;
 
-                        Log.d(LOG_TAG, "location " + location.toString());
+                        //get place Id
+                        String placeId = firstObject.getString("place_id");
+                        lngLat[2] = placeId;
+
+                        Log.d(LOG_TAG, "location and placeId" + location.toString() + placeId);
                     }
 
 
