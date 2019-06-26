@@ -9,9 +9,15 @@ import android.content.Context;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -225,12 +231,30 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             //holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
 
             String imageUrl = buildImageUrl(url);
-            if (imageUrl.equals("")){
-                Glide.with(context).load(imageUrl).into(holder.mImageView);
+
+                Glide.with(context).load(imageUrl).into(holder.mImageView).onLoadFailed(new Drawable() {
+                    @Override
+                    public void draw(@NonNull Canvas canvas) {
+                        buildImageFromPlaces(placeId, holder);
+                    }
+
+                    @Override
+                    public void setAlpha(int i) {
+
+                    }
+
+                    @Override
+                    public void setColorFilter(@Nullable ColorFilter colorFilter) {
+
+                    }
+
+                    @Override
+                    public int getOpacity() {
+                        return PixelFormat.UNKNOWN;
+                    }
+                });
                 Glide.with(context).load(imageUrl).into(holder.mEnlargedImageView);
-            }else {
-                buildImageFromPlaces(placeId, holder);
-            }
+
 
 
             holder.mImageView.setOnClickListener(view ->goToMenu(word,url));

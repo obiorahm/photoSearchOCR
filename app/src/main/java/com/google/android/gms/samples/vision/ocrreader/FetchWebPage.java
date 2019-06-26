@@ -270,6 +270,7 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
                 }else{
                     lngLat[0] ="";
                     lngLat[1] = "";
+                    lngLat[2] = "";
                 }
 
 
