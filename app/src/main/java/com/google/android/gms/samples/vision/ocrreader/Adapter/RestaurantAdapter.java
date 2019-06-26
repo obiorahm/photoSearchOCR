@@ -6,18 +6,10 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
-
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.speech.tts.TextToSpeech;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,26 +22,14 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-
 import com.bumptech.glide.Glide;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.maps.StreetViewPanoramaView;
-
 import com.google.android.gms.samples.vision.ocrreader.CurrentPlaceMap;
 import com.google.android.gms.samples.vision.ocrreader.GeographyActivity;
 import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.PhotoMetadata;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.FetchPhotoRequest;
-import com.google.android.libraries.places.api.net.FetchPlaceRequest;
-import com.google.android.libraries.places.api.net.PlacesClient;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 /**
  * Created by mgo983 on 10/17/18.
@@ -185,26 +165,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mRadioButton.setChecked((boolean) properties[IS_RELATIVE_LAYOUT_SELECTED]);
 
 
-            //set up panorama if properties[IS_PANORORAMA_VISIBLE] is visible
-            int isPanoramaVisible =  (int) properties[IS_PANORAMA_VISIBLE];
-            if (isPanoramaVisible == View.VISIBLE){
-                //holder.mImageButtonExpandLess.setVisibility(View.VISIBLE);
-                //holder.mImageButtonExpandMore.setVisibility(View.GONE);
-
-                //StreetViewPanoramaView streetViewPanoramaView = ((Activity) context).findViewById(R.id.streetviewpanorama);
-                //((UseRecyclerActivity) context).setUpPanorama(holder.mStreetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
-                //((UseRecyclerActivity) context).setUpPanorama(streetViewPanoramaView, restaurantData[LONGITUDE], restaurantData[LATITUDE]);
-            }else{
-                //holder.mImageButtonExpandLess.setVisibility(View.GONE);
-                //holder.mImageButtonExpandMore.setVisibility(View.VISIBLE);
-
-
-            }
-
-            //holder.mStreetViewPanoramaView.setVisibility(isPanoramaVisible);
-            //((Activity) context).findViewById(R.id.streetviewpanorama).setVisibility(isPanoramaVisible);
-
-
             // setup horizontal text by text adapter
             TextByTextAdapter adapter = new TextByTextAdapter(context, false, myTTS);
 
@@ -219,62 +179,26 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
             holder.mRecyclerView.setAdapter(adapter);
 
-            holder.mRecyclerView.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
+            holder.mRecyclerView.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null, null));
 
 
 
-            holder.mBackground.setOnClickListener((View view) -> {
-                //holder.mRadioButton.setChecked(true);
-                control_select(holder, position);});
+            holder.mBackground.setOnClickListener(view ->
+                control_select(holder, position));
 
+                String imageUrl = buildImageUrl(url);
 
-            //holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
-
-            String imageUrl = buildImageUrl(url);
-
-                Glide.with(context).load(imageUrl).into(holder.mImageView).onLoadFailed(new Drawable() {
-                    @Override
-                    public void draw(@NonNull Canvas canvas) {
-                        buildImageFromPlaces(placeId, holder);
-                    }
-
-                    @Override
-                    public void setAlpha(int i) {
-
-                    }
-
-                    @Override
-                    public void setColorFilter(@Nullable ColorFilter colorFilter) {
-
-                    }
-
-                    @Override
-                    public int getOpacity() {
-                        return PixelFormat.UNKNOWN;
-                    }
-                });
+                Glide.with(context).load(imageUrl).into(holder.mImageView);
                 Glide.with(context).load(imageUrl).into(holder.mEnlargedImageView);
 
 
-
-            holder.mImageView.setOnClickListener(view ->goToMenu(word,url));
-                    //control_select(holder, position));
-                //enlargeImage((ImageView) view,holder.mEnlargedImageView, holder, position));
+            holder.mImageView.setOnClickListener(view ->goToMenu(holder));
 
             Log.d(LOG_TAG, "internet " + url);
 
 
             holder.mRadioButton.setOnClickListener((view)-> control_select(holder, position));
 
-
-            /*holder.mImageButtonExpandMore.setOnClickListener((view) ->
-                expandPanorama(position)
-            );
-
-
-            holder.mImageButtonExpandLess.setOnClickListener((view) ->
-                hidePanorama(position)
-            );*/
 
             //hide progressBar
             ProgressBar progressBar = ((Activity) context).findViewById(R.id.menu_progress);
@@ -285,20 +209,18 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
 
-        private void goToMenu(String word, String url){
-
-
-
-            Intent openRestaurantIntent = new Intent(context, OpenRestaurantMenuActivity.class);
-            openRestaurantIntent.putExtra(RESTAURANT_NAME, CurrentPlaceMap.selected_item);
-            openRestaurantIntent.putExtra(RESTAURANT_URL, CurrentPlaceMap.selected_url);
-            ((Activity) context).startActivity(openRestaurantIntent);
-
+        private void goToMenu(ViewHolder holder){
+            if (holder.mRadioButton.isChecked()){
+                Intent openRestaurantIntent = new Intent(context, OpenRestaurantMenuActivity.class);
+                openRestaurantIntent.putExtra(RESTAURANT_NAME, CurrentPlaceMap.selected_item);
+                openRestaurantIntent.putExtra(RESTAURANT_URL, CurrentPlaceMap.selected_url);
+                (context).startActivity(openRestaurantIntent);
+            }
         }
 
 
 
-    private void expandPanorama(int position){
+    /*private void expandPanorama(int position){
 
         Object [] data = mDataProperties.get(position);
         data[IS_PANORAMA_VISIBLE] = View.VISIBLE;
@@ -313,12 +235,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         data[IS_PANORAMA_VISIBLE] = View.GONE;
         notifyItemChanged(position);
 
-    }
+    }*/
 
 
-    private void enlargeImage(ImageView view, ImageView enlargedView, RestaurantAdapter.ViewHolder holder, int position){
+    /*private void enlargeImage(ImageView view, ImageView enlargedView, RestaurantAdapter.ViewHolder holder, int position){
         zoomImageFromTHumb(view, enlargedView, holder, position);
-    }
+    }*/
 
 
     private String buildImageUrl(String internetAddress){
@@ -344,7 +266,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     }
 
 
-    private void buildImageFromPlaces(String placeId, ViewHolder holder){
+    /*private void buildImageFromPlaces(String placeId, ViewHolder holder){
+
+        Log.d(LOG_TAG, "PLACE ID " + placeId);
 
         PlacesClient placesClient = Places.createClient(context);
 
@@ -353,35 +277,36 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         List<Place.Field> fields = Arrays.asList(Place.Field.PHOTO_METADATAS);
 
         // Get a Place object (this example uses fetchPlace(), but you can also use findCurrentPlace())
-        FetchPlaceRequest placeRequest = FetchPlaceRequest.builder(placeId, fields).build();
+        FetchPlaceRequest placeRequest = FetchPlaceRequest.builder(placeId.trim(), fields).build();
 
         placesClient.fetchPlace(placeRequest).addOnSuccessListener((response) -> {
             Place place = response.getPlace();
 
             // Get the photo metadata.
-            PhotoMetadata photoMetadata = place.getPhotoMetadatas().get(0);
+            if(place.getPhotoMetadatas() != null){
+                PhotoMetadata photoMetadata = place.getPhotoMetadatas().get(0);
 
-            // Get the attribution text.
-            String attributions = photoMetadata.getAttributions();
+                // Create a FetchPhotoRequest.
+                FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
+                        .setMaxWidth(500) // Optional.
+                        .setMaxHeight(300) // Optional.
+                        .build();
+                placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
+                    Bitmap bitmap = fetchPhotoResponse.getBitmap();
+                    Glide.with(context).load(bitmap).into(holder.mImageView);
+                }).addOnFailureListener((exception) -> {
+                    if (exception instanceof ApiException) {
+                        ApiException apiException = (ApiException) exception;
+                        int statusCode = apiException.getStatusCode();
+                        // Handle error with given status code.
+                        Log.e(LOG_TAG, "Place not found: " + exception.getMessage());
+                    }
+                });
+            }
 
-            // Create a FetchPhotoRequest.
-            FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                    .setMaxWidth(500) // Optional.
-                    .setMaxHeight(300) // Optional.
-                    .build();
-            placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
-                Bitmap bitmap = fetchPhotoResponse.getBitmap();
-                Glide.with(context).load(bitmap).into(holder.mImageView);
-            }).addOnFailureListener((exception) -> {
-                if (exception instanceof ApiException) {
-                    ApiException apiException = (ApiException) exception;
-                    int statusCode = apiException.getStatusCode();
-                    // Handle error with given status code.
-                    Log.e(LOG_TAG, "Place not found: " + exception.getMessage());
-                }
-            });
+
         });
-    }
+    }*/
 
 
     private void control_select(RestaurantAdapter.ViewHolder holder, int position){
@@ -430,7 +355,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         last_selected_property = currentProperties;
 
         notifyDataSetChanged();
-        //goToMenu(restaurantName, restaurantUrl);
 
 
     }
@@ -442,8 +366,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     }
 
 
-    Animator currentAnimator;
-    int shortAnimationDuration = 2000;
+    private Animator currentAnimator;
+    private int shortAnimationDuration = 2000;
 
 
 
@@ -551,49 +475,46 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         // to the original bounds and show the thumbnail instead of
         // the expanded image.
         final float startScaleFinal = startScale;
-        expandedImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (currentAnimator != null) {
-                    currentAnimator.cancel();
+        expandedImageView.setOnClickListener((View view)-> {
+            if (currentAnimator != null) {
+                currentAnimator.cancel();
+            }
+
+            // Animate the four positioning/sizing properties in parallel,
+            // back to their original values.
+            AnimatorSet set1 = new AnimatorSet();
+            set1.play(ObjectAnimator
+                    .ofFloat(expandedImageView, View.X, startBounds.left))
+                    .with(ObjectAnimator
+                            .ofFloat(expandedImageView,
+                                    View.Y,startBounds.top))
+                    .with(ObjectAnimator
+                            .ofFloat(expandedImageView,
+                                    View.SCALE_X, startScaleFinal))
+                    .with(ObjectAnimator
+                            .ofFloat(expandedImageView,
+                                    View.SCALE_Y, startScaleFinal));
+            set1.setDuration(shortAnimationDuration);
+            set1.setInterpolator(new DecelerateInterpolator());
+            set1.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    normalView.setAlpha(1f);
+                    expandedImageView.setVisibility(View.GONE);
+                    mDataProperties.get(position)[IS_LOGO_ENLARGED] = View.GONE;
+                    currentAnimator = null;
                 }
 
-                // Animate the four positioning/sizing properties in parallel,
-                // back to their original values.
-                AnimatorSet set = new AnimatorSet();
-                set.play(ObjectAnimator
-                        .ofFloat(expandedImageView, View.X, startBounds.left))
-                        .with(ObjectAnimator
-                                .ofFloat(expandedImageView,
-                                        View.Y,startBounds.top))
-                        .with(ObjectAnimator
-                                .ofFloat(expandedImageView,
-                                        View.SCALE_X, startScaleFinal))
-                        .with(ObjectAnimator
-                                .ofFloat(expandedImageView,
-                                        View.SCALE_Y, startScaleFinal));
-                set.setDuration(shortAnimationDuration);
-                set.setInterpolator(new DecelerateInterpolator());
-                set.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        normalView.setAlpha(1f);
-                        expandedImageView.setVisibility(View.GONE);
-                        mDataProperties.get(position)[IS_LOGO_ENLARGED] = View.GONE;
-                        currentAnimator = null;
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-                        normalView.setAlpha(1f);
-                        mDataProperties.get(position)[IS_LOGO_ENLARGED] = View.GONE;
-                        expandedImageView.setVisibility(View.GONE);
-                        currentAnimator = null;
-                    }
-                });
-                set.start();
-                currentAnimator = set;
-            }
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                    normalView.setAlpha(1f);
+                    mDataProperties.get(position)[IS_LOGO_ENLARGED] = View.GONE;
+                    expandedImageView.setVisibility(View.GONE);
+                    currentAnimator = null;
+                }
+            });
+            set1.start();
+            currentAnimator = set1;
         });
 
 
