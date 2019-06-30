@@ -49,6 +49,15 @@
             android:layout_margin="10dp"
             />
 
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_below="@id/food_item_options"
+            android:layout_alignStart="@id/food_item_options"
+            android:id="@+id/order_option_items"
+            />
+
     </RelativeLayout>
 
 </RelativeLayout>
