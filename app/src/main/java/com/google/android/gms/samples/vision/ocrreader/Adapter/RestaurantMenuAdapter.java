@@ -133,7 +133,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
             }
         });*/
 
-        holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null));
+        holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null, null));
 
         holder.mRelativeLayout.setOnClickListener((View view) -> {
             control_select(holder, restaurantData);
@@ -142,7 +142,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
         holder.mInfoTextView.setText(description);
 
-        holder.mInfoTextView.setOnClickListener(view -> myTTS.speak(description, TextToSpeech.QUEUE_FLUSH,null));
+        holder.mInfoTextView.setOnClickListener(view -> myTTS.speak(description, TextToSpeech.QUEUE_FLUSH,null, null));
 
 
         holder.mInfoImageButton.setOnClickListener((View view) -> {

@@ -69,13 +69,14 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
 
     }
 
-    public FoodItemOrderOptionAdapter(Context context, HashMap<String, Object[]> order, String current_order, RecyclerView recyclerView){
+    public FoodItemOrderOptionAdapter(Context context, HashMap<String, Object[]> order, String current_order, RecyclerView recyclerView, TextToSpeech myTTS){
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.order = order;
         this.current_order = current_order;
         this.expandOptionRecyclerView = new RecyclerView(context);
         this.expandOptionRecyclerView = recyclerView;
+        this.myTTS = myTTS;
     }
 
     //private int[] STATES = { normal, select};
@@ -111,6 +112,7 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
         holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[current_state]));
 
         holder.mImageView.setOnClickListener((View view) -> {
+            myTTS.speak(label,TextToSpeech.QUEUE_FLUSH,null, null);
             next_state(holder, position);
             handleOnClickListener(holder, label);
 

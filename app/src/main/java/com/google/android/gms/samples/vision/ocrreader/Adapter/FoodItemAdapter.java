@@ -170,7 +170,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
 
         //set up food item adapter
-        FoodItemOrderOptionAdapter foodItemOrderOptionAdapter = new FoodItemOrderOptionAdapter(context,order, word, holder.mExpandOptionRecyclerView);
+        FoodItemOrderOptionAdapter foodItemOrderOptionAdapter = new FoodItemOrderOptionAdapter(context,order, word, holder.mExpandOptionRecyclerView, myTTS);
 
         addAllItems(foodItemOrderOptionAdapter, word);
         LinearLayoutManager foodItemLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
@@ -384,6 +384,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     private static final int POSITION = 1;
     private static final int HOLDER = 2;
     public static final int FOOD_ITEM_ADAPTER = 3;
+    public static final int MEAL_CATEGORY = 4;
+    public static final int MEAL_NAME = 5;
 
 
     private void removeOrder(String word){
@@ -394,11 +396,15 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     private void addOrder(String word, int position, ViewHolder holder){
         Integer order_items [] = new Integer[Order.OPTION_SIZE];
         Order current_order = new Order(word, order_items);
-        Object [] orderData = new Object[4];
+        Object [] orderData = new Object[6];
         orderData[ORDER] = current_order;
         orderData[POSITION] = position;
         orderData[HOLDER] = holder;
         orderData[FOOD_ITEM_ADAPTER] = this;
+        orderData[MEAL_CATEGORY] = mealCategory;
+        orderData[MEAL_NAME] = word;
+
+
         //order.put(word, current_order);
         order.put(word, orderData);
     }

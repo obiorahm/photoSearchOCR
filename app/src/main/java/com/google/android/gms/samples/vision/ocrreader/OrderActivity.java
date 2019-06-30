@@ -112,7 +112,8 @@ public class OrderActivity extends UseRecyclerActivity implements TextToSpeech.O
 
             String url = info[EdmanJasonReader.URL];
 
-            shoppingCartAdapter.addItem(current_item_name, order_details, url);
+
+            shoppingCartAdapter.addItem(current_item_name, order_details, url, orderData);
 
             Log.d(LOG_TAG, "shoppingCartAdapter " + info[EdmanJasonReader.URL]);
 
