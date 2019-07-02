@@ -7,11 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
@@ -33,7 +30,6 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
 
     private static RecyclerView lastParent = null;
     private boolean notFoodItem;
-
 
     public static class ViewHolder extends  RecyclerView.ViewHolder{
         public TextView mTextView;
@@ -60,7 +56,7 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
         this.context = context;
         //myTTS = ((DetectImageActivity) context).myTTS;
         myTTS = ((UseRecyclerActivity) context).myTTS;
-        notFoodItem = notFoodItem;
+        this.notFoodItem = notFoodItem;
 
     }
 
@@ -69,7 +65,7 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.myTTS = myTTS;
-        notFoodItem = notFoodItem;
+        this.notFoodItem = notFoodItem;
 
     }
 
@@ -77,9 +73,9 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
     @Override
     public TextByTextAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View convertView = inflater.inflate(R.layout.recognized_text_item, null);
-        TextByTextAdapter.ViewHolder viewHolder = new TextByTextAdapter.ViewHolder(convertView, parent);
+        //TextByTextAdapter.ViewHolder viewHolder = new TextByTextAdapter.ViewHolder(convertView, parent);
 
-        return viewHolder;
+        return new TextByTextAdapter.ViewHolder(convertView, parent);
     }
 
 
@@ -112,7 +108,8 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
         });*/
 
         holder.mTextView.setOnClickListener((View view)->{
-            myTTS.speak(word,TextToSpeech.QUEUE_FLUSH, null,null);
+
+            myTTS.speak(getSelectedString(),TextToSpeech.QUEUE_FLUSH, null,null);
             if (holder.mImageView.getVisibility() == View.VISIBLE){
                 holder.mImageView.setVisibility(View.GONE);
             }else{
