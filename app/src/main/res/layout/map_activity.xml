@@ -49,7 +49,7 @@
             android:visibility="gone">
         </com.google.android.gms.maps.StreetViewPanoramaView>
 
-        <ImageButton
+        <!--ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/streetviewpanorama"
@@ -68,7 +68,7 @@
             android:src="@drawable/baseline_expand_less_black_48"
             android:background="@drawable/circular_button"
             android:tint="@color/silver"
-            android:visibility="gone"/>
+            android:visibility="gone"/-->
 
     </RelativeLayout>
 

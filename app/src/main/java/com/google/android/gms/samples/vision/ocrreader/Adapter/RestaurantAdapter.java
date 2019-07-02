@@ -20,9 +20,9 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.samples.vision.ocrreader.CurrentPlaceMap;
 import com.google.android.gms.samples.vision.ocrreader.GeographyActivity;
 import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
@@ -77,7 +77,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         private ImageButton mImageButton;
         private ImageView mImageView;
         private ImageView mEnlargedImageView;
-        private RadioButton mRadioButton;
+        //private RadioButton mRadioButton;
         //private StreetViewPanoramaView mStreetViewPanoramaView;
         private ImageButton mImageButtonExpandMore;
         private ImageButton mImageButtonExpandLess;
@@ -94,7 +94,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             mEnlargedImageView = convertView.findViewById(R.id.enlarged_image);
             //mStreetViewPanoramaView = convertView.findViewById(R.id.streetviewpanorama);
 
-            mRadioButton = convertView.findViewById(R.id.select_option);
+            //mRadioButton = convertView.findViewById(R.id.select_option);
 
             mImageButtonExpandMore = convertView.findViewById(R.id.expand_more);
             mImageButtonExpandLess = convertView.findViewById(R.id.expand_less);
@@ -123,8 +123,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             notifyItemChanged(mData.size() - 1);
 
             //notifyDataSetChanged();
-
-
         }
 
 
@@ -139,9 +137,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         @Override
         public RestaurantAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
             View convertView = LayoutInflater.from(parent.getContext()).inflate(resource, null);
-            //RestaurantAdapter.ViewHolder viewHolder = new RestaurantAdapter.ViewHolder(convertView);
-
-
             return new RestaurantAdapter.ViewHolder(convertView);
         }
 
@@ -162,7 +157,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mEnlargedImageView.setVisibility((int) properties[IS_LOGO_ENLARGED]);
 
             holder.mRelativeLayout.setSelected((boolean) properties[IS_RELATIVE_LAYOUT_SELECTED]);
-            holder.mRadioButton.setChecked((boolean) properties[IS_RELATIVE_LAYOUT_SELECTED]);
+            //holder.mRadioButton.setChecked((boolean) properties[IS_RELATIVE_LAYOUT_SELECTED]);
 
 
             // setup horizontal text by text adapter
@@ -197,7 +192,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             Log.d(LOG_TAG, "internet " + url);
 
 
-            holder.mRadioButton.setOnClickListener((view)-> control_select(holder, position));
+            //holder.mRadioButton.setOnClickListener((view)-> control_select(holder, position));
+
+
+            StreetViewPanoramaView streetViewPanoramaView = ((Activity) context).findViewById(R.id.streetviewpanorama);
+
+            holder.mImageButtonExpandMore.setOnClickListener((View view)->{expandPanorama(holder, streetViewPanoramaView, position);});
+
+            holder.mImageButtonExpandLess.setOnClickListener((View view)->{hidePanorama(holder, streetViewPanoramaView, position);});
 
 
             //hide progressBar
@@ -210,14 +212,37 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
         private void goToMenu(ViewHolder holder){
-            if (holder.mRadioButton.isChecked()){
+            //if (holder.mRadioButton.isChecked()){
                 Intent openRestaurantIntent = new Intent(context, OpenRestaurantMenuActivity.class);
                 openRestaurantIntent.putExtra(RESTAURANT_NAME, CurrentPlaceMap.selected_item);
                 openRestaurantIntent.putExtra(RESTAURANT_URL, CurrentPlaceMap.selected_url);
                 (context).startActivity(openRestaurantIntent);
-            }
+            //}
         }
 
+
+        private void expandPanorama(ViewHolder holder, StreetViewPanoramaView streetViewPanoramaView, int position){
+            //updated selected longitude and latitude
+            /*String longitude = mData.get(position)[LONGITUDE];
+            String latitude = mData.get(position)[LATITUDE];
+
+            CurrentPlaceMap.LONGITUDE = longitude.equals("")? LONGITUDE : Double.valueOf(longitude);
+            CurrentPlaceMap.LATITUDE = latitude.equals("") ? LATITUDE : Double.valueOf(latitude);
+            ((UseRecyclerActivity) context).setUpPanorama();*/
+
+            control_select(holder, position);
+
+            holder.mImageButtonExpandMore.setVisibility(View.GONE);
+            holder.mImageButtonExpandLess.setVisibility(View.VISIBLE);
+            streetViewPanoramaView.setVisibility(View.VISIBLE);
+        }
+
+
+    private void hidePanorama(ViewHolder holder, StreetViewPanoramaView streetViewPanoramaView, int position){
+        holder.mImageButtonExpandLess.setVisibility(View.GONE);
+        holder.mImageButtonExpandMore.setVisibility(View.VISIBLE);
+        streetViewPanoramaView.setVisibility(View.GONE);
+    }
 
 
     /*private void expandPanorama(int position){
@@ -325,15 +350,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             last_selected_property[IS_PANORAMA_VISIBLE] = View.GONE;
             last_selected_property[IS_LOGO_ENLARGED] = View.GONE;
             last_selected_property[IS_RELATIVE_LAYOUT_SELECTED] = false;
-
-
             //to enable redraw of view with new properties
-
-
-
         }
 
-        if (holder.mRadioButton.isChecked()){
+        //if (holder.mRadioButton.isChecked()){
 
             holder.mRelativeLayout.setSelected(true);
             Log.d(LOG_TAG, "restaurantUrl " + restaurantUrl);
@@ -348,9 +368,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             CurrentPlaceMap.LONGITUDE = longitude.equals("")? LONGITUDE : Double.valueOf(longitude);
             CurrentPlaceMap.LATITUDE = latitude.equals("") ? LATITUDE : Double.valueOf(latitude);
             ((UseRecyclerActivity) context).setUpPanorama();
-
-
-        }
+        //}
 
         last_selected_property = currentProperties;
 

@@ -18,8 +18,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageButton;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
@@ -104,28 +102,22 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
             myTTS = new TextToSpeech(this, this);
 
 
-        ImageButton expandmore = findViewById(R.id.expand_more);
+ /*     ImageButton expandmore = findViewById(R.id.expand_more);
         ImageButton expandless = findViewById(R.id.expand_less);
         StreetViewPanoramaView streetViewPanoramaView = findViewById(R.id.streetviewpanorama);
 
-        expandmore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                expandmore.setVisibility(View.GONE);
-                expandless.setVisibility(View.VISIBLE);
-                streetViewPanoramaView.setVisibility(View.VISIBLE);
-            }
+        expandmore.setOnClickListener((View view)-> {
+            expandmore.setVisibility(View.GONE);
+            expandless.setVisibility(View.VISIBLE);
+            streetViewPanoramaView.setVisibility(View.VISIBLE);
         });
 
 
-        expandless.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                expandmore.setVisibility(View.VISIBLE);
-                expandless.setVisibility(View.GONE);
-                streetViewPanoramaView.setVisibility(View.GONE);
-            }
-        });
+        expandless.setOnClickListener((View view) -> {
+            expandmore.setVisibility(View.VISIBLE);
+            expandless.setVisibility(View.GONE);
+            streetViewPanoramaView.setVisibility(View.GONE);
+        });*/
     }
 
 
