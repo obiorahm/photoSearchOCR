@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -148,12 +149,10 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
 
                     break;
                 case Order.DRINKS:
-                    type[0] = ZERO_SUM;
                     mTopLevelInteger.add(Order.ORDER_DRINK);
 
                     break;
                 case Order.NUTRITION:
-                    type[0] = ZERO_SUM;
                     mTopLevelInteger.add(Order.ORDER_NUTRITION);
 
                     break;
@@ -248,6 +247,25 @@ public class ExpandOptionAdapter extends RecyclerView.Adapter<ExpandOptionAdapte
 
         }
     }
+
+
+    /*private void setOrderLanguage(ShoppingCartAdapter.ViewHolder holder, int pos){
+        LanguageAdapter languageAdapter= new LanguageAdapter(context);
+
+        Integer[] specifics = mSpecificOptions.get(pos);
+        for (int i = 0; i < specifics.length; i++){
+            String current_sentence = Order.CONSOLIDATED_OPTION[i][specifics[i]];
+            //String current_image_url = "";
+            String current_image_url = getImageUrl(i, specifics[i]);
+            String[] data = {current_sentence,current_image_url};
+            if (!current_sentence.equals(""))
+                languageAdapter.addItem(data);
+        }
+
+        holder.mRecyclerView.setAdapter(languageAdapter);
+        LinearLayoutManager languageLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false);
+        holder.mRecyclerView.setLayoutManager(languageLayoutManager);
+    }*/
 
 
 }

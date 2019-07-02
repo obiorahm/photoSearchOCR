@@ -141,6 +141,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             holder.mOptionRecyclerView.setVisibility(View.VISIBLE);
         });
 
+        holder.mTextView.setOnClickListener((View view)->myTTS.speak(finalText,TextToSpeech.QUEUE_FLUSH,null, null));
+
     }
 
 

@@ -53,10 +53,8 @@
         <com.google.android.gms.samples.vision.ocrreader.ui.project.InterceptRecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:id="@+id/food_item_options"
-            android:layout_toRightOf="@id/order_option"
-            android:layout_below="@id/order_option_text"
+            android:layout_toRightOf="@id/order_option_text"
             android:paddingStart="15dp"
             android:paddingTop="15dp"
             />
@@ -67,7 +65,6 @@ show options-->
         <android.support.v7.widget.RecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_below="@id/food_item_options"
             android:layout_alignStart="@id/food_item_options"
             android:id="@+id/order_option_items"
