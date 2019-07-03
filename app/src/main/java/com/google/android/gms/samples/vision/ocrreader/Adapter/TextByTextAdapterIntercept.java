@@ -87,7 +87,7 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
         ((UseRecyclerActivity) context).loadImage(word, holder.mImageView, notFoodItem);
         holder.mTextView.setOnClickListener((View view) ->{
 
-            myTTS.speak(word,TextToSpeech.QUEUE_FLUSH, null, null);
+            myTTS.speak(getSelectedString(),TextToSpeech.QUEUE_FLUSH, null, null);
 
             if (holder.mImageView.getVisibility() == View.VISIBLE){
                 mImageData.set(position, View.GONE);
