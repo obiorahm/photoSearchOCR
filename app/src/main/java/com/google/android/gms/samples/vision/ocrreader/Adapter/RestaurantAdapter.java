@@ -187,7 +187,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 Glide.with(context).load(imageUrl).into(holder.mEnlargedImageView);
 
 
-            holder.mImageView.setOnClickListener(view ->goToMenu(holder));
+            holder.mImageView.setOnClickListener(view ->goToMenu(holder,position));
 
             Log.d(LOG_TAG, "internet " + url);
 
@@ -211,8 +211,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
 
-        private void goToMenu(ViewHolder holder){
+        private void goToMenu(ViewHolder holder,int position){
             //if (holder.mRadioButton.isChecked()){
+            control_select(holder,position);
                 Intent openRestaurantIntent = new Intent(context, OpenRestaurantMenuActivity.class);
                 openRestaurantIntent.putExtra(RESTAURANT_NAME, CurrentPlaceMap.selected_item);
                 openRestaurantIntent.putExtra(RESTAURANT_URL, CurrentPlaceMap.selected_url);
