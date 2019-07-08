@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PointOfInterest;
 import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
 import com.google.android.gms.maps.model.StreetViewSource;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
@@ -43,7 +44,7 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 
 
 
-public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, TextToSpeech.OnInitListener, OnStreetViewPanoramaReadyCallback, Runnable {
+public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, TextToSpeech.OnInitListener, OnStreetViewPanoramaReadyCallback, Runnable, GoogleMap.OnPoiClickListener {
 
     Bundle mSavedInstance;
 
@@ -68,6 +69,10 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
     public static double LATITUDE = -33.87365;
 
     public Handler handler = new Handler();
+
+    GoogleMap map;
+
+    LatLng currentPlaceLngLat;
 
 
 
@@ -144,13 +149,13 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
             fusedLocationProviderClient.getLastLocation()
                     .addOnSuccessListener((Location location)-> {
                 if (location != null){
-                    LatLng newLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    googleMap.addMarker(new MarkerOptions().position(newLatLng).title("leave it!"));
+                    LatLng newLatLng = currentPlaceLngLat = new LatLng(location.getLatitude(), location.getLongitude());
+                    /*googleMap.addMarker(markerOptions.position(newLatLng).title(mapTitle));
                     googleMap.addCircle(new CircleOptions().center(newLatLng)
                             .fillColor(Color.LTGRAY)
                             .radius(10.0)
                             .strokeColor(Color.RED)
-                    );
+                    );*/
 
                     CircleOptions circleOptions = new CircleOptions();
                     circleOptions.clickable(true);
@@ -160,6 +165,8 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
 
                     googleMap.setOnMarkerClickListener((Marker marker)-> {
                         //startIntentService(location);
+                        String title = marker.getTitle();
+                        myTTS.speak(title, TextToSpeech.QUEUE_FLUSH, null, null);
                         return false;
                     });
 
@@ -189,16 +196,20 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
     public void onMapReady(GoogleMap googleMap){
 
 
+
         // retrieve address
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
             checkPermission();
-
+            map = googleMap;
             getCurrentLocation(googleMap);
-
-
+            googleMap.setOnPoiClickListener(this);
         }
 
+    }
 
+    @Override
+    public void onPoiClick(PointOfInterest poi) {
+        myTTS.speak(poi.name, TextToSpeech.QUEUE_FLUSH, null, null);
     }
 
 
@@ -305,7 +316,17 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
 
 
     private void displayCurrentLocation(String address){
+
+
         if (address != null){
+
+            map.addMarker(new MarkerOptions().position(currentPlaceLngLat).title(address));
+            map.addCircle(new CircleOptions().center(currentPlaceLngLat)
+                    .fillColor(Color.LTGRAY)
+                    .radius(10.0)
+                    .strokeColor(Color.RED)
+            );
+
             FetchWebPage fetchWebPage = new FetchWebPage(this, adapter);
             fetchWebPage.execute(address, "encode");
         }
