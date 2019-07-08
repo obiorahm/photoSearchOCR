@@ -63,9 +63,20 @@
             android:layout_height="wrap_content"
             android:id="@+id/text_by_text"
             android:layout_below="@id/descriptive_image"
+            android:layout_margin="10dp"
 
 
             />
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/restaurant_name"
+            android:textColor="@color/quantum_black_secondary_text"
+            android:padding="10sp"
+            android:textSize="22sp"
+            android:layout_below="@id/descriptive_image"
+            android:visibility="gone"/>
+
         <!--android:layout_toLeftOf="@+id/speak_whole_text"-->
         <!--ImageButton
             android:layout_width="wrap_content"

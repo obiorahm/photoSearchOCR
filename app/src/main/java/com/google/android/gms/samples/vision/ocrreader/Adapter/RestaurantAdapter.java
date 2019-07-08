@@ -21,6 +21,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.samples.vision.ocrreader.CurrentPlaceMap;
@@ -77,6 +79,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         private ImageButton mImageButton;
         private ImageView mImageView;
         private ImageView mEnlargedImageView;
+        private TextView mTextView;
         //private RadioButton mRadioButton;
         //private StreetViewPanoramaView mStreetViewPanoramaView;
         private ImageButton mImageButtonExpandMore;
@@ -92,6 +95,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             mImageButton = convertView.findViewById(R.id.speak_whole_text);
             mImageView = convertView.findViewById(R.id.descriptive_image);
             mEnlargedImageView = convertView.findViewById(R.id.enlarged_image);
+            mTextView = convertView.findViewById(R.id.restaurant_name);
             //mStreetViewPanoramaView = convertView.findViewById(R.id.streetviewpanorama);
 
             //mRadioButton = convertView.findViewById(R.id.select_option);
@@ -175,6 +179,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mRecyclerView.setAdapter(adapter);
 
             holder.mRecyclerView.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null, null));
+
+
+            // Use TextView instead of adapter
+            holder.mTextView.setText(word);
+
+            holder.mTextView.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null, null));
+
+
 
 
 

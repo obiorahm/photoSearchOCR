@@ -55,7 +55,7 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
 
     private FusedLocationProviderClient fusedLocationProviderClient;
 
-    public static String RESTAURANT_ADDRESS = "com.google.android.gms.samples.vision.ocrreader.RESTAURANT_ADDRESS";
+    //public static String RESTAURANT_ADDRESS = "com.google.android.gms.samples.vision.ocrreader.RESTAURANT_ADDRESS";
 
     RestaurantAdapter adapter;
 

@@ -19,7 +19,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:visibility="gone"
+        android:id="@+id/restaurant_name_container"
+        >
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="wrap_content"
@@ -29,6 +32,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+
             />
 
 

@@ -66,8 +66,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     private RecyclerView last_selected_recycler;
     private RecyclerView last_selected_expand_option;
     private TextByTextAdapterIntercept last_tbt_adapter;
-    private LinearLayout last_start_separator;
-    private LinearLayout last_end_separator;
+    /*private LinearLayout last_start_separator;
+    private LinearLayout last_end_separator;*/
 
     private RecyclerView last_selected_mRecyclerViewWholeMealView;
     private ImageButton last_selected_mImageButtonCancelEdamamSearch;
@@ -84,14 +84,14 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private ImageButton mImageButton;
-        private ImageButton mImageButtonShowFoodItem;
+        //private ImageButton mImageButtonShowFoodItem;
         private RecyclerView mTextByTextRecyclerView;
-        private RecyclerView mRecyclerView;
-        private RecyclerView mExpandOptionRecyclerView;
+        //private RecyclerView mRecyclerView;
+        //private RecyclerView mExpandOptionRecyclerView;
         private RelativeLayout mContainingRelativeLayout;
         private RelativeLayout mParent;
-        private LinearLayout mEndSeparator;
-        private LinearLayout mStartSeparator;
+/*        private LinearLayout mEndSeparator;
+        private LinearLayout mStartSeparator;*/
         private CheckBox mCheckBox;
 
         private ImageButton mImageButtonMore;
@@ -109,13 +109,13 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             mTextByTextRecyclerView = parent.findViewById(R.id.single_food_item);
 
             mImageButton = parent.findViewById(R.id.speak_whole_text);
-            mImageButtonShowFoodItem = parent.findViewById(R.id.show_food_item_image);
-            mRecyclerView = parent.findViewById(R.id.food_item_options);
-            mExpandOptionRecyclerView = parent.findViewById(R.id.order_option_items);
+            //mImageButtonShowFoodItem = parent.findViewById(R.id.show_food_item_image);
+            //mRecyclerView = parent.findViewById(R.id.food_item_options);
+            //mExpandOptionRecyclerView = parent.findViewById(R.id.order_option_items);
             mContainingRelativeLayout = parent.findViewById(R.id.containing_relative_layout);
 
-            mStartSeparator = parent.findViewById(R.id.start_separator);
-            mEndSeparator = parent.findViewById(R.id.end_separator);
+            /*mStartSeparator = parent.findViewById(R.id.start_separator);
+            mEndSeparator = parent.findViewById(R.id.end_separator);*/
             mCheckBox = parent.findViewById(R.id.select_food_item);
 
             mImageButtonMore = parent.findViewById(R.id.more_selection_details);
@@ -170,13 +170,13 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
 
         //set up food item adapter
-        FoodItemOrderOptionAdapter foodItemOrderOptionAdapter = new FoodItemOrderOptionAdapter(context,order, word, holder.mExpandOptionRecyclerView, myTTS);
+        /*FoodItemOrderOptionAdapter foodItemOrderOptionAdapter = new FoodItemOrderOptionAdapter(context,order, word, holder.mExpandOptionRecyclerView, myTTS);
 
         addAllItems(foodItemOrderOptionAdapter, word);
         LinearLayoutManager foodItemLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
         holder.mRecyclerView.setLayoutManager(foodItemLayoutManager);
 
-        holder.mRecyclerView.setAdapter(foodItemOrderOptionAdapter);
+        holder.mRecyclerView.setAdapter(foodItemOrderOptionAdapter);*/
 
 
         //select with relative layout instead
@@ -187,8 +187,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         holder.mImageButton.setOnClickListener((view) ->
             myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null, null));
 
-        holder.mImageButtonShowFoodItem.setOnClickListener((view) ->
-            setUpRecyclerView(word, holder));
+        /*holder.mImageButtonShowFoodItem.setOnClickListener((view) ->
+            setUpRecyclerView(word, holder));*/
 
         holder.mCheckBox.setOnClickListener((View view) ->
             changeState(word, holder, position, adapter));
@@ -215,9 +215,9 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     private void expandMore(FoodItemAdapter.ViewHolder holder,
                             TextByTextAdapterIntercept adapterIntercept, String word){
         holder.mImageButtonLess.setVisibility(View.VISIBLE);
-        holder.mRecyclerView.setVisibility(View.VISIBLE);
-        holder.mEndSeparator.setVisibility(View.VISIBLE);
-        holder.mStartSeparator.setVisibility(View.VISIBLE);
+        //holder.mRecyclerView.setVisibility(View.VISIBLE);
+        /*holder.mEndSeparator.setVisibility(View.VISIBLE);
+        holder.mStartSeparator.setVisibility(View.VISIBLE);*/
 
 
 
@@ -233,10 +233,10 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     private void expandLess(FoodItemAdapter.ViewHolder holder, TextByTextAdapterIntercept adapterIntercept){
         holder.mImageButtonLess.setVisibility(View.GONE);
-        holder.mRecyclerView.setVisibility(View.GONE);
-        holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
-        holder.mEndSeparator.setVisibility(View.GONE);
-        holder.mStartSeparator.setVisibility(View.GONE);
+        //holder.mRecyclerView.setVisibility(View.GONE);
+        //holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
+        /*holder.mEndSeparator.setVisibility(View.GONE);
+        holder.mStartSeparator.setVisibility(View.GONE);*/
 
 
         //hide tenRecycler
@@ -340,11 +340,11 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
                 last_selected_mTextViewNoResult.setVisibility(View.GONE);*/
 
             }
-            last_selected_recycler = holder.mRecyclerView;
-            last_selected_expand_option = holder.mExpandOptionRecyclerView;
+            //last_selected_recycler = holder.mRecyclerView;
+            //last_selected_expand_option = holder.mExpandOptionRecyclerView;
             last_tbt_adapter = adapter;
-            last_start_separator = holder.mStartSeparator;
-            last_end_separator = holder.mEndSeparator;
+            /*last_start_separator = holder.mStartSeparator;
+            last_end_separator = holder.mEndSeparator;*/
 
             last_selected_mImageButtonCancelEdamamSearch = holder.mImageButtonCancelEdamamSearch;
             last_selected_mProgressBarSearchingEdamam = holder.mProgressBarSearchingEdamam;
@@ -414,11 +414,11 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         Object[]  current_order_item = order.get(key);
         ViewHolder holder = (ViewHolder) current_order_item[HOLDER];
         holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
-        holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
+        //holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
         holder.mCheckBox.setChecked(false);
-        holder.mRecyclerView.setVisibility(View.GONE);
-        holder.mStartSeparator.setVisibility(View.GONE);
-        holder.mEndSeparator.setVisibility(View.GONE);
+        //holder.mRecyclerView.setVisibility(View.GONE);
+        /*holder.mStartSeparator.setVisibility(View.GONE);
+        holder.mEndSeparator.setVisibility(View.GONE);*/
 
         holder.mImageButtonCancelEdamamSearch.setVisibility(View.GONE);
         holder.mProgressBarSearchingEdamam.setVisibility(View.GONE);
@@ -433,10 +433,10 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     private void goneViews(ViewHolder holder, TextByTextAdapterIntercept tbtAdapter){
 
-        holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
-        holder.mRecyclerView.setVisibility(View.GONE);
-        holder.mEndSeparator.setVisibility(View.GONE);
-        holder.mStartSeparator.setVisibility(View.GONE);
+        //holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
+        //holder.mRecyclerView.setVisibility(View.GONE);
+        /*holder.mEndSeparator.setVisibility(View.GONE);
+        holder.mStartSeparator.setVisibility(View.GONE);*/
 
         holder.mImageButtonCancelEdamamSearch.setVisibility(View.GONE);
         holder.mProgressBarSearchingEdamam.setVisibility(View.GONE);
@@ -449,9 +449,9 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     private void visibleViews(ViewHolder holder){
 
-        holder.mRecyclerView.setVisibility(View.VISIBLE);
+        /*holder.mRecyclerView.setVisibility(View.VISIBLE);
         holder.mStartSeparator.setVisibility(View.VISIBLE);
-        holder.mEndSeparator.setVisibility(View.VISIBLE);
+        holder.mEndSeparator.setVisibility(View.VISIBLE);*/
 
     }
 

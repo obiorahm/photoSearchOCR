@@ -6,6 +6,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RestaurantAdapter;
 
@@ -128,6 +129,7 @@ public class FetchWebPage extends AsyncTask<String, Void, Document[]> {
 
                 ((Activity) context).runOnUiThread(()-> {
                     // Stuff that updates the UI
+                    ((Activity) context).findViewById(R.id.restaurant_name_container).setVisibility(View.VISIBLE);
                     adapter.addItem(item);
 
                 });
