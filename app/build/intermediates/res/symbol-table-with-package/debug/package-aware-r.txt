@@ -1607,6 +1607,7 @@ id progress_circular
 id progress_horizontal
 id questions
 id radio
+id re_center
 id read_text
 id recipe_image
 id recipe_list_view
@@ -1919,6 +1920,7 @@ string places_powered_by_google
 string places_search_error
 string places_try_again
 string project_id
+string re_center
 string read_text
 string restaurants_nearby
 string search_menu_title

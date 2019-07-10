@@ -18,6 +18,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
@@ -78,6 +80,8 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -123,7 +127,20 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
             expandless.setVisibility(View.GONE);
             streetViewPanoramaView.setVisibility(View.GONE);
         });*/
+        re_center_map();
+
     }
+
+    private void re_center_map(){
+
+        Button button = this.findViewById(R.id.re_center);
+        button.setOnClickListener(view -> {
+            finish();
+            Intent intent = new Intent(getApplicationContext(),CurrentPlaceMap.class);
+            startActivity(intent);
+        });
+    }
+
 
 
     //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.

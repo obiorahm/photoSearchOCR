@@ -63,8 +63,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/text_by_text"
             android:layout_below="@id/descriptive_image"
-            android:layout_margin="10dp"
-
 
             />
         <TextView
@@ -95,8 +93,6 @@
             android:src="@drawable/baseline_expand_more_black_48"
             android:layout_below="@id/text_by_text"
             android:layout_centerHorizontal="true"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
             android:backgroundTint="@color/transparent"
             android:tint="@color/grey"
             android:id="@+id/expand_more"/>
@@ -107,8 +103,6 @@
             android:src="@drawable/baseline_expand_less_black_48"
             android:layout_below="@id/text_by_text"
             android:layout_centerHorizontal="true"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
             android:backgroundTint="@color/transparent"
             android:tint="@color/grey"
             android:id="@+id/expand_less"
