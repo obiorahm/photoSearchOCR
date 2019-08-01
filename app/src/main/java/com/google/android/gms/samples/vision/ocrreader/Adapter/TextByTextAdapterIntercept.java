@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +12,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
+import com.google.android.gms.samples.vision.ocrreader.FetchNounDependency;
+import com.google.android.gms.samples.vision.ocrreader.NounDependencyJsonHandler;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by mgo983 on 12/22/18.
  */
 
-public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextAdapterIntercept.ViewHolder> {
+public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextAdapterIntercept.ViewHolder> implements NounDependencyJsonHandler {
 
     private ArrayList<String> mData = new ArrayList<>();
     private ArrayList<Integer> mImageData = new ArrayList<>();
+    private HashMap<String,String> mListOfNouns = new HashMap<>();
 
     private LayoutInflater inflater;
     private Context context;
@@ -35,7 +44,6 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
     private static RecyclerView lastParent = null;
 
     private boolean notFoodItem = true;
-
 
     public static class ViewHolder extends  RecyclerView.ViewHolder{
         public TextView mTextView;
@@ -60,11 +68,37 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
-        //myTTS = ((DetectImageActivity) context).myTTS;
         myTTS = ((UseRecyclerActivity) context).myTTS;
         this.notFoodItem = notFoodItem;
 
     }
+
+    private void get_noun_dependency(String wholeText){
+        FetchNounDependency nounDependency = new FetchNounDependency(this);
+        nounDependency.execute(wholeText);
+
+
+    }
+
+@Override
+    public void processJson(String text){
+        try{
+            JSONObject data = new JSONObject(text);
+            JSONArray chunk = data.getJSONArray("chunk");
+            JSONArray chunk_root =  data.getJSONArray("chunk_root");
+            for (int i = 0; i < chunk.length(); i++){
+                mListOfNouns.put((String) chunk_root.get(i), (String) chunk_root.get(i));
+            }
+
+
+
+        }catch (JSONException e){
+            Log.e(LOG_TAG, e.toString());
+        }
+    }
+
+
+
 
 
     @Override
@@ -84,7 +118,9 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
 
         holder.mImageView.setVisibility(mImageData.get(position));
 
-        ((UseRecyclerActivity) context).loadImage(word, holder.mImageView, notFoodItem);
+        if (mListOfNouns.containsKey(word))
+            ((UseRecyclerActivity) context).loadImage(word, holder.mImageView, notFoodItem);
+
         holder.mTextView.setOnClickListener((View view) ->{
 
             myTTS.speak(getSelectedString(),TextToSpeech.QUEUE_FLUSH, null, null);
@@ -139,9 +175,19 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
         return mData.size();
     }
 
-    public void addItem(String text){
-        mData.add(text);
-        mImageData.add(View.GONE);
+    public void addItem(String fullText){
+
+        String tokenizedString [] = fullText.split(" ");
+
+        for (String child : tokenizedString){
+            mData.add(child);
+            mImageData.add(View.GONE);
+        }
+
+        get_noun_dependency(fullText);
+
+        //mData.add(text);
+        //mImageData.add(View.GONE);
         notifyDataSetChanged();
     }
 

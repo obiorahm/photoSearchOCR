@@ -13,6 +13,8 @@ import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by mgo983 on 8/20/18.
@@ -21,6 +23,8 @@ import java.util.ArrayList;
 public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.ViewHolder> {
 
     private ArrayList<String> mData = new ArrayList<>();
+    private HashMap<String, Boolean> wordIsMeal = new HashMap<>();
+
     private LayoutInflater inflater;
     private Context context;
 

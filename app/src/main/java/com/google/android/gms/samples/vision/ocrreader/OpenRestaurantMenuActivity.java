@@ -21,9 +21,15 @@ import com.google.firebase.FirebaseApp;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.python.core.PyObject;
+import org.python.core.PyString;
+import org.python.util.PythonInterpreter;
+
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
+import java.util.Properties;
 
 
 /**
@@ -101,6 +107,8 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         ImageButton imageButtonNext = findViewById(R.id.next_btn_dr);
         imageButtonNext.setOnClickListener(view -> getOrder());
 
+        //runPythonCode("Ketchup, mustard, lettuce, pickle, onion and tomato. 100% Angus beef, always fresh, never frozen");
+
 
     }
 
@@ -148,6 +156,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
             Log.d(LOG_TAG, "internet address " + internetAddress);
 
             Elements testElement = document.select(".menu-category");
+
             for(Element element : testElement){
 
                 String categoryName = element.select(".category-name").text();
@@ -156,16 +165,40 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
                 Log.d(LOG_TAG, categoryName);
 
                 ArrayList categoryItems = new ArrayList();
+
+                ArrayList itemsDescriptions = new ArrayList();
+
                 Elements food_items = element.select(".item-title");
+
+                Elements food_item_descriptions = element.select(".description");
+
+
+                //get meal description
+
+
+
+
 
                 for(Element food_item : food_items){
                     String string_food_item = food_item.text();
+
                     Log.d(LOG_TAG, string_food_item);
                     categoryItems.add(string_food_item);
                 }
+
+
+
+                for(Element description :food_item_descriptions){
+                    String itemDescription = description.text();
+                    itemsDescriptions.add(itemDescription);
+                    Log.d(LOG_TAG, "description " + description);
+                }
                 String [] category = {categoryName, categoryDescription};
-                adapter.addItem(category, categoryItems);
+                adapter.addItem(category, categoryItems, itemsDescriptions);
             }
+
+
+
             if (internetAddress != null || ! (internetAddress.equals(""))){
                 int start = internetAddress.indexOf("//");
                 int start1 = internetAddress.indexOf(".");
@@ -213,6 +246,30 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         remove_food_image_imageButton.setVisibility(View.GONE);
 
     }
+    protected final static String PYTHON_HOME_PARAM = "python.home";
+
+    public void runPythonCode(String text){
+        Properties props = new Properties();
+        String pythonHomeString = props.getProperty(PYTHON_HOME_PARAM);
+        Log.d(LOG_TAG, "python Interpreter " + pythonHomeString);
+
+
+        String pythonCode = "import spacy\n" +
+                "import sys\n" +
+                "sys.path.append('/libs\u2069/jython')\n" +
+                "def get_noun_dependency(text):\n" +
+                "  nlp = spacy.load(\"en_core_web_sm\")\n" +
+                "  doc = nlp(text)\n" +
+                "  nouns = []\n" +
+                "  for chunk in doc.noun_chunks:\n" +
+                "    nouns.append(chunk)\n" +
+                "  return nouns";
+        PythonInterpreter pythonInterpreter = new PythonInterpreter();
+        pythonInterpreter.exec(pythonCode);
+        PyObject func = pythonInterpreter.get("get_noun_dependency");
+        PyObject result = func.__call__(new PyString(text));
+        String [] javaResult = (String []) result.__tojava__(String[].class);
+    }
 
 
     //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.
@@ -228,6 +285,9 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
             }
         }
     }
+
+
+
     @Override
     public void onInit(int initStatus){
         //initialize firebase
@@ -254,5 +314,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         super.onResume();
 
     }
+
+
 
 }

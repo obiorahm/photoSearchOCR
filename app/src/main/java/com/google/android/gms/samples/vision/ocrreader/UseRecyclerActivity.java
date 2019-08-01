@@ -125,7 +125,9 @@ public class UseRecyclerActivity extends FragmentActivity  {
         Log.d(LOG_TAG, " token " + searchString );
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD);
 
-        databaseReference.orderByKey().startAt(searchString).endAt(searchString+"\uf8ff").addValueEventListener(new ValueEventListener() {
+       //databaseReference.orderByKey().startAt(searchString).endAt(searchString+"\uf8ff").addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByKey().equalTo(searchString).addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d(LOG_TAG, "got here");
@@ -234,5 +236,6 @@ public class UseRecyclerActivity extends FragmentActivity  {
             }
         });
     }
+
 
 }

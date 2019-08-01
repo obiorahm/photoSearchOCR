@@ -46,6 +46,10 @@ dependencies {
 
     implementation 'org.jsoup:jsoup:1.11.1'
 
+// https://mvnrepository.com/artifact/org.python/jython
+    //implementation group: 'org.python', name: 'jython-standalone', version: '2.7.0'
+
+
     implementation 'com.google.firebase:firebase-core:16.0.4'
     implementation 'com.google.firebase:firebase-database:16.0.4'
     implementation 'com.google.firebase:firebase-auth:16.0.4'
@@ -60,6 +64,7 @@ dependencies {
     implementation files('libs/opennlp-uima-1.6.0.jar')
 
     implementation files('libs/edu.mit.jwi_2.4.0.jar')
+    implementation files('libs/jython-2.7.0.jar')
 
 
 }

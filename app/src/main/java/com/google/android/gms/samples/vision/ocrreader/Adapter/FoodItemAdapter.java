@@ -19,6 +19,8 @@ import android.widget.TextView;
 
 
 import com.google.android.gms.samples.vision.ocrreader.FetchMealDetails;
+import com.google.android.gms.samples.vision.ocrreader.FetchNounDependency;
+import com.google.android.gms.samples.vision.ocrreader.NounDependencyJsonHandler;
 import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.Order;
 import com.google.android.gms.samples.vision.ocrreader.R;
@@ -33,10 +35,11 @@ import java.util.HashMap;
  * Created by mgo983 on 10/22/18.
  */
 
-public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHolder> {
+public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHolder>  {
 
     LayoutInflater inflater;
     ArrayList<String> mData;
+    ArrayList<String> mDescription;
     private ArrayList<Integer> state = new ArrayList<>();
     //public static HashMap<String, Order> order = new HashMap<>();
     public static HashMap<String, Object[]> order = new HashMap<>();
@@ -157,26 +160,18 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         // setup horizontal text by text adapter
         TextByTextAdapterIntercept adapter = new TextByTextAdapterIntercept(context, R.layout.recognized_text_item, false);
 
-        String tokenizedString [] = word.split(" ");
+        adapter.addItem(word);
+
+        /*String tokenizedString [] = word.split(" ");
 
         for (String child : tokenizedString){
             adapter.addItem(child);
-        }
+        }*/
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
         holder.mTextByTextRecyclerView.setLayoutManager(layoutManager);
 
         holder.mTextByTextRecyclerView.setAdapter(adapter);
-
-
-        //set up food item adapter
-        /*FoodItemOrderOptionAdapter foodItemOrderOptionAdapter = new FoodItemOrderOptionAdapter(context,order, word, holder.mExpandOptionRecyclerView, myTTS);
-
-        addAllItems(foodItemOrderOptionAdapter, word);
-        LinearLayoutManager foodItemLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
-        holder.mRecyclerView.setLayoutManager(foodItemLayoutManager);
-
-        holder.mRecyclerView.setAdapter(foodItemOrderOptionAdapter);*/
 
 
         //select with relative layout instead
@@ -356,6 +351,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             visibleViews(holder);
             state.set(position,STATE_CURRENT_SELECT);
 
+            getNounDependency(mDescription.get(position));
+
             addOrder(word, position, holder);
 
 
@@ -378,6 +375,14 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         }
 
 
+    }
+
+
+    private void getNounDependency(String description){
+        /*FetchNounDependency fetchNounDependency = new FetchNounDependency(this);
+        if (description != null && !(description.equals(""))){
+            fetchNounDependency.execute(description);
+        }*/
     }
 
     public static final int ORDER = 0;
@@ -487,8 +492,10 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    public void addItem(ArrayList<String> foodItems){
+    public void addItem(ArrayList<String> foodItems, ArrayList<String> foodItemDescription){
         mData = foodItems;
+        mDescription = foodItemDescription;
+
         for (String item : foodItems){
             state.add(STATE_NORMAL);
         }

@@ -30,6 +30,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
     TextToSpeech myTTS;
     ArrayList<String[]> mData = new ArrayList<>();
     private ArrayList<ArrayList<String>> mfoodItems = new ArrayList<>();
+    private ArrayList<ArrayList<String>> mItemDescriptions = new ArrayList<>();
     //private RecyclerView last_selected = null;
 
     public RelativeLayout last_selected_rl = null;
@@ -68,9 +69,10 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
     }*/
 
-    public void addItem(String[] category, ArrayList<String> category_items){
+    public void addItem(String[] category, ArrayList<String> category_items, ArrayList<String> itemsDescription){
         mData.add(category);
         mfoodItems.add(category_items);
+        mItemDescriptions.add(itemsDescription);
 
         notifyDataSetChanged();
     }
@@ -101,11 +103,13 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
         // setup horizontal text by text adapter
         TextByTextAdapterIntercept adapter = new TextByTextAdapterIntercept(context, R.layout.recognized_text_item, true);
 
-        String tokenizedString [] = word.split(" ");
+        adapter.addItem(word);
+
+        /*String tokenizedString [] = word.split(" ");
 
         for (String child : tokenizedString){
             adapter.addItem(child);
-        }
+        }*/
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
         holder.mRecyclerView.setLayoutManager(layoutManager);
@@ -157,7 +161,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
         //set up food item adapter
         FoodItemAdapter foodItemAdapter = new FoodItemAdapter(context, word);
 
-        foodItemAdapter.addItem(mfoodItems.get(position));
+        foodItemAdapter.addItem(mfoodItems.get(position), mItemDescriptions.get(position));
 
         LinearLayoutManager FoodItemLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false);
         holder.mFoodItemRecyclerView.setLayoutManager(FoodItemLayoutManager);
