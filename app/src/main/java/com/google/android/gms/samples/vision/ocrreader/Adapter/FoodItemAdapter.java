@@ -12,15 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
 import com.google.android.gms.samples.vision.ocrreader.FetchMealDetails;
-import com.google.android.gms.samples.vision.ocrreader.FetchNounDependency;
-import com.google.android.gms.samples.vision.ocrreader.NounDependencyJsonHandler;
 import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.Order;
 import com.google.android.gms.samples.vision.ocrreader.R;
@@ -55,22 +52,12 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     private final static int STATE_SELECT = 1;
     private final static int STATE_CURRENT_SELECT = 2;
 
-    /*
-    private static RelativeLayout last_selected_relative_layout;
-    private static RecyclerView last_selected_recycler;
-    private static RecyclerView last_selected_expand_option;
-    private static TextByTextAdapterIntercept last_tbt_adapter;
-    private static LinearLayout last_start_separator;
-    private static LinearLayout last_end_separator;
-    */
-
 
     private RelativeLayout last_selected_relative_layout;
     private RecyclerView last_selected_recycler;
     private RecyclerView last_selected_expand_option;
     private TextByTextAdapterIntercept last_tbt_adapter;
-    /*private LinearLayout last_start_separator;
-    private LinearLayout last_end_separator;*/
+
 
     private RecyclerView last_selected_mRecyclerViewWholeMealView;
     private ImageButton last_selected_mImageButtonCancelEdamamSearch;

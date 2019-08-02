@@ -3,6 +3,7 @@ package com.google.android.gms.samples.vision.ocrreader.Adapter;
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.samples.vision.ocrreader.FetchNounDependency;
 import com.google.android.gms.samples.vision.ocrreader.NounDependencyJsonHandler;
+import com.google.android.gms.samples.vision.ocrreader.OrderInstructions;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
@@ -33,48 +35,31 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
 
     LayoutInflater inflater;
     ArrayList<String> mData = new ArrayList<>();
+    ArrayList<SimpleImageRecyclerAdapter> mImageRecyclerAdapters = new ArrayList<>();
     HashMap<String,  String> mListOfNouns = new HashMap<>();
     private ArrayList<Integer> state = new ArrayList<>();
     public static HashMap<String, Object[]> order = new HashMap<>();
 
 
-    private
 
     TextToSpeech myTTS;
     Context context;
     private String LOG_TAG = FoodDescriptionAdapter.class.getSimpleName();
 
-    private final static int STATE_NORMAL = 0;
-    private final static int STATE_SELECT = 1;
-    private final static int STATE_CURRENT_SELECT = 2;
 
-    private RelativeLayout last_selected_relative_layout;
-
-    private int normal = R.drawable.border;
-    private int select = R.drawable.text_border;
-    private int current_selection = R.drawable.select_border;
-
-    private int[] STATES = { normal, select, current_selection};
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageButton mSpeakImageButton;
-        private ImageButton mDescriptiveImageButton;
-        private TextView mTextView;
-        private RelativeLayout mContainingRelativeLayout;
-        private CheckBox mCheckBox;
+        ImageButton mSpeakImageButton;
+
+        RecyclerView mDescriptionImageRecycler;
+
 
         public ViewHolder(View parent){
             super(parent);
-
-            mTextView = parent.findViewById(R.id.single_item);
-
-            mSpeakImageButton = parent.findViewById(R.id.speak_whole_text);
-            mDescriptiveImageButton = parent.findViewById(R.id.show_image);
-            mContainingRelativeLayout = parent.findViewById(R.id.containing_relative_layout);
-
-            mCheckBox = parent.findViewById(R.id.select_food_item);
+            mSpeakImageButton = parent.findViewById(R.id.speak_recycler_all);
+            mDescriptionImageRecycler = parent.findViewById(R.id.option_icons);
 
         }
 
@@ -91,9 +76,7 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
 
     @Override
     public FoodDescriptionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View convertView = inflater.inflate(R.layout.single_description_item, null);
-
-
+        View convertView = inflater.inflate(R.layout.block_select_item, null);
         return new FoodDescriptionAdapter.ViewHolder(convertView);
     }
 
@@ -101,66 +84,20 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
     public void onBindViewHolder(final FoodDescriptionAdapter.ViewHolder holder, int position){
 
         final String word = mData.get(position);
-        holder.mTextView.setText(word);
 
-        //load image
-        ((UseRecyclerActivity) context).loadImage(mListOfNouns.get(word),holder.mDescriptiveImageButton, false);
+        holder.mSpeakImageButton.setOnClickListener((View view)-> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH,null,null));
 
-        //select with relative layout instead
-        holder.mContainingRelativeLayout.setSelected(false);
+        final SimpleImageRecyclerAdapter imageRecyclerAdapter = mImageRecyclerAdapters.get(position);
 
+        LinearLayoutManager layoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
 
-        holder.mSpeakImageButton.setOnClickListener((view) ->
-                myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null, null));
-
-
-        holder.mCheckBox.setOnClickListener((View view) ->
-                changeState(holder, position));
-
-        holder.mContainingRelativeLayout.setOnClickListener((View view)->{
-            if(holder.mCheckBox.isChecked())
-                holder.mCheckBox.setChecked(false);
-            else
-                holder.mCheckBox.setChecked(true);
-            changeState(holder, position);
-        });
-
+        holder.mDescriptionImageRecycler.setLayoutManager(layoutManager);
+        holder.mDescriptionImageRecycler.setAdapter(imageRecyclerAdapter);
 
 
     }
 
-    private void changeState(FoodDescriptionAdapter.ViewHolder holder, int position){
 
-        myTTS.speak(mData.get(position), TextToSpeech.QUEUE_FLUSH, null, null);
-
-        if (holder.mCheckBox.isChecked()){
-
-            if (last_selected_relative_layout != null){
-                last_selected_relative_layout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_SELECT]));
-            }
-            last_selected_relative_layout = holder.mContainingRelativeLayout;
-
-
-
-            holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_CURRENT_SELECT]));
-            state.set(position,STATE_CURRENT_SELECT);
-
-
-        }else{
-
-
-            holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_NORMAL]));
-
-            if (last_selected_relative_layout == holder.mContainingRelativeLayout)
-                last_selected_relative_layout = null;
-
-            state.set(position,STATE_NORMAL);
-
-
-        }
-
-
-    }
 
 @Override
     public void processJson(String description){
@@ -175,9 +112,17 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
 
             if (!(mListOfNouns.containsKey(chunk_root_item))){
                 // initialize entry state to zero
-                state.add(STATE_NORMAL);
                 mListOfNouns.put(chunk_item,chunk_root_item);
                 mData.add(chunk_item);
+
+                //Create itemRecycler
+                SimpleImageRecyclerAdapter imageRecyclerAdapter = new SimpleImageRecyclerAdapter(context, myTTS);
+                String[] option = {chunk_root_item, chunk_item };
+                imageRecyclerAdapter.addItem(option);
+
+                mImageRecyclerAdapters.add(imageRecyclerAdapter);
+
+
 
             }
         }
