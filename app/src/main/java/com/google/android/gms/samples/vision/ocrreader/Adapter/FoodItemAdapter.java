@@ -101,6 +101,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         private ImageButton mImageButtonLess;
 
         public RecyclerView mRecyclerViewWholeMealView;
+        public RecyclerView mRecyclerFoodDescription;
         public ImageButton mImageButtonCancelEdamamSearch;
         public ProgressBar mProgressBarSearchingEdamam;
         public TextView mTextViewNoResult;
@@ -124,6 +125,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             mImageButtonMore = parent.findViewById(R.id.more_selection_details);
             mImageButtonLess = parent.findViewById(R.id.less_selection_details);
 
+            mRecyclerFoodDescription = parent.findViewById(R.id.food_description_recycler);
             mRecyclerViewWholeMealView = parent.findViewById(R.id.gridview_edit_meal);
             mImageButtonCancelEdamamSearch = parent.findViewById(R.id.cancel_gridview_edit_meal);
             mProgressBarSearchingEdamam = parent.findViewById(R.id.searching_edmame);
@@ -155,6 +157,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     public void onBindViewHolder(final FoodItemAdapter.ViewHolder holder, int position){
 
         final String word = mData.get(position);
+        final String description = mDescription.get(position);
         //holder.mTextView.setText(word);
 
         // setup horizontal text by text adapter
@@ -162,16 +165,18 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
         adapter.addItem(word);
 
-        /*String tokenizedString [] = word.split(" ");
-
-        for (String child : tokenizedString){
-            adapter.addItem(child);
-        }*/
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
         holder.mTextByTextRecyclerView.setLayoutManager(layoutManager);
 
         holder.mTextByTextRecyclerView.setAdapter(adapter);
+
+
+        //if desription is not empty setup description of meal
+        if (description != null && !(description.equals("")))
+            setUpFoodDescriptionAdapter(holder, position);
+
+
 
 
         //select with relative layout instead
@@ -198,7 +203,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
 
         holder.mImageButtonMore.setOnClickListener((View view) ->
-            expandMore(holder, adapter, word)
+            expandMore(holder, adapter, word, description)
         );
 
         holder.mImageButtonLess.setOnClickListener((View view) ->
@@ -206,15 +211,22 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     }
 
+    private void setUpFoodDescriptionAdapter(FoodItemAdapter.ViewHolder holder, int position){
+        FoodDescriptionAdapter foodDescriptionAdapter = new FoodDescriptionAdapter(context);
+        LinearLayoutManager descriptionLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false);
+        holder.mRecyclerFoodDescription.setLayoutManager(descriptionLayoutManager);
+        foodDescriptionAdapter.addItem(mDescription.get(position));
+        holder.mRecyclerFoodDescription.setAdapter(foodDescriptionAdapter);
+    }
 
     private void expandMore(FoodItemAdapter.ViewHolder holder,
-                            TextByTextAdapterIntercept adapterIntercept, String word){
+                            TextByTextAdapterIntercept adapterIntercept, String word, String description){
         holder.mImageButtonLess.setVisibility(View.VISIBLE);
         //holder.mRecyclerView.setVisibility(View.VISIBLE);
         /*holder.mEndSeparator.setVisibility(View.VISIBLE);
         holder.mStartSeparator.setVisibility(View.VISIBLE);*/
 
-
+        showFoodDescription(holder, description);
 
         holder.mImageButtonMore.setVisibility(View.GONE);
 
@@ -225,6 +237,15 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     }
 
+    private void showFoodDescription(FoodItemAdapter.ViewHolder holder, String description){
+        if (description != null && !(description.equals("")))
+            holder.mRecyclerFoodDescription.setVisibility(View.VISIBLE);
+    }
+
+    private void hideFoodDescription(FoodItemAdapter.ViewHolder holder){
+        holder.mRecyclerFoodDescription.setVisibility(View.GONE);
+    }
+
 
     private void expandLess(FoodItemAdapter.ViewHolder holder, TextByTextAdapterIntercept adapterIntercept){
         holder.mImageButtonLess.setVisibility(View.GONE);
@@ -232,6 +253,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         //holder.mExpandOptionRecyclerView.setVisibility(View.GONE);
         /*holder.mEndSeparator.setVisibility(View.GONE);
         holder.mStartSeparator.setVisibility(View.GONE);*/
+
+        hideFoodDescription(holder);
 
 
         //hide tenRecycler

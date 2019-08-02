@@ -59,6 +59,8 @@
                 android:layout_marginBottom="10dp"
                 />
 
+
+
             <!--dividers-->
 
             <!--LinearLayout
@@ -144,13 +146,24 @@
                 android:visibility="gone"/>
 
         </LinearLayout>
-        <!--SHow image of full food item -->
+
+        <!--show items from description-->
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/food_description_recycler"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/container_text_option_recycler"
+            android:visibility="gone"/>
+
+
+        <!--Show image of full food item -->
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/gridview_edit_meal"
-            android:layout_below="@id/container_text_option_recycler"
+            android:layout_below="@id/food_description_recycler"
             android:layout_alignParentLeft="true"
 
             android:background="@drawable/text_border_internal"

@@ -101,24 +101,24 @@ public final class R {
         public static final int async = 0x7f080021;
         public static final int blocking = 0x7f080029;
         public static final int chronometer = 0x7f080036;
-        public static final int forever = 0x7f080067;
-        public static final int icon = 0x7f080073;
-        public static final int icon_group = 0x7f080074;
-        public static final int info = 0x7f08007e;
-        public static final int italic = 0x7f080084;
-        public static final int item_touch_helper_previous_elevation = 0x7f080085;
-        public static final int line1 = 0x7f080089;
-        public static final int line3 = 0x7f08008a;
-        public static final int normal = 0x7f0800ab;
-        public static final int notification_background = 0x7f0800ac;
-        public static final int notification_main_column = 0x7f0800ad;
-        public static final int notification_main_column_container = 0x7f0800ae;
-        public static final int right_icon = 0x7f0800e5;
-        public static final int right_side = 0x7f0800e6;
-        public static final int text = 0x7f08011c;
-        public static final int text2 = 0x7f08011d;
-        public static final int time = 0x7f080124;
-        public static final int title = 0x7f080125;
+        public static final int forever = 0x7f080068;
+        public static final int icon = 0x7f080074;
+        public static final int icon_group = 0x7f080075;
+        public static final int info = 0x7f08007f;
+        public static final int italic = 0x7f080085;
+        public static final int item_touch_helper_previous_elevation = 0x7f080086;
+        public static final int line1 = 0x7f08008a;
+        public static final int line3 = 0x7f08008b;
+        public static final int normal = 0x7f0800ac;
+        public static final int notification_background = 0x7f0800ad;
+        public static final int notification_main_column = 0x7f0800ae;
+        public static final int notification_main_column_container = 0x7f0800af;
+        public static final int right_icon = 0x7f0800e6;
+        public static final int right_side = 0x7f0800e7;
+        public static final int text = 0x7f08011f;
+        public static final int text2 = 0x7f080120;
+        public static final int time = 0x7f080127;
+        public static final int title = 0x7f080128;
     }
     public static final class integer {
         private integer() {}
