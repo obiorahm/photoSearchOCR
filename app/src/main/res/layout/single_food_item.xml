@@ -50,6 +50,7 @@
                 android:tint="@color/grey"
                 android:contentDescription="@string/speak_whole_text"/>
 
+
             <android.support.v7.widget.RecyclerView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

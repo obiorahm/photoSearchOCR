@@ -1,22 +1,15 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.bumptech.glide.Glide;
-import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.StreetViewPanoramaView;
-import com.google.android.gms.samples.vision.ocrreader.Adapter.FoodItemAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,10 +21,8 @@ import com.google.firebase.storage.StorageReference;
 import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import opennlp.tools.stemmer.PorterStemmer;
-import opennlp.tools.stemmer.Stemmer;
 
 /**
  * Created by mgo983 on 9/6/18.
@@ -52,9 +43,6 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
     public static Object [] last_selected_object;
 
-    public void setView(RecyclerWordAdapter adapter, FoodItemAdapter.ViewHolder holder, ArrayList<String []> edmamInfo){}
-
-    public void setView(RecyclerWordAdapter adapter, RecyclerView recyclerView, ArrayList<String[]> edamanInfo){}
 
     public void setView(RecyclerWordAdapter adapter, ArrayList<String[]> edamanInfo){}
 
@@ -62,33 +50,19 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
     public void processWebResults(Document document){}
 
-    public void beginFetchRestaurantLogos(HashMap<String, String[]> restaurantInfo){}
-
     public String LOG_TAG;
 
     private static final String DB_REF_WORD = "word";
 
     private final static String WORD_IMAGE_REFERENCE  = "symbols";
 
+    private int CHUNK_ROOT_POS = 0;
+
+    private int CHUNK_POS = 1;
+
+    private int IMAGE_URL_POS = 2;
 
 
-
-    /**
-     *
-     * @param lngLatPack contains JSONdata for location in string
-     */
-    public void addLongLatToAdapter(HashMap<String, String[]> lngLatPack){
-
-    }
-
-    /**
-     *
-     * @param imageUrlPack
-     */
-
-    public void addImageUrlToAdapter(HashMap<String, String[]> imageUrlPack){
-
-    }
 
 
     /**
@@ -107,33 +81,28 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
     }
 
-    /**
-     *
-     * @param imageView comes from the TextByTextAdapter
-     */
-    public void displayTextByTextImage(ImageView imageView){
-
-    }
 
 
-    public void loadImage(final String  token,  ImageView imageView, boolean notFoodItem){
+
+
+
+    public void loadImage(final String[]  token,  SetAdapter adapter, boolean notFoodItem){
 
         if (token == null)
             return;
 
-        String searchString = token.toLowerCase().trim();
+        String searchString = token[CHUNK_ROOT_POS].toLowerCase().trim();
         Log.d(LOG_TAG, " token " + searchString );
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD);
 
-       //databaseReference.orderByKey().startAt(searchString).endAt(searchString+"\uf8ff").addValueEventListener(new ValueEventListener() {
+        //databaseReference.orderByKey().startAt(searchString).endAt(searchString+"\uf8ff").addValueEventListener(new ValueEventListener() {
         databaseReference.orderByKey().equalTo(searchString).addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d(LOG_TAG, "got here");
                 if (!dataSnapshot.exists()){
-                    searchWithStemmer(searchString, imageView, notFoodItem);
-                    return;
+                    searchWithStemmer(token, adapter, notFoodItem);
                 }else {
                     for (DataSnapshot child : dataSnapshot.getChildren()){
 
@@ -147,19 +116,11 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
                                 firebaseStorage.child( WORD_IMAGE_REFERENCE + "/" + grandChildValue[0] + "/" + grandChildValue[2])
                                         .getDownloadUrl()
-                                        .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                            @Override
-                                            public void onSuccess(Uri uri) {
-
-                                                Glide.with(getApplicationContext()).load(uri).into(imageView);
-
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.d(LOG_TAG, "could not load image");
-                                    }
-                                });
+                                        .addOnSuccessListener((Uri uri)->
+                                    adapter.addImageUrl(token, uri))
+                                        .addOnFailureListener((@NonNull Exception e)->
+                                    Log.d(LOG_TAG, "could not load image")
+                                );
                                 Log.d(LOG_TAG, " grandChild " + grandChild.getValue().toString());
 
                                 return;
@@ -180,10 +141,18 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
 
 
-    private void searchWithStemmer(final String  token,  ImageView imageView, boolean notFoodItem){
+
+
+
+
+
+
+
+
+    private void searchWithStemmer(final String[]  token,  SetAdapter adapter, boolean notFoodItem){
 
         PorterStemmer porterStemmer = new PorterStemmer();
-        String searchString = porterStemmer.stem(token);
+        String searchString = porterStemmer.stem(token[CHUNK_ROOT_POS]);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD);
 
@@ -191,9 +160,8 @@ public class UseRecyclerActivity extends FragmentActivity  {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d(LOG_TAG, "got here");
-                if (!dataSnapshot.exists()){
-                    return;
-                }else {
+                if (dataSnapshot.exists()){
+
                     for (DataSnapshot child : dataSnapshot.getChildren()){
 
                         for(DataSnapshot grandChild : child.getChildren()){
@@ -206,19 +174,13 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
                                 firebaseStorage.child( WORD_IMAGE_REFERENCE + "/" + grandChildValue[0] + "/" + grandChildValue[2])
                                         .getDownloadUrl()
-                                        .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                            @Override
-                                            public void onSuccess(Uri uri) {
+                                        .addOnSuccessListener((Uri uri)-> {
+                                    adapter.addImageUrl(token, uri);                                                //Glide.with(getApplicationContext()).load(uri).into(imageView);
+                                    //setAdapter.mNotifyDataSetChanged();
 
-                                                Glide.with(getApplicationContext()).load(uri).into(imageView);
-
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.d(LOG_TAG, "could not load image");
-                                    }
-                                });
+                                }).addOnFailureListener((@NonNull Exception e)->
+                                    Log.d(LOG_TAG, "could not load image")
+                                );
                                 Log.d(LOG_TAG, " grandChild " + grandChild.getValue().toString());
 
                                 return;
@@ -236,6 +198,4 @@ public class UseRecyclerActivity extends FragmentActivity  {
             }
         });
     }
-
-
 }

@@ -1,6 +1,7 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,21 +10,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.R;
+import com.google.android.gms.samples.vision.ocrreader.SetAdapter;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+
 
 /**
  * Created by mgo983 on 8/20/18.
  */
 
-public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.ViewHolder> {
+public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.ViewHolder> implements SetAdapter {
 
-    private ArrayList<String> mData = new ArrayList<>();
-    private HashMap<String, Boolean> wordIsMeal = new HashMap<>();
+    private ArrayList<String[]> mData = new ArrayList<>();
+    private HashMap<String, Uri> mUrls = new HashMap<>();
 
     private LayoutInflater inflater;
     private Context context;
@@ -34,6 +37,10 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
 
     private static RecyclerView lastParent = null;
     private boolean notFoodItem;
+
+
+    private int URI_POS = 1;
+    private int WORD_POS = 0;
 
     public static class ViewHolder extends  RecyclerView.ViewHolder{
         public TextView mTextView;
@@ -86,10 +93,8 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
     @Override
     public void onBindViewHolder(final TextByTextAdapter.ViewHolder holder, int position){
 
-        final String word = mData.get(position);
+        final String word = mData.get(position)[WORD_POS];
         holder.mTextView.setText(word);
-
-        ((UseRecyclerActivity) context).loadImage(word, holder.mImageView, true);
 
         /*holder.mTextView.setOnClickListener((View view) -> {
             myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
@@ -110,6 +115,8 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
             }
             DetectImageActivity.last_parent_di = holder.mRecyclerView;
         });*/
+
+        Glide.with(context).load(mUrls.get(word)).into(holder.mImageView);
 
         holder.mTextView.setOnClickListener((View view)->{
 
@@ -133,8 +140,8 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
 
     public String getSelectedString(){
         String appendMData = "";
-        for (String child : mData){
-            appendMData += child + " ";
+        for (String[] child : mData){
+            appendMData += child[WORD_POS] + " ";
         }
         return appendMData;
     }
@@ -145,8 +152,25 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
     }
 
     public void addItem(String text){
-        mData.add(text);
+
+        String url = "";
+
+        String [] data = {text, url};
+
+        ((UseRecyclerActivity) context).loadImage(data,this,false);
+
+        mData.add(data);
+        notifyDataSetChanged();
+
+    }
+
+
+    @Override
+
+    public void addImageUrl(String [] icon, Uri uri){
+        mUrls.put(icon[WORD_POS], uri);
         notifyDataSetChanged();
     }
+
 
 }

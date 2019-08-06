@@ -2,21 +2,17 @@ package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+
 
 import com.google.android.gms.samples.vision.ocrreader.FetchNounDependency;
 import com.google.android.gms.samples.vision.ocrreader.NounDependencyJsonHandler;
-import com.google.android.gms.samples.vision.ocrreader.OrderInstructions;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
@@ -35,8 +31,8 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
 
     LayoutInflater inflater;
     ArrayList<String> mData = new ArrayList<>();
-    ArrayList<SimpleImageRecyclerAdapter> mImageRecyclerAdapters = new ArrayList<>();
-    HashMap<String,  String> mListOfNouns = new HashMap<>();
+    private ArrayList<SimpleImageRecyclerAdapter> mImageRecyclerAdapters = new ArrayList<>();
+    private HashMap<String,  String> mListOfNouns = new HashMap<>();
     private ArrayList<Integer> state = new ArrayList<>();
     public static HashMap<String, Object[]> order = new HashMap<>();
 
@@ -109,6 +105,7 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
 
             String chunk_item = (String) chunk.get(i);
             String chunk_root_item = (String) chunk_root.get(i);
+            String image_url = "";
 
             if (!(mListOfNouns.containsKey(chunk_root_item))){
                 // initialize entry state to zero
@@ -117,10 +114,12 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
 
                 //Create itemRecycler
                 SimpleImageRecyclerAdapter imageRecyclerAdapter = new SimpleImageRecyclerAdapter(context, myTTS);
-                String[] option = {chunk_root_item, chunk_item };
+                String[] option = {chunk_root_item, chunk_item, ""  };
                 imageRecyclerAdapter.addItem(option);
 
                 mImageRecyclerAdapters.add(imageRecyclerAdapter);
+
+                notifyDataSetChanged();
 
 
 

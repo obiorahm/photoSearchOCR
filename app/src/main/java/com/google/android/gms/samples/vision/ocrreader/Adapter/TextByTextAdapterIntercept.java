@@ -1,7 +1,7 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,10 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.samples.vision.ocrreader.DetectImageActivity;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.FetchNounDependency;
 import com.google.android.gms.samples.vision.ocrreader.NounDependencyJsonHandler;
 import com.google.android.gms.samples.vision.ocrreader.R;
+import com.google.android.gms.samples.vision.ocrreader.SetAdapter;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
 import org.json.JSONArray;
@@ -28,11 +29,12 @@ import java.util.HashMap;
  * Created by mgo983 on 12/22/18.
  */
 
-public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextAdapterIntercept.ViewHolder> implements NounDependencyJsonHandler {
+public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextAdapterIntercept.ViewHolder> implements NounDependencyJsonHandler, SetAdapter {
 
-    private ArrayList<String> mData = new ArrayList<>();
+    private ArrayList<String[]> mData = new ArrayList<>();
     private ArrayList<Integer> mImageData = new ArrayList<>();
     private HashMap<String,String> mListOfNouns = new HashMap<>();
+    private HashMap<String, Uri> mUrls = new HashMap<>();
 
     private LayoutInflater inflater;
     private Context context;
@@ -41,9 +43,9 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
 
     private TextToSpeech myTTS;
 
-    private static RecyclerView lastParent = null;
 
-    private boolean notFoodItem = true;
+    private int URI_POS = 1;
+    private int WORD_POS = 0;
 
     public static class ViewHolder extends  RecyclerView.ViewHolder{
         public TextView mTextView;
@@ -69,7 +71,7 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
         inflater = LayoutInflater.from(context);
         this.context = context;
         myTTS = ((UseRecyclerActivity) context).myTTS;
-        this.notFoodItem = notFoodItem;
+
 
     }
 
@@ -87,7 +89,10 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
             JSONArray chunk = data.getJSONArray("chunk");
             JSONArray chunk_root =  data.getJSONArray("chunk_root");
             for (int i = 0; i < chunk.length(); i++){
-                mListOfNouns.put((String) chunk_root.get(i), (String) chunk_root.get(i));
+                Log.d(LOG_TAG, "processJSON " + chunk_root.get(i));
+                String root_noun = ((String) chunk_root.get(i)).toLowerCase().trim();
+                mListOfNouns.put(root_noun, root_noun);
+                notifyDataSetChanged();
             }
 
 
@@ -104,22 +109,30 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
     @Override
     public TextByTextAdapterIntercept.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View convertView = inflater.inflate(R.layout.recognized_text_item, null);
-        TextByTextAdapterIntercept.ViewHolder viewHolder = new TextByTextAdapterIntercept.ViewHolder(convertView, parent);
 
-        return viewHolder;
+        return new TextByTextAdapterIntercept.ViewHolder(convertView, parent);
     }
 
 
     @Override
     public void onBindViewHolder(final TextByTextAdapterIntercept.ViewHolder holder, int position){
 
-        final String word = mData.get(position);
+
+        final String [] data = mData.get(position);
+        final String word = data[WORD_POS];
+
         holder.mTextView.setText(word);
 
         holder.mImageView.setVisibility(mImageData.get(position));
 
         if (mListOfNouns.containsKey(word))
-            ((UseRecyclerActivity) context).loadImage(word, holder.mImageView, notFoodItem);
+        {
+            Glide.with(context).load(mUrls.get(word)).into(holder.mImageView);
+
+        }
+
+        Log.d(LOG_TAG, "bindviewholder " + word);
+
 
         holder.mTextView.setOnClickListener((View view) ->{
 
@@ -137,7 +150,7 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
     }
 
 
-    private void displayDescriptiveImage(TextByTextAdapterIntercept.ViewHolder holder, String word, int position){
+    public void displayDescriptiveImage(TextByTextAdapterIntercept.ViewHolder holder, String word, int position){
         if (holder.mImageView.getVisibility() == View.VISIBLE){
             mImageData.set(position, View.GONE);
             holder.mImageView.setVisibility(View.GONE);
@@ -162,10 +175,10 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
         notifyDataSetChanged();
     }
 
-    public String getSelectedString(){
+    private String getSelectedString(){
         String appendMData = "";
-        for (String child : mData){
-            appendMData += child + " ";
+        for (String [] child : mData){
+            appendMData += child[WORD_POS] + " ";
         }
         return appendMData;
     }
@@ -180,14 +193,27 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
         String tokenizedString [] = fullText.split(" ");
 
         for (String child : tokenizedString){
-            mData.add(child);
+            //mData.add(child);
+
+            String uri = "";
+            String icon[] = {child.toLowerCase().trim(), uri};
+            ((UseRecyclerActivity) context).loadImage(icon, this, false);
+
+            mData.add(icon);
             mImageData.add(View.GONE);
+            notifyDataSetChanged();
         }
 
         get_noun_dependency(fullText);
 
         //mData.add(text);
         //mImageData.add(View.GONE);
+    }
+
+    @Override
+    public void addImageUrl(String[] icon, Uri uri){
+        mUrls.put(icon[WORD_POS], uri);
+        Log.d(LOG_TAG, "found image "+ icon[WORD_POS] + uri.toString() + mListOfNouns.get(icon[WORD_POS]));
         notifyDataSetChanged();
     }
 
@@ -198,7 +224,6 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
         }
         notifyDataSetChanged();
     }
-
 
 
 

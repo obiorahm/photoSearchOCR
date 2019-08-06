@@ -248,28 +248,6 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
     }
     protected final static String PYTHON_HOME_PARAM = "python.home";
 
-    public void runPythonCode(String text){
-        Properties props = new Properties();
-        String pythonHomeString = props.getProperty(PYTHON_HOME_PARAM);
-        Log.d(LOG_TAG, "python Interpreter " + pythonHomeString);
-
-
-        String pythonCode = "import spacy\n" +
-                "import sys\n" +
-                "sys.path.append('/libs\u2069/jython')\n" +
-                "def get_noun_dependency(text):\n" +
-                "  nlp = spacy.load(\"en_core_web_sm\")\n" +
-                "  doc = nlp(text)\n" +
-                "  nouns = []\n" +
-                "  for chunk in doc.noun_chunks:\n" +
-                "    nouns.append(chunk)\n" +
-                "  return nouns";
-        PythonInterpreter pythonInterpreter = new PythonInterpreter();
-        pythonInterpreter.exec(pythonCode);
-        PyObject func = pythonInterpreter.get("get_noun_dependency");
-        PyObject result = func.__call__(new PyString(text));
-        String [] javaResult = (String []) result.__tojava__(String[].class);
-    }
 
 
     //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.

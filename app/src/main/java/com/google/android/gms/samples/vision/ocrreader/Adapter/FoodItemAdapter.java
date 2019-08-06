@@ -361,8 +361,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             visibleViews(holder);
             state.set(position,STATE_CURRENT_SELECT);
 
-            getNounDependency(mDescription.get(position));
-
             addOrder(word, position, holder);
 
 
@@ -388,12 +386,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     }
 
 
-    private void getNounDependency(String description){
-        /*FetchNounDependency fetchNounDependency = new FetchNounDependency(this);
-        if (description != null && !(description.equals(""))){
-            fetchNounDependency.execute(description);
-        }*/
-    }
+
 
     public static final int ORDER = 0;
     private static final int POSITION = 1;
