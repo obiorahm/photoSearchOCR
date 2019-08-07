@@ -1489,6 +1489,7 @@ id fill_horizontal
 id fill_vertical
 id fixed
 id food_description_recycler
+id food_description_recycler_progress_bar
 id food_image
 id food_item
 id food_item_options

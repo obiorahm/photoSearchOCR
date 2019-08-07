@@ -11,9 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.samples.vision.ocrreader.ObjectsToHide;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.SetAdapter;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
@@ -45,7 +47,9 @@ public class SimpleImageRecyclerAdapter extends RecyclerView.Adapter<SimpleImage
 
     private int WORD_POS = 0;
 
-    private String LOGTAG = SimpleImageRecyclerAdapter.class.getSimpleName();
+    private String LOG_TAG = SimpleImageRecyclerAdapter.class.getSimpleName();
+
+    private ObjectsToHide objectsToHide = new ObjectsToHide();
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageView mImageView;
@@ -60,19 +64,19 @@ public class SimpleImageRecyclerAdapter extends RecyclerView.Adapter<SimpleImage
 
     }
 
-    public SimpleImageRecyclerAdapter(Context context, TextToSpeech myTTS){
+    public SimpleImageRecyclerAdapter(Context context, TextToSpeech myTTS, ObjectsToHide objectsToHide){
         super();
         this.myTTS = myTTS;
         this.context = context;
         this.inflater = LayoutInflater.from(context);
+        this.objectsToHide = objectsToHide;
     }
 
     public void addItem(String [] icon){
         state.add(STATE_NORMAL);
         ((UseRecyclerActivity) context).loadImage(icon,this, false);
         mData.add(icon);
-
-        //mData.add(icon);
+        showRecyclers();
         notifyDataSetChanged();
 
     }
@@ -80,7 +84,21 @@ public class SimpleImageRecyclerAdapter extends RecyclerView.Adapter<SimpleImage
     @Override
     public void addImageUrl(String [] icon, Uri uri){
         mUrls.put(icon[WORD_POS], uri);
+        showRecyclers();
         notifyDataSetChanged();
+    }
+
+
+    private void showRecyclers(){
+        ProgressBar progressBar = objectsToHide.descriptionProgressBar;
+        RecyclerView recyclerView = objectsToHide.descriptionRecyclerView;
+
+        Log.d(LOG_TAG, "object to hide " + objectsToHide.toString());
+
+
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+
     }
 
     @Override

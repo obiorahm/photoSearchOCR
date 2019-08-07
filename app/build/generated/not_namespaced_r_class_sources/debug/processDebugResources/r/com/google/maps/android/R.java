@@ -83,17 +83,17 @@ public final class R {
         public static final int amu_text = 0x7f080020;
         public static final int auto = 0x7f080022;
         public static final int dark = 0x7f080046;
-        public static final int hybrid = 0x7f080073;
-        public static final int icon_only = 0x7f080077;
-        public static final int light = 0x7f080089;
-        public static final int none = 0x7f0800ab;
-        public static final int normal = 0x7f0800ac;
-        public static final int satellite = 0x7f0800e8;
-        public static final int standard = 0x7f080114;
-        public static final int terrain = 0x7f08011d;
-        public static final int webview = 0x7f080134;
-        public static final int wide = 0x7f080135;
-        public static final int window = 0x7f080136;
+        public static final int hybrid = 0x7f080074;
+        public static final int icon_only = 0x7f080078;
+        public static final int light = 0x7f08008a;
+        public static final int none = 0x7f0800ac;
+        public static final int normal = 0x7f0800ad;
+        public static final int satellite = 0x7f0800e9;
+        public static final int standard = 0x7f080115;
+        public static final int terrain = 0x7f08011e;
+        public static final int webview = 0x7f080135;
+        public static final int wide = 0x7f080136;
+        public static final int window = 0x7f080137;
     }
     public static final class integer {
         private integer() {}

@@ -1,5 +1,6 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 
 import com.google.android.gms.samples.vision.ocrreader.FetchNounDependency;
 import com.google.android.gms.samples.vision.ocrreader.NounDependencyJsonHandler;
+import com.google.android.gms.samples.vision.ocrreader.ObjectsToHide;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
@@ -35,6 +38,8 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
     private HashMap<String,  String> mListOfNouns = new HashMap<>();
     private ArrayList<Integer> state = new ArrayList<>();
     public static HashMap<String, Object[]> order = new HashMap<>();
+
+    ObjectsToHide objectsToHide;
 
 
 
@@ -61,11 +66,13 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
 
     }
 
-    public FoodDescriptionAdapter(Context context){
+    public FoodDescriptionAdapter(Context context, ObjectsToHide objectsToHide){
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
         myTTS = ((UseRecyclerActivity) context).myTTS;
+
+        this.objectsToHide = objectsToHide;
 
 
     }
@@ -113,15 +120,13 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
                 mData.add(chunk_item);
 
                 //Create itemRecycler
-                SimpleImageRecyclerAdapter imageRecyclerAdapter = new SimpleImageRecyclerAdapter(context, myTTS);
+                Log.d(LOG_TAG, "object to hide " + objectsToHide.toString());
+                SimpleImageRecyclerAdapter imageRecyclerAdapter = new SimpleImageRecyclerAdapter(context, myTTS, objectsToHide);
                 String[] option = {chunk_root_item, chunk_item, ""  };
                 imageRecyclerAdapter.addItem(option);
 
                 mImageRecyclerAdapters.add(imageRecyclerAdapter);
-
                 notifyDataSetChanged();
-
-
 
             }
         }
@@ -142,7 +147,6 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
     public void addItem(String text){
         FetchNounDependency fetchNounDependency = new FetchNounDependency(this);
         fetchNounDependency.execute(text);
-
         notifyDataSetChanged();
     }
 
