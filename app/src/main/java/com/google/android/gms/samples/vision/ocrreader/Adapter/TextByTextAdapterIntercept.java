@@ -211,9 +211,10 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
     }
 
     @Override
-    public void addImageUrl(String[] icon, Uri uri){
-        mUrls.put(icon[WORD_POS], uri);
-        Log.d(LOG_TAG, "found image "+ icon[WORD_POS] + uri.toString() + mListOfNouns.get(icon[WORD_POS]));
+    public void addImageUrl(String word, Uri uri){
+        mUrls.put(word, uri);
+        String x = uri == null? "": uri.toString();
+        Log.d(LOG_TAG, "found image "+ word + x + mListOfNouns.get(word));
         notifyDataSetChanged();
     }
 

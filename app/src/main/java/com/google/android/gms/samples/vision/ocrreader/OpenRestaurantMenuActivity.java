@@ -107,9 +107,6 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         ImageButton imageButtonNext = findViewById(R.id.next_btn_dr);
         imageButtonNext.setOnClickListener(view -> getOrder());
 
-        //runPythonCode("Ketchup, mustard, lettuce, pickle, onion and tomato. 100% Angus beef, always fresh, never frozen");
-
-
     }
 
 

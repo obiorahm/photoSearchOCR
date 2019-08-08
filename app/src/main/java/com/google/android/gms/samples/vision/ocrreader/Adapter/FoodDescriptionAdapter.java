@@ -1,6 +1,5 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 
 
 import com.google.android.gms.samples.vision.ocrreader.FetchNounDependency;
@@ -36,7 +34,6 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
     ArrayList<String> mData = new ArrayList<>();
     private ArrayList<SimpleImageRecyclerAdapter> mImageRecyclerAdapters = new ArrayList<>();
     private HashMap<String,  String> mListOfNouns = new HashMap<>();
-    private ArrayList<Integer> state = new ArrayList<>();
     public static HashMap<String, Object[]> order = new HashMap<>();
 
     ObjectsToHide objectsToHide;

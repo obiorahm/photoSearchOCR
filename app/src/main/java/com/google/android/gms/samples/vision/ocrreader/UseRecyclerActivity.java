@@ -91,7 +91,9 @@ public class UseRecyclerActivity extends FragmentActivity  {
         if (token == null)
             return;
 
-        String searchString = token[CHUNK_ROOT_POS].toLowerCase().trim();
+        String rawString = token[CHUNK_ROOT_POS];
+
+        String searchString = rawString.toLowerCase().trim();
         Log.d(LOG_TAG, " token " + searchString );
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD);
 
@@ -117,7 +119,7 @@ public class UseRecyclerActivity extends FragmentActivity  {
                                 firebaseStorage.child( WORD_IMAGE_REFERENCE + "/" + grandChildValue[0] + "/" + grandChildValue[2])
                                         .getDownloadUrl()
                                         .addOnSuccessListener((Uri uri)->
-                                    adapter.addImageUrl(token, uri))
+                                    adapter.addImageUrl(rawString, uri))
                                         .addOnFailureListener((@NonNull Exception e)->
                                     Log.d(LOG_TAG, "could not load image")
                                 );
@@ -152,7 +154,10 @@ public class UseRecyclerActivity extends FragmentActivity  {
     private void searchWithStemmer(final String[]  token,  SetAdapter adapter, boolean notFoodItem){
 
         PorterStemmer porterStemmer = new PorterStemmer();
-        String searchString = porterStemmer.stem(token[CHUNK_ROOT_POS]);
+
+        String rawString = token[CHUNK_ROOT_POS];
+
+        String searchString = porterStemmer.stem(rawString);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD);
 
@@ -175,11 +180,14 @@ public class UseRecyclerActivity extends FragmentActivity  {
                                 firebaseStorage.child( WORD_IMAGE_REFERENCE + "/" + grandChildValue[0] + "/" + grandChildValue[2])
                                         .getDownloadUrl()
                                         .addOnSuccessListener((Uri uri)-> {
-                                    adapter.addImageUrl(token, uri);                                                //Glide.with(getApplicationContext()).load(uri).into(imageView);
+                                    adapter.addImageUrl(rawString, uri);                                                //Glide.with(getApplicationContext()).load(uri).into(imageView);
                                     //setAdapter.mNotifyDataSetChanged();
 
-                                }).addOnFailureListener((@NonNull Exception e)->
-                                    Log.d(LOG_TAG, "could not load image")
+                                }).addOnFailureListener((@NonNull Exception e)->{
+                                            Log.d(LOG_TAG, "could not load image");
+                                            searchWithEngine(rawString, adapter);
+
+                                        }
                                 );
                                 Log.d(LOG_TAG, " grandChild " + grandChild.getValue().toString());
 
@@ -189,6 +197,10 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
                     }
 
+                }else{
+                    Log.d(LOG_TAG, "runEngine");
+                    searchWithEngine(rawString, adapter);
+
                 }
             }
 
@@ -197,5 +209,13 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
             }
         });
+    }
+
+
+    private void searchWithEngine(String searchString, SetAdapter adapter){
+        FetchImageEngine fetchImageEngine = new FetchImageEngine(adapter);
+        fetchImageEngine.execute(searchString);
+
+
     }
 }

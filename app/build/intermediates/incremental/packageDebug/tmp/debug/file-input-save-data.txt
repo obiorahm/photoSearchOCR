@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Jul 27 15:20:26 CDT 2019
+#Thu Aug 08 14:15:00 CDT 2019
 5.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/0
 42.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
 22.path=icons/medium.png
@@ -14,7 +14,7 @@
 21.set=ASSET
 46.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
 39.set=ASSET
-26.path=nutrition/nutrition_facts.png
+26.path=general/restaurant.png
 6.baseType=DIRECTORY
 36.path=icons/mustard.png
 10.set=ASSET
@@ -62,7 +62,7 @@
 48.baseType=DIRECTORY
 39.baseType=DIRECTORY
 20.baseType=DIRECTORY
-27.path=classes4.dex
+27.path=nutrition/nutrition_facts.png
 37.path=meats/sliced/sliced.png
 20.set=ASSET
 38.set=ASSET
@@ -71,9 +71,9 @@
 33.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
 13.path=icons/vegetables.png
 17.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
-27.set=DEX
+27.set=ASSET
 count=53
-27.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/1
+27.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
 16.set=ASSET
 37.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
 11.baseType=DIRECTORY
@@ -169,7 +169,7 @@ count=53
 45.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
 29.set=ASSET
 3.baseType=DIRECTORY
-25.path=general/restaurant.png
+25.path=classes4.dex
 35.path=icons/blue_rare.png
 18.set=ASSET
 19.path=icons/well_done.png
@@ -182,7 +182,7 @@ count=53
 2.set=ASSET
 39.path=sauces/mustard.png
 40.set=ASSET
-25.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
+25.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/1
 16.baseType=DIRECTORY
 25.baseType=DIRECTORY
 44.baseType=DIRECTORY
@@ -197,7 +197,7 @@ count=53
 36.set=ASSET
 39.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
 1.path=icons/warm.png
-25.set=ASSET
+25.set=DEX
 15.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
 14.set=ASSET
 35.baseType=DIRECTORY

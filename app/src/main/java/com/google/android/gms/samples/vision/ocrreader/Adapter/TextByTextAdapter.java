@@ -167,8 +167,8 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
 
     @Override
 
-    public void addImageUrl(String [] icon, Uri uri){
-        mUrls.put(icon[WORD_POS], uri);
+    public void addImageUrl(String word, Uri uri){
+        mUrls.put(word, uri);
         notifyDataSetChanged();
     }
 

@@ -101,31 +101,4 @@ public class EdmanJasonReader {
         return AllRecipes;
     }
 
-
-    /*public ArrayList<String []> getRecipe(){
-        ArrayList<String [] > tenRecipes = new ArrayList<>();
-        try{
-            JSONArray hits = JSONEntry.getJSONArray("hits");
-
-            for (int i = 0; i < hits.length(); i++){
-                String[] recipeInfo = new String[2];
-                JSONObject recipe = hits.getJSONObject(i);
-                // get url
-                recipeInfo[0] = recipe.getJSONObject("recipe").getString("image");
-                //get ingredients
-                recipeInfo[1] = recipe.getJSONObject("recipe").getJSONArray("ingredientLines").toString();
-                Log.d(LOG_TAG, recipeInfo[0]);
-                tenRecipes.add(recipeInfo);
-
-            }
-            return tenRecipes;
-
-        }catch (JSONException e){
-            Log.e(LOG_TAG, e + "");
-
-        }catch (NullPointerException e){
-            Log.e(LOG_TAG, e + "");
-        }
-        return null;
-    }*/
 }

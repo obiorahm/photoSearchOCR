@@ -48,7 +48,7 @@ public class SimpleImageRecyclerAdapter extends RecyclerView.Adapter<SimpleImage
 
     private String LOG_TAG = SimpleImageRecyclerAdapter.class.getSimpleName();
 
-    private ObjectsToHide objectsToHide = new ObjectsToHide();
+    private ObjectsToHide objectsToHide;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageView mImageView;
@@ -81,8 +81,8 @@ public class SimpleImageRecyclerAdapter extends RecyclerView.Adapter<SimpleImage
     }
 
     @Override
-    public void addImageUrl(String [] icon, Uri uri){
-        mUrls.put(icon[WORD_POS], uri);
+    public void addImageUrl(String word, Uri uri){
+        mUrls.put(word, uri);
         showRecyclers();
         notifyDataSetChanged();
     }
