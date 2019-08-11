@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Aug 08 14:15:00 CDT 2019
+#Thu Aug 08 15:18:05 CDT 2019
 5.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/transforms/dexMerger/debug/0
 42.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
 22.path=icons/medium.png

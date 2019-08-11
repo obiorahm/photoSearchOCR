@@ -16,6 +16,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import com.google.android.gms.samples.vision.ocrreader.AllOrders;
+import com.google.android.gms.samples.vision.ocrreader.CurrentOrder;
 import com.google.android.gms.samples.vision.ocrreader.FetchMealDetails;
 import com.google.android.gms.samples.vision.ocrreader.ObjectsToHide;
 import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
@@ -34,12 +36,12 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     LayoutInflater inflater;
     ArrayList<String> mData;
-    ArrayList<String> mDescription;
+    private ArrayList<String> mDescription;
     private ArrayList<Integer> state = new ArrayList<>();
+    private ArrayList<FoodDescriptionAdapter> foodDescriptionAdapters = new ArrayList<>();
+
     public static HashMap<String, Object[]> order = new HashMap<>();
 
-
-    private
 
     TextToSpeech myTTS;
     Context context;
@@ -58,6 +60,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     private int[] STATES = { normal, select, current_selection};
     private String mealCategory;
+
+    private AllOrders orders = new AllOrders();
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -107,6 +111,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         this.context = context;
         myTTS = ((UseRecyclerActivity) context).myTTS;
         this.mealCategory = mealCategory;
+        this.orders = orders;
 
     }
 
@@ -123,9 +128,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
         final String word = mData.get(position);
         final String description = mDescription.get(position);
-        //holder.mTextView.setText(word);
-
-
 
         // setup horizontal text by text adapter
         TextByTextAdapterIntercept adapter = new TextByTextAdapterIntercept(context, R.layout.recognized_text_item, false);
@@ -147,8 +149,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         holder.mImageButton.setOnClickListener((view) ->
             myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null, null));
 
-        /*holder.mImageButtonShowFoodItem.setOnClickListener((view) ->
-            setUpRecyclerView(word, holder));*/
 
         holder.mCheckBox.setOnClickListener((View view) ->
             changeState(word, holder, position, adapter));
@@ -171,12 +171,14 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
     }
 
-    private void setUpFoodDescriptionAdapter(FoodItemAdapter.ViewHolder holder, int position, ObjectsToHide objectsToHide){
-        FoodDescriptionAdapter foodDescriptionAdapter = new FoodDescriptionAdapter(context, objectsToHide);
+    private void setUpFoodDescriptionAdapter(FoodItemAdapter.ViewHolder holder, int position){
         LinearLayoutManager descriptionLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false);
         holder.mRecyclerFoodDescription.setLayoutManager(descriptionLayoutManager);
-        foodDescriptionAdapter.addItem(mDescription.get(position));
-        holder.mRecyclerFoodDescription.setAdapter(foodDescriptionAdapter);
+        FoodDescriptionAdapter  currentFoodDescriptionAdapter = foodDescriptionAdapters.get(position);
+        ObjectsToHide objectsToHide = new ObjectsToHide(holder.mFoodDescriptionProgressBar, holder.mRecyclerFoodDescription);
+
+        currentFoodDescriptionAdapter.setObjectsToHide(objectsToHide);
+        holder.mRecyclerFoodDescription.setAdapter(currentFoodDescriptionAdapter);
     }
 
 
@@ -190,12 +192,16 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         setUpRecyclerView(word, holder);
 
         if (description != null && !(description.equals(""))){
-            ObjectsToHide objectsToHide = new ObjectsToHide(holder.mFoodDescriptionProgressBar, holder.mRecyclerFoodDescription);
-            Log.d(LOG_TAG, "object to hide " + objectsToHide.toString());
+            //Log.d(LOG_TAG, "object to hide " + objectsToHide.toString());
 
             holder.mFoodDescriptionProgressBar.setVisibility(View.VISIBLE);
 
-            setUpFoodDescriptionAdapter(holder, position, objectsToHide);
+            setUpFoodDescriptionAdapter(holder, position);
+
+            holder.mFoodDescriptionProgressBar.setVisibility(View.GONE);
+            holder.mRecyclerFoodDescription.setVisibility(View.VISIBLE);
+
+
 
         }
 
@@ -229,10 +235,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
 
     }
-
-
-
-
 
     private void changeState(String word, FoodItemAdapter.ViewHolder holder, int position, TextByTextAdapterIntercept adapter){
 
@@ -272,6 +274,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
 
     }
+
 
 
 
@@ -357,22 +360,43 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         return mData.size();
     }
 
-    public void addItem(String text){
+    /*public void addItem(String text){
         mData.add(text);
         // initialize entry state to zero
 
         state.add(STATE_NORMAL);
         notifyDataSetChanged();
-    }
+    }*/
 
     public void addItem(ArrayList<String> foodItems, ArrayList<String> foodItemDescription){
         mData = foodItems;
         mDescription = foodItemDescription;
 
-        for (String item : foodItems){
+        for (int i = 0; i < mData.size(); i++ ){
             state.add(STATE_NORMAL);
+            String description = mDescription.get(i);
+
+            FoodDescriptionAdapter foodDescriptionAdapter = new FoodDescriptionAdapter(context);
+            foodDescriptionAdapter.addItem(description);
+            foodDescriptionAdapters.add(foodDescriptionAdapter);
+
         }
     }
+
+    public void getSelectedItem(AllOrders orders){
+        for (int i = 0; i < mData.size(); i++){
+            int currentState = state.get(i);
+            if (currentState == STATE_SELECT || currentState == STATE_CURRENT_SELECT){
+                String mealName = mData.get(i);
+                HashMap description = foodDescriptionAdapters.get(i).getOrderDescription();
+                CurrentOrder currentOrder = new CurrentOrder(mealName, description);
+                orders.addOrder(currentOrder);
+
+                Log.d(LOG_TAG, "orders " + orders + " " +orders.orders.size() + " mealName " + mealName);
+            }
+        }
+    }
+
 
 
 

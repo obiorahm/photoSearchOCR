@@ -186,7 +186,9 @@
 
             android:background="@drawable/text_border_internal"
             android:visibility="gone"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             >
 
         </android.support.v7.widget.RecyclerView>

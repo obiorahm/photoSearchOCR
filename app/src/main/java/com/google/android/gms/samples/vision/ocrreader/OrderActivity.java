@@ -13,6 +13,7 @@ import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapt
 import com.google.android.gms.samples.vision.ocrreader.Adapter.ShoppingCartAdapter;
 import com.google.firebase.FirebaseApp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -41,6 +42,9 @@ public class OrderActivity extends UseRecyclerActivity implements TextToSpeech.O
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.geography_order);
+
+        Serializable serializableOrder = getIntent().getSerializableExtra(OpenRestaurantMenuActivity.ALL_ORDERS);
+        AllOrders currentOrder = (AllOrders) serializableOrder;
 
         //start text to speech
         Intent checkTTSIntent = new Intent();

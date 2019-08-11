@@ -37,7 +37,7 @@ public class SimpleImageRecyclerAdapter extends RecyclerView.Adapter<SimpleImage
 
     private static int STATE_NORMAL = 0;
 
-    private int normal = R.drawable.layer_drawable;
+    private int normal = R.drawable.smaller_layer_drawable;
     private int select = R.drawable.option_button;
     private int reject = R.drawable.option_button_on;
 
@@ -75,7 +75,6 @@ public class SimpleImageRecyclerAdapter extends RecyclerView.Adapter<SimpleImage
         state.add(STATE_NORMAL);
         ((UseRecyclerActivity) context).loadImage(icon,this, false);
         mData.add(icon);
-        showRecyclers();
         notifyDataSetChanged();
 
     }
@@ -83,7 +82,7 @@ public class SimpleImageRecyclerAdapter extends RecyclerView.Adapter<SimpleImage
     @Override
     public void addImageUrl(String word, Uri uri){
         mUrls.put(word, uri);
-        showRecyclers();
+        //showRecyclers();
         notifyDataSetChanged();
     }
 
@@ -121,6 +120,8 @@ public class SimpleImageRecyclerAdapter extends RecyclerView.Adapter<SimpleImage
         holder.mTextView.setText(noun_chunk);
 
         Glide.with(context).load(uri).into(holder.mImageView);
+
+        showRecyclers();
 
         holder.mImageView.setOnClickListener((View view)->
            {

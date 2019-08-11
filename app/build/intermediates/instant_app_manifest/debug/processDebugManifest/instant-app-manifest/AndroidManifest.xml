@@ -119,6 +119,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.google.android.gms.samples.vision.ocrreader.NewOrderActivity"
+            android:label="NewOrderActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="com.google.android.gms.samples.vision.ocrreader.CurrentPlaceMap"
             android:label="@string/title_activity_main" >
             <intent-filter>

@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.samples.vision.ocrreader.AllOrders;
 import com.google.android.gms.samples.vision.ocrreader.OpenRestaurantMenuActivity;
 import com.google.android.gms.samples.vision.ocrreader.R;
 
@@ -31,11 +32,13 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
     ArrayList<String[]> mData = new ArrayList<>();
     private ArrayList<ArrayList<String>> mfoodItems = new ArrayList<>();
     private ArrayList<ArrayList<String>> mItemDescriptions = new ArrayList<>();
+    private ArrayList<FoodItemAdapter> foodItemAdapters = new ArrayList<>();
     //private RecyclerView last_selected = null;
 
     public RelativeLayout last_selected_rl = null;
 
     private String LOG_TAG = RestaurantMenuAdapter.class.getSimpleName();
+
 
     //public static int counter = 0;
 
@@ -57,7 +60,6 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
             mRecyclerView = convertView.findViewById(R.id.text_by_text);
             mFoodItemRecyclerView = convertView.findViewById(R.id.food_item);
             mRelativeLayout = convertView.findViewById(R.id.outer_layout);
-            //mRelativeLayout = convertView.findViewById(R.id.enclosing_layout);
             mImageButton = convertView.findViewById(R.id.speak_whole_text);
             mInfoTextView = convertView.findViewById(R.id.info_text);
             mInfoImageButton = convertView.findViewById(R.id.more_info);
@@ -74,10 +76,17 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
         mfoodItems.add(category_items);
         mItemDescriptions.add(itemsDescription);
 
+
+        FoodItemAdapter foodItemAdapter = new FoodItemAdapter(context, category[CATEGORY_TITLE]);
+
+        foodItemAdapter.addItem(category_items, itemsDescription);
+
+        foodItemAdapters.add(foodItemAdapter);
+
         notifyDataSetChanged();
     }
 
-    public RestaurantMenuAdapter(Context context){
+    public RestaurantMenuAdapter(Context context, AllOrders orders){
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
@@ -92,6 +101,9 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
         return new RestaurantMenuAdapter.ViewHolder(convertView);
     }
 
+    final int CATEGORY_TITLE = 0;
+
+
     @Override
     public void onBindViewHolder(final RestaurantMenuAdapter.ViewHolder holder, final int position){
         final String[] restaurantData =  mData.get(position);
@@ -105,11 +117,6 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
         adapter.addItem(word);
 
-        /*String tokenizedString [] = word.split(" ");
-
-        for (String child : tokenizedString){
-            adapter.addItem(child);
-        }*/
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
         holder.mRecyclerView.setLayoutManager(layoutManager);
@@ -118,24 +125,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
 
         holder.mRelativeLayout.setSelected(false);
-        //((DetectImageActivity) context).fetchSuggestionsFor("theer aer a coupel of mistaeks in this senence");
 
-
-        /*holder.mBackground.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                control_select(holder, restaurantData);
-
-            }
-        });*/
-
-        /*holder.mRecyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                control_select(holder, restaurantData);
-
-            }
-        });*/
 
         holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null, null));
 
@@ -159,14 +149,12 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
 
         //set up food item adapter
-        FoodItemAdapter foodItemAdapter = new FoodItemAdapter(context, word);
 
-        foodItemAdapter.addItem(mfoodItems.get(position), mItemDescriptions.get(position));
 
         LinearLayoutManager FoodItemLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false);
         holder.mFoodItemRecyclerView.setLayoutManager(FoodItemLayoutManager);
 
-        holder.mFoodItemRecyclerView.setAdapter(foodItemAdapter);
+        holder.mFoodItemRecyclerView.setAdapter(foodItemAdapters.get(position));
 
         //hide progressBar
         ProgressBar progressBar = ((OpenRestaurantMenuActivity) context).findViewById(R.id.menu_progress);
@@ -210,6 +198,13 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
     @Override
     public int getItemCount(){
         return mData.size();
+    }
+
+
+    public void getSelectedItems(AllOrders orders){
+        for (FoodItemAdapter adapter : foodItemAdapters){
+            adapter.getSelectedItem(orders);
+        }
     }
 
 

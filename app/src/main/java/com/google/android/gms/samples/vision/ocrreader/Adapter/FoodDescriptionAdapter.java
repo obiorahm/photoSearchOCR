@@ -23,6 +23,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by mgo983 on 10/22/18.
@@ -36,7 +38,7 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
     private HashMap<String,  String> mListOfNouns = new HashMap<>();
     public static HashMap<String, Object[]> order = new HashMap<>();
 
-    ObjectsToHide objectsToHide;
+    ObjectsToHide objectsToHide ;
 
 
 
@@ -63,15 +65,19 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
 
     }
 
-    public FoodDescriptionAdapter(Context context, ObjectsToHide objectsToHide){
+    public FoodDescriptionAdapter(Context context){
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
         myTTS = ((UseRecyclerActivity) context).myTTS;
 
+        objectsToHide = new ObjectsToHide(context);
+
+    }
+
+    public void setObjectsToHide(ObjectsToHide objectsToHide){
         this.objectsToHide = objectsToHide;
-
-
+        notifyDataSetChanged();
     }
 
     @Override
@@ -102,30 +108,36 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
 @Override
     public void processJson(String description){
     try{
-        JSONObject data = new JSONObject(description);
-        JSONArray chunk = data.getJSONArray("chunk");
-        JSONArray chunk_root =  data.getJSONArray("chunk_root");
-        for (int i = 0; i < chunk.length(); i++){
+        if (description != null){
+            JSONObject data = new JSONObject(description);
+            JSONArray chunk = data.getJSONArray("chunk");
+            JSONArray chunk_root =  data.getJSONArray("chunk_root");
+            for (int i = 0; i < chunk.length(); i++){
 
-            String chunk_item = (String) chunk.get(i);
-            String chunk_root_item = (String) chunk_root.get(i);
-            String image_url = "";
+                String chunk_item = (String) chunk.get(i);
+                String chunk_root_item = (String) chunk_root.get(i);
+                String image_url = "";
 
-            if (!(mListOfNouns.containsKey(chunk_root_item))){
-                // initialize entry state to zero
-                mListOfNouns.put(chunk_item,chunk_root_item);
-                mData.add(chunk_item);
+                if (!(mListOfNouns.containsKey(chunk_root_item))){
+                    // initialize entry state to zero
+                    mListOfNouns.put(chunk_item,chunk_root_item);
+                    mData.add(chunk_item);
 
-                //Create itemRecycler
-                Log.d(LOG_TAG, "object to hide " + objectsToHide.toString());
-                SimpleImageRecyclerAdapter imageRecyclerAdapter = new SimpleImageRecyclerAdapter(context, myTTS, objectsToHide);
-                String[] option = {chunk_root_item, chunk_item, ""  };
-                imageRecyclerAdapter.addItem(option);
+                    //Create itemRecycler
+                    //Log.d(LOG_TAG, "object to hide " + objectsToHide.toString());
+                    SimpleImageRecyclerAdapter imageRecyclerAdapter = new SimpleImageRecyclerAdapter(context, myTTS, objectsToHide);
+                    String[] option = {chunk_root_item, chunk_item, ""  };
+                    imageRecyclerAdapter.addItem(option);
 
-                mImageRecyclerAdapters.add(imageRecyclerAdapter);
-                notifyDataSetChanged();
+                    mImageRecyclerAdapters.add(imageRecyclerAdapter);
+                    notifyDataSetChanged();
 
-            }
+                }
+                objectsToHide.descriptionProgressBar.setVisibility(View.GONE);
+                objectsToHide.descriptionRecyclerView.setVisibility(View.VISIBLE);
+
+        }
+
         }
 
 
@@ -145,6 +157,14 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
         FetchNounDependency fetchNounDependency = new FetchNounDependency(this);
         fetchNounDependency.execute(text);
         notifyDataSetChanged();
+    }
+
+
+    public HashMap getOrderDescription(){
+// Getting an iterator
+
+        return mListOfNouns;
+
     }
 
 

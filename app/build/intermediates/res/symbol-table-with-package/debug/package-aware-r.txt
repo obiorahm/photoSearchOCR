@@ -1568,6 +1568,7 @@ id notification_main_column_container
 id on_map_recycler
 id option_icons
 id option_item
+id order_image_progress_bar
 id order_meal_text
 id order_option
 id order_option_items

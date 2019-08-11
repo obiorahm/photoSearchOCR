@@ -1,5 +1,7 @@
 package com.google.android.gms.samples.vision.ocrreader;
 
+import java.util.ArrayList;
+
 /**
  * Created by mgo983 on 1/5/19.
  */
@@ -40,6 +42,9 @@ public class Order {
             //ice
             {"", "Ice please!", "No ice please."}};
 
+
+    public Order(){}
+
     public static final String dummy_language = "a_dummy";
 
 
@@ -48,6 +53,13 @@ public class Order {
     String foodItemName;
     Integer orderValues [] = new Integer[OPTION_SIZE];
 
+
+    public class Description{
+        String name;
+        String value;
+    }
+
+    ArrayList<Description> descriptions = new ArrayList<>();
 
     public Order(String foodItemName, Integer [] orderValues){
         this.foodItemName = foodItemName;

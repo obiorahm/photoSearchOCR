@@ -21,6 +21,7 @@ import com.google.firebase.storage.StorageReference;
 import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import opennlp.tools.stemmer.PorterStemmer;
 
@@ -46,7 +47,11 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
     public void setView(RecyclerWordAdapter adapter, ArrayList<String[]> edamanInfo){}
 
+    public void setView(RecyclerWordAdapter adapter, HashMap edamanInfo){}
+
     public void setView( ArrayList<String []> edmanInfo){}
+
+    public void setView( HashMap<String, String []> edmanInfo){}
 
     public void processWebResults(Document document){}
 
@@ -161,7 +166,8 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD);
 
-        databaseReference.orderByKey().startAt(searchString).endAt(searchString+"\uf8ff").addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByKey().equalTo(searchString).addValueEventListener(new ValueEventListener() {
+        //databaseReference.orderByKey().startAt(searchString).endAt(searchString+"\uf8ff").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d(LOG_TAG, "got here");

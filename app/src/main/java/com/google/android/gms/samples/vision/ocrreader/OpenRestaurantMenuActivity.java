@@ -21,15 +21,14 @@ import com.google.firebase.FirebaseApp;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.python.core.PyObject;
-import org.python.core.PyString;
-import org.python.util.PythonInterpreter;
+import org.python.icu.util.BytesTrie;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
-import java.util.Properties;
+
 
 
 /**
@@ -49,12 +48,20 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
     public static RelativeLayout last_parent_rl = null;
 
+    AllOrders current_order;
+
+    public static String ALL_ORDERS = "com.google.android.gms.samples.vision.ocrreader.AllOrders";
+
 
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         //we reuse the display_nearby_restaurants layout to display specific restaurant menus
         setContentView(R.layout.display_nearby_restaurants_intercept);
+
+        current_order = new AllOrders();
+
+        Log.d(LOG_TAG, "orders " + current_order);
 
         FoodItemAdapter.order.clear();
 
@@ -83,7 +90,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
             myTTS = new TextToSpeech(this, this);
 
         recyclerView = findViewById(R.id.detected_location_list_view);
-        adapter = new RestaurantMenuAdapter(this);
+        adapter = new RestaurantMenuAdapter(this, current_order);
 
         // apparently the recycler view does not work without setting up a layout manager
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
@@ -111,7 +118,22 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
 
     public void getOrder(){
-        Intent orderActivityIntent = new Intent(getApplicationContext(), OrderActivity.class);
+        adapter.getSelectedItems(current_order);
+        Intent orderActivityIntent = new Intent(getApplicationContext(), NewOrderActivity.class);
+        orderActivityIntent.putExtra(ALL_ORDERS, current_order);
+
+        ArrayList<CurrentOrder> one_oder = new ArrayList<>();
+
+        ArrayList<String> uid = new ArrayList<>();
+
+        Iterator iterator = current_order.orders.entrySet().iterator();
+        while (iterator.hasNext()){
+            HashMap.Entry item = (HashMap.Entry) iterator.next();
+            one_oder.add((CurrentOrder) item.getValue());
+            uid.add((String) item.getKey());
+        }
+
+
         startActivity(orderActivityIntent);
 
     }
@@ -171,10 +193,6 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
 
                 //get meal description
-
-
-
-
 
                 for(Element food_item : food_items){
                     String string_food_item = food_item.text();
@@ -243,8 +261,6 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         remove_food_image_imageButton.setVisibility(View.GONE);
 
     }
-    protected final static String PYTHON_HOME_PARAM = "python.home";
-
 
 
     //checks whether the user has the TTS data installed. If it is not, the user will be prompted to install it.

@@ -26,6 +26,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by mgo983 on 8/6/18.
@@ -210,8 +212,11 @@ public class FetchMealDetails extends AsyncTask<String, Void, HashMap<String, St
                     setDialog(edmanInfo);
                     break;
                 case FOR_TEN_RECYCLER:
-                case FOR_ORDER:
                     setRecycler(edmanInfo);
+
+                case FOR_ORDER:
+                    setRecycler(Result);
+
                     break;
                 case FOR_TENTATIVE_ORDER:
                     setRecycler(edmanInfo, true);
@@ -227,6 +232,19 @@ public class FetchMealDetails extends AsyncTask<String, Void, HashMap<String, St
 
 
     private void setRecycler(ArrayList<String[]> edmanInfo){
+
+        useRecyclerActivity.setView(adapter, edmanInfo);
+    }
+
+
+    private void setRecycler(HashMap edmanInfo){
+
+        Iterator iterator = edmanInfo.entrySet().iterator();
+        while (iterator.hasNext()){
+
+            HashMap.Entry item = (Map.Entry) iterator.next();
+            Log.d(LOG_TAG, (String) item.getKey() +" " + item.getValue());
+        }
 
         useRecyclerActivity.setView(adapter, edmanInfo);
     }

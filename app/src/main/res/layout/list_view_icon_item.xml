@@ -8,15 +8,15 @@
     android:layout_marginEnd="5dp">
     <ImageView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/icon_item"
         android:src="@drawable/baseline_not_interested_white_48dp"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="3dp"
         android:layout_marginEnd="3dp"
         android:layout_marginStart="3dp"
-        android:background="@drawable/layer_drawable"
+        android:background="@drawable/smaller_layer_drawable"
         android:focusable="true"/>
     <TextView
         android:layout_width="wrap_content"

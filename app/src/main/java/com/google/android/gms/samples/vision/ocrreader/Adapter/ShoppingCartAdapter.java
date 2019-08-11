@@ -128,10 +128,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             String meal_category = (String) orderData[MEAL_CATEGORY];
             HashMap<String, Object[]> order = FoodItemAdapter.order;
 
-            //FoodItemOrderOptionAdapter foodItemOrderOptionAdapter = new FoodItemOrderOptionAdapter(context,order, word, holder.mExpandOptionRecyclerView, myTTS);
             FoodItemOrderOptionAdapter foodItemOrderOptionAdapter = new FoodItemOrderOptionAdapter(context,order, meal_name, holder.mExpandOptionRecyclerView, myTTS);
 
-            //addAllItems(foodItemOrderOptionAdapter, word);
             addAllItems(foodItemOrderOptionAdapter, meal_name, meal_category);
             LinearLayoutManager foodItemLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false);
             holder.mOptionRecyclerView.setLayoutManager(foodItemLayoutManager);

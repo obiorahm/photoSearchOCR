@@ -57,7 +57,10 @@ public class DynamicOptions {
         foodCategories.add("herbs_and_spices");
         foodCategories.add("juices");
         foodCategories.add("junk_food");
+        foodCategories.add("kitchen");
+        foodCategories.add("legumes");
         foodCategories.add("meat");
+        foodCategories.add("nuts");
         foodCategories.add("sandwiches");
         foodCategories.add("seafood");
         foodCategories.add("snacks");
