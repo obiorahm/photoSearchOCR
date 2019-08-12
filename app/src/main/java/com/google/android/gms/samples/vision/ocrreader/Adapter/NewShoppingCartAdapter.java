@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.samples.vision.ocrreader.AllOrders;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.SetAdapter;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
@@ -36,6 +37,7 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
     TextToSpeech myTTS;
     Context context;
 
+    AllOrders allOrders;
 
     String LOG_TAG = NewShoppingCartAdapter.class.getSimpleName();
 
@@ -71,11 +73,12 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
     }
 
 
-    public NewShoppingCartAdapter(Context context){
+    public NewShoppingCartAdapter(Context context, AllOrders currentOrder){
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
         myTTS = ((UseRecyclerActivity) context).myTTS;
+        allOrders = currentOrder;
     }
 
 
@@ -112,7 +115,7 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
 
 
         holder.mImageButton.setOnClickListener((View view) -> {
-
+            deleteItem(position);
 
         });
 
@@ -146,10 +149,29 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
         notifyDataSetChanged();
     }
 
+
+
     @Override
     public int getItemCount(){
         return mData.size();
+
     }
+
+
+    public void deleteItem(int position){
+        int UID_POS = 1;
+        int FOOD_ITEM_POS = 0;
+        Object [] order =  mData.get(position);
+
+        Log.d(LOG_TAG, allOrders + " new order");
+
+        allOrders.removeOrder((String) order[UID_POS]);
+        mUrl.remove(order[FOOD_ITEM_POS]);
+        mData.remove(position);
+        notifyDataSetChanged();
+    }
+
+
 
 
 }

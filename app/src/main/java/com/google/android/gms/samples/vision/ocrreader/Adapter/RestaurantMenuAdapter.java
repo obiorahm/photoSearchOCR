@@ -33,12 +33,15 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
     private ArrayList<ArrayList<String>> mfoodItems = new ArrayList<>();
     private ArrayList<ArrayList<String>> mItemDescriptions = new ArrayList<>();
     private ArrayList<FoodItemAdapter> foodItemAdapters = new ArrayList<>();
+    private ArrayList<Boolean> mState = new ArrayList<>();
     //private RecyclerView last_selected = null;
 
     public RelativeLayout last_selected_rl = null;
 
     private String LOG_TAG = RestaurantMenuAdapter.class.getSimpleName();
 
+    private boolean UNSELECTED = false;
+    private boolean SELECTED = true;
 
     //public static int counter = 0;
 
@@ -83,10 +86,12 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
         foodItemAdapters.add(foodItemAdapter);
 
+        mState.add(UNSELECTED);
+
         notifyDataSetChanged();
     }
 
-    public RestaurantMenuAdapter(Context context, AllOrders orders){
+    public RestaurantMenuAdapter(Context context){
         super();
         inflater = LayoutInflater.from(context);
         this.context = context;
@@ -124,13 +129,13 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
         holder.mRecyclerView.setAdapter(adapter);
 
 
-        holder.mRelativeLayout.setSelected(false);
+        holder.mRelativeLayout.setSelected(mState.get(position));
 
 
         holder.mImageButton.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null, null));
 
         holder.mRelativeLayout.setOnClickListener((View view) -> {
-            control_select(holder, restaurantData);
+            control_select(holder, restaurantData, position);
             ((OpenRestaurantMenuActivity) context).hideOptionResults();
         });
 
@@ -167,7 +172,7 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
 
 
 
-    private void control_select(RestaurantMenuAdapter.ViewHolder holder, String[] MenuData){
+    private void control_select(RestaurantMenuAdapter.ViewHolder holder, String[] MenuData, int position){
         /*counter++;
         Log.d(LOG_TAG, counter + "");*/
         String mealCategory = MenuData[0];
@@ -175,17 +180,20 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
         if (last_selected_rl != null && last_selected_rl != holder.mRelativeLayout){
             RestaurantMenuAdapter.ViewHolder lastViewHolder = new RestaurantMenuAdapter.ViewHolder(last_selected_rl);
             lastViewHolder.mRelativeLayout.setSelected(false);
+            mState.add(UNSELECTED);
             Log.d(LOG_TAG, "relative layout false 1");
 
             lastViewHolder.mFoodItemRecyclerView.setVisibility(View.GONE);
         }
         if(holder.mRelativeLayout.isSelected()){
             holder.mRelativeLayout.setSelected(false);
+            mState.add(UNSELECTED);
             Log.d(LOG_TAG, "relative layout false 2");
             holder.mFoodItemRecyclerView.setVisibility(View.GONE);
 
         }else{
             holder.mRelativeLayout.setSelected(true);
+            mState.add(SELECTED);
             OpenRestaurantMenuActivity.selected_item = mealCategory;
             Log.d(LOG_TAG, "relative layout true");
             holder.mFoodItemRecyclerView.setVisibility(View.VISIBLE);
@@ -205,6 +213,24 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
         for (FoodItemAdapter adapter : foodItemAdapters){
             adapter.getSelectedItem(orders);
         }
+    }
+
+
+    public void reset_selected(){
+        for (Boolean state : mState){
+            state = UNSELECTED;
+
+
+        }
+
+        /*for (FoodItemAdapter foodItemAdapter : foodItemAdapters){
+            foodItemAdapter.resetSelection();
+        }*/
+
+        notifyDataSetChanged();
+
+
+
     }
 
 

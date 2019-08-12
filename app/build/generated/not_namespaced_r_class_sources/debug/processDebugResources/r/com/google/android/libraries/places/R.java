@@ -396,13 +396,13 @@ public final class R {
     public static final class drawable {
         private drawable() {}
 
-        public static final int places_autocomplete_toolbar_shadow = 0x7f070109;
-        public static final int places_powered_by_google_dark = 0x7f07010c;
-        public static final int places_powered_by_google_light = 0x7f07010d;
-        public static final int quantum_ic_arrow_back_grey600_24 = 0x7f070110;
-        public static final int quantum_ic_clear_grey600_24 = 0x7f070111;
-        public static final int quantum_ic_cloud_off_vd_theme_24 = 0x7f070112;
-        public static final int quantum_ic_search_grey600_24 = 0x7f070113;
+        public static final int places_autocomplete_toolbar_shadow = 0x7f07010e;
+        public static final int places_powered_by_google_dark = 0x7f070111;
+        public static final int places_powered_by_google_light = 0x7f070112;
+        public static final int quantum_ic_arrow_back_grey600_24 = 0x7f070115;
+        public static final int quantum_ic_clear_grey600_24 = 0x7f070116;
+        public static final int quantum_ic_cloud_off_vd_theme_24 = 0x7f070117;
+        public static final int quantum_ic_search_grey600_24 = 0x7f070118;
     }
     public static final class id {
         private id() {}

@@ -5,16 +5,12 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.google.android.gms.samples.vision.ocrreader.Adapter.FoodItemAdapter;
 import com.google.android.gms.samples.vision.ocrreader.Adapter.NewShoppingCartAdapter;
-import com.google.android.gms.samples.vision.ocrreader.Adapter.RecyclerWordAdapter;
 import com.google.firebase.FirebaseApp;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
@@ -42,8 +38,9 @@ public class NewOrderActivity extends UseRecyclerActivity implements TextToSpeec
 
         Serializable serializableOrder = getIntent().getSerializableExtra(OpenRestaurantMenuActivity.ALL_ORDERS);
         currentOrders = (AllOrders) serializableOrder;
+        OpenRestaurantMenuActivity.current_order = currentOrders;
 
-        //start text to speech
+                //start text to speech
         Intent checkTTSIntent = new Intent();
         checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
@@ -51,7 +48,7 @@ public class NewOrderActivity extends UseRecyclerActivity implements TextToSpeec
         if (myTTS == null)
             myTTS = new TextToSpeech(this, this);
 
-        newShoppingCartAdapter = new NewShoppingCartAdapter(this );
+        newShoppingCartAdapter = new NewShoppingCartAdapter(this, currentOrders );
 
         TextView textView = findViewById(R.id.order_text_view);
 
@@ -60,29 +57,33 @@ public class NewOrderActivity extends UseRecyclerActivity implements TextToSpeec
 
 
         String complete_text = "";
-        String [] order_items = new String[currentOrders.orders.size()];
-        int count = 0;
-        Iterator resultIterator = currentOrders.orders.entrySet().iterator();
-        while (resultIterator.hasNext()) {
-            HashMap.Entry item = (HashMap.Entry) resultIterator.next();
-            CurrentOrder currOrder = (CurrentOrder) item.getValue();
 
-            String current_item_name = currOrder.mealName;;
+        if (currentOrders != null){
+            String [] order_items = new String[currentOrders.orders.size()];
+            int count = 0;
+            Iterator resultIterator = currentOrders.orders.entrySet().iterator();
+            while (resultIterator.hasNext()) {
+                HashMap.Entry item = (HashMap.Entry) resultIterator.next();
+                CurrentOrder currOrder = (CurrentOrder) item.getValue();
 
-            order_items[count] = current_item_name;
+                String current_item_name = currOrder.mealName;;
 
-            complete_text += current_item_name;
+                order_items[count] = current_item_name;
 
-            Object[] order = new Object[2];
+                complete_text += current_item_name;
 
-            order[0] = current_item_name;
+                Object[] order = new Object[2];
 
-            newShoppingCartAdapter.addItem(order);
+                order[0] = current_item_name;
+                order[1] = item.getKey();
+
+                newShoppingCartAdapter.addItem(order);
 
 
-            count++;
+                count++;
 
 
+            }
         }
 
 

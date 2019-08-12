@@ -48,7 +48,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
     public static RelativeLayout last_parent_rl = null;
 
-    AllOrders current_order;
+    public static AllOrders current_order;
 
     public static String ALL_ORDERS = "com.google.android.gms.samples.vision.ocrreader.AllOrders";
 
@@ -90,7 +90,7 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
             myTTS = new TextToSpeech(this, this);
 
         recyclerView = findViewById(R.id.detected_location_list_view);
-        adapter = new RestaurantMenuAdapter(this, current_order);
+        adapter = new RestaurantMenuAdapter(this);
 
         // apparently the recycler view does not work without setting up a layout manager
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
@@ -119,20 +119,11 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
 
     public void getOrder(){
         adapter.getSelectedItems(current_order);
+        Log.d(LOG_TAG, current_order + " new order");
+        adapter.reset_selected();
+
         Intent orderActivityIntent = new Intent(getApplicationContext(), NewOrderActivity.class);
         orderActivityIntent.putExtra(ALL_ORDERS, current_order);
-
-        ArrayList<CurrentOrder> one_oder = new ArrayList<>();
-
-        ArrayList<String> uid = new ArrayList<>();
-
-        Iterator iterator = current_order.orders.entrySet().iterator();
-        while (iterator.hasNext()){
-            HashMap.Entry item = (HashMap.Entry) iterator.next();
-            one_oder.add((CurrentOrder) item.getValue());
-            uid.add((String) item.getKey());
-        }
-
 
         startActivity(orderActivityIntent);
 

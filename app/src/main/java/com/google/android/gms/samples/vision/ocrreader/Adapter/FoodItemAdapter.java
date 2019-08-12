@@ -38,6 +38,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     ArrayList<String> mData;
     private ArrayList<String> mDescription;
     private ArrayList<Integer> state = new ArrayList<>();
+    private ArrayList<Boolean> checkBoxState = new ArrayList<>();
     private ArrayList<FoodDescriptionAdapter> foodDescriptionAdapters = new ArrayList<>();
 
     public static HashMap<String, Object[]> order = new HashMap<>();
@@ -50,6 +51,9 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     private final static int STATE_NORMAL = 0;
     private final static int STATE_SELECT = 1;
     private final static int STATE_CURRENT_SELECT = 2;
+
+    private final static Boolean UNCHECKED = false;
+    private final static Boolean CHECKED = true;
 
 
     private RelativeLayout last_selected_relative_layout;
@@ -145,6 +149,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
         holder.mContainingRelativeLayout.setSelected(false);
 
+        holder.mCheckBox.setChecked(checkBoxState.get(position));
+
 
         holder.mImageButton.setOnClickListener((view) ->
             myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null, null));
@@ -154,10 +160,14 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             changeState(word, holder, position, adapter));
 
         holder.mContainingRelativeLayout.setOnClickListener((View view)->{
-            if(holder.mCheckBox.isChecked())
+            if(holder.mCheckBox.isChecked()) {
                 holder.mCheckBox.setChecked(false);
-            else
+                checkBoxState.set(position, UNCHECKED);
+            }
+            else {
                 holder.mCheckBox.setChecked(true);
+                checkBoxState.set(position,CHECKED);
+            }
             changeState(word,holder, position, adapter);
         });
 
@@ -374,6 +384,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
         for (int i = 0; i < mData.size(); i++ ){
             state.add(STATE_NORMAL);
+            checkBoxState.add(UNCHECKED);
             String description = mDescription.get(i);
 
             FoodDescriptionAdapter foodDescriptionAdapter = new FoodDescriptionAdapter(context);
@@ -381,6 +392,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             foodDescriptionAdapters.add(foodDescriptionAdapter);
 
         }
+        notifyDataSetChanged();
     }
 
     public void getSelectedItem(AllOrders orders){
@@ -392,10 +404,28 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
                 CurrentOrder currentOrder = new CurrentOrder(mealName, description);
                 orders.addOrder(currentOrder);
 
+                state.set(i, STATE_NORMAL);
+                checkBoxState.set(i, UNCHECKED);
+
                 Log.d(LOG_TAG, "orders " + orders + " " +orders.orders.size() + " mealName " + mealName);
             }
         }
     }
+
+
+    /*public void resetSelection(){
+        for (int curr_state : state){
+            curr_state = STATE_NORMAL;
+            notifyDataSetChanged();
+        }
+        for (Boolean checkBox : checkBoxState){
+            checkBox = UNCHECKED;
+            notifyDataSetChanged();
+        }
+
+
+
+    }*/
 
 
 

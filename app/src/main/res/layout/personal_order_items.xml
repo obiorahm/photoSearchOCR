@@ -19,17 +19,23 @@
             android:background="@drawable/image_border"
             android:layout_margin="10dp"
 
+
             />
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/order_image_progress_bar"/>
+            android:id="@+id/order_image_progress_bar"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@id/order_option"
+            android:layout_alignRight="@id/order_option"
+
+            android:layout_toLeftOf="@id/order_option_text"
+             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/order_option"
-            android:textAlignment="center"
             android:id="@+id/order_option_text"
             android:textSize="23dp"
             android:layout_margin="10dp"/>
@@ -48,7 +54,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/remove_order"
-            android:background="@drawable/ic_clear_black_24dp"
+            android:background="@drawable/baseline_delete_outline_black_48"
             android:textSize="23dp"
             android:layout_margin="10dp"
             />
