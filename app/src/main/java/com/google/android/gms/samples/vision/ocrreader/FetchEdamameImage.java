@@ -48,7 +48,6 @@ public class FetchEdamameImage extends  FetchImageEngine  {
 
         try{
 
-
                 JSONObject JSONEntry = new JSONObject(JSONData);
 
                 JSONArray hits = JSONEntry.getJSONArray("hits");
@@ -61,8 +60,6 @@ public class FetchEdamameImage extends  FetchImageEngine  {
                         String recipeInfoUrl = recipe.getJSONObject("recipe").getString("image");
 
                         return Uri.parse(recipeInfoUrl);
-
-
                 }
 
 

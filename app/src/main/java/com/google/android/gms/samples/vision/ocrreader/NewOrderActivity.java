@@ -72,10 +72,11 @@ public class NewOrderActivity extends UseRecyclerActivity implements TextToSpeec
 
                 complete_text += current_item_name;
 
-                Object[] order = new Object[2];
+                Object[] order = new Object[3];
 
                 order[0] = current_item_name;
                 order[1] = item.getKey();
+                order[2] = (HashMap) currOrder.descriptions;
 
                 newShoppingCartAdapter.addItem(order);
 

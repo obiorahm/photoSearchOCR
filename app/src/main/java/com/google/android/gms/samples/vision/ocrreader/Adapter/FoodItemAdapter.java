@@ -413,19 +413,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     }
 
 
-    /*public void resetSelection(){
-        for (int curr_state : state){
-            curr_state = STATE_NORMAL;
-            notifyDataSetChanged();
-        }
-        for (Boolean checkBox : checkBoxState){
-            checkBox = UNCHECKED;
-            notifyDataSetChanged();
-        }
-
-
-
-    }*/
 
 
 

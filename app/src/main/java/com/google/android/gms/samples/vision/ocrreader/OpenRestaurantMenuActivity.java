@@ -75,10 +75,8 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         //hide unnecessary views
         TextView textView1 = findViewById(R.id.current_location);
         textView1.setText(name);
-        //textView1.setVisibility(View.GONE);
 
         imageView = findViewById(R.id.location_image);
-        //imageView1.setVisibility(View.GONE);
 
 
         //start text to speech

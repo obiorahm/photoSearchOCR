@@ -3,6 +3,7 @@ package com.google.android.gms.samples.vision.ocrreader.Adapter;
 import android.content.Context;
 import android.net.Uri;
 import android.speech.tts.TextToSpeech;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,12 +18,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.AllOrders;
+import com.google.android.gms.samples.vision.ocrreader.ItemOrderOptionAdapter;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.SetAdapter;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by mgo983 on 1/10/19.
@@ -50,6 +54,7 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
         private ImageView mImageView;
         private TextView mTextView;
         private ImageButton mImageButton;
+        private RecyclerView mOptionSelectRecyclerView;
         private RecyclerView mRecyclerView;
         private RelativeLayout mRelativeLayout;
         private RecyclerView mOptionRecyclerView;
@@ -68,6 +73,7 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
             mOptionRecyclerView = parent.findViewById(R.id.food_item_options);
             mExpandOptionRecyclerView = parent.findViewById(R.id.order_option_items);
             mImageProgressBar = parent.findViewById(R.id.order_image_progress_bar);
+            mOptionSelectRecyclerView = parent.findViewById(R.id.order_selection);
         }
 
     }
@@ -100,6 +106,8 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
 
         final String meal_name = (String) orderData[MEAL_NAME];
 
+        HashMap<String, String > descriptions = (HashMap<String, String>) orderData[2];
+
         Uri url = mUrl.get(meal_name);
 
         String finalText = ORDER_PREFIX + meal_name;
@@ -109,10 +117,29 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
         if (url != null){
             Glide.with(context).load(url).into(holder.mImageView);
             holder.mImageProgressBar.setVisibility(View.GONE);
-
         }
 
+        ItemOrderOptionAdapter itemOrderOptionAdapter = new ItemOrderOptionAdapter(context, myTTS);
 
+
+        if (descriptions != null){
+            Iterator iterator = descriptions.entrySet().iterator();
+            while (iterator.hasNext()){
+                Map.Entry item = (Map.Entry) iterator.next();
+                String key = (String)item.getKey();
+                String value = (String) item.getValue();
+
+                String[] descriptionData = {value, key };
+                itemOrderOptionAdapter.addItem(descriptionData);
+            }
+        }
+
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL, false);
+        holder.mOptionSelectRecyclerView.setLayoutManager(layoutManager);
+
+
+        holder.mOptionSelectRecyclerView.setAdapter(itemOrderOptionAdapter);
+        holder.mOptionSelectRecyclerView.setVisibility(View.VISIBLE);
 
         holder.mImageButton.setOnClickListener((View view) -> {
             deleteItem(position);

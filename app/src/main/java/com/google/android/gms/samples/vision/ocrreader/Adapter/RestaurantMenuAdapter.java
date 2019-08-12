@@ -220,17 +220,9 @@ public class RestaurantMenuAdapter extends RecyclerView.Adapter<RestaurantMenuAd
         for (Boolean state : mState){
             state = UNSELECTED;
 
-
         }
 
-        /*for (FoodItemAdapter foodItemAdapter : foodItemAdapters){
-            foodItemAdapter.resetSelection();
-        }*/
-
         notifyDataSetChanged();
-
-
-
     }
 
 
