@@ -58,7 +58,7 @@ public class NewOrderActivity extends UseRecyclerActivity implements TextToSpeec
 
         String complete_text = "";
 
-        if (currentOrders != null){
+        if (currentOrders != null && currentOrders.orders != null){
             String [] order_items = new String[currentOrders.orders.size()];
             int count = 0;
             Iterator resultIterator = currentOrders.orders.entrySet().iterator();

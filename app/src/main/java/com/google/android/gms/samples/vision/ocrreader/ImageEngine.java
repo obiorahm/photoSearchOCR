@@ -6,5 +6,6 @@ public interface ImageEngine {
 
     public Uri buildUrl (String queryParameter);
     public Uri handleJSON(String JSONData);
+    public void nextEngine(String searchString);
 
 }

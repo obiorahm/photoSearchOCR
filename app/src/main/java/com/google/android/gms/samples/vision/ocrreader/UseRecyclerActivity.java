@@ -219,7 +219,7 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
 
     private void searchWithEngine(String searchString, SetAdapter adapter){
-        FetchImageEngine fetchImageEngine = new FetchImageEngine(adapter);
+        FetchEdamameImage fetchImageEngine = new FetchEdamameImage(adapter);
         fetchImageEngine.execute(searchString);
 
 

@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class FetchEdamameImage implements ImageEngine {
+public class FetchEdamameImage extends  FetchImageEngine  {
 
     private final static String BASEURL = "https://api.edamam.com/search";
     private final static String API_KEY = "37345295e38efe1ea020cbc391ee11a8";
@@ -18,6 +18,11 @@ public class FetchEdamameImage implements ImageEngine {
     String LOG_TAG = FetchEdamameImage.class.getSimpleName();
 
 
+    FetchEdamameImage(SetAdapter adapter){
+        this.adapter = adapter;
+    }
+
+@Override
     public Uri buildUrl (String queryParameter){
         final String API_KEY_NAME = "app_key";
         final String API_ID_NAME = "app_id";
@@ -37,6 +42,8 @@ public class FetchEdamameImage implements ImageEngine {
                 .build();
         return buildUri;
     }
+
+    @Override
     public Uri handleJSON(String JSONData){
 
         try{
@@ -69,4 +76,9 @@ public class FetchEdamameImage implements ImageEngine {
         return null;
     }
 
+    @Override
+    public void nextEngine(String searchString) {
+        FetchPixabayImage fetchPixabayImage = new FetchPixabayImage(adapter);
+        fetchPixabayImage.execute(searchString);
+    }
 }

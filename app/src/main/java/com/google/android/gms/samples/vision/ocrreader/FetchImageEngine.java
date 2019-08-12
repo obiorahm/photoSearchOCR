@@ -11,16 +11,15 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class  FetchImageEngine extends AsyncTask<String, Void, String[]>{
+public class  FetchImageEngine extends AsyncTask<String, Void, String[]> implements ImageEngine {
 
 
     String LOG_TAG = FetchImageEngine.class.getSimpleName();
 
 
+    public SetAdapter adapter;
 
-    private ImageEngine fetchImageEngine;
-
-    private SetAdapter adapter;
+    public  FetchImageEngine(){}
 
     FetchImageEngine(SetAdapter adapter){
         this.adapter = adapter;
@@ -33,7 +32,7 @@ public class  FetchImageEngine extends AsyncTask<String, Void, String[]>{
             return null;
         String searchString = params[0];
 
-        Uri uri = engineSelection(params[0]);
+        Uri uri = runEngine(params[0]);
 
         String uriString = uri == null? null : uri.toString();
 
@@ -45,31 +44,16 @@ public class  FetchImageEngine extends AsyncTask<String, Void, String[]>{
 
     }
 
-    private Uri runEngine(ImageEngine fetchImageEngine, String searchstring){
+    private Uri runEngine( String searchstring){
 
-        Uri uri = fetchImageEngine.buildUrl(searchstring);
+        Uri uri = buildUrl(searchstring);
 
-        Uri result = fetchImageEngine.handleJSON(getJSONData(uri));
+        Uri result = handleJSON(getJSONData(uri));
 
         return result;
     }
 
 
-
-    private Uri engineSelection(String searchstring){
-
-
-            Uri result = runEngine(new FetchEdamameImage(),searchstring);
-
-            if (result != null) return result;
-
-            result = runEngine(new FetchPixabayImage(), searchstring);
-
-            //Uri result = runEngine(new FetchOpenClipArtImage(), searchstring);
-
-            return result;
-
-    }
 
     private String getJSONData(Uri SearchUri){
         HttpURLConnection urlConnection = null;
@@ -144,10 +128,27 @@ public class  FetchImageEngine extends AsyncTask<String, Void, String[]>{
         Log.d(LOG_TAG, "pixabay searched string " + uriString);
 
 
-        //Uri result  = fetchImageEngine.handleJSON(JSONData);
-        Uri uri = uriString == null? null : Uri.parse(uriString);
-        adapter.addImageUrl(searchString, uri);
+        if (uriString == null){
+            nextEngine(searchString);
+        }else{
+            Uri uri = Uri.parse(uriString);
+            adapter.addImageUrl(searchString, uri);
 
+        }
+
+    }
+
+    @Override
+    public void nextEngine(String searchString){
+
+    }
+
+    public Uri buildUrl (String queryParameter){
+            return  null;
+    }
+
+    public Uri handleJSON(String JSONData){
+        return null;
     }
 
 }

@@ -8,12 +8,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class FetchPixabayImage implements ImageEngine {
+public class FetchPixabayImage extends  FetchImageEngine  {
 
     String LOG_TAG = FetchPixabayImage.class.getSimpleName();
 
     static String BASE_URL =  "https://pixabay.com/api/";
     static String API_KEY = "5321405-e3d51a927066916f670cf60c0";
+
+
+    FetchPixabayImage(SetAdapter adapter){
+        this.adapter = adapter;
+    }
 
     @Override
     public Uri buildUrl (String queryParameter){
@@ -55,6 +60,11 @@ public class FetchPixabayImage implements ImageEngine {
             Log.e("JSON Error: ", e.toString());
         }
         return null;
+    }
+
+    @Override
+    public void nextEngine(String searchString) {
+
     }
 
 
