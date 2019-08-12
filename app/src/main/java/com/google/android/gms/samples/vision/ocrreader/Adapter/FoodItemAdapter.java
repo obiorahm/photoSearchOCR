@@ -199,6 +199,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
         holder.mImageButtonMore.setVisibility(View.GONE);
 
+        holder.mProgressBarSearchingEdamam.setVisibility(View.VISIBLE);
+
         setUpRecyclerView(word, holder);
 
         if (description != null && !(description.equals(""))){
@@ -355,7 +357,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         RecyclerWordAdapter recyclerWordAdapter = new RecyclerWordAdapter(context, R.layout.gridview_item, myTTS, wholeMealText, blockOrText);
 
 
-        holder.mProgressBarSearchingEdamam.setVisibility(View.GONE);
+        //holder.mProgressBarSearchingEdamam.setVisibility(View.GONE);
 
         FetchMealDetails fetchMealDetails = new FetchMealDetails(recyclerWordAdapter, context, FetchMealDetails.FOR_TENTATIVE_ORDER, holder);
         fetchMealDetails.execute(wholeMealText);
