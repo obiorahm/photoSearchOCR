@@ -26,6 +26,15 @@
         android:background="@color/silver"
         />
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:padding="80dp"
+        android:id="@+id/menu_progress"
+        />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,15 +55,6 @@
 
             />
 
-
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/menu_progress"
-            />
-
         <com.google.android.gms.maps.StreetViewPanoramaView
             android:name="com.google.android.gms.maps.StreetViewPanoramaView"
             android:layout_width="wrap_content"
@@ -67,26 +67,8 @@
             android:padding="0dp">
         </com.google.android.gms.maps.StreetViewPanoramaView>
 
-        <!--ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/streetviewpanorama"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/expand_more"
-            android:src="@drawable/baseline_expand_more_black_48"
-            android:background="@drawable/circular_button"
-            android:tint="@color/silver"/>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/streetviewpanorama"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/expand_less"
-            android:src="@drawable/baseline_expand_less_black_48"
-            android:background="@drawable/circular_button"
-            android:tint="@color/silver"
-            android:visibility="gone"/-->
+
 
     </RelativeLayout>
 

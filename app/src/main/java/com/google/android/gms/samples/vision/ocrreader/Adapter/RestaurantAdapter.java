@@ -187,9 +187,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             holder.mTextView.setOnClickListener(view -> myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null, null));
 
 
-
-
-
             holder.mBackground.setOnClickListener(view ->
                 control_select(holder, position));
 
@@ -235,13 +232,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
         private void expandPanorama(ViewHolder holder, StreetViewPanoramaView streetViewPanoramaView, int position){
-            //updated selected longitude and latitude
-            /*String longitude = mData.get(position)[LONGITUDE];
-            String latitude = mData.get(position)[LATITUDE];
-
-            CurrentPlaceMap.LONGITUDE = longitude.equals("")? LONGITUDE : Double.valueOf(longitude);
-            CurrentPlaceMap.LATITUDE = latitude.equals("") ? LATITUDE : Double.valueOf(latitude);
-            ((UseRecyclerActivity) context).setUpPanorama();*/
 
             control_select(holder, position);
 
@@ -257,28 +247,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         streetViewPanoramaView.setVisibility(View.GONE);
     }
 
-
-    /*private void expandPanorama(int position){
-
-        Object [] data = mDataProperties.get(position);
-        data[IS_PANORAMA_VISIBLE] = View.VISIBLE;
-        notifyItemChanged(position);
-
-    }
-
-
-    private void hidePanorama(int position){
-
-        Object [] data = mDataProperties.get(position);
-        data[IS_PANORAMA_VISIBLE] = View.GONE;
-        notifyItemChanged(position);
-
-    }*/
-
-
-    /*private void enlargeImage(ImageView view, ImageView enlargedView, RestaurantAdapter.ViewHolder holder, int position){
-        zoomImageFromTHumb(view, enlargedView, holder, position);
-    }*/
 
 
     private String buildImageUrl(String internetAddress){
@@ -304,48 +272,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     }
 
 
-    /*private void buildImageFromPlaces(String placeId, ViewHolder holder){
-
-        Log.d(LOG_TAG, "PLACE ID " + placeId);
-
-        PlacesClient placesClient = Places.createClient(context);
-
-
-        // Specify fields. Requests for photos must always have the PHOTO_METADATAS field.
-        List<Place.Field> fields = Arrays.asList(Place.Field.PHOTO_METADATAS);
-
-        // Get a Place object (this example uses fetchPlace(), but you can also use findCurrentPlace())
-        FetchPlaceRequest placeRequest = FetchPlaceRequest.builder(placeId.trim(), fields).build();
-
-        placesClient.fetchPlace(placeRequest).addOnSuccessListener((response) -> {
-            Place place = response.getPlace();
-
-            // Get the photo metadata.
-            if(place.getPhotoMetadatas() != null){
-                PhotoMetadata photoMetadata = place.getPhotoMetadatas().get(0);
-
-                // Create a FetchPhotoRequest.
-                FetchPhotoRequest photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                        .setMaxWidth(500) // Optional.
-                        .setMaxHeight(300) // Optional.
-                        .build();
-                placesClient.fetchPhoto(photoRequest).addOnSuccessListener((fetchPhotoResponse) -> {
-                    Bitmap bitmap = fetchPhotoResponse.getBitmap();
-                    Glide.with(context).load(bitmap).into(holder.mImageView);
-                }).addOnFailureListener((exception) -> {
-                    if (exception instanceof ApiException) {
-                        ApiException apiException = (ApiException) exception;
-                        int statusCode = apiException.getStatusCode();
-                        // Handle error with given status code.
-                        Log.e(LOG_TAG, "Place not found: " + exception.getMessage());
-                    }
-                });
-            }
-
-
-        });
-    }*/
-
 
     private void control_select(RestaurantAdapter.ViewHolder holder, int position){
         String [] restaurantData = mData.get(position);
@@ -366,7 +292,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             //to enable redraw of view with new properties
         }
 
-        //if (holder.mRadioButton.isChecked()){
 
             holder.mRelativeLayout.setSelected(true);
             Log.d(LOG_TAG, "restaurantUrl " + restaurantUrl);
@@ -374,14 +299,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             CurrentPlaceMap.selected_url = restaurantUrl;
 
             //update properties
-            //currentProperties[IS_PANORAMA_VISIBLE] = View.VISIBLE;
             currentProperties[IS_RELATIVE_LAYOUT_SELECTED] = true;
 
             //updated selected longitude and latitude
             CurrentPlaceMap.LONGITUDE = longitude.equals("")? LONGITUDE : Double.valueOf(longitude);
             CurrentPlaceMap.LATITUDE = latitude.equals("") ? LATITUDE : Double.valueOf(latitude);
             ((UseRecyclerActivity) context).setUpPanorama();
-        //}
 
         last_selected_property = currentProperties;
 

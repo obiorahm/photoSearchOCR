@@ -110,23 +110,6 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
         if (myTTS == null)
             myTTS = new TextToSpeech(this, this);
 
-
- /*     ImageButton expandmore = findViewById(R.id.expand_more);
-        ImageButton expandless = findViewById(R.id.expand_less);
-        StreetViewPanoramaView streetViewPanoramaView = findViewById(R.id.streetviewpanorama);
-
-        expandmore.setOnClickListener((View view)-> {
-            expandmore.setVisibility(View.GONE);
-            expandless.setVisibility(View.VISIBLE);
-            streetViewPanoramaView.setVisibility(View.VISIBLE);
-        });
-
-
-        expandless.setOnClickListener((View view) -> {
-            expandmore.setVisibility(View.VISIBLE);
-            expandless.setVisibility(View.GONE);
-            streetViewPanoramaView.setVisibility(View.GONE);
-        });*/
         re_center_map();
 
     }
@@ -148,7 +131,7 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == MY_DATA_CHECK_CODE) {
             if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
-                //if (myTTS == null)
+
                 myTTS = new TextToSpeech(this, this);
             } else {
                 Intent installTTSIntent = new Intent();
@@ -161,18 +144,11 @@ public class CurrentPlaceMap extends UseRecyclerActivity implements OnMapReadyCa
     private void getCurrentLocation(GoogleMap googleMap){
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            //addHeatMap(latLngList, googleMap);
 
             fusedLocationProviderClient.getLastLocation()
                     .addOnSuccessListener((Location location)-> {
                 if (location != null){
                     LatLng newLatLng = currentPlaceLngLat = new LatLng(location.getLatitude(), location.getLongitude());
-                    /*googleMap.addMarker(markerOptions.position(newLatLng).title(mapTitle));
-                    googleMap.addCircle(new CircleOptions().center(newLatLng)
-                            .fillColor(Color.LTGRAY)
-                            .radius(10.0)
-                            .strokeColor(Color.RED)
-                    );*/
 
                     CircleOptions circleOptions = new CircleOptions();
                     circleOptions.clickable(true);

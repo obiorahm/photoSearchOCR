@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.samples.vision.ocrreader.AllOrders;
-import com.google.android.gms.samples.vision.ocrreader.ItemOrderOptionAdapter;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.SetAdapter;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;

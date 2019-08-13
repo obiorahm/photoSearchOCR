@@ -372,13 +372,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
         return mData.size();
     }
 
-    /*public void addItem(String text){
-        mData.add(text);
-        // initialize entry state to zero
 
-        state.add(STATE_NORMAL);
-        notifyDataSetChanged();
-    }*/
 
     public void addItem(ArrayList<String> foodItems, ArrayList<String> foodItemDescription){
         mData = foodItems;
@@ -392,9 +386,9 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             FoodDescriptionAdapter foodDescriptionAdapter = new FoodDescriptionAdapter(context);
             foodDescriptionAdapter.addItem(description);
             foodDescriptionAdapters.add(foodDescriptionAdapter);
+            notifyDataSetChanged();
 
         }
-        notifyDataSetChanged();
     }
 
     public void getSelectedItem(AllOrders orders){

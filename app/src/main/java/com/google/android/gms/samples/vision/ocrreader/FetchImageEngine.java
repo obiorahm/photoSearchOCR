@@ -55,16 +55,13 @@ public class  FetchImageEngine extends AsyncTask<String, Void, String[]> impleme
 
 
 
-    private String getJSONData(Uri SearchUri){
+    private String getJSONData(Uri buildUri){
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
 
         try{
 
-            Uri buildUri;
-
-            buildUri = SearchUri;
 
             URL url = new URL(buildUri.toString());
             Log.v(LOG_TAG,"The built Uri " + url);
