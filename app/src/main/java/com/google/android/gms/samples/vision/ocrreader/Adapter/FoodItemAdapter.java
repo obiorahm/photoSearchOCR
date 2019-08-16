@@ -263,7 +263,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             holder.mContainingRelativeLayout.setBackground(ContextCompat.getDrawable(context, STATES[STATE_CURRENT_SELECT]));
             state.set(position,STATE_CURRENT_SELECT);
 
-            addOrder(word, position, holder);
 
 
         }else{
@@ -280,7 +279,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
 
             state.set(position,STATE_NORMAL);
 
-            removeOrder(word);
 
         }
 
@@ -299,24 +297,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
     public static final int MEAL_NAME = 5;
 
 
-    private void removeOrder(String word){
-        order.remove(word);
-    }
-
-
-    private void addOrder(String word, int position, ViewHolder holder){
-        Integer order_items [] = new Integer[Order.OPTION_SIZE];
-        Order current_order = new Order(word, order_items);
-        Object [] orderData = new Object[6];
-        orderData[ORDER] = current_order;
-        orderData[POSITION] = position;
-        orderData[HOLDER] = holder;
-        orderData[FOOD_ITEM_ADAPTER] = this;
-        orderData[MEAL_CATEGORY] = mealCategory;
-        orderData[MEAL_NAME] = word;
-
-        order.put(word, orderData);
-    }
 
     public void resetLayout(String key){
 
@@ -397,7 +377,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             if (currentState == STATE_SELECT || currentState == STATE_CURRENT_SELECT){
                 String mealName = mData.get(i);
                 HashMap description = foodDescriptionAdapters.get(i).getOrderDescription();
-                CurrentOrder currentOrder = new CurrentOrder(mealName, description);
+                CurrentOrder currentOrder = new CurrentOrder(mealName, description, mealCategory);
                 orders.addOrder(currentOrder);
 
                 state.set(i, STATE_NORMAL);

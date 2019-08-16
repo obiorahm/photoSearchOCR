@@ -1,6 +1,7 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,7 +22,11 @@ import com.google.android.gms.samples.vision.ocrreader.AllOrders;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.SetAdapter;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
+import com.google.android.gms.samples.vision.ocrreader.WordNetHypernyms;
 
+import org.python.antlr.ast.Str;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -97,6 +102,8 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
 
     private static final int MEAL_NAME = 0;
     private static final int MEAL_URL = 1;
+    private static final int MEAL_CATEGORY = 3;
+    private static final int MEAL_DESCRIPTION = 2;
 
     @Override
     public void onBindViewHolder(final NewShoppingCartAdapter.ViewHolder holder, final int position){
@@ -104,8 +111,9 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
         Object[] orderData = mData.get(position);
 
         final String meal_name = (String) orderData[MEAL_NAME];
+        String meal_category = (String) orderData[MEAL_CATEGORY];
 
-        HashMap<String, String > descriptions = (HashMap<String, String>) orderData[2];
+        HashMap<String, String > descriptions = (HashMap<String, String>) orderData[MEAL_DESCRIPTION];
 
         Uri url = mUrl.get(meal_name);
 
@@ -118,20 +126,23 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
             holder.mImageProgressBar.setVisibility(View.GONE);
         }
 
-        ItemOrderOptionAdapter itemOrderOptionAdapter = new ItemOrderOptionAdapter(context, myTTS);
+        ItemOrderOptionAdapter itemOrderOptionAdapter = new ItemOrderOptionAdapter(context, myTTS, meal_name, meal_category);
 
-
+        //add dynamic options
         if (descriptions != null){
             Iterator iterator = descriptions.entrySet().iterator();
             while (iterator.hasNext()){
                 Map.Entry item = (Map.Entry) iterator.next();
                 String key = (String)item.getKey();
                 String value = (String) item.getValue();
+                String type = "DYNAMIC";
 
-                String[] descriptionData = {value, key };
+                String[] descriptionData = {value, key, type, ""};
                 itemOrderOptionAdapter.addItem(descriptionData);
             }
         }
+        //add static options
+        itemOrderOptionAdapter.addStaticOptions();
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL, false);
         holder.mOptionSelectRecyclerView.setLayoutManager(layoutManager);
@@ -140,10 +151,8 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
         holder.mOptionSelectRecyclerView.setAdapter(itemOrderOptionAdapter);
         holder.mOptionSelectRecyclerView.setVisibility(View.VISIBLE);
 
-        holder.mImageButton.setOnClickListener((View view) -> {
-            deleteItem(position);
-
-        });
+        holder.mImageButton.setOnClickListener((View view) ->
+            deleteItem(position));
 
         holder.mRelativeLayout.setOnClickListener((View view)->{
             //set up food item adapter
@@ -196,9 +205,6 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
         mData.remove(position);
         notifyDataSetChanged();
     }
-
-
-
 
 }
 

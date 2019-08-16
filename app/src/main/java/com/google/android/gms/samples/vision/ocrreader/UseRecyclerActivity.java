@@ -20,9 +20,15 @@ import com.google.firebase.storage.StorageReference;
 
 import org.jsoup.nodes.Document;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import opennlp.tools.lemmatizer.SimpleLemmatizer;
+import opennlp.tools.postag.POSModel;
+import opennlp.tools.postag.POSTaggerME;
 import opennlp.tools.stemmer.PorterStemmer;
 
 /**
@@ -148,14 +154,6 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
 
 
-
-
-
-
-
-
-
-
     private void searchWithStemmer(final String[]  token,  SetAdapter adapter, boolean notFoodItem){
 
         PorterStemmer porterStemmer = new PorterStemmer();
@@ -191,7 +189,8 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
                                 }).addOnFailureListener((@NonNull Exception e)->{
                                             Log.d(LOG_TAG, "could not load image");
-                                            searchWithEngine(rawString, adapter);
+                                            searchWithLemma(token,adapter, notFoodItem);
+                                            //searchWithEngine(rawString, adapter);
 
                                         }
                                 );
@@ -205,7 +204,8 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
                 }else{
                     Log.d(LOG_TAG, "runEngine");
-                    searchWithEngine(rawString, adapter);
+                    //searchWithEngine(rawString, adapter);
+                    searchWithLemma(token, adapter, notFoodItem);
 
                 }
             }
@@ -218,10 +218,96 @@ public class UseRecyclerActivity extends FragmentActivity  {
     }
 
 
+    private void searchWithLemma(final String[]  token,  SetAdapter adapter, boolean notFoodItem){
+
+        try{
+
+            InputStream modelIn = new FileInputStream("en-lemmatizer.bin");
+
+            SimpleLemmatizer simpleLemmatizer = new SimpleLemmatizer(modelIn);
+
+
+            String rawString = token[CHUNK_ROOT_POS];
+
+            //Loading Parts of speech-maxent model
+            InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-pos-maxent.bin");
+            POSModel model = new POSModel(inputStream);
+
+            POSTaggerME tagger = new POSTaggerME(model);
+
+            String tags = tagger.tag(rawString);
+
+
+            String searchString = simpleLemmatizer.lemmatize(rawString, tags);
+
+            Log.d(LOG_TAG, "lemma " + searchString);
+
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD);
+
+            databaseReference.orderByKey().equalTo(searchString).addValueEventListener(new ValueEventListener() {
+                //databaseReference.orderByKey().startAt(searchString).endAt(searchString+"\uf8ff").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Log.d(LOG_TAG, "got here");
+                    if (dataSnapshot.exists()){
+
+                        for (DataSnapshot child : dataSnapshot.getChildren()){
+
+                            for(DataSnapshot grandChild : child.getChildren()){
+
+                                final String grandChildValue [] = grandChild.getValue().toString().split("/");
+
+                                if (DynamicOptions.foodCategories.contains(grandChildValue[0]) || notFoodItem){
+                                    //now that we have the file name retrieve image from firebase storage
+                                    StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
+
+                                    firebaseStorage.child( WORD_IMAGE_REFERENCE + "/" + grandChildValue[0] + "/" + grandChildValue[2])
+                                            .getDownloadUrl()
+                                            .addOnSuccessListener((Uri uri)-> {
+                                                adapter.addImageUrl(rawString, uri);                                                //Glide.with(getApplicationContext()).load(uri).into(imageView);
+                                                //setAdapter.mNotifyDataSetChanged();
+
+                                            }).addOnFailureListener((@NonNull Exception e)->{
+                                                Log.d(LOG_TAG, "could not load image");
+                                                searchWithEngine(rawString, adapter);
+
+                                            }
+                                    );
+                                    Log.d(LOG_TAG, " grandChild " + grandChild.getValue().toString());
+
+                                    return;
+                                }
+                            }
+
+                        }
+
+                    }else{
+                        Log.d(LOG_TAG, "runEngine");
+                        searchWithEngine(rawString, adapter);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }catch (IOException e){
+
+        }
+
+
+    }
+
+
     private void searchWithEngine(String searchString, SetAdapter adapter){
         FetchEdamameImage fetchImageEngine = new FetchEdamameImage(adapter);
         fetchImageEngine.execute(searchString);
 
 
     }
+
+
 }

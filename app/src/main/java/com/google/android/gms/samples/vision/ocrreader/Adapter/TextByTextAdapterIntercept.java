@@ -85,6 +85,8 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
 @Override
     public void processJson(String text){
         try{
+            if (text == null || text.equals(""))
+                return;
             JSONObject data = new JSONObject(text);
             JSONArray chunk = data.getJSONArray("chunk");
             JSONArray chunk_root =  data.getJSONArray("chunk_root");
@@ -94,8 +96,6 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
                 mListOfNouns.put(root_noun, root_noun);
                 notifyDataSetChanged();
             }
-
-
 
         }catch (JSONException e){
             Log.e(LOG_TAG, e.toString());

@@ -24,11 +24,18 @@ import org.jsoup.select.Elements;
 import org.python.icu.util.BytesTrie;
 
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 
+import opennlp.tools.lemmatizer.SimpleLemmatizer;
+import opennlp.tools.postag.POSModel;
+import opennlp.tools.postag.POSTaggerME;
 
 
 /**
@@ -112,6 +119,50 @@ public class OpenRestaurantMenuActivity extends UseRecyclerActivity implements T
         ImageButton imageButtonNext = findViewById(R.id.next_btn_dr);
         imageButtonNext.setOnClickListener(view -> getOrder());
 
+        //print();
+
+    }
+
+
+    public void print(){
+        //System.setProperty("org.xml.sax.driver", "org.xmlpull.v1.sax2.Driver");
+
+        try{
+        //InputStream inputStream = getAssets().open("farmhouse.png");
+            InputStream modelIn = getAssets().open("en-lemmatizer.dict.txt");
+            //InputStream modelIn = getClass().getResourceAsStream("/models/en-lemmatizer.dict");
+
+        if (modelIn == null)
+            Log.d(LOG_TAG, "modelIn is null ");
+
+            SimpleLemmatizer simpleLemmatizer = new SimpleLemmatizer(modelIn);
+
+            modelIn.close();
+
+            String rawString = "thieves";
+
+            //Instantiating POSTaggerME class
+
+            InputStream inputStream = getAssets().open("en-pos-maxent.bin");
+
+            POSModel modelpos = new POSModel(inputStream);
+
+            //Instantiating POSTaggerME class
+
+            POSTaggerME tagger = new POSTaggerME(modelpos);
+
+
+            //Generating tags
+            String[] tags = tagger.tag(rawString).split("/");
+
+
+            String searchString = simpleLemmatizer.lemmatize(rawString, tags[1]);
+
+            Log.d(LOG_TAG, "lemma " + searchString + " " +tags);
+
+       }catch (IOException e){
+            Log.e(LOG_TAG, e + " ");
+        }
     }
 
 

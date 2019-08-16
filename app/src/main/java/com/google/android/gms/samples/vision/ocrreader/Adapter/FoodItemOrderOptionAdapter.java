@@ -76,6 +76,7 @@ public class FoodItemOrderOptionAdapter extends RecyclerView.Adapter<FoodItemOrd
         this.expandOptionRecyclerView = new RecyclerView(context);
         this.expandOptionRecyclerView = recyclerView;
         this.myTTS = myTTS;
+
     }
 
     //private int[] STATES = { normal, select};
