@@ -4,7 +4,7 @@
             "outputFile": "/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v26/values-v26.xml",
             "map": [
                 {
-                    "source": "/Users/mgo983/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/f4736623a9b4573a1d8a3b1407bcbfec/res/values-v26/values-v26.xml",
+                    "source": "/Users/mgo983/.gradle/caches/transforms-2/files-2.1/3bd4c69f8ee7b23e4602724de1e8a7c3/res/values-v26/values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",

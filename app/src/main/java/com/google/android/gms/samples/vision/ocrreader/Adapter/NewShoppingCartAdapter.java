@@ -22,11 +22,7 @@ import com.google.android.gms.samples.vision.ocrreader.AllOrders;
 import com.google.android.gms.samples.vision.ocrreader.R;
 import com.google.android.gms.samples.vision.ocrreader.SetAdapter;
 import com.google.android.gms.samples.vision.ocrreader.UseRecyclerActivity;
-import com.google.android.gms.samples.vision.ocrreader.WordNetHypernyms;
 
-import org.python.antlr.ast.Str;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -167,7 +163,7 @@ public class NewShoppingCartAdapter extends RecyclerView.Adapter<NewShoppingCart
 
 
     public void addItem(Object[] orderData){
-            mData.add(orderData);
+        mData.add(orderData);
         String icon[] = new String[1];
         icon[0] = (String) orderData[0];
         ((UseRecyclerActivity) context).loadImage(icon, this, false);

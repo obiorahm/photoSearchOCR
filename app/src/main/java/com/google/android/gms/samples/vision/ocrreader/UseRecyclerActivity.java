@@ -25,8 +25,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-import opennlp.tools.lemmatizer.SimpleLemmatizer;
+import opennlp.tools.lemmatizer.Lemmatizer;
+import opennlp.tools.lemmatizer.LemmatizerME;
+import opennlp.tools.lemmatizer.LemmatizerModel;
 import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSTaggerME;
 import opennlp.tools.stemmer.PorterStemmer;
@@ -61,7 +64,7 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
     public void processWebResults(Document document){}
 
-    public String LOG_TAG;
+    public String LOG_TAG = UseRecyclerActivity.class.getSimpleName();
 
     private static final String DB_REF_WORD = "word";
 
@@ -224,10 +227,14 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
             InputStream modelIn = new FileInputStream("en-lemmatizer.bin");
 
-            SimpleLemmatizer simpleLemmatizer = new SimpleLemmatizer(modelIn);
+            /*LemmatizerModel lemmatizerModel = new LemmatizerModel(modelIn);
+
+            LemmatizerME lemmatizerME = new LemmatizerME(lemmatizerModel);
 
 
-            String rawString = token[CHUNK_ROOT_POS];
+
+
+            String[] rawString = {token[CHUNK_ROOT_POS]};
 
             //Loading Parts of speech-maxent model
             InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-pos-maxent.bin");
@@ -235,10 +242,14 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
             POSTaggerME tagger = new POSTaggerME(model);
 
-            String tags = tagger.tag(rawString);
+            String[] tags = tagger.tag(rawString);
 
 
-            String searchString = simpleLemmatizer.lemmatize(rawString, tags);
+            String searchString = lemmatizerME.lemmatize(rawString, tags);*/
+
+            String rawString = token[CHUNK_ROOT_POS];
+
+            String searchString = token[CHUNK_ROOT_POS];
 
             Log.d(LOG_TAG, "lemma " + searchString);
 

@@ -1842,6 +1842,7 @@ raw amu_poly_style_boolean_numeric
 raw amu_unknwown_folder
 raw amu_unsupported
 raw amu_visibility_ground_overlay
+raw en_pos_maxent
 raw keep
 string abc_action_bar_home_description
 string abc_action_bar_home_description_format
