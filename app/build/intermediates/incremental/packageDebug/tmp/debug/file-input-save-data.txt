@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Aug 29 16:31:57 CDT 2019
+#Thu Aug 29 16:35:05 CDT 2019
 5.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/merged_assets/debug/out
 42.base=/Users/mgo983/Documents/Northwestern Classes/Language Development Project/android projects/android-vision-master/visionSamples/ocr-reader/app/build/intermediates/merged_assets/debug/out
 22.path=meats/cooked/medium_well.png

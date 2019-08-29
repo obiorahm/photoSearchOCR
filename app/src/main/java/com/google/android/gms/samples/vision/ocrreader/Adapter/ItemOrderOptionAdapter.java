@@ -132,7 +132,7 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
                         state.set(position, next_state);
                         break;
                 }
-                myTTS.speak(label,TextToSpeech.QUEUE_FLUSH,null, null);
+                myTTS.speak(prefix + label,TextToSpeech.QUEUE_FLUSH,null, null);
 
 
             });
