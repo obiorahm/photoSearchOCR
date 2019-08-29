@@ -77,8 +77,6 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
             this.categoryName = categoryName;
         }
 
-        //private int[] STATES = { normal, select};
-
 
         @Override
         public ItemOrderOptionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -90,8 +88,6 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
         @Override
         public void onBindViewHolder(final ItemOrderOptionAdapter.ViewHolder holder, int position){
 
-            //final int pos = position;
-
             String[] text = mData.get(position);
             String label = text[1];
             String root_string = text[0];
@@ -102,10 +98,11 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
 
             Uri url = mUrl.get(root_string);
 
-            if (url != null){
+            Log.d(LOG_TAG, "url: " + url);
+
+            //if (url != null){
                 Glide.with(context).load(url).into(holder.mImageView);
-                Log.d(LOG_TAG, url + "");
-            }
+            //}
 
             int current_state = state.get(position);
 
@@ -121,16 +118,18 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
 
 
             holder.mImageView.setOnClickListener((View view) -> {
+                String prefix = "";
                 switch (type){
                     case "DYNAMIC":
-                        case "STATIC_ZERO_SUM":
-                            int nextstate = next_state(state.get(position));
-                            holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[nextstate]));
-                            state.set(position, nextstate);
-                            break;
+                    case "STATIC_ZERO_SUM":
+                        int nextstate = next_state(state.get(position));
+                        holder.mImageView.setBackground(ContextCompat.getDrawable(context, STATES[nextstate]));
+                        prefix = getPrefix(nextstate);
+                        state.set(position, nextstate);
+                        break;
                     case "STATIC":
-                        int next_state = nextstate(text[URL_POS], current_state,position, holder);
-                        state.set(position,next_state);
+                        int next_state = nextstate(text[URL_POS], current_state, position, holder);
+                        state.set(position, next_state);
                         break;
                 }
                 myTTS.speak(label,TextToSpeech.QUEUE_FLUSH,null, null);
@@ -138,6 +137,12 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
 
             });
 
+        }
+
+
+        private String getPrefix (int state){
+            String [] current_state_prefix = {"", "with ", "no " };
+            return current_state_prefix[state];
         }
 
         @Override
@@ -152,19 +157,8 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
 
         public void addItem(String[] icon){
             mData.add(icon);
-
-            switch (icon[TYPE_POS]){
-                case "DYNAMIC":
-                    ((UseRecyclerActivity) context).loadImage(icon, this, false);
-                    state.add(STATE_NORMAL);
-                    break;
-                case "STATIC":
-                case "STATIC_ZERO_SUM":
-                    mUrl.put(icon[WORD_POS], Uri.parse(icon[URL_POS]));
-
-            }
-
-
+            ((UseRecyclerActivity) context).loadImage(icon, this, false);
+            state.add(STATE_NORMAL);
             notifyDataSetChanged();
         }
 
@@ -211,10 +205,10 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
                 data[URL_POS] = prefix + new_string + "/" + word;
                 data[ROOT_WORD_POS] = clean_word;
                 data[WORD_POS] = clean_word;
-                Log.d(LOG_TAG, "next state " + next_state + prefix + new_string + "/" + word + " " + allAssets.length);
+                Log.d(LOG_TAG, "next state " + next_state + " " +prefix + new_string + "/" + word + " " + allAssets.length);
                 Glide.with(context).load(data[URL_POS]).into(holder.mImageView);
                 holder.mTextView.setText(word);
-                mUrl.put(word, Uri.parse(data[URL_POS]));
+                mUrl.put(clean_word, Uri.parse(data[URL_POS]));
                 notifyDataSetChanged();
 
             }catch (IOException e){
@@ -325,8 +319,7 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
                 data[URL_POS] = "file:///android_asset/" + clean_option + "/" + more_options;
                 state.add(init_state);
                 mUrl.put(clean_more_option_, Uri.parse(data[URL_POS]));
-                addItem(data);
-
+                mData.add(data);
                 Log.d(LOG_TAG, "clean more option " + "file:///android_asset/" + clean_option + "/" + more_options);
             }
 
