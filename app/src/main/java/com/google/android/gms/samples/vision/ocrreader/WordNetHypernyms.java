@@ -42,12 +42,19 @@ public class WordNetHypernyms {
     public static final String[] DRINK_HYPERNYMS = {
       "beverage",
             "drink",
+            "drinks",
             "drinkable",
             "brew",
             "beverage",
+            "beverages",
             "liquid",
+            "liquids",
             "espresso",
-            "coffee"
+            "coffee",
+            "juice",
+            "juices",
+            "smoothie",
+            "smoothies"
     };
 
     public static final String[] MEAT_HYPERNYMS = {

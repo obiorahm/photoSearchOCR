@@ -23,8 +23,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 /**
  * Created by mgo983 on 10/22/18.
@@ -112,11 +110,13 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
             JSONObject data = new JSONObject(description);
             JSONArray chunk = data.getJSONArray("chunk");
             JSONArray chunk_root =  data.getJSONArray("chunk_root");
+            JSONArray chunk_lemma = data.getJSONArray("chunk_lemma");
             for (int i = 0; i < chunk.length(); i++){
 
                 String chunk_item = (String) chunk.get(i);
                 String chunk_root_item = (String) chunk_root.get(i);
                 String image_url = "";
+                String chunk_lemma_item = ((JSONArray) chunk_lemma.get(i)).getString(0);
 
                 if (!(mListOfNouns.containsKey(chunk_root_item))){
                     // initialize entry state to zero
@@ -126,7 +126,7 @@ public class FoodDescriptionAdapter extends RecyclerView.Adapter<FoodDescription
                     //Create itemRecycler
                     //Log.d(LOG_TAG, "object to hide " + objectsToHide.toString());
                     SimpleImageRecyclerAdapter imageRecyclerAdapter = new SimpleImageRecyclerAdapter(context, myTTS, objectsToHide);
-                    String[] option = {chunk_root_item, chunk_item, ""  };
+                    String[] option = {chunk_root_item, chunk_item, "", chunk_lemma_item  };
                     imageRecyclerAdapter.addItem(option);
 
                     mImageRecyclerAdapters.add(imageRecyclerAdapter);

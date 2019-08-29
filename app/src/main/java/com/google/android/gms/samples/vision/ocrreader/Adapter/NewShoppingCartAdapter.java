@@ -1,7 +1,6 @@
 package com.google.android.gms.samples.vision.ocrreader.Adapter;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.LinearLayoutManager;

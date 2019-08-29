@@ -105,6 +105,7 @@ public class SimpleImageRecyclerAdapter extends RecyclerView.Adapter<SimpleImage
 
         int CHUNK= 1;
         int URL = 2;
+        int ROOT_LEMMA = 3;
         int CHUNK_ROOT = 0;
 
         final int pos = position;

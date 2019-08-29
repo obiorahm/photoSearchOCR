@@ -42,6 +42,7 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
 
 
         private static int STATE_NORMAL = 0;
+        private static int STATIC_STATE_NORMAL = 1;
 
         private int normal = R.drawable.smaller_layer_drawable;
         private int select = R.drawable.option_button;
@@ -197,7 +198,7 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
                 String allAssets[] = assetManager.list(new_string);
 
                 if (next_state >= allAssets.length){
-                    next_state = 1;
+                    next_state = STATIC_STATE_NORMAL;
                 }
 
 
@@ -226,15 +227,6 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
 
     public void addStaticOptions(){
         AssetManager assetManager = context.getAssets();
-        WordNetHypernyms wordNetHypernyms = new WordNetHypernyms();
-
-        //check if hypernym of parent and child makes the required hypernym.
-        boolean parentHypernym ;
-        boolean selfHypernym;
-
-        // check if the words themselves are the required hypernyms.
-        boolean isSelfHypernym;
-        boolean isParentHypernym;
 
         try{
             final String allAssets[] = assetManager.list("top_level_icons");
@@ -247,120 +239,34 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
                 String clean_option =  option.substring(firstPos, lastPos).replace("_", " ");
                 Log.d(LOG_TAG, "clean option " + clean_option + " parent " + categoryName);
 
-                String option_image_url = "file:///android_asset/top_level_icons/" + option;
-
-                parentHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, categoryName);
-                selfHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, mealName);
-                isSelfHypernym = wordNetHypernyms.isHypernym(WordNetHypernyms.DRINK_HYPERNYMS, mealName);
-                isParentHypernym = wordNetHypernyms.isHypernym(WordNetHypernyms.DRINK_HYPERNYMS, categoryName);
-
                 switch (clean_option){
                     case FoodItemOrderOptionAdapter.DRINKS:
-                        Log.d(LOG_TAG, "is_parent_hypernym " + parentHypernym + selfHypernym + isSelfHypernym + isParentHypernym);
-                        if (parentHypernym || selfHypernym || isSelfHypernym || isParentHypernym)
-                        {
-
-                            /*String [] data = new String[4];
-                            data[WORD_POS] = clean_option;
-                            data[ROOT_WORD_POS] = clean_option;
-                            data[TYPE_POS] = "STATIC";
-                            data[URL_POS] = option_image_url;
-                            state.add(1);
-                            addItem(data);*/
-
-                            String[] moreAssets = assetManager.list( clean_option );
-
-                            if (moreAssets.length >= 1){
-                                String more_options = moreAssets[0];
-                                Log.d(LOG_TAG, "even more options size" + more_options);
-
-                                lastPos = more_options.lastIndexOf('.');
-
-                                String clean_more_option_ =  more_options.substring(firstPos, lastPos).replace("_"," ");
-
-                                String [] data = new String[4];
-                                data[WORD_POS] = clean_more_option_;
-                                data[ROOT_WORD_POS] = clean_more_option_;
-                                data[TYPE_POS] = "STATIC_ZERO_SUM";
-                                data[URL_POS] = "file:///android_asset/" + clean_option + "/" + more_options ;
-                                state.add(STATE_NORMAL);
-                                addItem(data);
-
-                                Log.d(LOG_TAG, "clean more option " + "file:///android_asset/" + clean_option + "/" + more_options);
-                            }
-
-
-
-
-
-                        }
+                        if (isDrink())
+                            setData(clean_option, 1, 0,  "STATIC_ZERO_SUM", STATE_NORMAL);
                         break;
+
+                    case FoodItemOrderOptionAdapter.NUTRITION:
+                        setData(clean_option, 1, 0,  "STATIC_ZERO_SUM", STATE_NORMAL);
+                        break;
+
                     case FoodItemOrderOptionAdapter.MEATS:
                         // assume if drink then not meat
-
-                        if (!(parentHypernym || selfHypernym || isParentHypernym || isSelfHypernym))
+                        if (!isDrink())
                         {
                             String[] moreAssets = assetManager.list( clean_option );
                             for (String more_options : moreAssets) {
                                 Log.d(LOG_TAG, "more options size" + more_options);
-                                String [] evenMoreAssets = assetManager.list(clean_option + "/" + more_options );
-
-                                if (evenMoreAssets.length >= 2){
-                                    String even_more_options = evenMoreAssets[1];
-                                    Log.d(LOG_TAG, "even more options size" + even_more_options);
-
-                                    lastPos = even_more_options.lastIndexOf('.');
-                                    String clean_option_0 = clean_option;
-                                    String clean_option_1 =  even_more_options.substring(firstPos, lastPos).replace("_"," ");
-
-                                    String [] data = new String[4];
-                                    data[WORD_POS] = clean_option_1;
-                                    data[ROOT_WORD_POS] = clean_option_1;
-                                    data[TYPE_POS] = "STATIC";
-                                    data[URL_POS] = "file:///android_asset/" + clean_option_0 + "/" + more_options + "/" + even_more_options;
-                                    state.add(1);
-                                    addItem(data);
-
-                                    Log.d(LOG_TAG, "clean more option " + "file:///android_asset/" + option + "/" + more_options + "/" + even_more_options);
-                                }
-
-
-
+                                String addressPrefix = clean_option + "/" + more_options;
+                                setData(addressPrefix, 2,1,  "STATIC", STATIC_STATE_NORMAL);
                             }
 
                         }
-
                         break;
                     default:
-
-                        String[] moreAssets = assetManager.list( clean_option );
-
-                            if (moreAssets.length >= 1){
-                                String more_options = moreAssets[0];
-                                Log.d(LOG_TAG, "even more options size" + more_options);
-
-                                lastPos = more_options.lastIndexOf('.');
-
-                                String clean_more_option_ =  more_options.substring(firstPos, lastPos).replace("_"," ");
-
-                                String [] data = new String[4];
-                                data[WORD_POS] = clean_more_option_;
-                                data[ROOT_WORD_POS] = clean_more_option_;
-                                data[TYPE_POS] = "STATIC";
-                                data[URL_POS] = "file:///android_asset/" + clean_option + "/" + more_options ;
-                                state.add(1);
-                                addItem(data);
-
-                                Log.d(LOG_TAG, "clean more option " + "file:///android_asset/" + clean_option + "/" + more_options);
-                            }
-
-
-
+                        if (!isDrink())
+                            setData(clean_option, 1, 0, "STATIC", STATIC_STATE_NORMAL);
                         break;
-
                 }
-
-
             }
 
         }catch (IOException e){
@@ -369,5 +275,66 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
 
 
     }
+
+
+    private boolean isDrink(){
+
+        //check if hypernym of parent and child makes the required hypernym.
+        boolean parentHypernym ;
+        boolean selfHypernym;
+
+        // check if the words themselves are the required hypernyms.
+        boolean isSelfHypernym;
+        boolean isParentHypernym;
+
+        WordNetHypernyms wordNetHypernyms = new WordNetHypernyms();
+
+        parentHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, categoryName);
+        selfHypernym = wordNetHypernyms.getHypernym(WordNetHypernyms.DRINK_HYPERNYMS, mealName);
+        isSelfHypernym = wordNetHypernyms.isHypernym(WordNetHypernyms.DRINK_HYPERNYMS, mealName);
+        isParentHypernym = wordNetHypernyms.isHypernym(WordNetHypernyms.DRINK_HYPERNYMS, categoryName);
+
+        Log.d(LOG_TAG, "is_parent_hypernym " + parentHypernym + selfHypernym + isSelfHypernym + isParentHypernym);
+
+        return (parentHypernym || selfHypernym || isSelfHypernym || isParentHypernym);
+
+    }
+
+
+    private void setData(String clean_option, int min_asset_length, int first_asset_pos, String type_pos, int init_state) {
+
+        try {
+
+            AssetManager assetManager = context.getAssets();
+            String[] moreAssets = assetManager.list(clean_option);
+
+            int firstPos = 0;
+
+            if (moreAssets.length >= min_asset_length) {
+                String more_options = moreAssets[first_asset_pos];
+                Log.d(LOG_TAG, "even more options size" + more_options);
+
+                int lastPos = more_options.lastIndexOf('.');
+
+                String clean_more_option_ = more_options.substring(firstPos, lastPos).replace("_", " ");
+
+                String[] data = new String[4];
+                data[WORD_POS] = clean_more_option_;
+                data[ROOT_WORD_POS] = clean_more_option_;
+                data[TYPE_POS] = type_pos;
+                data[URL_POS] = "file:///android_asset/" + clean_option + "/" + more_options;
+                state.add(init_state);
+                mUrl.put(clean_more_option_, Uri.parse(data[URL_POS]));
+                addItem(data);
+
+                Log.d(LOG_TAG, "clean more option " + "file:///android_asset/" + clean_option + "/" + more_options);
+            }
+
+        }catch (IOException e){
+            Log.e(LOG_TAG, e + " ");
+        }
+    }
+
+
 
 }

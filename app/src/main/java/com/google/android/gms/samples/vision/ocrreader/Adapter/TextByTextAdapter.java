@@ -96,26 +96,6 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
         final String word = mData.get(position)[WORD_POS];
         holder.mTextView.setText(word);
 
-        /*holder.mTextView.setOnClickListener((View view) -> {
-            myTTS.speak(word, TextToSpeech.QUEUE_FLUSH, null);
-            //lastParent = DetectImageActivity.last_parent_di;
-            lastParent = UseRecyclerActivity.last_parent_di;
-            if (lastParent != null && lastParent != holder.mRecyclerView){
-                lastParent.setSelected(false);
-            }
-            if(holder.mRecyclerView.isSelected()){
-                holder.mRecyclerView.setSelected(false);
-                holder.mImageView.setVisibility(View.GONE);
-            }else{
-                UseRecyclerActivity.selected_item = getSelectedString();
-                //DetectImageActivity.selected_meal = getSelectedString();
-                holder.mRecyclerView.setSelected(true);
-                holder.mImageView.setVisibility(View.VISIBLE);
-
-            }
-            DetectImageActivity.last_parent_di = holder.mRecyclerView;
-        });*/
-
         Glide.with(context).load(mUrls.get(word)).into(holder.mImageView);
 
         holder.mTextView.setOnClickListener((View view)->{
@@ -128,13 +108,6 @@ public class TextByTextAdapter extends RecyclerView.Adapter<TextByTextAdapter.Vi
             }
         });
     }
-
-
-
-
-
-
-
 
 
 

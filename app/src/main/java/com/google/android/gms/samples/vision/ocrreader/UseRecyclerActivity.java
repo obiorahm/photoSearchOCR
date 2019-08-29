@@ -20,18 +20,9 @@ import com.google.firebase.storage.StorageReference;
 
 import org.jsoup.nodes.Document;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import opennlp.tools.lemmatizer.Lemmatizer;
-import opennlp.tools.lemmatizer.LemmatizerME;
-import opennlp.tools.lemmatizer.LemmatizerModel;
-import opennlp.tools.postag.POSModel;
-import opennlp.tools.postag.POSTaggerME;
 import opennlp.tools.stemmer.PorterStemmer;
 
 /**
@@ -76,6 +67,8 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
     private int IMAGE_URL_POS = 2;
 
+    private int CHUNK_LEMMA_POS = 3;
+
 
 
 
@@ -97,9 +90,6 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
 
 
-
-
-
     public void loadImage(final String[]  token,  SetAdapter adapter, boolean notFoodItem){
 
         if (token == null)
@@ -111,7 +101,6 @@ public class UseRecyclerActivity extends FragmentActivity  {
         Log.d(LOG_TAG, " token " + searchString );
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(DB_REF_WORD);
 
-        //databaseReference.orderByKey().startAt(searchString).endAt(searchString+"\uf8ff").addValueEventListener(new ValueEventListener() {
         databaseReference.orderByKey().equalTo(searchString).addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -223,33 +212,20 @@ public class UseRecyclerActivity extends FragmentActivity  {
 
     private void searchWithLemma(final String[]  token,  SetAdapter adapter, boolean notFoodItem){
 
-        try{
-
-            InputStream modelIn = new FileInputStream("en-lemmatizer.bin");
-
-            /*LemmatizerModel lemmatizerModel = new LemmatizerModel(modelIn);
-
-            LemmatizerME lemmatizerME = new LemmatizerME(lemmatizerModel);
 
 
-
-
-            String[] rawString = {token[CHUNK_ROOT_POS]};
-
-            //Loading Parts of speech-maxent model
-            InputStream inputStream = new FileInputStream("C:/OpenNLP_models/en-pos-maxent.bin");
-            POSModel model = new POSModel(inputStream);
-
-            POSTaggerME tagger = new POSTaggerME(model);
-
-            String[] tags = tagger.tag(rawString);
-
-
-            String searchString = lemmatizerME.lemmatize(rawString, tags);*/
 
             String rawString = token[CHUNK_ROOT_POS];
 
-            String searchString = token[CHUNK_ROOT_POS];
+            String searchString = "";
+
+            if (token.length >= 4)
+                searchString = token[CHUNK_LEMMA_POS];
+            else
+            {
+                searchWithEngine(rawString, adapter);
+                return;
+            }
 
             Log.d(LOG_TAG, "lemma " + searchString);
 
@@ -305,9 +281,7 @@ public class UseRecyclerActivity extends FragmentActivity  {
                 }
             });
 
-        }catch (IOException e){
 
-        }
 
 
     }

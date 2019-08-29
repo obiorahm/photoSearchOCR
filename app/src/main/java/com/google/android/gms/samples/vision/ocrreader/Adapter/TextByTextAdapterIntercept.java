@@ -90,10 +90,20 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
             JSONObject data = new JSONObject(text);
             JSONArray chunk = data.getJSONArray("chunk");
             JSONArray chunk_root =  data.getJSONArray("chunk_root");
+            JSONArray chunk_lemma = data.getJSONArray("chunk_lemma");
+
             for (int i = 0; i < chunk.length(); i++){
                 Log.d(LOG_TAG, "processJSON " + chunk_root.get(i));
                 String root_noun = ((String) chunk_root.get(i)).toLowerCase().trim();
+                String lemma_item = ((JSONArray) chunk_lemma.get(i)).getString(0);
+                String [] chunk_details = {root_noun, lemma_item};
+                Log.d(LOG_TAG, "processJSONS " + lemma_item);
                 mListOfNouns.put(root_noun, root_noun);
+
+                String uri = "";
+                String icon[] = {root_noun.toLowerCase().trim(), uri, uri, lemma_item };
+                ((UseRecyclerActivity) context).loadImage(icon, this, false);
+
                 notifyDataSetChanged();
             }
 
@@ -197,7 +207,7 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
 
             String uri = "";
             String icon[] = {child.toLowerCase().trim(), uri};
-            ((UseRecyclerActivity) context).loadImage(icon, this, false);
+            //((UseRecyclerActivity) context).loadImage(icon, this, false);
 
             mData.add(icon);
             mImageData.add(View.GONE);
@@ -206,8 +216,6 @@ public class TextByTextAdapterIntercept extends RecyclerView.Adapter<TextByTextA
 
         get_noun_dependency(fullText);
 
-        //mData.add(text);
-        //mImageData.add(View.GONE);
     }
 
     @Override
