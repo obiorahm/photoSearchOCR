@@ -28,18 +28,14 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
 
         LayoutInflater inflater;
         ArrayList<String[]> mData = new ArrayList<>();
-        ArrayList<Integer> state = new ArrayList<>();
-        HashMap<String, Uri> mUrl = new HashMap<>();
+        private ArrayList<Integer> state = new ArrayList<>();
+        private HashMap<String, Uri> mUrl = new HashMap<>();
 
         TextToSpeech myTTS;
         Context context;
 
-        String mealName;
-        String categoryName;
-
-
-
-
+        private String mealName;
+        private String categoryName;
 
         private static int STATE_NORMAL = 0;
         private static int STATIC_STATE_NORMAL = 1;
@@ -189,7 +185,9 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
                 int lastPos = url.lastIndexOf("/");
                 String new_string = url.substring(firstPos, lastPos);
                 AssetManager assetManager = context.getAssets();
-                String allAssets[] = assetManager.list(new_string);
+                String []allAssets = assetManager.list(new_string);
+
+                if (allAssets == null) return STATIC_STATE_NORMAL;
 
                 if (next_state >= allAssets.length){
                     next_state = STATIC_STATE_NORMAL;
@@ -212,6 +210,7 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
                 notifyDataSetChanged();
 
             }catch (IOException e){
+                Log.e(LOG_TAG, e + " ");
 
             }
         return next_state;
@@ -223,7 +222,9 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
         AssetManager assetManager = context.getAssets();
 
         try{
-            final String allAssets[] = assetManager.list("top_level_icons");
+            final String [] allAssets = assetManager.list("top_level_icons");
+
+            if (allAssets == null) return;
 
             for (String option : allAssets){
 
@@ -248,6 +249,7 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
                         if (!isDrink())
                         {
                             String[] moreAssets = assetManager.list( clean_option );
+                            if (moreAssets == null) return;
                             for (String more_options : moreAssets) {
                                 Log.d(LOG_TAG, "more options size" + more_options);
                                 String addressPrefix = clean_option + "/" + more_options;
@@ -258,7 +260,7 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
                         break;
                     default:
                         if (!isDrink())
-                            setData(clean_option, 1, 0, "STATIC", STATIC_STATE_NORMAL);
+                            setData(clean_option, 2, 1, "STATIC", STATIC_STATE_NORMAL);
                         break;
                 }
             }
@@ -304,7 +306,7 @@ public class ItemOrderOptionAdapter extends RecyclerView.Adapter<ItemOrderOption
 
             int firstPos = 0;
 
-            if (moreAssets.length >= min_asset_length) {
+            if (moreAssets != null && moreAssets.length >= min_asset_length) {
                 String more_options = moreAssets[first_asset_pos];
                 Log.d(LOG_TAG, "even more options size" + more_options);
 
